@@ -14,6 +14,16 @@ module.exports = {
 	 * @param {Client} client
 	 */
 	async execute(interaction, client) {
+		if (client.maintenance && interaction.user.id != "861270236475817994") {
+			const Response = new MessageEmbed()
+				.setTitle("👷‍♂️ MAINTENANCE 👷‍♂️")
+				.setDescription(
+					"Sorry the bot will be back shortly when everything is working correctly."
+				)
+				.setColor("DARK_BUT_NOT_BLACK");
+
+			return interaction.reply({ embeds: [Response] });
+		}
 		if (interaction.isCommand() || interaction.isContextMenu()) {
 			const command = client.commands.get(interaction.commandName);
 			if (!command)

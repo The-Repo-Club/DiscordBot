@@ -1,6 +1,6 @@
 // -*-coding:utf-8 -*-
 // -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Developer/status.js
+// Path          - DiscordBot/Commands/Utilities/status.js
 // Git           - https://github.com/The-Repo-Club
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
@@ -47,9 +47,9 @@ module.exports = {
 					name: "Client",
 					value: `Username: \`${
 						client.user.tag
-					}\`\nLibrary: [discord.js](https://discord.js.org/)\nPing: \`${Math.round(
+					}\`\nLibrary: [discord.js](https://discord.js.org/)\nPing: \`🟢 ONLINE\` - \`${
 						client.ws.ping
-					)}ms\`\nUptime: <t:${parseInt(client.readyTimestamp / 1000)}:R>`,
+					}ms\`\nUptime: <t:${parseInt(client.readyTimestamp / 1000)}:R>`,
 				},
 				{
 					name: "Stats",
@@ -58,7 +58,7 @@ module.exports = {
 				},
 				{
 					name: "Database",
-					value: `Name: \`MongoDB\`\nStatus: \`${switchTo(
+					value: `Name: \`MongoDB \`\nStatus: \`${switchTo(
 						connection.readyState
 					)}\``,
 					inline: false,
