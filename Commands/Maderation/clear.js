@@ -42,7 +42,7 @@ module.exports = {
 
 		const Responce = new MessageEmbed().setColor("RED");
 
-		if (target) {
+		if (Target) {
 			let i = 0;
 			const filetred = [];
 			(await Messages).filter((m) => {

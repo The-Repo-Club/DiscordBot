@@ -6,8 +6,10 @@
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 
-const { CommandInteraction, Client } = require("discord.js");
-const { Token, ownerIDS } = require("../../Structure/config.json");
+const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
+const { Token } = require("../../Structure/config.json");
+
+const ownerIDS = ["861270236475817994"];
 
 module.exports = {
 	name: "restart",
@@ -35,6 +37,18 @@ module.exports = {
 			.then(() => {
 				client.login(Token);
 				console.log("[Client] Ready");
+				for (var i = 0; i < ownerIDS.length; i++) {
+					var owner = client.users.cache.get(ownerIDS[i]);
+
+					owner.send({
+						embeds: [
+							new MessageEmbed()
+								.setColor("PURPLE")
+								.setTitle("[Client] Restarted by")
+								.setDescription(`${member.user.username} in ${guild.name}`),
+						],
+					});
+				}
 			});
 	},
 };

@@ -6,7 +6,7 @@
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 const { MessageEmbed, Message } = require("discord.js");
-const { Logs } = require("../../Structure/config.json");
+const DB = require("../../Structure/Schemas/logsDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "messageUpdate",
@@ -14,13 +14,17 @@ module.exports = {
 	 * @param {Message} oldMessage
 	 * @param {Message} newMessage
 	 */
-	execute(oldMessage, newMessage) {
+	async execute(oldMessage, newMessage) {
 		if (oldMessage.author.bot) return;
 		// We're going to ignore all messages that are sent by the bot
 
 		if (oldMessage.content === newMessage.content) return;
 
-		const logsChannel = newMessage.guild.channels.cache.get(Logs);
+		const admin = await DB.findOne({
+			GuildID: newMessage.guild.id,
+		});
+
+		const logsChannel = newMessage.guild.channels.cache.get(admin.Logs);
 
 		const Count = 1950;
 
@@ -33,7 +37,7 @@ module.exports = {
 			(newMessage.content.length > 1950 ? " ..." : "");
 
 		const Log = new MessageEmbed()
-			.setColor("RANDOM")
+			.setColor("RED")
 			.setDescription(
 				`📘 A [message](${newMessage.url}) by ${newMessage.author} was **edited** in ${newMessage.channel}.`
 			)
