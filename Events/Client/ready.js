@@ -8,8 +8,9 @@
 
 const { Client } = require("discord.js");
 const mongoose = require("mongoose");
-const { Database } = require("../../Structure/config.json");
+const { Database } = require("../../Structures/config.json");
 
+require("../../Structures/Handlers/Cooldowns")(Client);
 module.exports = {
 	name: "ready",
 	once: true,

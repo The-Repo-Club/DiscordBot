@@ -7,7 +7,7 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
-const { Logs } = require("../../Structure/config.json");
+const { Logs } = require("../../Structures/config.json");
 
 module.exports = {
 	name: "announce",

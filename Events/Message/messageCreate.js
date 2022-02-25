@@ -7,7 +7,7 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 const { Message } = require("discord.js");
 const Levels = require("discord-xp");
-const { Database } = require("../../Structure/config.json");
+const { Database } = require("../../Structures/config.json");
 Levels.setURL(Database);
 
 module.exports = {

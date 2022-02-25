@@ -7,7 +7,7 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
-const { Token } = require("../../Structure/config.json");
+const { Token } = require("../../Structures/config.json");
 
 const ownerIDS = ["861270236475817994"];
 

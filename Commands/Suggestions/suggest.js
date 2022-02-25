@@ -12,8 +12,8 @@ const {
 	MessageActionRow,
 	MessageButton,
 } = require("discord.js");
-const suggestDB = require("../../Structure/Schemas/suggestDB"); //Make sure this path is correct
-const suggestSetupDB = require("../../Structure/Schemas/suggestSetupDB"); //Make sure this path is correct
+const suggestDB = require("../../Structures/Schemas/suggestDB"); //Make sure this path is correct
+const suggestSetupDB = require("../../Structures/Schemas/suggestSetupDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "suggest",

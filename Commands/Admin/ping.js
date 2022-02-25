@@ -12,6 +12,7 @@ module.exports = {
 	name: "ping",
 	description: "Ping",
 	permission: "ADMINISTRATOR",
+	cooldown: 10000,
 	/**
 	 *
 	 * @param {CommandInteraction} interaction

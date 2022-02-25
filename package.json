@@ -2,7 +2,7 @@
 	"name": "the-repo-bot",
 	"version": "1.0.0",
 	"description": "A cool discord bot",
-	"main": "Structure/index.js",
+	"main": "Structures/index.js",
 	"scripts": {
 		"start": "node ."
 	},

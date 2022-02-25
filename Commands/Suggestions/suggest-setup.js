@@ -1,5 +1,5 @@
 const { MessageEmbed, CommandInteraction, Client } = require("discord.js");
-const DB = require("../../Structure/Schemas/suggestSetupDB"); //Make sure this path is correct
+const DB = require("../../Structures/Schemas/suggestSetupDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "suggest-setup",
