@@ -7,6 +7,7 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 const { ButtonInteraction, MessageEmbed } = require("discord.js");
 const { createTranscript } = require("discord-html-transcripts");
+const ms = require("ms");
 
 const ticketsDB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path is correct
 const ticketsSetupDB = require("../../Structures/Schemas/ticketsSetupDB"); //Make sure this path is correct
@@ -87,7 +88,7 @@ module.exports = {
 
 					setTimeout(() => {
 						channel.delete();
-					}, 10 * 1000);
+					}, ms("10s"));
 					break;
 
 				case "lock_report":

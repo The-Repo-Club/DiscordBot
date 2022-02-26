@@ -11,6 +11,7 @@ const {
 	MessageActionRow,
 	MessageButton,
 } = require("discord.js");
+const ms = require("ms");
 
 const ticketsDB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path is correct
 const ticketsSetupDB = require("../../Structures/Schemas/ticketsSetupDB"); //Make sure this path is correct
@@ -109,7 +110,7 @@ module.exports = {
 					.then((m) => {
 						setTimeout(() => {
 							m.delete().catch(() => {});
-						}, 1 * 5000);
+						}, ms("5s"));
 					});
 
 				interaction.reply({

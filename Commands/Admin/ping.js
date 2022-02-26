@@ -7,12 +7,15 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 
 const { CommandInteraction } = require("discord.js");
+const ms = require("ms");
+
+const cd = ms("5m");
 
 module.exports = {
 	name: "ping",
 	description: "Ping",
 	permission: "ADMINISTRATOR",
-	cooldown: 10000,
+	cooldown: cd,
 	/**
 	 *
 	 * @param {CommandInteraction} interaction

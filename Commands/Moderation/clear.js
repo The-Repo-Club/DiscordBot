@@ -1,12 +1,13 @@
 // -*-coding:utf-8 -*-
 // -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Maderation/clear.js
+// Path          - DiscordBot/Commands/Moderation/clear.js
 // Git           - https://github.com/The-Repo-Club
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const ms = require("ms");
 
 module.exports = {
 	name: "clear",
@@ -54,7 +55,7 @@ module.exports = {
 
 			await channel.bulkDelete(filetred, true).then((messages) => {
 				Responce.setDescription(`🧹 Cleared ${messages.size} from ${Target}`);
-				interaction.reply({
+				const message = interaction.reply({
 					embeds: [Responce],
 				});
 			});
@@ -63,9 +64,12 @@ module.exports = {
 				Responce.setDescription(
 					`🧹 Cleared ${messages.size} from this channel`
 				);
-				interaction.reply({
+				const message = interaction.reply({
 					embeds: [Responce],
 				});
+				setTimeout(async () => {
+					await message.delete();
+				}, ms("5s"));
 			});
 		}
 	},

@@ -7,6 +7,7 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const ms = require("ms");
 
 module.exports = {
 	name: "maintenance",
@@ -32,7 +33,7 @@ module.exports = {
 			return interaction
 				.reply({ embeds: [bot], fetchReply: true })
 				.then((msg) => {
-					setTimeout(() => msg.delete(), 5000);
+					setTimeout(() => msg.delete(), ms("5s"));
 				});
 		}
 
@@ -48,14 +49,14 @@ module.exports = {
 			return interaction
 				.reply({ embeds: [bot], fetchReply: true })
 				.then((msg) => {
-					setTimeout(() => msg.delete(), 5000);
+					setTimeout(() => msg.delete(), ms("5s"));
 				});
 		}
 
 		interaction
-			.reply({ content: "No fuck you.", fetchReply: true })
+			.reply({ content: "No go away.", fetchReply: true })
 			.then((msg) => {
-				setTimeout(() => msg.delete(), 5000);
+				setTimeout(() => msg.delete(), ms("5s"));
 			});
 	},
 };
