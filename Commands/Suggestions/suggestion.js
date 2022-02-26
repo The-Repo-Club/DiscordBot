@@ -5,7 +5,6 @@ const suggestDB = require("../../Structures/Schemas/suggestDB"); //Make sure thi
 module.exports = {
 	name: "suggestion",
 	description: "Set up the channel to where suggestions are sent.",
-	usage: "/suggestion",
 	permission: "ADMINISTRATOR",
 	options: [
 		{

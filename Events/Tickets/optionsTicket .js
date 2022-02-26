@@ -8,9 +8,8 @@
 const { ButtonInteraction, MessageEmbed } = require("discord.js");
 const { createTranscript } = require("discord-html-transcripts");
 
-const { ticketsTranscriptsID } = require("../../Structures/config.json");
-
-const DB = require("../../Structures/Schemas/ticketsBD"); //Make sure this path is correct
+const ticketsDB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path is correct
+const ticketsSetupDB = require("../../Structures/Schemas/ticketsSetupDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "interactionCreate",
@@ -21,17 +20,31 @@ module.exports = {
 		const { guild, member, customId, channel } = interaction;
 
 		if (!interaction.isButton()) return;
-		if (!member.permissions.has("ADMINISTRATOR"))
+
+		const Data = await ticketsSetupDB.findOne({ GuildID: guild.id });
+		if (!Data)
+			return interaction.reply({
+				content: "The data for this system is out of date.",
+			});
+
+		if (!member.roles.cache.find((r) => r.id === Data.Handlers))
 			return interaction.reply({
 				content: "You can not use these buttons.",
 				ephemeral: true,
 			});
-		if (!["close_report", "lock_report", "unlock_report"].includes(customId))
+		if (
+			![
+				"close_report",
+				"lock_report",
+				"unlock_report",
+				"claim_report",
+			].includes(customId)
+		)
 			return;
 
 		const Embed = new MessageEmbed().setColor("#8130D7");
 
-		DB.findOne({ ChannelID: channel.id }, async (err, docs) => {
+		ticketsDB.findOne({ ChannelID: channel.id }, async (err, docs) => {
 			if (err) throw err;
 			if (!docs)
 				return interaction.reply({
@@ -51,22 +64,19 @@ module.exports = {
 						returnBuffer: false,
 						fileName: `${docs.Type}_${docs.TicketID}.html`,
 					});
-					await DB.updateOne({ ChannelID: channel.id }, { Closed: true });
+					await ticketsDB.updateOne(
+						{ ChannelID: channel.id },
+						{ Closed: true }
+					);
 
-					const MEMBER = guild.members.cache.get(docs.MemberID);
-					const Message = await guild.channels.cache
-						.get(ticketsTranscriptsID)
-						.send({
-							embeds: [
-								Embed.setAuthor({
-									name: MEMBER.user.tag,
-									iconURL: MEMBER.user.displayAvatarURL({ dynamic: true }),
-								}).setTitle(
-									`Transcript Type: ${docs.Type} \n ID: ${docs.TicketID}`
-								),
-							],
-							files: [attachment],
-						});
+					const Message = await guild.channels.cache.get(Data.Transcript).send({
+						embeds: [
+							Embed.setTitle(
+								`Transcript Type: ${docs.Type} \n ID: ${docs.TicketID}`
+							),
+						],
+						files: [attachment],
+					});
 					interaction.reply({
 						embeds: [
 							Embed.setDescription(
@@ -86,11 +96,18 @@ module.exports = {
 							content: "The ticket is already locked.",
 							ephemeral: true,
 						});
-					await DB.updateOne({ ChannelID: channel.id }, { Locked: true });
+					await ticketsDB.updateOne(
+						{ ChannelID: channel.id },
+						{ Locked: true }
+					);
 					Embed.setDescription("🔒 | This ticket is now locked for review.");
-					channel.permissionOverwrites.edit(docs.MemberID, {
-						SEND_MESSAGES: false,
+
+					docs.MembersID.forEach((m) => {
+						channel.permissionOverwrites.edit(m, {
+							SEND_MESSAGES: false,
+						});
 					});
+
 					interaction.reply({ embeds: [Embed] });
 					break;
 				case "unlock_report":
@@ -99,12 +116,42 @@ module.exports = {
 							content: "The ticket is already unlocked.",
 							ephemeral: true,
 						});
-					await DB.updateOne({ ChannelID: channel.id }, { Locked: false });
+					await ticketsDB.updateOne(
+						{ ChannelID: channel.id },
+						{ Locked: false }
+					);
 					Embed.setDescription("🔓 | This ticket is now unlocked.");
-					channel.permissionOverwrites.edit(docs.MemberID, {
-						SEND_MESSAGES: true,
+					docs.MembersID.forEach((m) => {
+						channel.permissionOverwrites.edit(m, {
+							SEND_MESSAGES: true,
+						});
 					});
 					interaction.reply({ embeds: [Embed] });
+					break;
+				case "claim_report":
+					if (docs.Claimed == true)
+						if (docs.ClaimedBy === member.id) {
+							return interaction.reply({
+								content: `You have already claimed this ticket.`,
+								ephemeral: true,
+							});
+						} else {
+							return interaction.reply({
+								content: `This ticket has already been claimed by <@${docs.ClaimedBy}>`,
+								ephemeral: true,
+							});
+						}
+
+					await ticketsDB.updateOne(
+						{ ChannelID: channel.id },
+						{ Claimed: true, ClaimedBy: member.id }
+					);
+
+					Embed.setDescription(
+						`🛄 | This tickets has been claimed by ${member}`
+					);
+					interaction.reply({ embeds: [Embed] });
+
 					break;
 			}
 		});

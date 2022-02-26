@@ -12,7 +12,6 @@ const ms = require("ms");
 module.exports = {
 	name: "timeout",
 	description: "Mute System",
-	usage: "/timeout",
 	permission: "MANAGE_MESSAGES",
 	options: [
 		{

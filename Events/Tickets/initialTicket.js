@@ -12,12 +12,8 @@ const {
 	MessageButton,
 } = require("discord.js");
 
-const {
-	roleEveryoneID,
-	ticketsCategoryID,
-} = require("../../Structures/config.json");
-
-const DB = require("../../Structures/Schemas/ticketsBD"); //Make sure this path is correct
+const ticketsDB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path is correct
+const ticketsSetupDB = require("../../Structures/Schemas/ticketsSetupDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "interactionCreate",
@@ -28,8 +24,11 @@ module.exports = {
 		const { guild, member, customId } = interaction;
 
 		if (!interaction.isButton()) return;
-		if (!["user_report", "bug_report", "other_report"].includes(customId))
-			return;
+
+		const Data = await ticketsSetupDB.findOne({ GuildID: guild.id });
+		if (!Data) return;
+
+		if (!Data.Buttons.includes(customId)) return;
 
 		const ID =
 			member.displayName + "_" + Math.floor(Math.random() * 90000) + 10000;
@@ -37,27 +36,29 @@ module.exports = {
 		await guild.channels
 			.create(`${customId + "_" + ID}`, {
 				type: "GUILD_TEXT",
-				parent: ticketsCategoryID,
+				parent: Data.Category,
 				permissionOverwrites: [
 					{
 						id: member.id,
 						allow: ["SEND_MESSAGES", "VIEW_CHANNEL", "READ_MESSAGE_HISTORY"],
 					},
 					{
-						id: roleEveryoneID,
+						id: Data.GuildID,
 						deny: ["SEND_MESSAGES", "VIEW_CHANNEL", "READ_MESSAGE_HISTORY"],
 					},
 				],
 			})
 			.then(async (channel) => {
-				await DB.create({
+				await ticketsDB.create({
 					GuildID: guild.id,
-					MemberID: member.id,
+					MembersID: member.id,
 					TicketID: ID,
 					ChannelID: channel.id,
 					Closed: false,
 					Locked: false,
 					Type: customId,
+					Claimed: false,
+					ClaimedBy: null,
 				});
 
 				const Embed = new MessageEmbed()
@@ -65,33 +66,37 @@ module.exports = {
 						name: `${guild.name} | Ticket ${ID}`,
 						iconURL: guild.iconURL({ dynamic: true }),
 					})
+					.setColor("GREY")
 					.setDescription(
 						"Please wait patiently for a response from a member of Staff, in the mean while, please describe your issue in as much detail as possible."
 					)
 					.setFooter({ text: "The buttons below are for staff only." });
-				if (customId === "user_report") Embed.setColor("BLUE");
-				if (customId === "bug_report") Embed.setColor("GREY");
-				if (customId === "other_report") Embed.setColor("GREEN");
 
 				const Buttons = new MessageActionRow();
 				Buttons.addComponents(
 					new MessageButton()
 						.setCustomId("close_report")
-						.setLabel("Save & Close Ticket")
+						.setLabel("Save & Close")
 						.setStyle("PRIMARY")
 						.setEmoji("💾"),
 
 					new MessageButton()
 						.setCustomId("lock_report")
-						.setLabel("Lock Ticket")
-						.setStyle("SECONDARY")
+						.setLabel("Lock")
+						.setStyle("DANGER")
 						.setEmoji("🔒"),
 
 					new MessageButton()
 						.setCustomId("unlock_report")
-						.setLabel("Unlock Ticket")
+						.setLabel("Unlock")
 						.setStyle("SUCCESS")
-						.setEmoji("🔓")
+						.setEmoji("🔓"),
+
+					new MessageButton()
+						.setCustomId("claim_report")
+						.setLabel("Claim")
+						.setStyle("SECONDARY")
+						.setEmoji("🛄")
 				);
 				channel.send({
 					embeds: [Embed],
