@@ -16,6 +16,7 @@
 		"ascii-table": "^0.0.9",
 		"canvacord": "^5.2.3",
 		"chalk": "^5.0.0",
+		"discord-html-transcripts": "^1.2.4",
 		"discord-xp": "^1.1.16",
 		"discord.js": "^13.6.0",
 		"glob": "^7.2.0",

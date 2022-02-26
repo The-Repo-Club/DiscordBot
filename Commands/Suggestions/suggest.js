@@ -6,12 +6,7 @@
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 
-const {
-	CommandInteraction,
-	MessageEmbed,
-	MessageActionRow,
-	MessageButton,
-} = require("discord.js");
+const { CommandInteraction, MessageEmbed } = require("discord.js");
 const suggestDB = require("../../Structures/Schemas/suggestDB"); //Make sure this path is correct
 const suggestSetupDB = require("../../Structures/Schemas/suggestSetupDB"); //Make sure this path is correct
 
@@ -19,8 +14,6 @@ module.exports = {
 	name: "suggest",
 	description: "Create a suggestion.",
 	usage: "/suggest",
-	disabled: false,
-	botCommandChannelOnly: true,
 	options: [
 		{
 			name: "type",
@@ -64,7 +57,7 @@ module.exports = {
 	 *
 	 * @param {CommandInteraction} interaction
 	 */
-	async execute(interaction, client) {
+	async execute(interaction) {
 		const { options, guildId, member, user } = interaction;
 
 		const suggestionsSetup = await suggestSetupDB.findOne({ GuildID: guildId });

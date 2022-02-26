@@ -1,9 +1,4 @@
-const {
-	MessageEmbed,
-	Message,
-	CommandInteraction,
-	Client,
-} = require("discord.js");
+const { MessageEmbed, CommandInteraction, Client } = require("discord.js");
 const suggestSetupDB = require("../../Structures/Schemas/suggestSetupDB"); //Make sure this path is correct
 const suggestDB = require("../../Structures/Schemas/suggestDB"); //Make sure this path is correct
 
