@@ -41,7 +41,7 @@ module.exports = {
 
 		const Messages = await channel.messages.fetch();
 
-		const Responce = new MessageEmbed().setColor("RED");
+		const Response = new MessageEmbed().setColor("RED");
 
 		if (Target) {
 			let i = 0;
@@ -54,22 +54,29 @@ module.exports = {
 			});
 
 			await channel.bulkDelete(filetred, true).then((messages) => {
-				Responce.setDescription(`🧹 Cleared ${messages.size} from ${Target}`);
-				const message = interaction.reply({
-					embeds: [Responce],
-				});
+				Response.setDescription(`🧹 Cleared ${messages.size} from ${Target}`);
+				interaction
+					.reply({
+						embeds: [Response],
+						fetchReply: true,
+					})
+					.then((msg) => {
+						setTimeout(() => msg.delete(), ms("5s"));
+					});
 			});
 		} else {
 			await channel.bulkDelete(Amount, true).then((messages) => {
-				Responce.setDescription(
+				Response.setDescription(
 					`🧹 Cleared ${messages.size} from this channel`
 				);
-				const message = interaction.reply({
-					embeds: [Responce],
-				});
-				setTimeout(async () => {
-					await message.delete();
-				}, ms("5s"));
+				interaction
+					.reply({
+						embeds: [Response],
+						fetchReply: true,
+					})
+					.then((msg) => {
+						setTimeout(() => msg.delete(), ms("5s"));
+					});
 			});
 		}
 	},
