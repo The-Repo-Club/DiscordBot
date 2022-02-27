@@ -19,7 +19,7 @@ client.commands = new Collection();
 client.cooldowns = new Collection();
 client.maintenance = false;
 
-["Events", "Commands"].forEach((handler) => {
+["Events", "Loggers", "Commands"].forEach((handler) => {
 	require(`./Handlers/${handler}`)(client, PG, Ascii);
 });
 

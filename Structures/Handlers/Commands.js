@@ -24,7 +24,7 @@ module.exports = async (client, PG, Ascii) => {
 		if (!command.name)
 			return Table.addRow(cmdName, "⛔ FAILED", "Missing a name.");
 
-		if (!command.context && !command.description)
+		if (!command.type && !command.description)
 			return Table.addRow(cmdName, "⛔ FAILED", "Missing a description.");
 
 		if (command.permission) {

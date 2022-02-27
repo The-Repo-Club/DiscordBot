@@ -7,7 +7,7 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 const { MessageEmbed, Message, WebhookClient, Client } = require("discord.js");
 const discordTranscripts = require("discord-html-transcripts");
-const DB = require("../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "messageDeleteBulk",

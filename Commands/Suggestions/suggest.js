@@ -5,6 +5,7 @@
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
+// -------------------------------------------------------------------------
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const suggestDB = require("../../Structures/Schemas/suggestDB"); //Make sure this path is correct
@@ -121,7 +122,7 @@ module.exports = {
 							`✅ Your [suggestion](${M.url}) was successfully created and sent to ${suggestionsChannel}`
 						)
 						.setFooter({
-							text: "This system was created by The-Repo-Club#3623",
+							text: "This system was created by TheRepo.Club#3623",
 						}),
 				],
 				ephemeral: true,

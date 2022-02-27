@@ -1,3 +1,12 @@
+// -*-coding:utf-8 -*-
+// -------------------------------------------------------------------------
+// Path          - DiscordBot/Commands/Suggestions/suggest-setup.js
+// Git           - https://github.com/The-Repo-Club
+// Author        - The-Repo-Club [wayne6324@gmail.com]
+// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
+// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
+// -------------------------------------------------------------------------
+
 const { MessageEmbed, CommandInteraction, Client } = require("discord.js");
 const DB = require("../../Structures/Schemas/suggestSetupDB"); //Make sure this path is correct
 
@@ -146,7 +155,7 @@ module.exports = {
 										`❌ An error occurred. \n\n \`\`\`${error}\`\`\``
 									)
 									.setFooter({
-										text: "This system was created by The-Repo-Club#3623",
+										text: "This system was created by TheRepo.Club#3623",
 									}),
 							],
 						});

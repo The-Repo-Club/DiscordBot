@@ -5,6 +5,7 @@
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
+// -------------------------------------------------------------------------
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const DB = require("../../Structures/Schemas/lockdownDB");
