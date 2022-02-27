@@ -19,30 +19,39 @@ module.exports = {
 		// We're going to ignore all messages that are sent by the bot
 
 		if (oldMessage.content === newMessage.content) return;
+		// If content of old and new messages are the same it returns
 
-		const admin = await DB.findOne({
+		const Data = await DB.findOne({
 			GuildID: newMessage.guild.id,
 		});
+		if (!Data) return;
 
-		const logsChannel = newMessage.guild.channels.cache.get(admin.Logs);
-
-		const Count = 1950;
+		const logsChannel = newMessage.guild.channels.cache.get(Data.Logs);
 
 		const Original =
-			oldMessage.content.slice(0, Count) +
-			(oldMessage.content.length > 1950 ? " ..." : "");
+			oldMessage.content.slice(0, 1500) +
+			(oldMessage.content.length > 1500 ? " ..." : "");
 
 		const Edited =
-			newMessage.content.slice(0, Count) +
-			(newMessage.content.length > 1950 ? " ..." : "");
+			newMessage.content.slice(0, 1500) +
+			(newMessage.content.length > 1500 ? " ..." : "");
 
 		const Log = new MessageEmbed()
 			.setColor("RED")
+			.setTitle("A Message Has Been Updated")
 			.setDescription(
-				`📘 A [message](${newMessage.url}) by ${newMessage.author} was **edited** in ${newMessage.channel}.`
+				`📘 A [message](${newMessage.url}) by ${newMessage.author} was **updated** in ${newMessage.channel}.`
 			)
-			.addField("Original", Original)
-			.addField("Edited", Edited)
+			.addFields(
+				{
+					name: "Original",
+					value: Original,
+				},
+				{
+					name: "Edited",
+					value: Edited,
+				}
+			)
 			.setFooter({
 				text: `Member: ${newMessage.author.tag} | Member: ${newMessage.author.id}`,
 				iconURL: `${newMessage.author.avatarURL({ dynamic: true, size: 512 })}`,

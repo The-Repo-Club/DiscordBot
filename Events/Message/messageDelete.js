@@ -16,29 +16,36 @@ module.exports = {
 	async execute(message) {
 		if (message.author.bot) return;
 		// We're going to ignore all messages that are sent by the bot
-		const admin = await DB.findOne({
+		const Data = await DB.findOne({
 			GuildID: message.guild.id,
 		});
+		if (!Data) return;
 
-		const logsChannel = message.guild.channels.cache.get(admin.Logs);
+		const logsChannel = message.guild.channels.cache.get(Data.Logs);
+		const logs = await message.guild.fetchAuditLogs({
+			limit: 1,
+		});
+		const log = logs.entries.first(); // Fetches the audit logs and takes the last entry
 
-		const Count = 1950;
+		const messageContent =
+			message.content.slice(0, 1500) +
+			(message.content.length > 1500 ? " ..." : "");
 
-		const Deleted =
-			message.content.slice(0, Count) +
-			(message.content.length > 1950 ? " ..." : "");
-
-		const Log = new MessageEmbed()
+		const messageDeletedEmbed = new MessageEmbed()
 			.setColor("RED")
+			.setTitle("A Message Has Been Deleted")
 			.setDescription(
-				`📘 A [message](${message.url}) by ${message.author} was **deleted** in ${message.channel}.`
+				`📘 A message by ${message.author} in ${message.channel} was **deleted** by <@${log.executor.id}>.`
 			)
-			.addField("Deleted", Deleted)
+			.setTimestamp()
+			.addField("Message", messageContent)
 			.setFooter({
-				text: `Member: ${message.author.tag} | Member: ${message.author.id}`,
+				text: `Member: ${message.author.tag} | ID: ${message.author.id}`,
 				iconURL: `${message.author.avatarURL({ dynamic: true, size: 512 })}`,
 			});
 
-		logsChannel.send({ embeds: [Log] }).catch((err) => console.log(err));
+		logsChannel
+			.send({ embeds: [messageDeletedEmbed] })
+			.catch((err) => console.log(err));
 	},
 };
