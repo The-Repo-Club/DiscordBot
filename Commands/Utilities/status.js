@@ -7,26 +7,34 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 // -------------------------------------------------------------------------
 
-const { Client, CommandInteraction, MessageEmbed } = require("discord.js");
+const {
+	Client,
+	CommandInteraction,
+	MessageEmbed,
+	MessageButton,
+} = require("discord.js");
+const paginationEmbed = require("../../Systems/paginationSys");
 const { connection } = require("mongoose");
 require("../../Events/Client/ready");
+var os = require("os");
+const ms = require("ms");
 
 function getPBar(percent) {
 	let thick = Math.floor(percent / 5);
 	let thin = Math.ceil((100 - percent) / 10) * 2;
-	let str = "_[_";
+	let str = "";
 
 	for (let i = 0; i < thick; i++) str += "▰";
 	for (let i = 0; i < thin; i++) str += "▱";
 
-	str += "_]_";
+	str += "";
 
 	return str;
 }
 
-let usedMemory = process.memoryUsage().heapUsed / 1024 / 1024;
-let totalMemory = 5000;
-let getp = ((usedMemory / totalMemory) * 5000).toFixed(2) + "%";
+let usedMemory = os.totalmem() - os.freemem();
+let totalMemory = os.totalmem();
+let percentMemory = ((usedMemory / totalMemory) * 100).toFixed(0);
 
 module.exports = {
 	name: "status",
@@ -37,47 +45,114 @@ module.exports = {
 	 * @param {Client} client
 	 */
 	async execute(interaction, client) {
-		const Embed = new MessageEmbed()
+		const { guild } = interaction;
+		const owner = client.users.cache.get(guild.ownerId);
+		const Page1 = new MessageEmbed()
 			.setAuthor({
 				name: interaction.user.tag,
 				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
 			})
-			.setColor("#2655ff")
+			.setColor("#8130D7")
+			.setDescription(
+				`**Client** [discord.js](https://discord.js.org/)
+        <t:${parseInt(client.readyTimestamp / 1000)}:R> `
+			)
+			.setTimestamp()
 			.addFields(
 				{
-					name: "Client",
-					value: `Username: \`${
-						client.user.tag
-					}\`\nLibrary: [discord.js](https://discord.js.org/)\nPing: \`🟢 ONLINE\` - \`${
-						client.ws.ping
-					}ms\`\nUptime: <t:${parseInt(client.readyTimestamp / 1000)}:R>`,
+					name: "Username",
+					value: ` \` ${client.user.tag} \` `,
 				},
 				{
-					name: "Stats",
-					value: `Commands: \`${client.commands.size} commands\`\nGuilds: \`${client.guilds.cache.size} guilds\`\nUsers: \`${client.users.cache.size} users\``,
-					inline: false,
+					name: "Ping",
+					value: `\` 🟢 ONLINE ${client.ws.ping}ms \``,
 				},
 				{
-					name: "Database",
-					value: `Name: \`MongoDB \`\nStatus: \`${switchTo(
-						connection.readyState
-					)}\``,
-					inline: false,
-				},
-				{
-					name: "Statistics",
-					value: `Memory: \`${(
-						process.memoryUsage().heapUsed /
-						1024 /
-						1024
-					).toFixed()}%\`\nBar: ${getPBar(
-						Math.round((usedMemory / totalMemory) * 5000)
-					)}`,
-					inline: false,
+					name: "Owner",
+					value: `\` ${owner.tag} \``,
 				}
-			)
-			.setTimestamp();
-		interaction.reply({ embeds: [Embed] });
+			);
+
+		const Page2 = new MessageEmbed()
+			.setAuthor({
+				name: interaction.user.tag,
+				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+			})
+			.setColor("#8130D7")
+			.setDescription("**Stats**")
+			.setTimestamp()
+			.addFields(
+				{
+					name: "Commands",
+					value: ` \` ${client.commands.size} commands \` `,
+				},
+				{
+					name: "Guilds",
+					value: `\` ${client.guilds.cache.size} guilds \``,
+				},
+				{
+					name: "Users",
+					value: `\` ${client.users.cache.size} users \``,
+				}
+			);
+
+		const Page3 = new MessageEmbed()
+			.setAuthor({
+				name: interaction.user.tag,
+				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+			})
+			.setColor("#8130D7")
+			.setDescription("**Database**")
+			.setTimestamp()
+			.addFields(
+				{
+					name: "Name",
+					value: ` \` MongoDB \` `,
+				},
+				{
+					name: "Status",
+					value: `\` ${switchTo(connection.readyState)} \``,
+				}
+			);
+
+		const Page4 = new MessageEmbed()
+			.setAuthor({
+				name: interaction.user.tag,
+				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+			})
+			.setColor("#8130D7")
+			.setDescription("**Statistics**")
+			.setTimestamp()
+			.addFields(
+				{
+					name: "Memory",
+					value: ` \` ${percentMemory}% \` `,
+				},
+				{
+					name: "Bar",
+					value: `\` ${getPBar(percentMemory)} \``,
+				}
+			);
+
+		const btn1 = new MessageButton()
+			.setStyle("DANGER")
+			.setCustomId("previousbtn")
+			.setLabel("Previous");
+
+		const btn2 = new MessageButton()
+			.setStyle("SUCCESS")
+			.setCustomId("nextbtn")
+			.setLabel("Next");
+
+		const btn3 = new MessageButton()
+			.setStyle("PRIMARY")
+			.setCustomId("closebtn")
+			.setLabel("Close");
+
+		const embedList = [Page1, Page2, Page3, Page4];
+		const buttonList = [btn1, btn2, btn3];
+		const timeout = ms("10m");
+		paginationEmbed(interaction, embedList, buttonList, timeout);
 	},
 };
 

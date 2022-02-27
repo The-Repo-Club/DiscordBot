@@ -46,6 +46,9 @@ module.exports = {
 						value: `\`${newUser.username}\``,
 					}
 				);
+			logsChannel
+				.send({ embeds: [userUpdateEmbed] })
+				.catch((err) => console.log(err));
 		}
 
 		if (oldUser.discriminator !== newUser.discriminator) {
@@ -62,42 +65,10 @@ module.exports = {
 						value: `\`${newUser.discriminator}\``,
 					}
 				);
+			logsChannel
+				.send({ embeds: [userUpdateEmbed] })
+				.catch((err) => console.log(err));
 		}
-
-		// if (oldUser.flags.bitfield != newUser.flags.bitfield) {
-		// 	// If flags changed execute code
-		// 	const newFlags = new UserFlags(newUser.flags.bitfield)
-		// 		.toArray()
-		// 		.slice(" ")
-		// 		.map((e) => `\`${e}\``)
-		// 		.join(" ")
-		// 		.toLowerCase()
-		// 		.replaceAll("_", " ");
-		// 	userUpdateEmbed
-		// 		.setDescription(`The user ${newUser} changed their flags`)
-		// 		.addField("New flags", newFlags || "No flags anymore");
-		// }
-		// console.log(logsChannel);
-		// if (oldUser.avatar !== newUser.avatar) {
-		// 	// If avatar changed execute code
-		// 	userUpdateEmbed
-		// 		.setDescription(`The user ${newUser} changed their avatar`)
-		// 		.setImage(newUser.avatarURL({ dynamic: true }))
-		// 		.addFields(
-		// 			{
-		// 				name: "Old avatar",
-		// 				value: oldUser.avatar
-		// 					? `${oldUser.avatarURL({ dynamic: true })}`
-		// 					: "No avatar before",
-		// 			},
-		// 			{
-		// 				name: "New avatar",
-		// 				value: newUser.avatar
-		// 					? `${newUser.avatarURL({ dynamic: true })}`
-		// 					: "No new avatar",
-		// 			}
-		// 		);
-		// }
 
 		if (oldUser.banner !== newUser.banner) {
 			// If banner changed execute code
@@ -118,10 +89,52 @@ module.exports = {
 							: "No new banner",
 					}
 				);
+			logsChannel
+				.send({ embeds: [userUpdateEmbed] })
+				.catch((err) => console.log(err));
 		}
 
-		logsChannel
-			.send({ embeds: [userUpdateEmbed] })
-			.catch((err) => console.log(err));
+		if (oldUser.avatar !== newUser.avatar) {
+			// If avatar changed execute code
+			userUpdateEmbed
+				.setDescription(`The user ${newUser} changed their avatar`)
+				.setImage(newUser.avatarURL({ dynamic: true }))
+				.addFields(
+					{
+						name: "Old avatar",
+						value: oldUser.avatar
+							? `${oldUser.avatarURL({ dynamic: true })}`
+							: "No avatar before",
+					},
+					{
+						name: "New avatar",
+						value: newUser.avatar
+							? `${newUser.avatarURL({ dynamic: true })}`
+							: "No new avatar",
+					}
+				);
+			logsChannel
+				.send({ embeds: [userUpdateEmbed] })
+				.catch((err) => console.log(err));
+		}
+
+		// if (!oldUser.flags.bitfield || !newUser.flags.bitfield) return;
+		// if (oldUser.flags.bitfield != newUser.flags.bitfield) {
+		// 	// If flags changed execute code
+		// 	const newFlags = new UserFlags(newUser.flags.bitfield)
+		// 		.toArray()
+		// 		.slice(" ")
+		// 		.map((e) => `\`${e}\``)
+		// 		.join(" ")
+		// 		.toLowerCase()
+		// 		.replaceAll("_", " ");
+		// 	userUpdateEmbed
+		// 		.setDescription(`The user ${newUser} changed their flags`)
+		// 		.addField("New flags", newFlags || "No flags anymore");
+
+		// 	logsChannel
+		// 		.send({ embeds: [userUpdateEmbed] })
+		// 		.catch((err) => console.log(err));
+		// }
 	},
 };
