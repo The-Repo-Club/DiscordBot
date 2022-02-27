@@ -1,11 +1,12 @@
 // -*-coding:utf-8 -*-
 // -------------------------------------------------------------------------
-// Path          - DiscordBot/Events/Message/messageUpdate.js
+// Path          - DiscordBot/Events/Loggers/Message/messageUpdate.js
 // Git           - https://github.com/The-Repo-Club
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 // -------------------------------------------------------------------------
+
 const { MessageEmbed, Client, User, UserFlags } = require("discord.js");
 const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
 
@@ -46,9 +47,6 @@ module.exports = {
 						value: `\`${newUser.username}\``,
 					}
 				);
-			logsChannel
-				.send({ embeds: [userUpdateEmbed] })
-				.catch((err) => console.log(err));
 		}
 
 		if (oldUser.discriminator !== newUser.discriminator) {
@@ -65,9 +63,6 @@ module.exports = {
 						value: `\`${newUser.discriminator}\``,
 					}
 				);
-			logsChannel
-				.send({ embeds: [userUpdateEmbed] })
-				.catch((err) => console.log(err));
 		}
 
 		if (oldUser.banner !== newUser.banner) {
@@ -89,9 +84,6 @@ module.exports = {
 							: "No new banner",
 					}
 				);
-			logsChannel
-				.send({ embeds: [userUpdateEmbed] })
-				.catch((err) => console.log(err));
 		}
 
 		if (oldUser.avatar !== newUser.avatar) {
@@ -113,9 +105,6 @@ module.exports = {
 							: "No new avatar",
 					}
 				);
-			logsChannel
-				.send({ embeds: [userUpdateEmbed] })
-				.catch((err) => console.log(err));
 		}
 
 		// if (!oldUser.flags.bitfield || !newUser.flags.bitfield) return;
@@ -136,5 +125,9 @@ module.exports = {
 		// 		.send({ embeds: [userUpdateEmbed] })
 		// 		.catch((err) => console.log(err));
 		// }
+
+		logsChannel
+			.send({ embeds: [userUpdateEmbed] })
+			.catch((err) => console.log(err));
 	},
 };

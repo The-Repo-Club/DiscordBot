@@ -121,11 +121,11 @@ module.exports = {
 				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
 			})
 			.setColor("#8130D7")
-			.setDescription("**Statistics**")
+			.setDescription("**Memory**")
 			.setTimestamp()
 			.addFields(
 				{
-					name: "Memory",
+					name: "Percentage",
 					value: ` \` ${percentMemory}% \` `,
 				},
 				{

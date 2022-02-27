@@ -22,7 +22,7 @@ module.exports = async (client, PG, Ascii) => {
 		if (!Events.includes(event.name) || !event.name) {
 			await Table.addRow(
 				`${event.name || "MISSING"}`,
-				`⛔ Event name is either invalid or missing: ${evtName}`
+				`🟥 Event name is either invalid or missing: ${evtName}`
 			);
 			return;
 		}
@@ -33,7 +33,7 @@ module.exports = async (client, PG, Ascii) => {
 			client.on(event.name, (...args) => event.execute(...args, client));
 		}
 
-		await Table.addRow(evtName, "💠 SUCCESSFUL");
+		await Table.addRow(evtName, "🟩 SUCCESSFUL");
 	});
 
 	console.log(Table.toString());

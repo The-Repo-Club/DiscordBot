@@ -159,7 +159,7 @@ module.exports = {
 			const errEmbed = new MessageEmbed()
 				.setColor("RED")
 				.setDescription(
-					`⛔ | An error occurred while setting up your ticket system.`
+					`🟥 | An error occurred while setting up your ticket system.`
 				)
 				.addField(
 					"What to make sure of?",

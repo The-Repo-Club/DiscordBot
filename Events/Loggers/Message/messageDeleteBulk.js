@@ -1,11 +1,13 @@
 // -*-coding:utf-8 -*-
 // -------------------------------------------------------------------------
-// Path          - DiscordBot/Events/Message/messageUpdate.js
+// Path          - DiscordBot/Events/Loggers/Message/messageDeleteBulk.js
 // Git           - https://github.com/The-Repo-Club
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-const { MessageEmbed, Message, WebhookClient, Client } = require("discord.js");
+// -------------------------------------------------------------------------
+
+const { MessageEmbed, Message, Client } = require("discord.js");
 const discordTranscripts = require("discord-html-transcripts");
 const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
 

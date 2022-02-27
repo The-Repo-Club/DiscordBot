@@ -55,7 +55,7 @@ module.exports = {
 								new MessageEmbed()
 									.setColor("#ff2600")
 									.setDescription(
-										`⛔ ${interaction.user} The __cooldown__ for **${
+										`🟥 ${interaction.user} The __cooldown__ for **${
 											command.name
 										}** is still active.\nYou have to wait for another \` ${
 											time.split(".")[0]
@@ -88,7 +88,7 @@ module.exports = {
 							new MessageEmbed()
 								.setColor("RED")
 								.setDescription(
-									"⛔ An error occured while running this command."
+									"🟥 An error occured while running this command."
 								)
 								.setTimestamp(),
 						],

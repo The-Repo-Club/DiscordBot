@@ -41,7 +41,7 @@ module.exports = {
 			return interaction.reply({
 				embeds: [
 					Embed.setColor("RED").setDescription(
-						"⛔ | This channel has already been locked!"
+						"🟥 | This channel has already been locked!"
 					),
 				],
 				ephemeral: true,

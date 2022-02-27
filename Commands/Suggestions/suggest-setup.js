@@ -145,6 +145,7 @@ module.exports = {
 										`❌ The bot does not have access to this channel.`
 									),
 							],
+							ephemeral: true,
 						});
 					} else {
 						return interaction.reply({
@@ -158,6 +159,7 @@ module.exports = {
 										text: "This system was created by TheRepo.Club#3623",
 									}),
 							],
+							ephemeral: true,
 						});
 					}
 				}
@@ -174,6 +176,7 @@ module.exports = {
 									`❌ This server has not setup the suggestion system.`
 								),
 						],
+						ephemeral: true,
 					});
 
 				const messages = new MessageEmbed().setColor("GREEN");

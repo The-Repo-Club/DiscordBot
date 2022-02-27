@@ -56,7 +56,7 @@ module.exports = {
 							return interaction.reply({
 								embeds: [
 									Embed.setColor("RED").setDescription(
-										"⛔ | This is not a ticket channel."
+										"🟥 | This is not a ticket channel."
 									),
 								],
 								ephemeral: true,
@@ -65,7 +65,7 @@ module.exports = {
 							return interaction.reply({
 								embeds: [
 									Embed.setColor("RED").setDescription(
-										"⛔ | This member is already part of this ticket."
+										"🟥 | This member is already part of this ticket."
 									),
 								],
 								ephemeral: true,
@@ -97,7 +97,7 @@ module.exports = {
 							return interaction.reply({
 								embeds: [
 									Embed.setColor("RED").setDescription(
-										"⛔ | This is not a ticket channel."
+										"🟥 | This is not a ticket channel."
 									),
 								],
 								ephemeral: true,
@@ -106,7 +106,7 @@ module.exports = {
 							return interaction.reply({
 								embeds: [
 									Embed.setColor("RED").setDescription(
-										"⛔ | This member is not part of this ticket."
+										"🟥 | This member is not part of this ticket."
 									),
 								],
 								ephemeral: true,

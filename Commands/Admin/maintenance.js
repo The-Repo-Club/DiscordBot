@@ -43,7 +43,7 @@ module.exports = {
 
 			const bot = new MessageEmbed()
 				.setColor("GREEN")
-				.setTitle("Maintenance mode **disabled** ⛔")
+				.setTitle("Maintenance mode **disabled** 🟥")
 				.setDescription(`👷‍♂️ The bot has been taken out of maintenance mode. 👷‍♂️`)
 				.setTimestamp();
 
