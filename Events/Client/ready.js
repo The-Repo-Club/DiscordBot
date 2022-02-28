@@ -21,8 +21,8 @@ module.exports = {
 		console.log(`The client connected as ${client.user.tag}!`);
 		client.user.setActivity("Development of v1.0.0", { type: "WATCHING" });
 
-		require("../../Systems/CooldownSys")(client);
-		require("../../Systems/LockdownSys")(client);
+		require("../../Systems/cooldownSys")(client);
+		require("../../Systems/lockdownSys")(client);
 
 		if (!Database) return;
 		mongoose

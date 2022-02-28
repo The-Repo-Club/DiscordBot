@@ -7,22 +7,22 @@
 // Modified On   - Wed 23 February 2022, 12:16:17 pm (GMT)
 // -------------------------------------------------------------------------
 
-const { Event, Events } = require("../Validation/EventNames");
+const { Event, Events } = require("../Validation/eventNames");
 
 /**
  * @param {Client} client
  */
 module.exports = async (client, PG, Ascii) => {
-	const Table = new Ascii("Events Loaded");
+	const Table = new Ascii("Loggers Loaded");
 
-	(await PG(`${process.cwd()}/Events/*/*.js`)).map(async (file) => {
+	(await PG(`${process.cwd()}/Events/Loggers/*/*.js`)).map(async (file) => {
 		const event = require(file);
-		const evtName = file.split("/")[6] + "/" + file.split("/")[7];
+		const evtName = file.split("/")[7] + "/" + file.split("/")[8];
 
 		if (!Events.includes(event.name) || !event.name) {
 			await Table.addRow(
 				`${event.name || "MISSING"}`,
-				`🟥 Event name is either invalid or missing: ${evtName}`
+				`🟥 Loggers Event name is either invalid or missing: ${evtName}`
 			);
 			return;
 		}
