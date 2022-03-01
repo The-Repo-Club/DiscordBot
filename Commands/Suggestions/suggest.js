@@ -98,8 +98,8 @@ module.exports = {
 		try {
 			const M = await suggestionsChannel.send({ embeds: [Embed] });
 
-			M.react("<:accepted:946447476355919922>");
-			M.react("<:declined:946447476460769300>");
+			M.react("<:accepted:947970636310011945>");
+			M.react("<:declined:947970620648468490>");
 
 			await suggestDB.create({
 				GuildID: guildId,

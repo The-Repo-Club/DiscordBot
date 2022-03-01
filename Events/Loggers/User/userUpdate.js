@@ -47,6 +47,9 @@ module.exports = {
 						value: `\`${newUser.username}\``,
 					}
 				);
+			logsChannel
+				.send({ embeds: [userUpdateEmbed] })
+				.catch((err) => console.log(err));
 		}
 
 		if (oldUser.discriminator !== newUser.discriminator) {
@@ -63,6 +66,9 @@ module.exports = {
 						value: `\`${newUser.discriminator}\``,
 					}
 				);
+			logsChannel
+				.send({ embeds: [userUpdateEmbed] })
+				.catch((err) => console.log(err));
 		}
 
 		if (oldUser.banner !== newUser.banner) {
@@ -84,6 +90,9 @@ module.exports = {
 							: "No new banner",
 					}
 				);
+			logsChannel
+				.send({ embeds: [userUpdateEmbed] })
+				.catch((err) => console.log(err));
 		}
 
 		if (oldUser.avatar !== newUser.avatar) {
@@ -105,29 +114,51 @@ module.exports = {
 							: "No new avatar",
 					}
 				);
+			logsChannel
+				.send({ embeds: [userUpdateEmbed] })
+				.catch((err) => console.log(err));
 		}
 
-		// if (!oldUser.flags.bitfield || !newUser.flags.bitfield) return;
-		// if (oldUser.flags.bitfield != newUser.flags.bitfield) {
-		// 	// If flags changed execute code
-		// 	const newFlags = new UserFlags(newUser.flags.bitfield)
-		// 		.toArray()
-		// 		.slice(" ")
-		// 		.map((e) => `\`${e}\``)
-		// 		.join(" ")
-		// 		.toLowerCase()
-		// 		.replaceAll("_", " ");
-		// 	userUpdateEmbed
-		// 		.setDescription(`The user ${newUser} changed their flags`)
-		// 		.addField("New flags", newFlags || "No flags anymore");
+		if (!oldUser.flags || !newUser.flags) return;
+		if (oldUser.flags != newUser.flags) {
+			// If flags changed execute code
+			const newFlags = new UserFlags(
+				oldUserFlags.missing(newUserFlags.bitfield, false)
+			).toArray();
+			const oldFlags = new UserFlags(
+				newUserFlags.missing(oldUserFlags.bitfield, false)
+			).toArray();
 
-		// 	logsChannel
-		// 		.send({ embeds: [userUpdateEmbed] })
-		// 		.catch((err) => console.log(err));
-		// }
+			if (newFlags.length < 1 && oldFlags.length < 1) return;
+			userUpdateEmbed.setDescription(`The user ${newUser} changed their flags`);
 
-		logsChannel
-			.send({ embeds: [userUpdateEmbed] })
-			.catch((err) => console.log(err));
+			if (newFlags.length > 0) {
+				const addedPerms = d
+					.slice(" ")
+					.map((e) => `\`${e}\``)
+					.join(" ")
+					.toLowerCase()
+					.replaceAll("_", " ");
+				userUpdateEmbed.addField("**Added Flags**", addedPerms);
+
+				logsChannel
+					.send({ embeds: [userUpdateEmbed] })
+					.catch((err) => console.log(err));
+			}
+
+			if (oldFlags.length > 0) {
+				const removedPerms = s
+					.slice(" ")
+					.map((e) => `\`${e}\``)
+					.join(" ")
+					.toLowerCase()
+					.replaceAll("_", " ");
+				userUpdateEmbed.addField("**Removed Flags**", removedPerms);
+
+				logsChannel
+					.send({ embeds: [userUpdateEmbed] })
+					.catch((err) => console.log(err));
+			}
+		}
 	},
 };
