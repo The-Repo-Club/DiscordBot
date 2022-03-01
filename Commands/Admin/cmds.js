@@ -1,6 +1,6 @@
 // -*-coding:utf-8 -*-
 // -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Admin/logs.js
+// Path          - DiscordBot/Commands/Admin/cmds.js
 // Git           - https://github.com/The-Repo-Club
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
@@ -8,22 +8,22 @@
 // -------------------------------------------------------------------------
 
 const { MessageEmbed, CommandInteraction } = require("discord.js");
-const DB = require("../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../Structures/Schemas/cmdsDB"); //Make sure this path is correct
 const ms = require("ms");
 
 module.exports = {
-	name: "logs",
-	description: "Setup or reset the logs channel.",
+	name: "cmds",
+	description: "Setup or reset the cmds channel.",
 	permission: "ADMINISTRATOR",
 	options: [
 		{
 			name: "setup",
-			description: "Setup the server logs channel.",
+			description: "Setup the server cmds channel.",
 			type: "SUB_COMMAND",
 			options: [
 				{
 					name: "channel",
-					description: "Select the channel to send the server logs to.",
+					description: "Select the channel to run server cmds in.",
 					required: true,
 					type: "CHANNEL",
 					channelTypes: ["GUILD_TEXT"],
@@ -32,7 +32,7 @@ module.exports = {
 		},
 		{
 			name: "reset",
-			description: "Reset the logs channel.",
+			description: "Reset the cmds channel.",
 			type: "SUB_COMMAND",
 		},
 	],
@@ -47,12 +47,12 @@ module.exports = {
 			switch (options.getSubcommand()) {
 				case "setup":
 					{
-						const LogsChannel = options.getChannel("channel");
+						const CmdChannel = options.getChannel("channel");
 
 						await DB.findOneAndUpdate(
 							{ GuildID: guild.id },
 							{
-								Logs: LogsChannel.id,
+								ChannelID: CmdChannel.id,
 							},
 							{
 								new: true,
@@ -61,11 +61,13 @@ module.exports = {
 						).catch((err) => console.log(err));
 
 						const LogsSetup = new MessageEmbed()
-							.setDescription("✅ | Successfully setup the server logs.")
+							.setDescription(
+								"✅ | Successfully setup the server cmds channel."
+							)
 							.setColor("#43b581");
 
 						await guild.channels.cache
-							.get(LogsChannel.id)
+							.get(CmdChannel.id)
 							.send({ embeds: [LogsSetup] })
 							.then((m) => {
 								setTimeout(() => {

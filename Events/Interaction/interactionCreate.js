@@ -7,6 +7,7 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 const { Client, CommandInteraction, MessageEmbed } = require("discord.js");
 const cooldownsDB = require("../../Structures/Schemas/cooldownsDB");
+const cmdsDB = require("../../Structures/Schemas/cmdsDB");
 
 module.exports = {
 	name: "interactionCreate",
@@ -15,7 +16,8 @@ module.exports = {
 	 * @param {Client} client
 	 */
 	async execute(interaction, client) {
-		const { guildId, guild, user } = interaction;
+		const { guildId, guild, user, member } = interaction;
+
 		if (client.maintenance && interaction.user.id != "861270236475817994") {
 			const Response = new MessageEmbed()
 				.setTitle("👷‍♂️ MAINTENANCE 👷‍♂️")
@@ -88,12 +90,31 @@ module.exports = {
 							new MessageEmbed()
 								.setColor("RED")
 								.setDescription(
-									"🟥 An error occured while running this command."
+									"🟥 An error occurred while running this command."
 								)
 								.setTimestamp(),
 						],
 					}) && client.commands.delete(interaction.commandName)
 				);
+
+			const CmdChannel = await cmdsDB.findOne({
+				GuildID: guild.id,
+			});
+
+			if (!CmdChannel)
+				return interaction.reply({
+					content: `❌ This server has not setup the commands system.`,
+					ephemeral: true,
+				});
+
+			if (
+				interaction.channel.id != CmdChannel.ChannelID &&
+				!member.permissions.has("MUTE_MEMBERS")
+			)
+				return interaction.reply({
+					content: `You cannot use ${client.user.tag} commands in this channel try <#${CmdChannel.ChannelID}>`,
+					ephemeral: true,
+				});
 			command.execute(interaction, client);
 		}
 	},

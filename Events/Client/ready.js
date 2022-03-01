@@ -19,6 +19,7 @@ module.exports = {
 	execute(client) {
 		console.log("The client is now ready!");
 		console.log(`The client connected as ${client.user.tag}!`);
+		// require("../../Dashboard/index");
 		client.user.setActivity("Development of v1.0.0", { type: "WATCHING" });
 
 		require("../../Systems/cooldownSys")(client);
