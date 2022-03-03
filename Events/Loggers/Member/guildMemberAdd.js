@@ -9,8 +9,6 @@
 
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
 const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
-const { Welcomer } = require("canvacord");
-const card = new Welcomer();
 
 module.exports = {
 	name: "guildMemberAdd",
@@ -46,33 +44,34 @@ module.exports = {
 				.send({ embeds: [botJoinedEmbed] })
 				.catch((err) => console.log(err));
 		} else {
+			console.log();
 			// Else it means a normal user joined
-			card
-				.setUsername(member.user.username)
-				.setDiscriminator(member.user.discriminator)
-				.setMemberCount(member.guild.memberCount.toLocaleString())
-				.setGuildName(member.guild.name)
-				.setAvatar(member.user.displayAvatarURL({ format: "png" }))
-				.setColor("border", "#81a1c1")
-				.setColor("username-box", "#81a1c1")
-				.setColor("discriminator-box", "#81a1c1")
-				.setColor("message-box", "#81a1c1")
-				.setColor("title", "#81a1c1")
-				.setColor("avatar", "#81a1c1")
-				.setText("member-count", "{count} Members")
-				.setText("title", "welcome")
-				.setText("message", `welcome to ${member.guild.name}`)
-				.build()
-				.then((buffer) => {
-					logsChannel.send({
-						files: [
-							{
-								attachment: buffer,
-								name: "welcome.png",
-							},
-						],
-					});
-				});
+			// card
+			// 	.setUsername(member.user.username)
+			// 	.setDiscriminator(member.user.discriminator)
+			// 	.setMemberCount(member.guild.memberCount.toLocaleString())
+			// 	.setGuildName(member.guild.name)
+			// 	.setAvatar(member.user.displayAvatarURL({ format: "png" }))
+			// 	.setColor("border", "#81a1c1")
+			// 	.setColor("username-box", "#81a1c1")
+			// 	.setColor("discriminator-box", "#81a1c1")
+			// 	.setColor("message-box", "#81a1c1")
+			// 	.setColor("title", "#81a1c1")
+			// 	.setColor("avatar", "#81a1c1")
+			// 	.setText("member-count", "{count} Members")
+			// 	.setText("title", "welcome")
+			// 	.setText("message", `welcome to ${member.guild.name}`)
+			// 	.build()
+			// 	.then((buffer) => {
+			// 		logsChannel.send({
+			// 			files: [
+			// 				{
+			// 					attachment: buffer,
+			// 					name: "welcome.png",
+			// 				},
+			// 			],
+			// 		});
+			// 	});
 		}
 	},
 };

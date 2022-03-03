@@ -9,7 +9,7 @@
 
 const { CommandInteraction, Client, MessageAttachment } = require("discord.js");
 const Levels = require("../../Systems/levelsSys");
-const canvacord = require("canvacord");
+const Canvas = require("../../Utils/ranks");
 
 module.exports = {
 	name: "rank",
@@ -30,29 +30,28 @@ module.exports = {
 	async execute(interaction, client) {
 		const Target =
 			interaction.options.getMember("target") || interaction.member;
-		const users = await Levels.fetch(Target.id, interaction.guildId);
+		const users = await Levels.fetch(Target.id, interaction.guildId, true);
 
 		if (!users)
 			return interaction.reply({ content: "The mentioned user has no XP." });
 
 		const neededXp = Levels.xpFor(parseInt(users.level) + 1);
 
-		const rank = new canvacord.Rank()
-			.setBackground("COLOR", "#283036")
+		const image = await new Canvas.RankCard()
+			.setUsername(Target.user.username)
 			.setAvatar(Target.displayAvatarURL({ format: "png", size: 512 }))
-			.setStatus(Target.presence.status)
-			.setCurrentXP(users.xp, "#a6ffa6")
-			.setRequiredXP(neededXp, "#ffc9a6")
-			.setLevelColor("#ffa6a6", "#ffa6a6")
 			.setLevel(users.level)
-			.setRankColor("#ffa6fc", "#ffa6fc")
-			.setProgressBar("#a6fffc", "COLOR")
-			.setUsername(Target.user.username, "#ffffa6")
-			.setDiscriminator(Target.user.discriminator, "rgba(255,255,166,0.6)");
-
-		rank.build().then((data) => {
-			const attachment = new MessageAttachment(data, "RankCard.png");
-			interaction.reply({ files: [attachment] });
-		});
+			.setAddon("RankName", false)
+			.setAddon("Reputation", false)
+			// .setAddon("Rank", false)
+			.setReputation(users.xp)
+			.setRankName("professional")
+			.setRank(users.position)
+			.setXP("Current", users.xp)
+			.setXP("Needed", neededXp)
+			.setColor("Background", "#283036")
+			.toAttachment();
+		const attachment = new MessageAttachment(image.toBuffer(), "RankCard.png");
+		interaction.reply({ files: [attachment] });
 	},
 };
