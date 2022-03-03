@@ -11,8 +11,6 @@ const { CommandInteraction, Client, MessageAttachment } = require("discord.js");
 const Levels = require("../../Systems/levelsSys");
 const canvacord = require("canvacord");
 
-const Canvas = require("../../Utils/ranks");
-
 module.exports = {
 	name: "rank",
 	description: "Get the rank of a user.",
@@ -56,22 +54,5 @@ module.exports = {
 			const attachment = new MessageAttachment(data, "RankCard.png");
 			interaction.reply({ files: [attachment] });
 		});
-
-		// const image = await new Canvas.RankCard()
-		// 	.setUsername(Target.user.username)
-		// 	.setAvatar(Target.displayAvatarURL({ format: "png", size: 512 }))
-		// 	.setLevel(users.level)
-		// 	.setAddon("RankName", false)
-		// 	.setAddon("Reputation", false)
-		// 	// .setAddon("Rank", false)
-		// 	.setReputation(users.xp)
-		// 	.setRankName("professional")
-		// 	.setRank(users.rank)
-		// 	.setXP("current", neededXp)
-		// 	.setXP("needed", 1000)
-		// 	.setColor("Background", "#283036")
-		// 	.toAttachment();
-		// const attachment = new MessageAttachment(image.toBuffer(), "RankCard.png");
-		// interaction.reply({ files: [attachment] });
 	},
 };
