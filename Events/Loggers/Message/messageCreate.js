@@ -8,7 +8,7 @@
 // -------------------------------------------------------------------------
 
 const { Message } = require("discord.js");
-const Levels = require("discord-xp");
+const Levels = require("../../../Systems/levelsSys");
 const { Database } = require("../../../Structures/config.json");
 Levels.setURL(Database);
 

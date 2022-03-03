@@ -8,7 +8,7 @@
 // -------------------------------------------------------------------------
 
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
-const Levels = require("discord-xp");
+const Levels = require("../../Systems/levelsSys");
 
 module.exports = {
 	name: "leaderboard",

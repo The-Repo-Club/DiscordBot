@@ -28,7 +28,7 @@ module.exports = {
 		});
 		if (!Data) return;
 
-		const logsChannel = newMessage.guild.channels.cache.get(Data.MemberLogs);
+		const logsChannel = newMessage.guild.channels.cache.get(Data.MessageLogs);
 
 		const Original =
 			oldMessage.content.slice(0, 1500) +

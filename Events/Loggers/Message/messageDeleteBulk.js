@@ -25,7 +25,7 @@ module.exports = {
 
 		const logsChannel = messages
 			.first()
-			.guild.channels.cache.get(Data.MemberLogs);
+			.guild.channels.cache.get(Data.MessageLogs);
 		const logs = await messages.first().guild.fetchAuditLogs({
 			limit: 1,
 		});
