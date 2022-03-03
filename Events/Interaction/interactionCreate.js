@@ -101,6 +101,9 @@ module.exports = {
 				GuildID: guild.id,
 			});
 
+			if (!CmdChannel && member.permissions.has("ADMINISTRATOR"))
+				return command.execute(interaction, client);
+
 			if (!CmdChannel)
 				return interaction.reply({
 					content: `❌ This server has not setup the commands system.`,
@@ -109,7 +112,7 @@ module.exports = {
 
 			if (
 				interaction.channel.id != CmdChannel.ChannelID &&
-				!member.permissions.has("MUTE_MEMBERS")
+				!member.permissions.has("ADMINISTRATOR")
 			)
 				return interaction.reply({
 					content: `You cannot use ${client.user.tag} commands in this channel try <#${CmdChannel.ChannelID}>`,

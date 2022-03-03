@@ -24,7 +24,7 @@ module.exports = {
 		});
 		if (!Data) return;
 
-		const logsChannel = oldRole.guild.channels.cache.get(Data.Logs);
+		const logsChannel = oldRole.guild.channels.cache.get(Data.RoleLogs);
 		const logs = await oldRole.guild.fetchAuditLogs({
 			limit: 1,
 			type: "ROLE_UPDATE",

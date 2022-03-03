@@ -22,7 +22,7 @@ module.exports = {
 		});
 		if (!Data) return;
 
-		const logsChannel = role.guild.channels.cache.get(Data.Logs);
+		const logsChannel = role.guild.channels.cache.get(Data.RoleLogs);
 		const logs = await role.guild.fetchAuditLogs({
 			limit: 1,
 			type: "ROLE_CREATE",

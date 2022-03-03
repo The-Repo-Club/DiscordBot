@@ -23,7 +23,9 @@ module.exports = {
 		});
 		if (!Data) return;
 
-		const logsChannel = messages.first().guild.channels.cache.get(Data.Logs);
+		const logsChannel = messages
+			.first()
+			.guild.channels.cache.get(Data.MemberLogs);
 		const logs = await messages.first().guild.fetchAuditLogs({
 			limit: 1,
 		});

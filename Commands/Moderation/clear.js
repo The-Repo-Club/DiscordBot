@@ -44,6 +44,11 @@ module.exports = {
 
 		const Response = new MessageEmbed().setColor("RED");
 
+		if (Amount > 100 || Amount <= 0) {
+			Response.setDescription(`Amount cannot exceed 100.`);
+			return interaction.reply({ embeds: [Response] });
+		}
+
 		if (Target) {
 			let i = 0;
 			const filetred = [];

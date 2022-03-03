@@ -11,19 +11,88 @@ const { MessageEmbed, CommandInteraction } = require("discord.js");
 const DB = require("../../Structures/Schemas/logsDB"); //Make sure this path is correct
 const ms = require("ms");
 
+async function updateField(guild, field, channel) {
+	await DB.findOneAndUpdate(
+		{ GuildID: guild },
+		{
+			[field]: channel,
+		},
+		{
+			new: true,
+			upsert: true,
+		}
+	).catch((err) => console.log(err));
+}
+
 module.exports = {
 	name: "logs",
-	description: "Setup or reset the logs channel.",
+	description: "Setup or reset the logs channels.",
 	permission: "ADMINISTRATOR",
 	options: [
 		{
 			name: "setup",
-			description: "Setup the server logs channel.",
+			description: "Setup the server logs channels.",
 			type: "SUB_COMMAND",
 			options: [
 				{
+					name: "type",
+					description: "Select the type of log you would like to setup.",
+					required: true,
+					type: "STRING",
+					choices: [
+						{
+							name: "Channel",
+							value: "Channel",
+						},
+						{
+							name: "Events",
+							value: "Events",
+						},
+						{
+							name: "Emoji",
+							value: "Emoji",
+						},
+						{
+							name: "Guild",
+							value: "Guild",
+						},
+						{
+							name: "Member",
+							value: "Member",
+						},
+						{
+							name: "Message",
+							value: "Message",
+						},
+						{
+							name: "Role",
+							value: "Role",
+						},
+						{
+							name: "Sticker",
+							value: "Sticker",
+						},
+						{
+							name: "Thread",
+							value: "Thread",
+						},
+						{
+							name: "User",
+							value: "User",
+						},
+						{
+							name: "Voice",
+							value: "Voice",
+						},
+						{
+							name: "Welcome",
+							value: "Welcome",
+						},
+					],
+				},
+				{
 					name: "channel",
-					description: "Select the channel to send the server logs to.",
+					description: "Select the channel to send them logs to.",
 					required: true,
 					type: "CHANNEL",
 					channelTypes: ["GUILD_TEXT"],
@@ -36,6 +105,7 @@ module.exports = {
 			type: "SUB_COMMAND",
 		},
 	],
+
 	/**
 	 * @param {CommandInteraction} interaction
 	 */
@@ -47,25 +117,17 @@ module.exports = {
 			switch (options.getSubcommand()) {
 				case "setup":
 					{
-						const LogsChannel = options.getChannel("channel");
-
-						await DB.findOneAndUpdate(
-							{ GuildID: guild.id },
-							{
-								Logs: LogsChannel.id,
-							},
-							{
-								new: true,
-								upsert: true,
-							}
-						).catch((err) => console.log(err));
+						const LType = options.getString("type");
+						const LChannel = options.getChannel("channel");
 
 						const LogsSetup = new MessageEmbed()
-							.setDescription("✅ | Successfully setup the server logs.")
+							.setDescription(`✅ | Successfully setup the ${LType} logs.`)
 							.setColor("#43b581");
 
+						updateField(guild.id, LType + "Logs", LChannel);
+
 						await guild.channels.cache
-							.get(LogsChannel.id)
+							.get(LChannel.id)
 							.send({ embeds: [LogsSetup] })
 							.then((m) => {
 								setTimeout(() => {
@@ -74,7 +136,7 @@ module.exports = {
 							});
 
 						await interaction.reply({
-							content: "Done",
+							content: `Successfully setup the ${LType} logs.`,
 							ephemeral: true,
 						});
 					}
@@ -82,7 +144,7 @@ module.exports = {
 				case "reset":
 					{
 						const LogsReset = new MessageEmbed()
-							.setDescription("✅ | Successfully reset the logging channel.")
+							.setDescription("✅ | Successfully reset the logging channels.")
 							.setColor("#43b581");
 						DB.deleteMany({ GuildID: guild.id }, async (err, data) => {
 							if (err) throw err;

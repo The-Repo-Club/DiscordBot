@@ -25,7 +25,7 @@ module.exports = {
 		});
 		if (!Data) return;
 
-		const logsChannel = guild.channels.cache.get(Data.Logs);
+		const logsChannel = guild.channels.cache.get(Data.UserLogs);
 
 		const userUpdateEmbed = new MessageEmbed()
 			.setColor("ORANGE")
