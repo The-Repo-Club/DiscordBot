@@ -135,9 +135,6 @@ module.exports = class Greeting {
 
 		// Draw title
 		ctx.font = "90px Bold";
-		ctx.strokeStyle = this.colorTitleBorder;
-		ctx.lineWidth = 15;
-		ctx.strokeText(this.textTitle, canvas.width - 620, canvas.height - 330);
 		ctx.fillStyle = this.colorTitle;
 		ctx.fillText(this.textTitle, canvas.width - 620, canvas.height - 330);
 

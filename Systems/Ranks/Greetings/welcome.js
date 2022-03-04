@@ -5,6 +5,6 @@ module.exports = class Welcome extends Greeting {
 		super();
 		this.textTitle = "WELCOME";
 		this.textMessage = "Welcome to {server}";
-		this.colorTitle = "#03A9F4";
+		this.colorTitle = "#59fff9";
 	}
 };

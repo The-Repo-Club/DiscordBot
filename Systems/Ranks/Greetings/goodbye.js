@@ -5,6 +5,6 @@ module.exports = class Goodbye extends Greeting {
 		super();
 		this.textTitle = "GOODBYE";
 		this.textMessage = "Leaving {server}";
-		this.colorTitle = "#df0909";
+		this.colorTitle = "#ff5959";
 	}
 };

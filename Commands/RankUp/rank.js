@@ -9,7 +9,7 @@
 
 const { CommandInteraction, Client, MessageAttachment } = require("discord.js");
 const Levels = require("../../Systems/levelsSys");
-const Canvas = require("../../Utils/ranks");
+const Canvas = require("../../Systems/Ranks/index");
 
 module.exports = {
 	name: "rank",
