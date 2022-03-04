@@ -3,8 +3,9 @@ var router = express.Router();
 const Levels = require("../../../Systems/levelsSys");
 
 /* GET users listing. */
-router.get("/", async function (req, res, next) {
-	const LeaderBoard = await Levels.fetchLeaderboard("945963538474754058", 10);
+router.get("/:guildID", async function (req, res, next) {
+	if (!req.params.guildID) return res.send("No guildID was sent.");
+	const LeaderBoard = await Levels.fetchLeaderboard(req.params.guildID, 10);
 
 	res.send(LeaderBoard);
 });
