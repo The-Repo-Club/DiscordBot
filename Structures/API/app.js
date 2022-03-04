@@ -1,7 +1,6 @@
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
-const fs = require("fs");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
@@ -40,6 +39,10 @@ app.use(function (err, req, res, next) {
 	// render the error page
 	res.status(err.status || 500);
 	res.render("error");
+});
+
+app.listen(port, () => {
+	console.log(`Example app listening on port ${port}`);
 });
 
 module.exports = app;
