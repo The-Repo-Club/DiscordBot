@@ -58,7 +58,7 @@ module.exports = {
 						},
 						{
 							name: "JoinLeave",
-							name: "JoinLeave",
+							value: "JoinLeave",
 						},
 						{
 							name: "Member",
