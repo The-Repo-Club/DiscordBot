@@ -22,7 +22,7 @@ module.exports = {
 		});
 		if (!Data) return;
 
-		const logsChannel = member.guild.channels.cache.get(Data.WelcomeLogs);
+		const logsChannel = member.guild.channels.cache.get(Data.MemberLogs);
 		const logs = await member.guild.fetchAuditLogs({
 			limit: 1,
 		});
@@ -46,20 +46,16 @@ module.exports = {
 				.catch((err) => console.log(err));
 		} else {
 			// Else it means a normal user joined
-			const image = await new Canvas.Welcome()
-				.setUsername(member.user.username)
-				.setDiscriminator(member.user.discriminator)
-				.setAvatar(member.displayAvatarURL({ format: "png", size: 512 }))
-				.setMemberCount(member.guild.memberCount)
-				.setGuildName(member.guild.name)
-				.setColor("Background", "#283036")
-				.toAttachment();
-			const attachment = new MessageAttachment(
-				image.toBuffer(),
-				"MemberWelcomeCard.png"
-			);
+			const userJoinedEmbed = new MessageEmbed()
+				.setColor("GREEN")
+				.setTitle(
+					"<:icons_unbanmember:866943415321100289> An User Just Joined The Server"
+				)
+				.setTimestamp()
+				.setFooter({ text: member.guild.name })
+				.setDescription(`> The user ${member} just joined the guild`);
 			logsChannel
-				.send({ files: [attachment] })
+				.send({ embeds: [userJoinedEmbed] })
 				.catch((err) => console.log(err));
 		}
 	},

@@ -24,7 +24,7 @@ module.exports = {
 		});
 		if (!Data) return;
 
-		const logsChannel = oldMember.guild.channels.cache.get(Data.WelcomeLogs);
+		const logsChannel = oldMember.guild.channels.cache.get(Data.MemberLogs);
 		const logs = await oldMember.guild.fetchAuditLogs({
 			limit: 1,
 		});

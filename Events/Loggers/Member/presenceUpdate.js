@@ -27,7 +27,7 @@ module.exports = {
 		});
 		if (!Data) return;
 
-		const logsChannel = oldPresence.guild.channels.cache.get(Data.WelcomeLogs);
+		const logsChannel = oldPresence.guild.channels.cache.get(Data.MemberLogs);
 
 		const userUpdateEmbed = new MessageEmbed()
 			.setColor("ORANGE")
@@ -52,7 +52,7 @@ module.exports = {
 					}
 				);
 			logsChannel
-				.send({ embeds: [botJoinedEmbed] })
+				.send({ embeds: [userUpdateEmbed] })
 				.catch((err) => console.log(err));
 		}
 	},
