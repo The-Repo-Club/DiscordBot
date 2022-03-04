@@ -35,7 +35,7 @@ module.exports = {
 				`<:icons_updatestage:866943415447191592> A Member Presence Has Been Updated`
 			)
 			.setTimestamp()
-			.setFooter({ test: oldPresence.guild.name });
+			.setFooter({ text: oldPresence.guild.name });
 
 		if (oldPresence.status !== newPresence.status) {
 			// If status has changed execute code

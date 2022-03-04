@@ -56,7 +56,7 @@ module.exports = {
 			if (log.reason) memberLeftEmbed.addField("Reason:", `\`${log.reason}\``);
 
 			logsChannel
-				.send({ embeds: [botJoinedEmbed] })
+				.send({ embeds: [memberLeftEmbed] })
 				.catch((err) => console.log(err));
 		} else {
 			// Else it means the member left normally
@@ -65,7 +65,7 @@ module.exports = {
 			);
 
 			logsChannel
-				.send({ embeds: [botJoinedEmbed] })
+				.send({ embeds: [memberLeftEmbed] })
 				.catch((err) => console.log(err));
 		}
 	},

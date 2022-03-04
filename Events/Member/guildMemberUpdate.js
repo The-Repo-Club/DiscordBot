@@ -9,8 +9,7 @@
 
 // Logs whenever a member's roles have changed, their nickname changed, they started boosting, or their server avatar changed
 
-const { MessageEmbed, GuildMember } = require("discord.js");
-const DB = require("../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const { GuildMember } = require("discord.js");
 
 module.exports = {
 	name: "guildMemberUpdate",

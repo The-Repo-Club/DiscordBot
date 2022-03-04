@@ -32,7 +32,7 @@ module.exports = {
 
 		if (log.action == "MEMBER_ROLE_UPDATE") {
 			// If the last entry fetched is of the type "MEMBER_ROLE_UPDATE" execute code
-			if (oldMember.roles.cache.size == newMember.roles.cache.size) return; // If number of roles member has didnt change return
+			if (oldMember.roles.cache.size == newMember.roles.cache.size) return; // If number of roles member has didn't change return
 			const memberRoleUpdateEmbed = new MessageEmbed()
 				.setTitle(
 					"<:icons_updatemember:866943416256167936> One Or Multiple Roles Have Been Added/Removed To A Member"
@@ -41,7 +41,7 @@ module.exports = {
 					`> Following roles have been added/removed to ${oldMember} by \`${log.executor.tag}\``
 				)
 				.setTimestamp()
-				.setFooter({ test: oldMember.guild.name });
+				.setFooter({ text: newMember.guild.name });
 
 			if (oldMember.roles.cache.size > newMember.roles.cache.size) {
 				// If newMember has more roles it means roles were added
@@ -70,7 +70,7 @@ module.exports = {
 					"<:icons_updatemember:866943416256167936> A Member Has Been Updated"
 				)
 				.setTimestamp()
-				.setFooter({ test: oldMember.guild.name });
+				.setFooter({ text: newMember.guild.name });
 
 			if (oldMember.nickname !== newMember.nickname) {
 				// If nickname changed execute code
@@ -113,7 +113,7 @@ module.exports = {
 					"<:icons_updatemember:866943416256167936> A Member Has Been Updated"
 				)
 				.setTimestamp()
-				.setFooter({ test: oldMember.guild.name });
+				.setFooter({ text: oldMember.guild.name });
 
 			if (oldMember.avatar != newMember.avatar) {
 				// If avatar changed execute code

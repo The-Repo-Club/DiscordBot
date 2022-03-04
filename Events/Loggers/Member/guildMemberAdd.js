@@ -54,6 +54,7 @@ module.exports = {
 				.setTimestamp()
 				.setFooter({ text: member.guild.name })
 				.setDescription(`> The user ${member} just joined the guild`);
+
 			logsChannel
 				.send({ embeds: [userJoinedEmbed] })
 				.catch((err) => console.log(err));
