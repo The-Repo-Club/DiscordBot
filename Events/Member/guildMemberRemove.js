@@ -8,8 +8,8 @@
 // -------------------------------------------------------------------------
 
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
-const Canvas = require("../../../Systems/Ranks/index");
+const DB = require("../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const Canvas = require("../../Systems/Ranks/index");
 
 module.exports = {
 	name: "guildMemberRemove",
