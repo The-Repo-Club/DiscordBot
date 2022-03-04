@@ -57,6 +57,10 @@ module.exports = {
 							value: "Guild",
 						},
 						{
+							name: "JoinLeave",
+							name: "JoinLeave",
+						},
+						{
 							name: "Member",
 							value: "Member",
 						},
@@ -83,10 +87,6 @@ module.exports = {
 						{
 							name: "Voice",
 							value: "Voice",
-						},
-						{
-							name: "Welcome",
-							value: "Welcome",
 						},
 					],
 				},

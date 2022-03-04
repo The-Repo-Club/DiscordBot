@@ -8,6 +8,7 @@ module.exports = model(
 		EventsLogs: { type: String, default: null },
 		EmojiLogs: { type: String, default: null },
 		GuildLogs: { type: String, default: null },
+		JoinLeaveLogs: { type: String, default: null },
 		MemberLogs: { type: String, default: null },
 		MessageLogs: { type: String, default: null },
 		OtherLogs: { type: String, default: null },
@@ -16,6 +17,5 @@ module.exports = model(
 		ThreadLogs: { type: String, default: null },
 		UserLogs: { type: String, default: null },
 		VoiceLogs: { type: String, default: null },
-		WelcomeLogs: { type: String, default: null },
 	})
 );
