@@ -24,3 +24,5 @@ client.maintenance = false;
 });
 
 client.login(Token);
+
+module.exports = client;
