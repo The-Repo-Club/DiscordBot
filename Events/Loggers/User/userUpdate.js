@@ -29,7 +29,9 @@ module.exports = {
 
 		const userUpdateEmbed = new MessageEmbed()
 			.setColor("ORANGE")
-			.setTitle(` A User Has Been Updated`)
+			.setTitle(
+				`<:icons_updatemember:949375652291809341> A User Has Been Updated`
+			)
 			.setTimestamp()
 			.setFooter({ text: guild.name });
 

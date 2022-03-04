@@ -32,7 +32,7 @@ module.exports = {
 
 		const memberLeftEmbed = new MessageEmbed()
 			.setTitle(
-				"<:icons_banmembers:866943415361732628> A Member Left the guild"
+				"<:icons_banmembers:949376159274127360> A Member Left the guild"
 			)
 			.setColor("RED")
 			.setTimestamp()

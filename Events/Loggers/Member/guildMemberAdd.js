@@ -32,7 +32,7 @@ module.exports = {
 			// If the last entry fetched is of the type "BOT_ADD" it means a bot has joined
 			const botJoinedEmbed = new MessageEmbed()
 				.setTitle(
-					"<:icons_unbanmember:866943415321100289> A Bot Joined The Server"
+					"<:icons_unbanmember:949376464388784138> A Bot Joined The Server"
 				)
 				.setColor("GREEN")
 				.setTimestamp()
@@ -49,7 +49,7 @@ module.exports = {
 			const userJoinedEmbed = new MessageEmbed()
 				.setColor("GREEN")
 				.setTitle(
-					"<:icons_unbanmember:866943415321100289> An User Just Joined The Server"
+					"<:icons_unbanmember:949376464388784138> An User Just Joined The Server"
 				)
 				.setTimestamp()
 				.setFooter({ text: member.guild.name })

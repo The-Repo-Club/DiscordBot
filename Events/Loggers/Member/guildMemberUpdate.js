@@ -35,7 +35,7 @@ module.exports = {
 			if (oldMember.roles.cache.size == newMember.roles.cache.size) return; // If number of roles member has didn't change return
 			const memberRoleUpdateEmbed = new MessageEmbed()
 				.setTitle(
-					"<:icons_updatemember:866943416256167936> One Or Multiple Roles Have Been Added/Removed To A Member"
+					"<:icons_updatemember:949375652291809341> One Or Multiple Roles Have Been Added/Removed To A Member"
 				)
 				.setDescription(
 					`> Following roles have been added/removed to ${oldMember} by \`${log.executor.tag}\``
@@ -67,7 +67,7 @@ module.exports = {
 			const memberUpdateEmbed = new MessageEmbed()
 				.setColor("ORANGE")
 				.setTitle(
-					"<:icons_updatemember:866943416256167936> A Member Has Been Updated"
+					"<:icons_updatemember:949375652291809341> A Member Has Been Updated"
 				)
 				.setTimestamp()
 				.setFooter({ text: newMember.guild.name });
@@ -110,7 +110,7 @@ module.exports = {
 			const memberUpdateEmbed = new MessageEmbed()
 				.setColor("ORANGE")
 				.setTitle(
-					"<:icons_updatemember:866943416256167936> A Member Has Been Updated"
+					"<:icons_updatemember:949375652291809341> A Member Has Been Updated"
 				)
 				.setTimestamp()
 				.setFooter({ text: oldMember.guild.name });

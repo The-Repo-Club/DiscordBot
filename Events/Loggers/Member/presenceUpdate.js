@@ -32,7 +32,7 @@ module.exports = {
 		const userUpdateEmbed = new MessageEmbed()
 			.setColor("ORANGE")
 			.setTitle(
-				`<:icons_updatestage:866943415447191592> A Member Presence Has Been Updated`
+				`<:icons_updatestage:949374612926504960> A Member Presence Has Been Updated`
 			)
 			.setTimestamp()
 			.setFooter({ text: oldPresence.guild.name });
