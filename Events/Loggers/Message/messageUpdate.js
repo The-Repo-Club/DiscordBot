@@ -31,12 +31,12 @@ module.exports = {
 		const logsChannel = newMessage.guild.channels.cache.get(Data.MessageLogs);
 
 		const Original =
-			oldMessage.content.slice(0, 1500) +
-			(oldMessage.content.length > 1500 ? " ..." : "");
+			oldMessage.content.slice(0, 1000) +
+			(oldMessage.content.length > 1000 ? " ..." : "");
 
 		const Edited =
-			newMessage.content.slice(0, 1500) +
-			(newMessage.content.length > 1500 ? " ..." : "");
+			newMessage.content.slice(0, 1000) +
+			(newMessage.content.length > 1000 ? " ..." : "");
 
 		const Log = new MessageEmbed()
 			.setColor("RED")

@@ -30,8 +30,8 @@ module.exports = {
 		const log = logs.entries.first(); // Fetches the audit logs and takes the last entry
 
 		const messageContent =
-			message.content.slice(0, 1500) +
-			(message.content.length > 1500 ? " ..." : "");
+			message.content.slice(0, 1000) +
+			(message.content.length > 1000 ? " ..." : "");
 
 		const messageDeletedEmbed = new MessageEmbed()
 			.setColor("RED")
