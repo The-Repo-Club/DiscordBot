@@ -22,7 +22,7 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: member.guild.id,
 		});
-		if (!Data) return;
+		if (!Data || !Data.MemberLogs) return;
 
 		const logsChannel = member.guild.channels.cache.get(Data.MemberLogs);
 		const logs = await member.guild.fetchAuditLogs({

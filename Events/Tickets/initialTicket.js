@@ -30,6 +30,7 @@ module.exports = {
 
 		const Data = await ticketsSetupDB.findOne({ GuildID: guild.id });
 		if (!Data) return;
+		if (!Data || !Data.Buttons) return;
 
 		if (!Data.Buttons.includes(customId)) return;
 

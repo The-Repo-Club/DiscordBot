@@ -20,7 +20,7 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: role.guild.id,
 		});
-		if (!Data) return;
+		if (!Data || !Data.RoleLogs) return;
 
 		const logsChannel = role.guild.channels.cache.get(Data.RoleLogs);
 		const logs = await role.guild.fetchAuditLogs({

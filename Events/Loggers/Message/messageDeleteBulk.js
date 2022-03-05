@@ -21,7 +21,7 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: messages.first().guild.id,
 		});
-		if (!Data) return;
+		if (!Data || !Data.MessageLogs) return;
 
 		const logsChannel = messages
 			.first()

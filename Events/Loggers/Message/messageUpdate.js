@@ -26,7 +26,7 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: newMessage.guild.id,
 		});
-		if (!Data) return;
+		if (!Data || !Data.MessageLogs) return;
 
 		const logsChannel = newMessage.guild.channels.cache.get(Data.MessageLogs);
 
