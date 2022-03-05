@@ -7,9 +7,8 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 // -------------------------------------------------------------------------
 
-// Logs whenever a member's roles have changed, their nickname changed, they started boosting, or their server avatar changed
-
 const { GuildMember } = require("discord.js");
+const DB = require("../../Structures/Schemas/roleDB");
 
 module.exports = {
 	name: "guildMemberUpdate",
@@ -18,10 +17,13 @@ module.exports = {
 	 * @param {GuildMember} newMember
 	 */
 	async execute(oldMember, newMember) {
+		const Data = await DB.findOne({
+			GuildID: oldMember.guild.id,
+		});
+		if (!Data || !Data.WelcomeID) return;
+
 		if (oldMember.pending && !newMember.pending) {
-			const role = newMember.guild.roles.cache.find(
-				(role) => role.name.toLowerCase() === "member"
-			);
+			const role = oldMember.guild.roles.cache.get(Data.WelcomeID);
 			if (role) {
 				await newMember.roles.add(role);
 			}
