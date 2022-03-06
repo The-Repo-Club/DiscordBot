@@ -4,9 +4,8 @@
 	"description": "A cool discord bot",
 	"main": "Structures/index.js",
 	"scripts": {
-		"start": "node .",
-		"dev": "nodemon . & npm run sass",
-		"sass": "sass --watch Structures/API/src/scss/style.scss Structures/API/public/stylesheets/style.css"
+		"start": "sudo node .",
+		"dev": "sudo nodemon . "
 	},
 	"keywords": [
 		"discord",

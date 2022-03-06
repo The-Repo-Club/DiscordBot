@@ -23,7 +23,7 @@ const dashboard = new Dashboard(client, {
 	theme: require("../dashboard/themes/therepo.club"),
 	description: "A super cool bot with an online dashboard!",
 	baseUrl: "http://bot.therepo.club",
-	port: 8080,
+	port: 80,
 	secret: "KF7rvD0KJ0TgpWoBxfndoUH6yRa4RbWM",
 });
 
