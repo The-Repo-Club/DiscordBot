@@ -4,6 +4,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const rateLimit = require("express-rate-limit");
+const chalk = require("chalk");
+const Box = require("cli-box");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -51,7 +53,48 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(port, () => {
-	console.log(`API listening on port ${port}`);
+	const DatabaseBoxHeader = new Box(
+		{
+			w: 56,
+			h: 1,
+			stringify: false,
+			marks: {
+				nw: "╭",
+				n: "─",
+				ne: "╮",
+				e: "│",
+				se: "╯",
+				s: "─",
+				sw: "╰",
+				w: "│",
+			},
+			hAlign: "middle",
+		},
+		"A P I   I N F O R M A T I O N"
+	).stringify();
+
+	const DatabaseBox = new Box(
+		{
+			w: 56,
+			h: 1,
+			stringify: false,
+			marks: {
+				nw: "╭",
+				n: "─",
+				ne: "╮",
+				e: "│",
+				se: "╯",
+				s: "─",
+				sw: "╰",
+				w: "│",
+			},
+			hAlign: "middle",
+		},
+		`${chalk.bold.yellowBright(`API listening on port ${port}`)}`
+	).stringify();
+
+	console.log(chalk.bold.greenBright(DatabaseBoxHeader));
+	console.log(chalk.bold.greenBright(DatabaseBox));
 });
 
 module.exports = app;

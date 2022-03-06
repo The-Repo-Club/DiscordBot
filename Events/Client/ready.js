@@ -8,8 +8,6 @@
 // -------------------------------------------------------------------------
 
 const { Client } = require("discord.js");
-const mongoose = require("mongoose");
-const { Database } = require("../../Structures/config.json");
 
 module.exports = {
 	name: "ready",
@@ -18,27 +16,21 @@ module.exports = {
 	 * @param {Client} client
 	 */
 	execute(client) {
-		console.log("The client is now ready!");
-		console.log(`The client connected as ${client.user.tag}!`);
-		// require("../../Dashboard/index");
+		require("./clientInfo");
+
 		client.user.setActivity("Development of v1.0.0", { type: "WATCHING" });
 
 		require("../../Systems/cooldownSys")(client);
 		require("../../Systems/lockdownSys")(client);
 
-		if (!Database) return;
-		mongoose
-			.connect(Database, {
-				useNewUrlParser: true,
-				useUnifiedTopology: true,
-			})
-			.then(() => {
-				console.log("The client is now connected to the database!");
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-
 		require("../../Structures/API/app");
+
+		client.dashboard.on("ready", () => {
+			console.log(
+				`Dashboard launched on port ${config.port} - ${config.baseUrl}${
+					config.port === 80 ? "" : ":" + config.port
+				}`
+			);
+		});
 	},
 };
