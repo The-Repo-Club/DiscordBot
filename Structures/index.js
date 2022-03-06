@@ -22,9 +22,9 @@ const dashboard = new Dashboard(client, {
 	name: "Minimal-Mistakes",
 	theme: require("../dashboard/themes/therepo.club"),
 	description: "A super cool bot with an online dashboard!",
-	baseUrl: "http://localhost",
+	baseUrl: "http://bot.therepo.club",
 	port: 8080,
-	secret: "n3Se5_JUpTXzlm5_1CJOyyMETeXDYwvs",
+	secret: "KF7rvD0KJ0TgpWoBxfndoUH6yRa4RbWM",
 });
 
 client.commands = new Collection();
