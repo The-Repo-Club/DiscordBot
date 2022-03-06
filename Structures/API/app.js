@@ -55,7 +55,7 @@ app.use(function (err, req, res, next) {
 app.listen(port, () => {
 	const DatabaseBoxHeader = new Box(
 		{
-			w: 56,
+			w: 50,
 			h: 1,
 			stringify: false,
 			marks: {
@@ -75,7 +75,7 @@ app.listen(port, () => {
 
 	const DatabaseBox = new Box(
 		{
-			w: 56,
+			w: 50,
 			h: 1,
 			stringify: false,
 			marks: {

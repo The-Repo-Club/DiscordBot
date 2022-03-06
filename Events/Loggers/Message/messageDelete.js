@@ -14,8 +14,9 @@ module.exports = {
 	name: "messageDelete",
 	/**
 	 * @param {Message} message
+	 * @param {Client} client
 	 */
-	async execute(message) {
+	async execute(message, client) {
 		if (message.author.bot) return;
 		// We're going to ignore all messages that are sent by the bot
 		const Data = await DB.findOne({
@@ -26,25 +27,39 @@ module.exports = {
 		const logsChannel = message.guild.channels.cache.get(Data.MessageLogs);
 		const logs = await message.guild.fetchAuditLogs({
 			limit: 1,
+			type: "MESSAGE_DELETE",
 		});
 		const log = logs.entries.first(); // Fetches the audit logs and takes the last entry
+
+		if (!log)
+			return console.log(
+				`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`
+			);
 
 		const messageContent =
 			message.content.slice(0, 1000) +
 			(message.content.length > 1000 ? " ..." : "");
 
+		const { executor, target } = log;
+
 		const messageDeletedEmbed = new MessageEmbed()
 			.setColor("RED")
 			.setTitle("A Message Has Been Deleted")
-			.setDescription(
-				`📘 A message by ${message.author} in ${message.channel} was **deleted** by <@${log.executor.id}>.`
-			)
 			.setTimestamp()
 			.addField("Message", messageContent)
 			.setFooter({
 				text: `Member: ${message.author.tag} | ID: ${message.author.id}`,
 				iconURL: `${message.author.avatarURL({ dynamic: true, size: 512 })}`,
 			});
+		if (target.id === message.author.id) {
+			messageDeletedEmbed.setDescription(
+				`📘 A message by ${message.author} in ${message.channel} was **deleted** by <@${executor.id}>.`
+			);
+		} else {
+			messageDeletedEmbed.setDescription(
+				`📘 A message by ${message.author} in ${message.channel} was **deleted**, audit log fetch was inconclusive.`
+			);
+		}
 
 		logsChannel
 			.send({ embeds: [messageDeletedEmbed] })
