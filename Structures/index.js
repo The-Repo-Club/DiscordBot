@@ -16,11 +16,11 @@ const PG = promisify(glob);
 const Ascii = require("ascii-table");
 
 // Requires Dashboard class from discord-easy-dashboard
-const Dashboard = require("discord-easy-dashboard");
+const Dashboard = require("../dashboard");
 // Initialise it
 const dashboard = new Dashboard(client, {
 	name: "Minimal-Mistakes",
-	theme: require("../dashboard/themes/therepo.club"),
+	theme: "therepo.club",
 	description: "A super cool bot with an online dashboard!",
 	baseUrl: "http://bot.therepo.club",
 	port: 80,

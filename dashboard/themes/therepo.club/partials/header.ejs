@@ -1,57 +1,134 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.3/dist/css/bootstrap-night.min.css" rel="stylesheet">
-        
-    <%- dashboardConfig.injectCSS ? `<style>${dashboardConfig.injectCSS}</style>` : '' %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>
+    <%= bot?.user?.username %>
+  </title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <!-- Choices.js-->
+  <link rel="stylesheet" href="https://cdn.therepo.club/public/vendor/choices.js/public/assets/styles/choices.min.css"
+    rel="stylesheet">
+  <!-- Google fonts - Muli-->
+  <link rel="stylesheet"
+    href="https://cdn.therepo.club/public/https://fonts.googleapis.com/css?family=Muli:300,400,700">
+  <!-- theme stylesheet-->
+  <link rel="stylesheet" href="https://cdn.therepo.club/public/css/style.default.css" id="theme-stylesheet">
+  <!-- Custom stylesheet - for your changes-->
+  <link rel="stylesheet" href="https://cdn.therepo.club/public/css/custom.css">
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand"><%= bot?.user?.username %></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+  <header class="header">
+    <nav class="navbar navbar-expand-lg py-3 bg-dash-dark-2 border-bottom border-dash-dark-1 z-index-10">
+      <div class="container-fluid d-flex align-items-center justify-content-between py-1">
+        <div class="navbar-header d-flex align-items-center"><a class="navbar-brand text-uppercase text-reset" href="/">
+            <div class="brand-text brand-big"><strong class="text-primary">Minimal</strong><strong>Mistakes</strong>
+            </div>
+            <div class="brand-text brand-sm"><strong class="text-primary">M</strong><strong>M</strong></div>
+          </a>
+          <button class="sidebar-toggle">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy transform-none">
+              <use xlink:href="#arrow-left-1"> </use>
+            </svg>
+          </button>
+        </div>
+        <ul class="list-inline mb-0">
+          <!-- Messages dropdown -->
+          <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
+              id="navbarDropdownMenuLink1" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <svg class="svg-icon svg-icon-xs svg-icon-heavy">
+                <use xlink:href="#envelope-1"> </use>
+              </svg>
+              <!-- <span class="badge bg-dash-color-1">5</span></a> -->
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink1">
+                <!-- <li><a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="position-relative"><img class="avatar avatar-md" src="img/avatar-3.jpg"
+                        alt="Nadia Halsey">
+                      <div class="availability-status bg-success"></div>
+                    </div>
+                    <div class="ms-3"> <strong class="d-block">Nadia Halsey</strong><span class="d-block text-xs">lorem
+                        ipsum dolor sit amit</span><small class="d-block">9:30am</small></div>
+                  </a></li> -->
+                <li><a class="dropdown-item text-center message" href="#"> <strong>See All Messages <i
+                        class="fas fa-angle-right ms-1"></i></strong></a></li>
+              </ul>
           </li>
-          <% if(hasClientSecret) { %>
-            <li class="nav-item">
-              <a class="nav-link" href="/selector">Dashboard</a>
-            </li>
-          <% } %>
-          <li class="nav-item">
-            <a class="nav-link" href="<%= dashboardDetails.inviteUrl ? dashboardDetails.inviteUrl : `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>">Invite</a>
+          <!-- Tasks dropdown                   -->
+          <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
+              id="navbarDropdownMenuLink2" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <svg class="svg-icon svg-icon-xs svg-icon-heavy">
+                <use xlink:href="#paper-stack-1"> </use>
+              </svg>
+              <!-- <span class="badge bg-dash-color-3">9</span></a> -->
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink2">
+                <!-- <li><a class="dropdown-item" href="#">
+                  <div class="d-flex justify-content-between mb-1"><strong>Task 1</strong><span>40% complete</span>
+                  </div>
+                  <div class="progress" style="height: 2px">
+                    <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: 40%" aria-valuenow="40"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </a></li> -->
+                <li> <a class="dropdown-item text-center" href="#"> <strong>See All Tasks <i
+                        class="fas fa-angle-right ms-1"></i></strong></a></li>
+              </ul>
           </li>
-          <% if(dashboardDetails.serverUrl) { %>
-            <li class="nav-item">
-              <a class="nav-link" href="<%= dashboardDetails.serverUrl %>">Discord server</a>
-            </li>
-          <% } %>
-        </ul>
-        <% if(hasClientSecret) { %>
-          <ul class="navbar-nav">
-            <% if (user) { %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Logged in as <%= user.username %>#<%= user.discriminator %>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <!-- <li><hr class="dropdown-divider"></li> -->
-                  <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
-                </ul>
-              </li>
-              </li>
+          <% if(is_logged) { %>
+            <li class="list-inline-item logout px-lg-2"> <a class="nav-link text-sm text-reset px-1 px-lg-0" id="logout"
+                href="/auth/logout"> <span class="d-none d-sm-inline-block">Logout </span>
+                <svg class="svg-icon svg-icon-xs svg-icon-heavy">
+                  <use xlink:href="#disable-1"> </use>
+                </svg></a></li>
             <% } else { %>
-              <li class="nav-item"><a href="/auth/login" class="nav-link">Login</a></li>
-            <% } %>
-          </ul>
-        <% } %>
+              <li class="list-inline-item login px-lg-2"> <a class="nav-link text-sm text-reset px-1 px-lg-0"
+                  id="logout" href="/dashboard"> <span class="d-none d-sm-inline-block">Login </span>
+                  <svg class="svg-icon svg-icon-xs svg-icon-heavy">
+                    <use xlink:href="#disable-1"> </use>
+                  </svg></a></li>
+              <% } %>
+        </ul>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
+  <div class="d-flex align-items-stretch">
+    <!-- Sidebar Navigation-->
+    <nav id="sidebar">
+      <!-- Sidebar Header-->
+      <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
+          src="<%= bot?.user?.displayAvatarURL() %>" alt="...">
+        <div class="ms-3 title">
+          <h1 class="h5 mb-1">
+            <%= bot?.user?.username %>
+          </h1>
+          <p class="text-sm text-gray-700 mb-0 lh-1">
+            Version: v<%= version %>
+          </p>
+        </div>
+      </div><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
+      <ul class="list-unstyled">
+        <li class="sidebar-item active"><a class="sidebar-link" href="/">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+              <use xlink:href="#real-estate-1"> </use>
+            </svg><span>Home </span></a></li>
+        <% if(is_logged) { %>
+          <li class="sidebar-item"><a class="sidebar-link" href="/dashboard">
+              <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                <use xlink:href="#portfolio-grid-1"> </use>
+              </svg><span>Dashboard </span></a></li>
+          <% } else { %>
+            <li class="sidebar-item"><a class="sidebar-link" href="/dashboard">
+                <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                  <use xlink:href="#disable-1"> </use>
+                </svg><span>Login page </span></a></li>
+            <% } %>
+      </ul>
+      </ul>
+    </nav>
+    <div class="page-content form-page">

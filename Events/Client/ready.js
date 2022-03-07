@@ -22,15 +22,5 @@ module.exports = {
 
 		require("../../Systems/cooldownSys")(client);
 		require("../../Systems/lockdownSys")(client);
-
-		require("../../Structures/API/app");
-
-		client.dashboard.on("ready", () => {
-			console.log(
-				`Dashboard launched on port ${config.port} - ${config.baseUrl}${
-					config.port === 80 ? "" : ":" + config.port
-				}`
-			);
-		});
 	},
 };
