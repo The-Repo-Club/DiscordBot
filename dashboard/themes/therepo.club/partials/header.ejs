@@ -39,26 +39,25 @@
         </div>
         <ul class="list-inline mb-0">
           <!-- Messages dropdown -->
-          <!-- <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
+          <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
               id="navbarDropdownMenuLink1" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
               <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                <use xlink:href="#envelope-1"> </use>
+                <use xlink:href="#paper-stack-1"> </use>
               </svg>
-              <span class="badge bg-dash-color-1">5</span></a>
+              <% if(!is_logged) { %>
+                <span class="badge bg-dash-color-3">1</span></a>
+              <% } %>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink1">
                 <li><a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="position-relative"><img class="avatar avatar-md" src="img/avatar-3.jpg"
+                    <div class="position-relative"><img class="avatar avatar-md" src="<%= bot?.user?.displayAvatarURL() %>"
                         alt="Nadia Halsey">
                       <div class="availability-status bg-success"></div>
                     </div>
-                    <div class="ms-3"> <strong class="d-block">Nadia Halsey</strong><span class="d-block text-xs">lorem
-                        ipsum dolor sit amit</span><small class="d-block">9:30am</small></div>
+                    <div class="ms-3"> <strong class="d-block"><%= bot?.user?.username %></strong><span class="d-block text-xs">Invite the bot.</span><small class="d-block"><%= new Date().toLocaleTimeString('en-US');%></small></div>
                   </a></li>
-                <li><a class="dropdown-item text-center message" href="#"> <strong>See All Messages <i
-                        class="fas fa-angle-right ms-1"></i></strong></a></li>
               </ul>
-          </li> -->
+          </li>
           <!-- Tasks dropdown                   -->
           <!-- <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
               id="navbarDropdownMenuLink2" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -81,9 +80,9 @@
               </ul>
           </li> -->
           <% if(dashboardDetails.serverUrl) { %>
-            <li class="list-inline-item login px-lg-2">
+            <li class="list-inline-item support px-lg-2">
               <a class="nav-link text-sm text-reset px-1 px-lg-0" id="server" href="<%= dashboardDetails.serverUrl %>">
-                <span class="d-none d-sm-inline-block ms-2">Discord Server </span>
+                <span class="d-none d-sm-inline-block ms-2">Support Server</span>
                 <svg class="svg-icon svg-icon-xs svg-icon-heavy">
                   <use xlink:href="#shield-security-1"> </use>
                 </svg>
