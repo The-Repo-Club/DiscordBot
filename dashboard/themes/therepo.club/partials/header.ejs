@@ -49,7 +49,7 @@
                 <span class="badge bg-dash-color-3">1</span></a>
               <% } %>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink1">
-                <li><a class="dropdown-item d-flex align-items-center" href="#">
+                <li><a class="dropdown-item d-flex align-items-center" href="<%= dashboardDetails.inviteUrl ? dashboardDetails.inviteUrl : `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>">
                     <div class="position-relative"><img class="avatar avatar-md" src="<%= bot?.user?.displayAvatarURL() %>"
                         alt="Nadia Halsey">
                       <div class="availability-status bg-success"></div>
