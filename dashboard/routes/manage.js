@@ -24,6 +24,7 @@ const Server = Router()
 				errors: false,
 				dashboardDetails: req.dashboardDetails,
 				dashboardConfig: req.dashboardConfig,
+				commands: req.dashboardCommands,
 				settings: req.dashboardSettings,
 			},
 			(err, html) => {
@@ -76,6 +77,7 @@ const Server = Router()
 				errors: errors.length > 0,
 				dashboardDetails: req.dashboardDetails,
 				dashboardConfig: req.dashboardConfig,
+				commands: req.dashboardCommands,
 				settings: req.dashboardSettings,
 			},
 			(err, html) => res.status(200).send(html)

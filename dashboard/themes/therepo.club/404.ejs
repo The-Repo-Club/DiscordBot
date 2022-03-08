@@ -20,21 +20,23 @@
           <svg class="svg-icon svg-icon-sm svg-icon-heavy">
             <use xlink:href="#real-estate-1"> </use>
           </svg><span>Home </span></a></li>
-      <li class="sidebar-item"><a class="sidebar-link" href="/commands">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-              <use xlink:href="#checkmark-1"> </use>
-            </svg><span>Commands </span></a></li>
-      <% if(is_logged) { %>
-        <li class="sidebar-item active"><a class="sidebar-link" href="/dashboard">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-              <use xlink:href="#portfolio-grid-1"> </use>
-            </svg><span>Dashboard </span></a></li>
-        <% } else { %>
-          <li class="sidebar-item active"><a class="sidebar-link" href="/dashboard">
+      <% if(commands.length> 0) { %>
+          <li class="sidebar-item"><a class="sidebar-link" href="/commands">
               <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-                <use xlink:href="#disable-1"> </use>
-              </svg><span>Login page </span></a></li>
-          <% } %>
+                <use xlink:href="#checkmark-1"> </use>
+              </svg><span>Commands </span></a></li>
+        <% } %>
+        <% if(is_logged) { %>
+          <li class="sidebar-item"><a class="sidebar-link" href="/dashboard">
+              <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                <use xlink:href="#portfolio-grid-1"> </use>
+              </svg><span>Dashboard </span></a></li>
+        <% } else { %>
+          <li class="sidebar-item"><a class="sidebar-link" href="/auth/login">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+              <use xlink:href="#disable-1"> </use>
+            </svg><span>Login page </span></a></li>
+        <% } %>
     </ul>
     </ul>
   </nav>
@@ -43,7 +45,7 @@
 <div class="container-sm center" style="margin-top: 25px;">
     <div class="d-grid gap-2 col-6 mx-auto">
         <h1>404</h1>
-        <h2>Not found</h2>
+        <h2>Page Not Found</h2>
     </div>
 </div>
 <%- await include("partials/footer") %>

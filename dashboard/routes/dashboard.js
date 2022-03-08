@@ -21,6 +21,7 @@ const Dashboard = Router().get("/", CheckAuth, async (req, res) => {
 			port: req.dashboardConfig.port,
 			dashboardDetails: req.dashboardDetails,
 			dashboardConfig: req.dashboardConfig,
+			commands: req.dashboardCommands,
 		},
 		(err, html) => {
 			if (err) {

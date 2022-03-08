@@ -15,6 +15,7 @@ const Commands = Router().get("/*", function (req, res) {
 			port: req.dashboardConfig.port,
 			hasClientSecret: Boolean(req.dashboardConfig.secret),
 			commands: req.dashboardCommands,
+
 		});
 	}
 	res.status(200).render(req.dashboardConfig.theme[path], {
