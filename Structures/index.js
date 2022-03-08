@@ -9,7 +9,7 @@
 
 const { Client, Collection } = require("discord.js");
 const client = new Client({ intents: 32767 });
-const { Token } = require("./config.json");
+const { Token, Secret } = require("./config.json");
 const { promisify } = require("util");
 const { glob } = require("glob");
 const PG = promisify(glob);
@@ -22,9 +22,10 @@ const dashboard = new Dashboard(client, {
 	name: "Minimal-Mistakes",
 	theme: "therepo.club",
 	description: "A super cool bot with an online dashboard!",
+	serverUrl: "http://discord.gg/myKsJhHNN6",
 	baseUrl: "http://bot.therepo.club",
 	port: 80,
-	secret: "KF7rvD0KJ0TgpWoBxfndoUH6yRa4RbWM",
+	secret: Secret,
 });
 
 client.commands = new Collection();

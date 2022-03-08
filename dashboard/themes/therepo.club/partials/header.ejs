@@ -15,7 +15,7 @@
     rel="stylesheet">
   <!-- Google fonts - Muli-->
   <link rel="stylesheet"
-    href="https://cdn.therepo.club/public/https://fonts.googleapis.com/css?family=Muli:300,400,700">
+    href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
   <!-- theme stylesheet-->
   <link rel="stylesheet" href="https://cdn.therepo.club/public/css/style.default.css" id="theme-stylesheet">
   <!-- Custom stylesheet - for your changes-->
@@ -39,96 +39,79 @@
         </div>
         <ul class="list-inline mb-0">
           <!-- Messages dropdown -->
-          <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
+          <!-- <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
               id="navbarDropdownMenuLink1" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
               <svg class="svg-icon svg-icon-xs svg-icon-heavy">
                 <use xlink:href="#envelope-1"> </use>
               </svg>
-              <!-- <span class="badge bg-dash-color-1">5</span></a> -->
+              <span class="badge bg-dash-color-1">5</span></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink1">
-                <!-- <li><a class="dropdown-item d-flex align-items-center" href="#">
+                <li><a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="position-relative"><img class="avatar avatar-md" src="img/avatar-3.jpg"
                         alt="Nadia Halsey">
                       <div class="availability-status bg-success"></div>
                     </div>
                     <div class="ms-3"> <strong class="d-block">Nadia Halsey</strong><span class="d-block text-xs">lorem
                         ipsum dolor sit amit</span><small class="d-block">9:30am</small></div>
-                  </a></li> -->
+                  </a></li>
                 <li><a class="dropdown-item text-center message" href="#"> <strong>See All Messages <i
                         class="fas fa-angle-right ms-1"></i></strong></a></li>
               </ul>
-          </li>
+          </li> -->
           <!-- Tasks dropdown                   -->
-          <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
+          <!-- <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
               id="navbarDropdownMenuLink2" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
               <svg class="svg-icon svg-icon-xs svg-icon-heavy">
                 <use xlink:href="#paper-stack-1"> </use>
               </svg>
-              <!-- <span class="badge bg-dash-color-3">9</span></a> -->
+              <span class="badge bg-dash-color-3">9</span></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink2">
-                <!-- <li><a class="dropdown-item" href="#">
+                <li><a class="dropdown-item" href="#">
                   <div class="d-flex justify-content-between mb-1"><strong>Task 1</strong><span>40% complete</span>
                   </div>
                   <div class="progress" style="height: 2px">
                     <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: 40%" aria-valuenow="40"
                       aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                </a></li> -->
+                </a></li>
                 <li> <a class="dropdown-item text-center" href="#"> <strong>See All Tasks <i
                         class="fas fa-angle-right ms-1"></i></strong></a></li>
               </ul>
-          </li>
-          <% if(is_logged) { %>
-            <li class="list-inline-item logout px-lg-2"> <a class="nav-link text-sm text-reset px-1 px-lg-0" id="logout"
-                href="/auth/logout"> <span class="d-none d-sm-inline-block">Logout </span>
+          </li> -->
+          <% if(dashboardDetails.serverUrl) { %>
+            <li class="list-inline-item login px-lg-2">
+              <a class="nav-link text-sm text-reset px-1 px-lg-0" id="server" href="<%= dashboardDetails.serverUrl %>">
+                <span class="d-none d-sm-inline-block ms-2">Discord Server </span>
                 <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                  <use xlink:href="#disable-1"> </use>
-                </svg></a></li>
-            <% } else { %>
-              <li class="list-inline-item login px-lg-2"> <a class="nav-link text-sm text-reset px-1 px-lg-0"
-                  id="logout" href="/dashboard"> <span class="d-none d-sm-inline-block">Login </span>
+                  <use xlink:href="#shield-security-1"> </use>
+                </svg>
+              </a>
+            </li>
+          <% } %>
+          <% if(hasClientSecret) { %>
+            <% if(is_logged) { %>
+              <li class="list-inline-item login px-lg-2">
+                <a class="nav-link text-sm text-reset px-1 px-lg-0" id="logout" href="/auth/logout">
+                  <span class="d-none d-sm-inline-block">Logout </span>
                   <svg class="svg-icon svg-icon-xs svg-icon-heavy">
                     <use xlink:href="#disable-1"> </use>
-                  </svg></a></li>
-              <% } %>
+                  </svg>
+                </a>
+              </li>
+            <% } else { %>
+              <li class="list-inline-item login px-lg-2">
+                <a class="nav-link text-sm text-reset px-1 px-lg-0" id="login" href="/auth/login">
+                  <span class="d-none d-sm-inline-block">Login </span>
+                  <svg class="svg-icon svg-icon-xs svg-icon-heavy">
+                    <use xlink:href="#disable-1"> </use>
+                  </svg>
+                </a>
+              </li>
+            <% } %>
+          <% } %>
         </ul>
       </div>
     </nav>
   </header>
-  <div class="d-flex align-items-stretch">
-    <!-- Sidebar Navigation-->
-    <nav id="sidebar">
-      <!-- Sidebar Header-->
-      <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
-          src="<%= bot?.user?.displayAvatarURL() %>" alt="...">
-        <div class="ms-3 title">
-          <h1 class="h5 mb-1">
-            <%= bot?.user?.username %>
-          </h1>
-          <p class="text-sm text-gray-700 mb-0 lh-1">
-            Version: v<%= version %>
-          </p>
-        </div>
-      </div><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
-      <ul class="list-unstyled">
-        <li class="sidebar-item active"><a class="sidebar-link" href="/">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-              <use xlink:href="#real-estate-1"> </use>
-            </svg><span>Home </span></a></li>
-        <% if(is_logged) { %>
-          <li class="sidebar-item"><a class="sidebar-link" href="/dashboard">
-              <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-                <use xlink:href="#portfolio-grid-1"> </use>
-              </svg><span>Dashboard </span></a></li>
-          <% } else { %>
-            <li class="sidebar-item"><a class="sidebar-link" href="/dashboard">
-                <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-                  <use xlink:href="#disable-1"> </use>
-                </svg><span>Login page </span></a></li>
-            <% } %>
-      </ul>
-      </ul>
-    </nav>
-    <div class="page-content form-page">

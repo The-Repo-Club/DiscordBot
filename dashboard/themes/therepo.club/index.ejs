@@ -1,21 +1,40 @@
 <%- await include("partials/header", { bot, user, title: "Home" , is_logged, dashboardDetails, dashboardConfig,
   hasClientSecret }) %>
 
-  <!-- Page Header-->
-  <div class="bg-dash-dark-2 py-4">
-    <div class="container-fluid">
-      <h2 class="h5 mb-0">Home</h2>
-    </div>
-  </div>
-  <!-- Breadcrumb-->
-  <div class="container-fluid py-2">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb mb-0 py-3 px-0">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <!-- <li class="breadcrumb-item active" aria-current="page">Forms</li> -->
-      </ol>
+  <div class="d-flex align-items-stretch">
+    <!-- Sidebar Navigation-->
+    <nav id="sidebar">
+      <!-- Sidebar Header-->
+      <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
+          src="<%= bot?.user?.displayAvatarURL() %>" alt="...">
+        <div class="ms-3 title">
+          <h1 class="h5 mb-1">
+            <%= bot?.user?.username %>
+          </h1>
+          <p class="text-sm text-gray-700 mb-0 lh-1">
+            Version: v<%= version %>
+          </p>
+        </div>
+      </div><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
+      <ul class="list-unstyled">
+        <li class="sidebar-item active"><a class="sidebar-link" href="/">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+              <use xlink:href="#real-estate-1"> </use>
+            </svg><span>Home </span></a></li>
+        <% if(is_logged) { %>
+          <li class="sidebar-item"><a class="sidebar-link" href="/dashboard">
+              <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                <use xlink:href="#portfolio-grid-1"> </use>
+              </svg><span>Dashboard </span></a></li>
+          <% } else { %>
+            <li class="sidebar-item active"><a class="sidebar-link" href="/auth/login">
+              <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                <use xlink:href="#disable-1"> </use>
+              </svg><span>Login page </span></a></li>
+            <% } %>
+      </ul>
     </nav>
-  </div>
+    <div class="page-content form-page">
 
   <div class="container-sm center" style="margin-top: 25px;">
     <div class="d-grid gap-2 col-6 mx-auto">
@@ -25,26 +44,32 @@
         <p>
           <%= dashboardDetails.description %>
         </p>
+      <% } %>
+
+      <% if(hasClientSecret) { %>
+        <% if(is_logged) { %>
+        <a class="btn btn-secondary text-white" href="/dashboard">
+          Dashboard
+        </a>
+        <% } else { %>
+          <a class="btn btn-secondary text-white" href="/auth/login">
+            Login to access the dashboard
+          </a>
         <% } %>
+      <% } %>
 
-          <% if(hasClientSecret) { %>
-            <a class="btn btn-secondary text-white" href="/dashboard">
-              <%- is_logged ? 'Dashboard' : 'Login to access the dashboard' %>
-            </a>
-            <% } %>
+      <% if(commands.length> 0) { %>
+        <a class="btn btn-secondary text-white" href="/commands">Command list</a>
+      <% } %>
 
-              <% if(commands.length> 0) { %>
-                <a class="btn btn-secondary text-white" href="/commands">Command list</a>
-                <% } %>
+      <hr>
 
-                  <hr>
 
-                  <a class="btn btn-primary text-white"
-                    href="<%= dashboardDetails.inviteUrl ? dashboardDetails.inviteUrl : `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>">Invite</a>
+      <a class="btn btn-primary text-white" href="<%= dashboardDetails.inviteUrl ? dashboardDetails.inviteUrl : `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>">Invite</a>
 
-                  <% if(dashboardDetails.serverUrl) { %>
-                    <a class="btn btn-warning" href="<%= dashboardDetails.serverUrl %>">Discord Server</a>
-                    <% } %>
+      <% if(dashboardDetails.serverUrl) { %>
+        <a class="btn btn-warning" href="<%= dashboardDetails.serverUrl %>">Discord Server</a>
+      <% } %>
 
     </div>
   </div>
