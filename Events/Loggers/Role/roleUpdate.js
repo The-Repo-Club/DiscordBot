@@ -33,7 +33,7 @@ module.exports = {
 
 		const roleUpdateEmbed = new MessageEmbed()
 			.setTitle(
-				"<:icons_updaterole:866943415278895114> A Role Has Been Updated"
+				"<:icons_updaterole:949338507447517266> A Role Has Been Updated"
 			)
 			.setColor("ORANGE")
 			.setTimestamp()
