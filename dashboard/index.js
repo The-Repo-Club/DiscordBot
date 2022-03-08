@@ -54,7 +54,7 @@ class Dashboard extends EventEmitter {
 
 		if (!this.config.secret)
 			console.warn(
-				"Without the client.secret parameter, some features of discord-easy-dashboard will be disabled, like Discord authentification or guild settings..."
+				"Without the client.secret parameter, some features of dashboard will be disabled, like Discord authentification or guild settings..."
 			);
 
 		this._setup();
@@ -99,7 +99,7 @@ class Dashboard extends EventEmitter {
 		} else {
 			this.app.use(
 				session({
-					secret: `discord-easy-dashboard-${Date.now()}-${
+					secret: `dashboard-${Date.now()}-${
 						this.client.id
 					}-${Math.random().toString(36)}`,
 					resave: false,

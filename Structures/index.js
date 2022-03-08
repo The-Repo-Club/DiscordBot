@@ -15,7 +15,7 @@ const { glob } = require("glob");
 const PG = promisify(glob);
 const Ascii = require("ascii-table");
 
-// Requires Dashboard class from discord-easy-dashboard
+// Requires Dashboard class from dashboard
 const Dashboard = require("../dashboard");
 // Initialise it
 const dashboard = new Dashboard(client, {

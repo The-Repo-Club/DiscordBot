@@ -469,19 +469,6 @@ discord-api-types@^0.26.0:
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.26.1.tgz#726f766ddc37d60da95740991d22cb6ef2ed787b"
   integrity sha512-T5PdMQ+Y1MEECYMV5wmyi9VEYPagEDEi4S0amgsszpWY0VB9JJ/hEvM6BgLhbdnKky4gfmZEXtEEtojN8ZKJQQ==
 
-discord-easy-dashboard@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/discord-easy-dashboard/-/discord-easy-dashboard-1.2.1.tgz#5dcae953e8e17a10011dc1f0a438ebf443453cfb"
-  integrity sha512-Xk8SyD7nZuU/UPYlGyUFTlAI5j9S1aUg4IAVKlqdP38xwgjkqkR/bVBBKyis1xTii5JB+LIz6lFX3tikBLmNpw==
-  dependencies:
-    btoa "^1.2.1"
-    discord.js "^13.1.0"
-    ejs "^3.1.6"
-    express "^4.17.1"
-    express-session "^1.17.2"
-    morgan "^1.10.0"
-    serve-favicon "^2.5.0"
-
 discord-html-transcripts@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/discord-html-transcripts/-/discord-html-transcripts-1.2.4.tgz#727511f5ccfd224eef8b7755ffdd61573d112bc1"
@@ -493,7 +480,7 @@ discord-html-transcripts@^1.2.4:
     highlight.js "^11.4.0"
     jsdom "^19.0.0"
 
-discord.js@^13.1.0, discord.js@^13.6.0:
+discord.js@^13.6.0:
   version "13.6.0"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.6.0.tgz#d8a8a591dbf25cbcf9c783d5ddf22c4694860475"
   integrity sha512-tXNR8zgsEPxPBvGk3AQjJ9ljIIC6/LOPjzKwpwz8Y1Q2X66Vi3ZqFgRHYwnHKC0jC0F+l4LzxlhmOJsBZDNg9g==
@@ -610,7 +597,7 @@ express-slow-down@^1.4.0:
   dependencies:
     defaults "^1.0.3"
 
-express@^4.17.1, express@^4.17.3:
+express@^4.17.3:
   version "4.17.3"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.3.tgz#f6c7302194a4fb54271b73a1fe7a06478c8f85a1"
   integrity sha512-yuSQpz5I+Ch7gFrPCk4/c+dIBKlQUxtgwqzph132bsT6qhuzss6I8cLJQz7B3rFblzd6wtcI0ZbGltH/C4LjUg==
