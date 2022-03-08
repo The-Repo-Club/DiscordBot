@@ -41,7 +41,7 @@
   <div class="page-content form-page">
 
 <div class="container-sm center" style="margin-top: 25px;">
-  <div class="d-grid gap-2 col-6 mx-auto">
+  <div class="d-grid gap-2 col-8 mx-auto">
     <h2><%= dashboardDetails.name %>'s commands</h2>
     <hr>
 
@@ -52,6 +52,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Usage</th>
+                <th scope="col">Permission</th>
             </tr>
         </thead>
         <tbody>
@@ -61,6 +62,7 @@
                     <td><%= command.name %></td>
                     <td><%= command.description %></td>
                     <td><%= command.usage %></td>
+                    <td><%- command.permission ? command.permission : "NO PERMISSIONS NEEDED" %></td>
                 </tr>
             <% }) %>
         </tbody>

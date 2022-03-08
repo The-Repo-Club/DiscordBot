@@ -193,8 +193,8 @@ class Dashboard extends EventEmitter {
 	 * @param description - A description of the command.
 	 * @param usage - The usage string for the command.
 	 */
-	registerCommand(name, description, usage) {
-		this._commands.push({ name, description, usage });
+	registerCommand(name, description, usage, permission) {
+		this._commands.push({ name, description, usage, permission });
 	}
 
 	/**

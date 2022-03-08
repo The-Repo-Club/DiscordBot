@@ -70,12 +70,13 @@ module.exports = async (client, PG, Ascii) => {
 			});
 		});
 
-    client.commands.forEach((command) => {
-      if (!command.type && command.description)
+		client.commands.forEach((command) => {
+			if (!command.type && command.description)
 				client.dashboard.registerCommand(
 					command.name,
 					command.description,
-					"/" + command.name
+					"/" + command.name,
+					command.permission
 				);
 		});
 	});
