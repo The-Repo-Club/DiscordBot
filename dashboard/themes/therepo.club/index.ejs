@@ -1,4 +1,4 @@
-<%- await include("partials/header", { bot, user, title: "Home" , is_logged, dashboardDetails, dashboardConfig,
+<%- await include("partials/header", { bot, version, user, title: "Home" , is_logged, dashboardDetails, dashboardConfig,
   hasClientSecret }) %>
 
   <div class="d-flex align-items-stretch">
@@ -21,13 +21,17 @@
             <svg class="svg-icon svg-icon-sm svg-icon-heavy">
               <use xlink:href="#real-estate-1"> </use>
             </svg><span>Home </span></a></li>
+        <li class="sidebar-item"><a class="sidebar-link" href="/commands">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+              <use xlink:href="#checkmark-1"> </use>
+            </svg><span>Commands </span></a></li>
         <% if(is_logged) { %>
           <li class="sidebar-item"><a class="sidebar-link" href="/dashboard">
               <svg class="svg-icon svg-icon-sm svg-icon-heavy">
                 <use xlink:href="#portfolio-grid-1"> </use>
               </svg><span>Dashboard </span></a></li>
           <% } else { %>
-            <li class="sidebar-item active"><a class="sidebar-link" href="/auth/login">
+            <li class="sidebar-item"><a class="sidebar-link" href="/auth/login">
               <svg class="svg-icon svg-icon-sm svg-icon-heavy">
                 <use xlink:href="#disable-1"> </use>
               </svg><span>Login page </span></a></li>

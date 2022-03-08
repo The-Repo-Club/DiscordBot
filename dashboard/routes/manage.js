@@ -16,6 +16,7 @@ const Server = Router()
 			file,
 			{
 				bot: req.client,
+				version: require("discord.js").version,
 				user: req.user,
 				is_logged: Boolean(req.session.user),
 				guild,

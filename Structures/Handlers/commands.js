@@ -69,5 +69,14 @@ module.exports = async (client, PG, Ascii) => {
 				await MainGuild.commands.permissions.set({ fullPermissions });
 			});
 		});
+
+    client.commands.forEach((command) => {
+      if (!command.type && command.description)
+				client.dashboard.registerCommand(
+					command.name,
+					command.description,
+					"/" + command.name
+				);
+		});
 	});
 };
