@@ -49,7 +49,7 @@ const Server = Router()
 		const errors = [];
 		Object.keys(req.body).forEach((item) => {
 			const setting = req.dashboardSettings.find((x) => x.name === item);
-			if (!setting) return;
+			if (!setting) return res.redirect("/dashboard");
 
 			if (setting.validator && !setting.validator(req.body[item]))
 				return errors.push(item);
@@ -61,10 +61,11 @@ const Server = Router()
 		});
 		const file = req.dashboardConfig.theme["guild"] || "guild.ejs";
 
-		return await res.render(
+    return await res.render(
 			file,
 			{
 				bot: req.client,
+				hostname: req.protocol + "://" + req.hostname,
 				version: require("discord.js").version,
 				user: req.user,
 				is_logged: Boolean(req.session.user),
@@ -81,7 +82,13 @@ const Server = Router()
 				commands: req.dashboardCommands,
 				settings: req.dashboardSettings,
 			},
-			(err, html) => res.status(200).send(html)
+			(err, html) => {
+				if (err) {
+					res.status(500).send(err.message);
+					return console.error(err);
+				}
+				res.status(200).send(html);
+			}
 		);
 	})
 	.get("/", CheckAuth, (req, res) => {
