@@ -163,10 +163,22 @@ module.exports = {
 						},
 						{ name: "Reason", value: `${reason}`, inline: true }
 					);
-
-				await acceptedChannel
-					.send({ embeds: [acceptedMessage] })
-					.catch(() => null);
+        try {
+					await acceptedChannel
+						.send({ embeds: [acceptedMessage] })
+						.catch(() => null);
+				} catch (error) {
+          return interaction.reply({
+						embeds: [
+							new MessageEmbed()
+								.setColor("RED")
+								.setDescription(
+									`❌ This accepted channel was not found in the database.`
+								),
+						],
+						ephemeral: true,
+					});
+        }
 
 				if (suggestion.DM) {
 					const member = client.users.cache.get(suggestion.MemberID);
@@ -225,9 +237,22 @@ module.exports = {
 						{ name: "Reason", value: `${reason}`, inline: true }
 					);
 
-				await declinedChannel
-					.send({ embeds: [declinedMessage] })
-					.catch(() => null);
+        try {
+					await declinedChannel
+						.send({ embeds: [declinedMessage] })
+						.catch(() => null);
+				} catch (error) {
+					return interaction.reply({
+						embeds: [
+							new MessageEmbed()
+								.setColor("RED")
+								.setDescription(
+									`❌ This declined channel was not found in the database.`
+								),
+						],
+						ephemeral: true,
+					});
+				}
 
 				if (suggestion.DM) {
 					const member = client.users.cache.get(suggestion.MemberID);
