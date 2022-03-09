@@ -68,8 +68,53 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 `
 			).stringify();
 
+      const DashboardBoxHeader = new Box(
+				{
+					w: Math.floor(client.user.tag.length + 35),
+					h: 1,
+					stringify: false,
+					marks: {
+						nw: "╭",
+						n: "─",
+						ne: "╮",
+						e: "│",
+						se: "╯",
+						s: "─",
+						sw: "╰",
+						w: "│",
+					},
+					hAlign: "middle",
+				},
+				"D A S H B O A R D   I N F O R M A T I O N"
+			).stringify();
+
+			const DashboardBox = new Box(
+				{
+					w: Math.floor(client.user.tag.length + 35),
+					h: 2,
+					stringify: false,
+					marks: {
+						nw: "╭",
+						n: "─",
+						ne: "╮",
+						e: "│",
+						se: "╯",
+						s: "─",
+						sw: "╰",
+						w: "│",
+					},
+					hAlign: "middle",
+				},
+				`${chalk.bold.blueBright("baseUrl")} :: ${chalk.redBright(client.dashboard.config.baseUrl)}
+        ${chalk.bold.blueBright("port")} :: ${chalk.redBright(client.dashboard.config.port)}`
+			).stringify();
+
+
 			console.log(chalk.bold.greenBright(ClientBoxHeader));
 			console.log(chalk.bold.greenBright(ClientBox));
+
+      console.log(chalk.bold.greenBright(DashboardBoxHeader));
+			console.log(chalk.bold.greenBright(DashboardBox));
 		}
 
 		clientInfo(client);

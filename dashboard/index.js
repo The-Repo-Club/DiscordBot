@@ -53,7 +53,7 @@ class Dashboard extends EventEmitter {
 
 		if (!this.config.secret)
 			console.warn(
-				"Without the client.secret parameter, some features of dashboard will be disabled, like Discord authentification or guild settings..."
+				"Without the client.secret parameter, some features of dashboard will be disabled, like Discord authentication or guild settings..."
 			);
 
 		this._setup();

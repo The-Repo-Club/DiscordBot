@@ -4,17 +4,32 @@
     <!-- Sidebar Navigation-->
     <nav id="sidebar">
       <!-- Sidebar Header-->
-      <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
-          src="<%= bot?.user?.displayAvatarURL() %>" alt="...">
-        <div class="ms-3 title">
-          <h1 class="h5 mb-1">
-            <%= bot?.user?.username %>
-          </h1>
-          <p class="text-sm text-gray-700 mb-0 lh-1">
-            Version: v<%= version %>
-          </p>
+      <% if(is_logged) { %>
+        <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
+            src="https://cdn.discordapp.com/avatars/<%= user?.id %>/<%= user?.avatar %>.png" alt="...">
+          <div class="ms-3 title">
+            <h1 class="h5 mb-1">
+              <%= user?.username %>
+            </h1>
+            <p class="text-sm text-gray-700 mb-0 lh-1">
+              Version: v<%= version %>
+            </p>
+          </div>
         </div>
-      </div><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
+      <% } else { %>
+        <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
+            src="<%= bot?.user?.displayAvatarURL() %>" alt="...">
+          <div class="ms-3 title">
+            <h1 class="h5 mb-1">
+              <%= bot?.user?.username %>
+            </h1>
+            <p class="text-sm text-gray-700 mb-0 lh-1">
+              Version: v<%= version %>
+            </p>
+          </div>
+        </div>
+      <% }  %>
+      <span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
       <ul class="list-unstyled">
         <li class="sidebar-item active"><a class="sidebar-link" href="/">
             <svg class="svg-icon svg-icon-sm svg-icon-heavy">
