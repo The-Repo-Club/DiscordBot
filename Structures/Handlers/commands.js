@@ -40,6 +40,17 @@ module.exports = async (client, PG, Ascii) => {
 
 	console.log(Table.toString());
 
+	// DASHBOARD CHECK //
+	client.commands.forEach((command) => {
+		if (!command.type && command.description)
+			client.dashboard.registerCommand(
+				command.name,
+				command.description,
+				"/" + command.name,
+				command.permission
+			);
+	});
+
 	// PERMISSIONS CHECK //
 	client.on("ready", async () => {
 		client.guilds.cache.forEach((MainGuild) => {
@@ -68,16 +79,6 @@ module.exports = async (client, PG, Ascii) => {
 
 				await MainGuild.commands.permissions.set({ fullPermissions });
 			});
-		});
-
-		client.commands.forEach((command) => {
-			if (!command.type && command.description)
-				client.dashboard.registerCommand(
-					command.name,
-					command.description,
-					"/" + command.name,
-					command.permission
-				);
 		});
 	});
 };
