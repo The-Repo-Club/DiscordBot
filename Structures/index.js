@@ -27,6 +27,8 @@ const dashboard = new Dashboard(client, {
 	port: 80,
 	secret: Secret,
 });
+// We now have a dashboard property to access everywhere!
+client.dashboard = dashboard;
 
 client.commands = new Collection();
 client.cooldowns = new Collection();
@@ -35,9 +37,6 @@ client.maintenance = false;
 ["events", "loggers", "commands"].forEach((handler) => {
 	require(`./Handlers/${handler}`)(client, PG, Ascii);
 });
-
-// We now have a dashboard property to access everywhere!
-client.dashboard = dashboard;
 
 client.login(Token);
 
