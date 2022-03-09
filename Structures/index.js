@@ -17,7 +17,7 @@ const Ascii = require("ascii-table");
 
 // Requires Dashboard class from dashboard
 const Dashboard = require("../dashboard");
-// Initialise it
+// Initialize it
 const dashboard = new Dashboard(client, {
 	name: "Minimal-Mistakes",
 	theme: "default",

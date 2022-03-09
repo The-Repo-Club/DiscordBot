@@ -86,6 +86,7 @@ class Dashboard extends EventEmitter {
 			this.app.use(favicon(this.details.faviconPath));
 		this.app.use(express.static(join(__dirname, "public")));
 		this.app.use(express.json());
+    this.app.enable("trust proxy");
 		this.app.use(express.urlencoded({ extended: false }));
 
 		if (this.config.logRequests) {
