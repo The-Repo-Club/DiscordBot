@@ -20,7 +20,7 @@ const Dashboard = require("../dashboard");
 // Initialise it
 const dashboard = new Dashboard(client, {
 	name: "Minimal-Mistakes",
-	theme: "therepo.club",
+	theme: "default",
 	description: "A super cool bot with an online dashboard!",
 	serverUrl: "http://discord.gg/myKsJhHNN6",
 	baseUrl: "http://bot.therepo.club",

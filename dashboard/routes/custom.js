@@ -6,6 +6,7 @@ const Commands = Router().get("/*", function (req, res) {
 		const file = req.dashboardConfig.theme["404"] || "404.ejs";
 		return res.status(404).render(file, {
 			bot: req.client,
+			hostname: req.protocol + "://" + req.hostname,
 			version: require("discord.js").version,
 			user: req.user,
 			is_logged: Boolean(req.session.user),
@@ -15,11 +16,11 @@ const Commands = Router().get("/*", function (req, res) {
 			port: req.dashboardConfig.port,
 			hasClientSecret: Boolean(req.dashboardConfig.secret),
 			commands: req.dashboardCommands,
-
 		});
 	}
 	res.status(200).render(req.dashboardConfig.theme[path], {
 		bot: req.client,
+		hostname: req.protocol + "://" + req.hostname,
 		version: require("discord.js").version,
 		user: req.user,
 		is_logged: Boolean(req.session.user),

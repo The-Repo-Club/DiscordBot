@@ -6,6 +6,7 @@ const Commands = Router().get("/", function (req, res) {
 
 	res.status(200).render(file, {
 		bot: req.client,
+		hostname: req.protocol + "://" + req.hostname,
 		version: require("discord.js").version,
 		user: req.user,
 		is_logged: Boolean(req.session.user),

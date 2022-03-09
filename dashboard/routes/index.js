@@ -6,6 +6,7 @@ const Home = Router().get('/', async (req, res) => {
 		file,
 		{
 			bot: req.client,
+			hostname: req.protocol + "://" + req.hostname,
 			version: require("discord.js").version,
 			user: req.user,
 			is_logged: Boolean(req.session.user),
