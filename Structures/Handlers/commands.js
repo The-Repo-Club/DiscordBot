@@ -15,11 +15,17 @@ const { Client } = require("discord.js");
  */
 module.exports = async (client, PG, Ascii) => {
 	const Table = new Ascii("Commands Loaded");
+  let cmdName;
 
 	CommandsArray = [];
 	(await PG(`${process.cwd()}/Commands/*/*.js`)).map(async (file) => {
 		const command = require(file);
-		const cmdName = file.split("/")[6] + "/" + file.split("/")[7];
+
+    if (file.split("/")[7] !== "undefined") {
+			cmdName = file.split("/")[6] + "/" + file.split("/")[7];
+		} else {
+			cmdName = file.split("/")[5] + "/" + file.split("/")[6];
+		}
 
 		if (!command.name)
 			return Table.addRow(cmdName, "🟥 FAILED", "Missing a name.");
