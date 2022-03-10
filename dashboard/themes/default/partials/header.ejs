@@ -38,58 +38,6 @@
           </button>
         </div>
         <ul class="list-inline mb-0">
-          <% if(is_logged) { %>
-            <li class="list-inline-item dashboard px-lg-2">
-              <a class="nav-link text-sm text-reset px-1 px-lg-0" id="dashboard" href="/dashboard">
-                <span class="d-none d-sm-inline-block ms-2">Dashboard</span>
-                <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-                  <use xlink:href="#portfolio-grid-1"> </use>
-                </svg>
-              </a>
-            </li>
-          <% } %>
-          <!-- Messages dropdown -->
-          <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
-              id="navbarDropdownMenuLink1" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <span class="d-none d-sm-inline-block ms-2">Invite Bot</span>
-              <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                <use xlink:href="#paper-stack-1"> </use>
-              </svg>
-              <% if(!is_logged) { %>
-                <span class="badge bg-dash-color-3">1</span></a>
-              <% } %>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink1">
-                <li><a class="dropdown-item d-flex align-items-center" href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8">
-                    <div class="position-relative"><img class="avatar avatar-md" src="<%= bot?.user?.displayAvatarURL() %>"
-                        alt="Nadia Halsey">
-                      <div class="availability-status bg-success"></div>
-                    </div>
-                    <div class="ms-3"> <strong class="d-block"><%= bot?.user?.username %></strong><span class="d-block text-xs">Invite the bot.</span><small class="d-block"><%= new Date().toLocaleTimeString('en-US');%></small></div>
-                  </a></li>
-              </ul>
-          </li>
-          <!-- Tasks dropdown                   -->
-          <!-- <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0"
-              id="navbarDropdownMenuLink2" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                <use xlink:href="#paper-stack-1"> </use>
-              </svg>
-              <span class="badge bg-dash-color-3">9</span></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink2">
-                <li><a class="dropdown-item" href="#">
-                  <div class="d-flex justify-content-between mb-1"><strong>Task 1</strong><span>40% complete</span>
-                  </div>
-                  <div class="progress" style="height: 2px">
-                    <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: 40%" aria-valuenow="40"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </a></li>
-                <li> <a class="dropdown-item text-center" href="#"> <strong>See All Tasks <i
-                        class="fas fa-angle-right ms-1"></i></strong></a></li>
-              </ul>
-          </li> -->
           <% if(dashboardDetails.serverUrl) { %>
             <li class="list-inline-item support px-lg-2">
               <a class="nav-link text-sm text-reset px-1 px-lg-0" id="server" href="<%= dashboardDetails.serverUrl %>">
