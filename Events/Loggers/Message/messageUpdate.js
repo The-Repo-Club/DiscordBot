@@ -12,6 +12,7 @@ const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path 
 
 module.exports = {
 	name: "messageUpdate",
+	path: "Message/messageUpdate.js",
 	/**
 	 * @param {Message} oldMessage
 	 * @param {Message} newMessage

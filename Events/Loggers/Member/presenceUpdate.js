@@ -15,6 +15,7 @@ const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path 
 
 module.exports = {
 	name: "presenceUpdate",
+	path: "Member/presenceUpdate.js",
 	/**
 	 * @param {Presence} oldPresence
 	 * @param {Presence} newPresence

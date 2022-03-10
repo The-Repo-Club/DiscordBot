@@ -26,6 +26,7 @@ async function updateField(guild, field, channel) {
 
 module.exports = {
 	name: "logs",
+	path: "Admin/logs.js",
 	description: "Setup or reset the logs channels.",
 	permission: "ADMINISTRATOR",
 	options: [

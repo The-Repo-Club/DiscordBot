@@ -13,6 +13,7 @@ const ms = require("ms");
 
 module.exports = {
 	name: "cmds",
+	path: "Admin/cmds.js",
 	description: "Setup or reset the cmds channel.",
 	permission: "ADMINISTRATOR",
 	options: [

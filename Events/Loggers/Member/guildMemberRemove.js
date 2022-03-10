@@ -15,6 +15,7 @@ const Canvas = require("../../../Systems/Ranks/index");
 
 module.exports = {
 	name: "guildMemberRemove",
+	path: "Member/guildMemberRemove.js",
 	/**
 	 * @param {GuildMember} member
 	 */

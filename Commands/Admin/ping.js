@@ -14,6 +14,7 @@ const cd = ms("5m");
 
 module.exports = {
 	name: "ping",
+	path: "Admin/ping.js",
 	description: "Ping",
 	permission: "ADMINISTRATOR",
 	cooldown: cd,

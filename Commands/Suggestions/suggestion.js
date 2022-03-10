@@ -13,6 +13,7 @@ const suggestDB = require("../../Structures/Schemas/suggestDB"); //Make sure thi
 
 module.exports = {
 	name: "suggestion",
+	path: "Suggestions/suggestion.js",
 	description: "Set up the channel to where suggestions are sent.",
 	permission: "ADMINISTRATOR",
 	options: [
@@ -163,12 +164,12 @@ module.exports = {
 						},
 						{ name: "Reason", value: `${reason}`, inline: true }
 					);
-        try {
+				try {
 					await acceptedChannel
 						.send({ embeds: [acceptedMessage] })
 						.catch(() => null);
 				} catch (error) {
-          return interaction.reply({
+					return interaction.reply({
 						embeds: [
 							new MessageEmbed()
 								.setColor("RED")
@@ -178,7 +179,7 @@ module.exports = {
 						],
 						ephemeral: true,
 					});
-        }
+				}
 
 				if (suggestion.DM) {
 					const member = client.users.cache.get(suggestion.MemberID);
@@ -237,7 +238,7 @@ module.exports = {
 						{ name: "Reason", value: `${reason}`, inline: true }
 					);
 
-        try {
+				try {
 					await declinedChannel
 						.send({ embeds: [declinedMessage] })
 						.catch(() => null);

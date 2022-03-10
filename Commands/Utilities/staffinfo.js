@@ -11,7 +11,8 @@ const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 const Staff = ["Founder", "The-Repo-Bot"];
 
 module.exports = {
-	name: "staff",
+	name: "staffinfo",
+	path: "Utilities/staffinfo.js",
 	description: "Send/updates the staff list automaticly!",
 
 	/**

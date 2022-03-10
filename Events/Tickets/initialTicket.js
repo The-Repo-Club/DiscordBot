@@ -20,6 +20,7 @@ const ticketsSetupDB = require("../../Structures/Schemas/ticketsSetupDB"); //Mak
 
 module.exports = {
 	name: "interactionCreate",
+	path: "Tickets/initialTicket.js",
 	/**
 	 * @param {ButtonInteraction} interaction
 	 */

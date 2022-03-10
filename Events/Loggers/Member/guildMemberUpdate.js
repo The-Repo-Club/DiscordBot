@@ -14,6 +14,7 @@ const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path 
 
 module.exports = {
 	name: "guildMemberUpdate",
+	path: "Member/guildMemberUpdate.js",
 	/**
 	 * @param {GuildMember} oldMember
 	 * @param {GuildMember} newMember

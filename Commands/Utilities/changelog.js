@@ -11,6 +11,7 @@ const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 
 module.exports = {
 	name: "changelog",
+	path: "Utilities/changelog.js",
 	description: "Shows the latest changes in the bot.",
 	/**
 	 * @param {CommandInteraction} interaction

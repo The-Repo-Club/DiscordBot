@@ -12,6 +12,7 @@ const ms = require("ms");
 
 module.exports = {
 	name: "clear",
+	path: "Moderation/clear.js",
 	description:
 		"Deletes a specified number of messages from a channel or target.",
 	permission: "MANAGE_MESSAGES",

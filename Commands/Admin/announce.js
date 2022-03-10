@@ -12,6 +12,7 @@ const { Logs } = require("../../Structures/config.json");
 
 module.exports = {
 	name: "announce",
+	path: "Admin/announce.js",
 	description:
 		"Announces whatever you want to announce in the announcement channel.",
 	permission: "ADMINISTRATOR",

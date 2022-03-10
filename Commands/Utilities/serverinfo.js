@@ -32,6 +32,7 @@ const verificationLevels = {
 
 module.exports = {
 	name: "serverinfo",
+	path: "Utilities/serverinfo.js",
 	description: "Sends the server's information",
 
 	/**

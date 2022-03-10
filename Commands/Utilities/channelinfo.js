@@ -11,6 +11,7 @@ const { CommandInteraction, MessageEmbed } = require("discord.js");
 
 module.exports = {
 	name: "channelinfo",
+	path: "Utilities/channelinfo.js",
 	description: "See info about a channel.",
 	options: [
 		{

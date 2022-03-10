@@ -12,6 +12,7 @@ const DB = require("../../Structures/Schemas/roleDB");
 
 module.exports = {
 	name: "guildMemberUpdate",
+	path: "Member/guildMemberUpdate.js",
 	/**
 	 * @param {GuildMember} oldMember
 	 * @param {GuildMember} newMember

@@ -11,6 +11,7 @@ const cmdsDB = require("../../Structures/Schemas/cmdsDB");
 
 module.exports = {
 	name: "interactionCreate",
+	path: "Interaction/interactionCreate.js",
 	/**
 	 * @param {CommandInteraction} interaction
 	 * @param {Client} client

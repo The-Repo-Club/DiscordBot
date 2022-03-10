@@ -12,6 +12,7 @@ const ms = require("ms");
 
 module.exports = {
 	name: "maintenance",
+	path: "Admin/maintenance.js",
 	description: "Only for bot owner.",
 	permission: "ADMINISTRATOR",
 	/**

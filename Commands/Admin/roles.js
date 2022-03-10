@@ -26,6 +26,7 @@ async function updateField(guild, field, role) {
 
 module.exports = {
 	name: "roles",
+	path: "Admin/roles.js",
 	description: "Setup or reset the roles.",
 	permission: "ADMINISTRATOR",
 	options: [

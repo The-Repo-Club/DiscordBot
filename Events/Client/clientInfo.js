@@ -1,3 +1,12 @@
+// -*-coding:utf-8 -*-
+// -------------------------------------------------------------------------
+// Path          - DiscordBot/Events/Client/clientInfo.js
+// Git           - https://github.com/The-Repo-Club
+// Author        - The-Repo-Club [wayne6324@gmail.com]
+// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
+// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
+// -------------------------------------------------------------------------
+
 const chalk = require("chalk");
 const Box = require("cli-box");
 
@@ -6,6 +15,7 @@ const { Database } = require("../../Structures/config.json");
 
 module.exports = {
 	name: "ready",
+	path: "Client/clientInfo.js",
 	once: true,
 	/**
 	 * @param {Client} client
@@ -68,7 +78,7 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 `
 			).stringify();
 
-      const DashboardBoxHeader = new Box(
+			const DashboardBoxHeader = new Box(
 				{
 					w: Math.floor(client.user.tag.length + 35),
 					h: 1,
@@ -105,15 +115,18 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 					},
 					hAlign: "middle",
 				},
-				`${chalk.bold.blueBright("baseUrl")} :: ${chalk.redBright(client.dashboard.config.baseUrl)}
-        ${chalk.bold.blueBright("port")} :: ${chalk.redBright(client.dashboard.config.port)}`
+				`${chalk.bold.blueBright("baseUrl")} :: ${chalk.redBright(
+					client.dashboard.config.baseUrl
+				)}
+        ${chalk.bold.blueBright("port")} :: ${chalk.redBright(
+					client.dashboard.config.port
+				)}`
 			).stringify();
-
 
 			console.log(chalk.bold.greenBright(ClientBoxHeader));
 			console.log(chalk.bold.greenBright(ClientBox));
 
-      console.log(chalk.bold.greenBright(DashboardBoxHeader));
+			console.log(chalk.bold.greenBright(DashboardBoxHeader));
 			console.log(chalk.bold.greenBright(DashboardBox));
 		}
 

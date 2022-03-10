@@ -19,23 +19,25 @@ module.exports = async (client, PG, Ascii) => {
 	CommandsArray = [];
 	(await PG(`${process.cwd()}/Commands/*/*.js`)).map(async (file) => {
 		const command = require(file);
-		const cmdName = file.split("/")[6] + "/" + file.split("/")[7];
 
 		if (!command.name)
-			return Table.addRow(cmdName, "🟥 FAILED", "Missing a name.");
+			return Table.addRow(command.path, "🟥 FAILED", "Missing a name.");
+
+    if (!command.path)
+			return Table.addRow(command.name, "🟥 FAILED", "Missing a path.");
 
 		if (!command.type && !command.description)
-			return Table.addRow(cmdName, "🟥 FAILED", "Missing a description.");
+			return Table.addRow(command.path, "🟥 FAILED", "Missing a description.");
 
 		if (command.permission) {
 			if (Perms.includes(command.permission)) command.defaultPermission = false;
-			else return Table.addRow(cmdName, "🟥 FAILED", "Permission is invalid.");
+			else return Table.addRow(command.path, "🟥 FAILED", "Permission is invalid.");
 		}
 
 		client.commands.set(command.name, command);
 		CommandsArray.push(command);
 
-		await Table.addRow(cmdName, "🟩 SUCCESSFUL");
+		await Table.addRow(command.path, "🟩 SUCCESSFUL");
 	});
 
 	console.log(Table.toString());

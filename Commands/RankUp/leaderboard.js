@@ -12,6 +12,7 @@ const Levels = require("../../Systems/levelsSys");
 
 module.exports = {
 	name: "leaderboard",
+	path: "RankUp/leaderboard.js",
 	description: "Shows top 10 highest ranks in the server.",
 	/**
 	 *

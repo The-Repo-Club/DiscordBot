@@ -18,12 +18,10 @@ module.exports = async (client, PG, Ascii) => {
 	(await PG(`${process.cwd()}/Events/Loggers/*/*.js`)).map(async (file) => {
 		const event = require(file);
 
-		const evtName = file.split("/")[7] + "/" + file.split("/")[8];
-
 		if (!Events.includes(event.name) || !event.name) {
 			await Table.addRow(
 				`${event.name || "MISSING"}`,
-				`🟥 Loggers Event name is either invalid or missing: ${evtName}`
+				`🟥 Loggers Event name is either invalid or missing: ${event.path}`
 			);
 			return;
 		}
@@ -34,7 +32,7 @@ module.exports = async (client, PG, Ascii) => {
 			client.on(event.name, (...args) => event.execute(...args, client));
 		}
 
-		await Table.addRow(evtName, "🟩 SUCCESSFUL");
+		await Table.addRow(event.path, "🟩 SUCCESSFUL");
 	});
 
 	console.log(Table.toString());

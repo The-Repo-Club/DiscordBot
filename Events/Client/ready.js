@@ -11,6 +11,7 @@ const { Client } = require("discord.js");
 
 module.exports = {
 	name: "ready",
+	path: "Client/ready.js",
 	once: true,
 	/**
 	 * @param {Client} client

@@ -13,6 +13,7 @@ const Canvas = require("../../Systems/Ranks/index");
 
 module.exports = {
 	name: "rank",
+	path: "RankUp/rank.js",
 	description: "Get the rank of a user.",
 	options: [
 		{

@@ -14,6 +14,7 @@ Levels.setURL(Database);
 
 module.exports = {
 	name: "messageCreate",
+	path: "Message/messageCreate.js",
 	/**
 	 * @param {Message} message
 	 */

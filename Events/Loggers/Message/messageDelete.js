@@ -12,6 +12,7 @@ const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path 
 
 module.exports = {
 	name: "messageDelete",
+	path: "Message/messageDelete.js",
 	/**
 	 * @param {Message} message
 	 * @param {Client} client

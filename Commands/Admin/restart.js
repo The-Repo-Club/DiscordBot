@@ -1,6 +1,6 @@
 // -*-coding:utf-8 -*-
 // -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Admin/ping.js
+// Path          - DiscordBot/Commands/Admin/restart.js
 // Git           - https://github.com/The-Repo-Club
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
@@ -14,6 +14,7 @@ const ownerIDS = ["861270236475817994"];
 
 module.exports = {
 	name: "restart",
+	path: "Admin/restart.js",
 	description: "Restart Bot",
 	permission: "ADMINISTRATOR",
 	/**

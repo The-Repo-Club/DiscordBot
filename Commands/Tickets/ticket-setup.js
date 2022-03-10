@@ -18,6 +18,7 @@ const DB = require("../../Structures/Schemas/ticketsSetupDB"); //Make sure this 
 
 module.exports = {
 	name: "ticket-setup",
+	path: "Tickets/ticket-setup.js",
 	description: "Setup your ticketing system message.",
 	permission: "ADMINISTRATOR",
 	options: [

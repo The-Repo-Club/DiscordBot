@@ -38,6 +38,7 @@ let percentMemory = ((usedMemory / totalMemory) * 100).toFixed(0);
 
 module.exports = {
 	name: "status",
+	path: "Utilities/status.js",
 	description: "Displays the status of the client and database connection.",
 	/**
 	 *

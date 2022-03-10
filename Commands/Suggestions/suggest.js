@@ -13,6 +13,7 @@ const suggestSetupDB = require("../../Structures/Schemas/suggestSetupDB"); //Mak
 
 module.exports = {
 	name: "suggest",
+	path: "Suggestions/suggest.js",
 	description: "Create a suggestion.",
 	options: [
 		{

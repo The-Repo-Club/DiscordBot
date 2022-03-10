@@ -13,6 +13,7 @@ const DB = require("../../../Structures/Schemas/logsDB");
 
 module.exports = {
 	name: "roleCreate",
+	path: "Role/roleCreate.js",
 	/**
 	 * @param {Role} role
 	 */

@@ -14,6 +14,7 @@ const DB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path 
 
 module.exports = {
 	name: "ticket",
+	path: "Tickets/ticket.js",
 	description: "Ticket actions.",
 	permission: "ADMINISTRATOR",
 	options: [

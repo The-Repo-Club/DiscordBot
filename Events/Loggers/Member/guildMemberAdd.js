@@ -13,6 +13,7 @@ const Canvas = require("../../../Systems/Ranks/index");
 
 module.exports = {
 	name: "guildMemberAdd",
+	path: "Member/guildMemberAdd.js",
 	/**
 	 * @param {GuildMember} member
 	 */

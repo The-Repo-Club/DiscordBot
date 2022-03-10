@@ -13,6 +13,7 @@ const ms = require("ms");
 
 module.exports = {
 	name: "unlock",
+	path: "Lockdown/unlock.js",
 	description: "Remove lockdown from this channel",
 	permission: "MANAGE_CHANNELS",
 	/**
