@@ -14,15 +14,10 @@ const { Event, Events } = require("../Validation/eventNames");
  */
 module.exports = async (client, PG, Ascii) => {
 	const Table = new Ascii("Events Loaded");
-  let evtName;
 
 	(await PG(`${process.cwd()}/Events/*/*.js`)).map(async (file) => {
 		const event = require(file);
-    if (file.split("/")[7] !== "undefined") {
-			evtName = file.split("/")[6] + "/" + file.split("/")[7];
-		} else {
-			evtName = file.split("/")[5] + "/" + file.split("/")[6];
-		}
+		const evtName = file.split("/")[6] + "/" + file.split("/")[7];
 
 		if (!Events.includes(event.name) || !event.name) {
 			await Table.addRow(
