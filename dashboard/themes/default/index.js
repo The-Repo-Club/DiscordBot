@@ -7,5 +7,6 @@ module.exports = {
 	guild: join(__dirname, BASE_PATH, "guild.ejs"),
 	dashboard: join(__dirname, BASE_PATH, "dashboard.ejs"),
 	commands: join(__dirname, BASE_PATH, "commands.ejs"),
+	updates: join(__dirname, BASE_PATH, "updates.ejs"),
 	404: join(__dirname, BASE_PATH, "404.ejs"),
 };
