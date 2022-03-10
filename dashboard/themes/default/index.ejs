@@ -1,59 +1,6 @@
 <%- await include("partials/header", { bot, version, user, title: `Home | ${bot?.user?.username}` , is_logged, dashboardDetails, dashboardConfig, hasClientSecret }) %>
 
   <div class="d-flex align-items-stretch">
-    <!-- Sidebar Navigation-->
-    <nav id="sidebar">
-      <!-- Sidebar Header-->
-      <% if(is_logged) { %>
-        <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
-            src="https://cdn.discordapp.com/avatars/<%= user?.id %>/<%= user?.avatar %>.png" alt="...">
-          <div class="ms-3 title">
-            <h1 class="h5 mb-1">
-              <%= user?.username %>
-            </h1>
-            <p class="text-sm text-gray-700 mb-0 lh-1">
-              Version: v<%= version %>
-            </p>
-          </div>
-        </div>
-      <% } else { %>
-        <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
-            src="<%= bot?.user?.displayAvatarURL() %>" alt="...">
-          <div class="ms-3 title">
-            <h1 class="h5 mb-1">
-              <%= bot?.user?.username %>
-            </h1>
-            <p class="text-sm text-gray-700 mb-0 lh-1">
-              Version: v<%= version %>
-            </p>
-          </div>
-        </div>
-      <% }  %>
-      <span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
-      <ul class="list-unstyled">
-        <li class="sidebar-item active"><a class="sidebar-link" href="/">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-              <use xlink:href="#real-estate-1"> </use>
-            </svg><span>Home </span></a></li>
-        <% if(commands.length> 0) { %>
-          <li class="sidebar-item"><a class="sidebar-link" href="/commands">
-              <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-                <use xlink:href="#checkmark-1"> </use>
-              </svg><span>Commands </span></a></li>
-        <% } %>
-        <% if(is_logged) { %>
-          <li class="sidebar-item"><a class="sidebar-link" href="/dashboard">
-              <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-                <use xlink:href="#portfolio-grid-1"> </use>
-              </svg><span>Dashboard </span></a></li>
-        <% } else { %>
-          <li class="sidebar-item"><a class="sidebar-link" href="/auth/login">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-              <use xlink:href="#disable-1"> </use>
-            </svg><span>Login </span></a></li>
-        <% } %>
-      </ul>
-    </nav>
     <div class="page-content form-page">
 
   <div class="container-sm center" style="margin-top: 25px;">
@@ -67,30 +14,69 @@
       <% } %>
 
       <% if(hasClientSecret) { %>
-        <% if(is_logged) { %>
-        <a class="btn btn-secondary text-white" href="/dashboard">
-          Dashboard
+        <% if(!is_logged) { %>
+        <a class="btn btn-secondary text-white" href="/auth/login">
+          Login to access the dashboard
         </a>
-        <% } else { %>
-          <a class="btn btn-secondary text-white" href="/auth/login">
-            Login to access the dashboard
-          </a>
         <% } %>
-      <% } %>
-
-      <% if(commands.length> 0) { %>
-        <a class="btn btn-secondary text-white" href="/commands">Command list</a>
       <% } %>
 
       <hr>
 
+      <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="card bg-grey" style="width:100%">
+                    <div class="card-body">
+                      <img class="card-img-top" src="<%= hostname %>:<%= port %>/asset/image1.png" alt="Bot Invite" style="width:100%">
+                      <h4 class="card-title big-text">Invite Bot</h4>
+                      <p class="card-text">Invite the greatest bot in the game and level up your server!</p>
+                      <!-- This link invites Spectre, Change the client id to your bot's id -->
+                      <a href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8" class="btn btn-discord btn-primary stretched-link">Invite Bot</a>
+                    </div>
+                </div>
+            </div>
+            <% if(dashboardDetails.serverUrl) { %>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="card bg-grey" style="width:100%">
+                    <div class="card-body">
+                      <img class="card-img-top" src="<%= hostname %>:<%= port %>/asset/image2.png" alt="Support Server" style="width:100%">
+                      <h4 class="card-title big-text">Support Server</h4>
+                      <p class="card-text">Join our support server for help setting up the bot and to report bugs...</p>
+                      <!-- Change link to your support server link -->
+                      <a href="<%= dashboardDetails.serverUrl %>" class="btn btn-discord btn-warning stretched-link">Join our Support Server</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="card bg-grey" style="width:100%">
+                    <div class="card-body">
+                      <img class="card-img-top" src="<%= hostname %>:<%= port %>/asset/image3.png" alt="Commands" style="width:100%">
+                      <h4 class="card-title big-text">Bot Commands</h4>
+                      <p class="card-text">View a full list of Commands for Spectre bot on our command list page!</p>
+                      <a href="commands" class="btn btn-discord btn-primary stretched-link">View Commands</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="brand-line"><b>Featured News:</b></h1>
+        </div>
 
-      <a class="btn btn-primary text-white" href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8">Invite</a>
-
-      <% if(dashboardDetails.serverUrl) { %>
-        <a class="btn btn-warning" href="<%= dashboardDetails.serverUrl %>">Discord Server</a>
-      <% } %>
-
+        <!-- Update these with your bot's News -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card bg-grey" style="width:100%">
+                    <div class="card-body">
+                      <h4 class="card-title big-text">Bot Updates</h4>
+                      <p class="card-text">View the latest Update Logs here...</p>
+                      <a href="updatelogs.html" class="btn btn-discord btn-secondary stretched-link">Update Logs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
+
+
   <%- await include("partials/footer") %>

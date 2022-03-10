@@ -23,8 +23,8 @@ const dashboard = new Dashboard(client, {
 	theme: "default",
 	description: "A super cool bot with an online dashboard!",
 	serverUrl: "http://discord.gg/myKsJhHNN6",
-	baseUrl: "http://bot.therepo.club",
-	port: 80,
+	baseUrl: "http://bot.minimal-mistakes.xyz",
+	port: 1337,
 	secret: Secret,
 });
 // We now have a dashboard property to access everywhere!
