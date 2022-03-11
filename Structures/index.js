@@ -26,7 +26,7 @@ const dashboard = new Dashboard(client, {
 	description: "A super cool bot with an online dashboard!",
 	serverUrl: "http://discord.gg/myKsJhHNN6",
 	baseUrl: "http://bot.minimal-mistakes.xyz",
-	port: 1337,
+	port: 80,
 	secret: Secret,
 });
 // We now have a dashboard property to access everywhere!

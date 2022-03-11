@@ -104,7 +104,7 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 			const DashboardBox = new Box(
 				{
 					w: Math.floor(client.user.tag.length + 35),
-					h: 2,
+					h: 3,
 					stringify: false,
 					marks: {
 						nw: "╭",
@@ -123,8 +123,13 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 				)}
         ${chalk.bold.blueBright("port")} :: ${chalk.redBright(
 					client.dashboard.config.port
+				)}
+        ${chalk.bold.blueBright("routes")} :: ${chalk.redBright(
+					client.dashboard.routes
 				)}`
 			).stringify();
+
+      console.log(client.dashboard.routes);
 
 			console.log(chalk.bold.greenBright(ClientBoxHeader));
 			console.log(chalk.bold.greenBright(ClientBox));

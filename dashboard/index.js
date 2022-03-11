@@ -12,7 +12,7 @@ class Dashboard extends EventEmitter {
 		super();
 
 		if (+process.versions.node.split(".")[0] < 16)
-			throw new Error("Discord-easy-dashboard only supports node-v16+");
+			throw new Error("dashboard only supports node-v16+");
 
 		if (!client) throw new Error("Client is a required parameter.");
 		this.client = client;
@@ -134,6 +134,9 @@ class Dashboard extends EventEmitter {
 	_loadRoutes() {
 		const files = readdirSync(join(__dirname, "routes"));
 		const routes = files.filter((c) => c.split(".").pop() === "js");
+
+    this.routes = routes.length;
+
 		if (files.length === 0 || routes.length === 0)
 			throw new Error("No routes were found!");
 		for (let i = 0; i < routes.length; i++) {
