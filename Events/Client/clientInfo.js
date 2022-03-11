@@ -45,7 +45,7 @@ module.exports = {
 			const ClientBox = new Box(
 				{
 					w: Math.floor(client.user.tag.length + 35),
-					h: 6,
+					h: 7,
 					stringify: false,
 					marks: {
 						nw: "╭",
@@ -66,8 +66,11 @@ ${chalk.bold.blueBright("Client Details")} :: ${chalk.redBright(
 ${chalk.bold.blueBright("Guilds Count")} :: ${chalk.redBright(
 					client.guilds.cache.size
 				)}
-${chalk.bold.blueBright("User Count")}:: ${chalk.redBright(
+${chalk.bold.blueBright("Users Count")}:: ${chalk.redBright(
 					client.users.cache.size
+				)}
+${chalk.bold.blueBright("Channels Count")}:: ${chalk.redBright(
+					client.channels.cache.size
 				)}
 ${chalk.bold.blueBright("NodeJS Version")} :: ${chalk.redBright(
 					process.version

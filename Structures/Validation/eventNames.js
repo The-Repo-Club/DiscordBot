@@ -48,6 +48,7 @@ module.exports = {
 		"messageReactionRemoveAll",
 		"messageReactionRemoveEmoji",
 		"messageUpdate",
+    "modalSubmit",
 		"presenceUpdate",
 		"rateLimit",
 		"ready",

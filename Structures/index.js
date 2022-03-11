@@ -9,6 +9,8 @@
 
 const { Client, Collection } = require("discord.js");
 const client = new Client({ intents: 32767 });
+const discordjsModal = require("discord-modals"); // Define this package
+discordjsModal(client); // It is necessary to have your client to be able to know when a modal is executed
 const { Token, Secret } = require("./config.json");
 const { promisify } = require("util");
 const { glob } = require("glob");
@@ -34,7 +36,7 @@ client.commands = new Collection();
 client.cooldowns = new Collection();
 client.maintenance = false;
 
-["events", "loggers", "commands"].forEach((handler) => {
+["commands", "events", "loggers", "modals"].forEach((handler) => {
 	require(`./Handlers/${handler}`)(client, PG, Ascii);
 });
 

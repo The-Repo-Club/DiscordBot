@@ -21,6 +21,7 @@
 		"cli-box": "^6.0.10",
 		"cookie-parser": "^1.4.6",
 		"discord-html-transcripts": "^1.2.4",
+		"discord-modals": "^1.2.7",
 		"discord.js": "^13.6.0",
 		"ejs": "^3.1.6",
 		"express": "^4.17.3",
