@@ -11,7 +11,7 @@
 
 const { MessageEmbed, GuildMember } = require("discord.js");
 const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
-const Canvas = require("../../../Systems/Ranks/index");
+const Canvas = require("../../../Systems/Canvas/index");
 
 module.exports = {
 	name: "guildMemberRemove",

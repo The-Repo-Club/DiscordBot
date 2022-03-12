@@ -6,6 +6,7 @@ const Commands = Router().get("/*", function (req, res) {
 		const file = req.dashboardConfig.theme["404"] || "404.ejs";
 		return res.status(404).render(file, {
 			bot: req.client,
+			title: "Custom | " + req.client.user.username,
 			hostname: req.protocol + "://" + req.hostname,
 			version: require("discord.js").version,
 			user: req.user,
@@ -20,6 +21,7 @@ const Commands = Router().get("/*", function (req, res) {
 	}
 	res.status(200).render(req.dashboardConfig.theme[path], {
 		bot: req.client,
+		title: "Custom | " + req.client.user.username,
 		hostname: req.protocol + "://" + req.hostname,
 		version: require("discord.js").version,
 		user: req.user,

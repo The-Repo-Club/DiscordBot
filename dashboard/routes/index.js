@@ -16,6 +16,7 @@ const Home = Router().get('/', async (req, res) => {
 			port: req.dashboardConfig.port,
 			hasClientSecret: Boolean(req.dashboardConfig.secret),
 			commands: req.dashboardCommands,
+			title: "Home | " + req.client.user.username,
 		},
 		(err, html) => {
 			if (err) {

@@ -16,13 +16,15 @@ const Server = Router()
 			file,
 			{
 				bot: req.client,
-        hostname: req.protocol + "://" + req.hostname,
+				title: "Manage | " + req.client.user.username,
+				hostname: req.protocol + "://" + req.hostname,
 				version: require("discord.js").version,
 				user: req.user,
 				is_logged: Boolean(req.session.user),
 				guild,
 				alert: null,
 				errors: false,
+				port: req.dashboardConfig.port,
 				dashboardDetails: req.dashboardDetails,
 				dashboardConfig: req.dashboardConfig,
 				commands: req.dashboardCommands,
@@ -65,6 +67,7 @@ const Server = Router()
 			file,
 			{
 				bot: req.client,
+				title: "Manage | " + req.client.user.username,
 				hostname: req.protocol + "://" + req.hostname,
 				version: require("discord.js").version,
 				user: req.user,
@@ -77,6 +80,7 @@ const Server = Router()
 						  )}.`
 						: "Your settings have been saved.",
 				errors: errors.length > 0,
+				port: req.dashboardConfig.port,
 				dashboardDetails: req.dashboardDetails,
 				dashboardConfig: req.dashboardConfig,
 				commands: req.dashboardCommands,

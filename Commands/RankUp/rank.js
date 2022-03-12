@@ -9,7 +9,7 @@
 
 const { CommandInteraction, Client, MessageAttachment } = require("discord.js");
 const Levels = require("../../Systems/levelsSys");
-const Canvas = require("../../Systems/Ranks/index");
+const Canvas = require("../../Systems/Canvas/index");
 
 module.exports = {
 	name: "rank",
@@ -42,11 +42,11 @@ module.exports = {
 			.setUsername(Target.user.username)
 			.setAvatar(Target.displayAvatarURL({ format: "png", size: 512 }))
 			.setLevel(users.level)
-			.setAddon("RankName", false)
+			.setAddon("RankName", true)
 			.setAddon("Reputation", false)
-			// .setAddon("Rank", false)
+			.setAddon("Rank", true)
 			.setReputation(users.xp)
-			.setRankName("professional")
+			.setRankName(Target.roles.highest.name)
 			.setRank(users.position)
 			.setXP("Current", users.xp)
 			.setXP("Needed", neededXp)

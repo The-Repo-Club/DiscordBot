@@ -1,139 +1,91 @@
-<%- await include("partials/header", { bot, version, user, title: `Guild Settings | ${bot?.user?.username}`, is_logged, dashboardConfig, hasClientSecret: true }) %>
+<div class="container-sm center" style="margin-top: 30px">
+	<div class="d-grid gap-2 col-4 mx-auto">
+		<% if (alert) { %>
+		<div
+			class="alert <%= errors ? 'alert-danger' : 'alert-success' %>"
+			role="alert"
+		>
+			<%= alert %>
+		</div>
+		<% } %>
+		<h1><%= guild.name %></h1>
+		<hr />
+		<form method="POST">
+			<% for (let i=0; i < settings.length; i++) { %> <% const
+			setting=settings[i] %> <% if (setting.type==='text input' ) { %>
+			<p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px">
+				<%= setting.name %>
+			</p>
+			<p style="font-style: italic" class="disabled">
+				<%= setting.description %>
+			</p>
+			<input
+				type="text"
+				class="form-control"
+				name="<%= setting.name %>"
+				id="<%= setting.name %>"
+				value="<%= await setting.get(bot, guild) %>"
+			/>
+			<% } else if (setting.type==='boolean input' ) { %>
+			<p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px">
+				<%= setting.name %>
+			</p>
+			<div class="form-check form-switch">
+				<input type="hidden" value="off" name="<%= setting.name %>" />
+				<input class="form-check-input" type="checkbox" name="<%= setting.name
+				%>" id="<%= setting.name %>" <%=await setting.get(bot, guild) ?
+				'checked' : '' %>>
+				<label class="form-check-label" for="<%= setting.name %>">
+					<%= setting.description %>
+				</label>
+			</div>
+			<% } else if (setting.type==='dashboard' ) { %>
+			<p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px">
+				<%= setting.name %>
+			</p>
+			<p style="font-style: italic" class="disabled">
+				<%= setting.description %>
+			</p>
+			<select
+				class="form-select"
+				aria-label="<%= setting.description %>"
+				name="<%= setting.name %>"
+			>
+				<option value="<%=  setting.get(bot, guild)[0] %>" selected>
+					<%= await setting.get(bot, guild)[1] %>
+				</option>
+				<% (await setting.getSelectorEntries(bot, guild)).forEach(x=> { %>
+				<option value="<%= x[0] %>"><%= x[1] %></option>
+				<% }) %>
+			</select>
+			<% } else if(setting.type==='color input' ) { %>
+			<p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px">
+				<%= setting.name %>
+			</p>
+			<p style="font-style: italic" class="disabled">
+				<%= setting.description %>
+			</p>
+			<input
+				type="color"
+				class="form-control form-control-color"
+				name="<%= setting.name %>"
+				id="<%= setting.name %>"
+				value="<%= await setting.get(bot, guild) %>"
+			/>
+			<% } %> <% if (i !==settings.length) { %>
+			<hr
+				style="
+					width: 40%;
+					display: block;
+					margin-left: auto;
+					margin-right: auto;
+				"
+			/>
+			<% } %> <% } %>
 
-  <div class="d-flex align-items-stretch">
-    <!-- Sidebar Navigation-->
-    <nav id="sidebar">
-      <!-- Sidebar Header-->
-      <% if(is_logged) { %>
-        <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
-            src="https://cdn.discordapp.com/avatars/<%= user?.id %>/<%= user?.avatar %>.png" alt="...">
-          <div class="ms-3 title">
-            <h1 class="h5 mb-1">
-              <%= user?.username %>
-            </h1>
-            <p class="text-sm text-gray-700 mb-0 lh-1">
-              Version: v<%= version %>
-            </p>
-          </div>
-        </div>
-      <% } else { %>
-        <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle"
-            src="<%= bot?.user?.displayAvatarURL() %>" alt="...">
-          <div class="ms-3 title">
-            <h1 class="h5 mb-1">
-              <%= bot?.user?.username %>
-            </h1>
-            <p class="text-sm text-gray-700 mb-0 lh-1">
-              Version: v<%= version %>
-            </p>
-          </div>
-        </div>
-      <% }  %>
-      <span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
-      <ul class="list-unstyled">
-        <li class="sidebar-item"><a class="sidebar-link" href="/">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-              <use xlink:href="#real-estate-1"> </use>
-            </svg><span>Home </span></a></li>
-        <% if(commands.length> 0) { %>
-          <li class="sidebar-item"><a class="sidebar-link" href="/commands">
-              <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-                <use xlink:href="#checkmark-1"> </use>
-              </svg><span>Commands </span></a></li>
-        <% } %>
-        <% if(is_logged) { %>
-          <li class="sidebar-item"><a class="sidebar-link" href="/dashboard">
-              <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-                <use xlink:href="#portfolio-grid-1"> </use>
-              </svg><span>Dashboard </span></a></li>
-        <% } else { %>
-          <li class="sidebar-item"><a class="sidebar-link" href="/auth/login">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-              <use xlink:href="#disable-1"> </use>
-            </svg><span>Login </span></a></li>
-        <% } %>
-      </ul>
-      <span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Extra</span>
-      <ul class="list-unstyled">
-        <li class="sidebar-item"><a class="sidebar-link" href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8">
-            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
-              <use xlink:href="#paper-stack-1"> </use>
-            </svg><span>Invite Bot </span></a></li>
-      </ul>
-    </nav>
-    <div class="page-content form-page">
-
-  <div class="container-sm center" style="margin-top: 30px;">
-    <div class="d-grid gap-2 col-4 mx-auto">
-      <% if (alert) { %>
-        <div class="alert <%= errors ? 'alert-danger' : 'alert-success' %>" role="alert">
-          <%= alert %>
-        </div>
-        <% } %>
-          <h1>
-            <%= guild.name %>
-          </h1>
-          <hr>
-          <form method="POST">
-
-            <% for (let i=0; i < settings.length; i++) { %>
-              <% const setting=settings[i] %>
-                <% if (setting.type==='text input' ) { %>
-                  <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">
-                    <%= setting.name %>
-                  </p>
-                  <p style="font-style: italic;" class="disabled">
-                    <%= setting.description %>
-                  </p>
-                  <input type="text" class="form-control" name="<%= setting.name %>" id="<%= setting.name %>"
-                    value="<%= await setting.get(bot, guild) %>">
-                  <% } else if (setting.type==='boolean input' ) { %>
-                    <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">
-                      <%= setting.name %>
-                    </p>
-                    <div class="form-check form-switch">
-                      <input type='hidden' value='off' name='<%= setting.name %>'>
-                      <input class="form-check-input" type="checkbox" name="<%= setting.name %>"
-                        id="<%= setting.name %>" <%=await setting.get(bot, guild) ? 'checked' : '' %>>
-                      <label class="form-check-label" for="<%= setting.name %>">
-                        <%= setting.description %>
-                      </label>
-                    </div>
-                    <% } else if (setting.type==='dashboard' ) { %>
-                      <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">
-                        <%= setting.name %>
-                      </p>
-                      <p style="font-style: italic;" class="disabled">
-                        <%= setting.description %>
-                      </p>
-                      <select class="form-select" aria-label="<%= setting.description %>" name='<%= setting.name %>'>
-                        <option value="<%=  setting.get(bot, guild)[0] %>" selected>
-                          <%= await setting.get(bot, guild)[1] %>
-                        </option>
-                        <% (await setting.getSelectorEntries(bot, guild)).forEach(x=> { %>
-                          <option value="<%= x[0] %>">
-                            <%= x[1] %>
-                          </option>
-                          <% }) %>
-                      </select>
-                      <% } else if(setting.type==='color input' ) { %>
-                        <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;">
-                          <%= setting.name %>
-                        </p>
-                        <p style="font-style: italic;" class="disabled">
-                          <%= setting.description %>
-                        </p>
-                        <input type="color" class="form-control form-control-color" name="<%= setting.name %>"
-                          id="<%= setting.name %>" value="<%= await setting.get(bot, guild) %>">
-                        <% } %>
-                          <% if (i !==settings.length) { %>
-                            <hr style="width:40%; display: block; margin-left: auto; margin-right: auto;">
-                            <% } %>
-                              <% } %>
-
-                                <br><button type="submit" class="btn btn-success text-white">Save Settings</button>
-          </form>
-    </div>
-  </div>
-
-  <%- await include("partials/footer") %>
+			<br /><button type="submit" class="btn btn-success text-white">
+				Save Settings
+			</button>
+		</form>
+	</div>
+</div>

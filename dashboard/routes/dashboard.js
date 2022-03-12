@@ -9,6 +9,7 @@ const Dashboard = Router().get("/", CheckAuth, async (req, res) => {
 		file,
 		{
 			bot: req.client,
+			title: "Dashboard | " + req.client.user.username,
 			hostname: req.protocol + "://" + req.hostname,
 			version: require("discord.js").version,
 			user: req.user,

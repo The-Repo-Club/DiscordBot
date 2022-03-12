@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const expressLayouts = require("express-ejs-layouts");
 const favicon = require("serve-favicon");
 const { existsSync, readdirSync } = require("fs");
 const { join } = require("path");
@@ -73,7 +74,8 @@ class Dashboard extends EventEmitter {
 	_setup() {
 		this.app.set("port", this.config.port || 3000);
 		this.app.set("views", join(__dirname, "views"));
-		this.app.set("view engine", "ejs");
+		this.app.use(expressLayouts);
+    this.app.set("view engine", "ejs");
 		this.app.engine("ejs", async (path, data, cb) => {
 			try {
 				let html = await ejs.renderFile(path, data, { async: true });

@@ -6,6 +6,7 @@ const Updates = Router().get("/", async (req, res) => {
 		file,
 		{
 			bot: req.client,
+			title: "Updates | " + req.client.user.username,
 			hostname: req.protocol + "://" + req.hostname,
 			version: require("discord.js").version,
 			user: req.user,
