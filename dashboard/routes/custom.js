@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { Permissions } = require("discord.js");
 
 const Commands = Router().get("/*", async function (req, res) {
 	const path = req.baseUrl.split("/").pop();
@@ -14,6 +15,7 @@ const Commands = Router().get("/*", async function (req, res) {
 			user: req.user,
 			invite,
 			is_logged: Boolean(req.session.user),
+			Perms: Permissions,
 			dashboardDetails: req.dashboardDetails,
 			dashboardConfig: req.dashboardConfig,
 			baseUrl: req.dashboardConfig.baseUrl,
@@ -31,6 +33,7 @@ const Commands = Router().get("/*", async function (req, res) {
 		user: req.user,
 		invite,
 		is_logged: Boolean(req.session.user),
+		Perms: Permissions,
 		dashboardDetails: req.dashboardDetails,
 		dashboardConfig: req.dashboardConfig,
 		baseUrl: req.dashboardConfig.baseUrl,

@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { parse } = require("rss-to-json");
+const { Permissions } = require("discord.js");
 
 const Updates = Router().get("/", async (req, res) => {
 	const invite = await require("../../Systems/inviteSys")(req.client);
@@ -19,6 +20,7 @@ const Updates = Router().get("/", async (req, res) => {
 			user: req.user,
 			invite,
 			is_logged: Boolean(req.session.user),
+			Perms: Permissions,
 			dashboardDetails: req.dashboardDetails,
 			dashboardConfig: req.dashboardConfig,
 			baseUrl: req.dashboardConfig.baseUrl,

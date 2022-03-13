@@ -30,6 +30,7 @@ const Levels = Router()
 				invite,
 				guild,
 				is_logged: Boolean(req.session.user),
+				Perms: Permissions,
 				dashboardDetails: req.dashboardDetails,
 				dashboardConfig: req.dashboardConfig,
 				baseUrl: req.dashboardConfig.baseUrl,

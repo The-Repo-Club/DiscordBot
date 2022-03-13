@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const CheckAuth = (req, res, next) =>
 	req.session.user ? next() : res.status(401).redirect("/auth/login");
+const { Permissions } = require("discord.js");
 
 const Server = Router()
 	.get("/:guildID", CheckAuth, async (req, res) => {
@@ -24,6 +25,7 @@ const Server = Router()
 				user: req.user,
 				invite,
 				is_logged: Boolean(req.session.user),
+				Perms: Permissions,
 				guild,
 				alert: null,
 				errors: false,
@@ -79,6 +81,7 @@ const Server = Router()
 				user: req.user,
 				invite,
 				is_logged: Boolean(req.session.user),
+				Perms: Permissions,
 				guild,
 				alert:
 					errors.length > 0
