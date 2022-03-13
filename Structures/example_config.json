@@ -1,5 +1,6 @@
 {
 	"Token": "",
 	"Secret": "",
-	"Database": ""
+	"Database": "",
+	"ownerIDS": []
 }

@@ -5,6 +5,7 @@ const Home = Router().get('/', async (req, res) => {
 	return await res.render(
 		file,
 		{
+			rel: "home",
 			bot: req.client,
 			hostname: req.protocol + "://" + req.hostname,
 			version: require("discord.js").version,

@@ -4,18 +4,20 @@
 // Git           - https://github.com/The-Repo-Club
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Sat 12 March 2022, 11:52:32 am (GMT) 
+// Modified On   - Sat 12 March 2022, 11:52:32 am (GMT)
 // -------------------------------------------------------------------------
 
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, MessageEmbed } = require("discord.js");
 const client = new Client({ intents: 32767 });
 const discordjsModal = require("discord-modals"); // Define this package
 discordjsModal(client); // It is necessary to have your client to be able to know when a modal is executed
-const { Token, Secret } = require("./config.json");
+const { Token, Secret, ownerIDS } = require("./config.json");
 const { promisify } = require("util");
 const { glob } = require("glob");
 const PG = promisify(glob);
 const Ascii = require("ascii-table");
+
+const replacer = new RegExp("/mnt/500GB/.gitlabs/", "g");
 
 // Requires Dashboard class from dashboard
 const Dashboard = require("../dashboard");
@@ -41,5 +43,37 @@ client.maintenance = false;
 });
 
 client.login(Token);
+
+process.on("uncaughtException", (exception) => {
+	const error = new MessageEmbed()
+		.setColor("RED")
+		.setTitle("🟥 **There was an uncaught exception** 🟥")
+		.setDescription(`${exception.stack.replace(replacer, "") || exception}`)
+		.setTimestamp();
+
+	for (var i = 0; i < ownerIDS.length; i++) {
+		var owner = client.users.cache.get(ownerIDS[i]);
+
+		owner.send({
+			embeds: [error],
+		});
+	}
+});
+
+process.on("unhandledRejection", (rejection) => {
+	const error = new MessageEmbed()
+		.setColor("RED")
+		.setTitle("🟥 **There was an uncaught rejection** 🟥")
+		.setDescription(`${rejection.stack.replace(replacer, "") || rejection}`)
+		.setTimestamp();
+
+	for (var i = 0; i < ownerIDS.length; i++) {
+		var owner = client.users.cache.get(ownerIDS[i]);
+
+		owner.send({
+			embeds: [error],
+		});
+	}
+});
 
 module.exports = client;

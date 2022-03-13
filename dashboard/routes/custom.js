@@ -5,6 +5,7 @@ const Commands = Router().get("/*", function (req, res) {
 	if (!req.dashboardConfig.theme[path]) {
 		const file = req.dashboardConfig.theme["404"] || "404.ejs";
 		return res.status(404).render(file, {
+			rel: "custom",
 			bot: req.client,
 			title: "Custom | " + req.client.user.username,
 			hostname: req.protocol + "://" + req.hostname,
@@ -20,6 +21,7 @@ const Commands = Router().get("/*", function (req, res) {
 		});
 	}
 	res.status(200).render(req.dashboardConfig.theme[path], {
+		rel: "custom",
 		bot: req.client,
 		title: "Custom | " + req.client.user.username,
 		hostname: req.protocol + "://" + req.hostname,

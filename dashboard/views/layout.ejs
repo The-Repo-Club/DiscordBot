@@ -21,6 +21,7 @@
 	</head>
 
 	<body
+    rel="<%= rel %>"
 		data-theme="dark"
 		data-layout="fluid"
 		data-sidebar-position="left"
@@ -74,13 +75,13 @@
 
 					<ul class="sidebar-nav">
 						<li class="sidebar-header">Pages</li>
-            <li class="sidebar-item active">
+            <li class="sidebar-item" id="rel_home">
 							<a class="sidebar-link" href="/">
 								<i class="align-middle" data-feather="home"></i>
 								<span class="align-middle">Home</span>
 							</a>
 						</li>
-						<li class="sidebar-item">
+						<li class="sidebar-item" id="rel_dashboards">
 							<a
 								data-bs-target="#dashboards"
 								data-bs-toggle="collapse"
@@ -94,12 +95,12 @@
 								class="sidebar-dropdown list-unstyled collapse"
 								data-bs-parent="#sidebar"
 							>
-								<li class="sidebar-item">
+								<li class="sidebar-item" id="rel_dashboard">
 									<a class="sidebar-link" href="/dashboard"
 										>Dashboard</a
 									>
 								</li>
-                <li class="sidebar-item">
+                <li class="sidebar-item" id="rel_commands">
 									<a class="sidebar-link" href="/commands"
 										>Commands</a
 									>
@@ -321,5 +322,29 @@
 		</div>
 
 		<script src="<%= hostname %>:<%= port %>/js/app.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script>
+      (function(){
+        var currentLocation = $('body').attr('rel');
+
+        switch(currentLocation){
+            case 'home':
+              var element = document.getElementById("rel_home");
+              element.classList.add("active");
+              break;
+
+            case 'commands':
+              var element = document.getElementById("rel_commands");
+              element.classList.add("active");
+              break;
+
+            case 'dashboard':
+              var element = document.getElementById("rel_dashboard");
+              element.classList.add("active");
+              break;
+        }
+
+      })();
+    </script>
 	</body>
 </html>

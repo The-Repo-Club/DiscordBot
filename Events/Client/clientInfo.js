@@ -129,8 +129,6 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 				)}`
 			).stringify();
 
-      console.log(client.dashboard.routes);
-
 			console.log(chalk.bold.greenBright(ClientBoxHeader));
 			console.log(chalk.bold.greenBright(ClientBox));
 

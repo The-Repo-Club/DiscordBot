@@ -8,9 +8,7 @@
 // -------------------------------------------------------------------------
 
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
-const { Token } = require("../../Structures/config.json");
-
-const ownerIDS = ["861270236475817994"];
+const { Token, ownerIDS } = require("../../Structures/config.json");
 
 module.exports = {
 	name: "restart",

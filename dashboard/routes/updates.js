@@ -5,6 +5,7 @@ const Updates = Router().get("/", async (req, res) => {
 	return await res.render(
 		file,
 		{
+			rel: "home",
 			bot: req.client,
 			title: "Updates | " + req.client.user.username,
 			hostname: req.protocol + "://" + req.hostname,

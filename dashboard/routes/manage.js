@@ -15,6 +15,7 @@ const Server = Router()
 		return await res.render(
 			file,
 			{
+				rel: "manage_get",
 				bot: req.client,
 				title: "Manage | " + req.client.user.username,
 				hostname: req.protocol + "://" + req.hostname,
@@ -66,6 +67,7 @@ const Server = Router()
     return await res.render(
 			file,
 			{
+				rel: "manage_post",
 				bot: req.client,
 				title: "Manage | " + req.client.user.username,
 				hostname: req.protocol + "://" + req.hostname,

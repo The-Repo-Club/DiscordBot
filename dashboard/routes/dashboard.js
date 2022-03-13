@@ -8,6 +8,7 @@ const Dashboard = Router().get("/", CheckAuth, async (req, res) => {
 	return await res.render(
 		file,
 		{
+			rel: "dashboard",
 			bot: req.client,
 			title: "Dashboard | " + req.client.user.username,
 			hostname: req.protocol + "://" + req.hostname,

@@ -8,7 +8,7 @@
 // -------------------------------------------------------------------------
 
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
-const Staff = ["Founder", "The-Repo-Bot"];
+const { Staff } = require("../../Structures/config.json");
 
 module.exports = {
 	name: "staffinfo",
@@ -22,26 +22,31 @@ module.exports = {
 	 */
 	async execute(interaction, client) {
 		const List = new MessageEmbed()
-			.setColor("RANDOM")
+			.setColor("ORANGE")
 			.setTitle("Staff list")
 			.setThumbnail(
 				`${interaction.guild.iconURL({ size: 512, dynamic: true })}`
 			)
-			.setTimestamp();
-		Staff.forEach((staff) => {
-			List.addFields({
-				name: `${staff}`,
-				value: `${
-					client.guilds.cache
-						.get(interaction.guildId)
-						.roles.cache.find((r) => r.name == staff)
-						.members.map((m) => `${m.user}`)
-						.join("\n") || "\n"
-				}`,
-				inline: false,
-			});
-		});
+			.setTimestamp()
+			.addField("**WIP**", "Work In Progress");
+		// Staff.forEach((staff) => {
+		// 	List.addFields({
+		// 		name: `${
+		// 			client.guilds.cache
+		// 				.get(interaction.guildId)
+		// 				.roles.cache.find((r) => r.id == staff).name
+		// 		}`,
+		// 		value: `${
+		// 			client.guilds.cache
+		// 				.get(interaction.guildId)
+		// 				.roles.cache.find((r) => r.id == staff)
+		// 				.members.map((m) => m.user)
+		// 				.join("\n") || "\n"
+		// 		}`,
+		// 		inline: false,
+		// 	});
+		// });
 
-		return interaction.reply({ embeds: [List], ephemeral: true });
+		await interaction.reply({ embeds: [List], ephemeral: true });
 	},
 };

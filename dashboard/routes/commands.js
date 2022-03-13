@@ -5,6 +5,7 @@ const Commands = Router().get("/", function (req, res) {
 	const file = req.dashboardConfig.theme["commands"] || "commands.ejs";
 
 	res.status(200).render(file, {
+    rel: "commands",
 		bot: req.client,
 		title: "Commands | " + req.client.user.username,
 		hostname: req.protocol + "://" + req.hostname,

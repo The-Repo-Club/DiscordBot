@@ -14,7 +14,6 @@ const {
 	MessageActionRow,
 	MessageButton,
 } = require("discord.js");
-const Staff = ["Founder", "The-Repo-Bot"];
 
 module.exports = {
 	name: "invite",
