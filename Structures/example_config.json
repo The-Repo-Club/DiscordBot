@@ -2,5 +2,6 @@
 	"Token": "",
 	"Secret": "",
 	"Database": "",
-	"ownerIDS": []
+	"ownerIDS": [],
+	"Staff": []
 }
