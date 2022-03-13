@@ -7,7 +7,7 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 // -------------------------------------------------------------------------
 
-const { MessageEmbed, Client, User, UserFlags } = require("discord.js");
+const { MessageEmbed, User, UserFlags } = require("discord.js");
 const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
 	 */
 	async execute(oldUser, newUser) {
 		const Data = await DB.findOne({
-			GuildID: newUser.guild.id,
+			GuildID: oldUser.guild.id,
 		});
 		if (!Data || !Data.UserLogs) return;
 
