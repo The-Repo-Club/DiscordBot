@@ -36,7 +36,7 @@ module.exports = {
 		if (!Data.Buttons.includes(customId)) return;
 
 		const ID =
-			member.displayName + "_" + Math.floor(Math.random() * 90000) + 10000;
+			member.user.username + "_" + Math.floor(Math.random() * 90000) + 10000;
 
 		await guild.channels
 			.create(`${customId + "_" + ID}`, {

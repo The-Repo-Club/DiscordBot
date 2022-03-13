@@ -31,11 +31,6 @@ module.exports = {
 				content: "The data for this system is out of date.",
 			});
 
-		if (!member.roles.cache.find((r) => r.id === Data.Handlers))
-			return interaction.reply({
-				content: "You can not use these buttons.",
-				ephemeral: true,
-			});
 		if (
 			![
 				"close_report",
@@ -45,6 +40,12 @@ module.exports = {
 			].includes(customId)
 		)
 			return;
+
+		if (!member.roles.cache.find((r) => r.id === Data.Handlers))
+			return interaction.reply({
+				content: "You can not use these buttons.",
+				ephemeral: true,
+			});
 
 		const Embed = new MessageEmbed().setColor("#8130D7");
 
