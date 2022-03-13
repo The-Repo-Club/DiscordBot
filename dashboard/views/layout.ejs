@@ -203,7 +203,7 @@
                 if(!permsOnGuild.has(dashboardConfig.lvlpermissions)) return;
               %>
                 <% if (bot.guilds.cache.get(guild.id)) { %>
-                  <li class="sidebar-item" id="rel_levels">
+                  <li class="sidebar-item" id="<%= guild.id %>" rel="<%= guild.id %>">
                     <a class="sidebar-link" href="/levels/<%= guild.id %>"
                       ><%= guild.name %></a
                     >
