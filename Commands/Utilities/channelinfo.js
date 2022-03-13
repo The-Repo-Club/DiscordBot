@@ -34,7 +34,7 @@ module.exports = {
 				name: guild.name,
 				iconURL: guild.iconURL({ dynamic: true }),
 			})
-			.setColor("RAMDOM")
+			.setColor("RANDOM")
 			.setDescription(`Info about ${channel} :`)
 			.setFields(
 				{

@@ -16,13 +16,10 @@ module.exports = {
 	/**
 	 * @param {User} oldUser
 	 * @param {User} newUser
-	 * @param {Client} client
 	 */
-	async execute(oldUser, newUser, client) {
-		const guild = client.guilds.cache.get("945963538474754058"); // Enter your guild ID
-
+	async execute(oldUser, newUser) {
 		const Data = await DB.findOne({
-			GuildID: guild.id,
+			GuildID: newUser.guild.id,
 		});
 		if (!Data || !Data.UserLogs) return;
 

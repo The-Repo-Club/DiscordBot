@@ -10,6 +10,7 @@ const Server = Router()
 		const member = await guild.members.fetch(req.user.id);
 		if (!member || !member.permissions.has(req.dashboardConfig.permissions))
 			return res.redirect("/dashboard");
+		const invite = await require("../../Systems/inviteSys")(req.client);
 		const file = req.dashboardConfig.theme["guild"] || "guild.ejs";
 
 		return await res.render(
@@ -21,6 +22,7 @@ const Server = Router()
 				hostname: req.protocol + "://" + req.hostname,
 				version: require("discord.js").version,
 				user: req.user,
+				invite,
 				is_logged: Boolean(req.session.user),
 				guild,
 				alert: null,
@@ -28,6 +30,7 @@ const Server = Router()
 				port: req.dashboardConfig.port,
 				dashboardDetails: req.dashboardDetails,
 				dashboardConfig: req.dashboardConfig,
+				hasClientSecret: Boolean(req.dashboardConfig.secret),
 				commands: req.dashboardCommands,
 				settings: req.dashboardSettings,
 			},
@@ -62,9 +65,10 @@ const Server = Router()
 
 			setting.set(req.client, guild, req.body[item]);
 		});
+		const invite = await require("../../Systems/inviteSys")(req.client);
 		const file = req.dashboardConfig.theme["guild"] || "guild.ejs";
 
-    return await res.render(
+		return await res.render(
 			file,
 			{
 				rel: "manage_post",
@@ -73,6 +77,7 @@ const Server = Router()
 				hostname: req.protocol + "://" + req.hostname,
 				version: require("discord.js").version,
 				user: req.user,
+				invite,
 				is_logged: Boolean(req.session.user),
 				guild,
 				alert:
@@ -85,6 +90,7 @@ const Server = Router()
 				port: req.dashboardConfig.port,
 				dashboardDetails: req.dashboardDetails,
 				dashboardConfig: req.dashboardConfig,
+				hasClientSecret: Boolean(req.dashboardConfig.secret),
 				commands: req.dashboardCommands,
 				settings: req.dashboardSettings,
 			},

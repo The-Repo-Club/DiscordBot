@@ -17,7 +17,8 @@ const { glob } = require("glob");
 const PG = promisify(glob);
 const Ascii = require("ascii-table");
 
-const replacer = new RegExp("/mnt/500GB/.gitlabs/", "g");
+const replacer1 = new RegExp("/mnt/500GB/.gitlabs/", "g");
+const replacer2 = new RegExp("/home/ubuntu/", "g");
 
 // Requires Dashboard class from dashboard
 const Dashboard = require("../dashboard");
@@ -26,7 +27,6 @@ const dashboard = new Dashboard(client, {
 	name: "Minimal-Mistakes",
 	theme: "default",
 	description: "A super cool bot with an online dashboard!",
-	serverUrl: "http://discord.gg/myKsJhHNN6",
 	baseUrl: "http://bot.minimal-mistakes.xyz",
 	port: 80,
 	secret: Secret,
@@ -39,24 +39,37 @@ client.cooldowns = new Collection();
 client.maintenance = false;
 
 ["commands", "events", "loggers", "modals"].forEach((handler) => {
-	require(`./Handlers/${handler}`)(client, PG, Ascii);
+	require(`./Handlers/${handler}`)(client, PG, Ascii).catch((err) =>
+		console.log(err)
+	);
 });
 
-client.login(Token);
+client.login(Token).catch((err) => console.log(err));
 
 process.on("uncaughtException", (exception) => {
 	const error = new MessageEmbed()
 		.setColor("RED")
 		.setTitle("🟥 **There was an uncaught exception** 🟥")
-		.setDescription(`${exception.stack.replace(replacer, "") || exception}`)
+		.setDescription(
+			`${
+				exception.stack.replace(replacer1, "").replace(replacer2, "") ||
+				exception
+			}`
+		)
 		.setTimestamp();
 
 	for (var i = 0; i < ownerIDS.length; i++) {
 		var owner = client.users.cache.get(ownerIDS[i]);
+		if (!owner)
+			return console.warn(
+				"Without the ownerIDS logging errors will not work..."
+			);
 
-		owner.send({
-			embeds: [error],
-		});
+		owner
+			.send({
+				embeds: [error],
+			})
+			.catch((err) => console.log(err));
 	}
 });
 
@@ -64,15 +77,26 @@ process.on("unhandledRejection", (rejection) => {
 	const error = new MessageEmbed()
 		.setColor("RED")
 		.setTitle("🟥 **There was an uncaught rejection** 🟥")
-		.setDescription(`${rejection.stack.replace(replacer, "") || rejection}`)
+		.setDescription(
+			`${
+				rejection.stack.replace(replacer1, "").replace(replacer2, "") ||
+				rejection
+			}`
+		)
 		.setTimestamp();
 
 	for (var i = 0; i < ownerIDS.length; i++) {
 		var owner = client.users.cache.get(ownerIDS[i]);
+		if (!owner)
+			return console
+				.warn("Without the ownerIDS logging errors will not work...")
+				.catch((err) => console.log(err));
 
-		owner.send({
-			embeds: [error],
-		});
+		owner
+			.send({
+				embeds: [error],
+			})
+			.catch((err) => console.log(err));
 	}
 });
 

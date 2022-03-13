@@ -4,6 +4,7 @@ const CheckAuth = (req, res, next) =>
 const { Permissions } = require("discord.js");
 
 const Dashboard = Router().get("/", CheckAuth, async (req, res) => {
+	const invite = await require("../../Systems/inviteSys")(req.client);
 	const file = req.dashboardConfig.theme["dashboard"] || "dashboard.ejs";
 	return await res.render(
 		file,
@@ -14,6 +15,7 @@ const Dashboard = Router().get("/", CheckAuth, async (req, res) => {
 			hostname: req.protocol + "://" + req.hostname,
 			version: require("discord.js").version,
 			user: req.user,
+			invite,
 			guilds: req.user.guilds.sort((a, b) =>
 				a.name < b.name ? -1 : Number(a.name > b.name)
 			),
@@ -24,6 +26,7 @@ const Dashboard = Router().get("/", CheckAuth, async (req, res) => {
 			port: req.dashboardConfig.port,
 			dashboardDetails: req.dashboardDetails,
 			dashboardConfig: req.dashboardConfig,
+			hasClientSecret: Boolean(req.dashboardConfig.secret),
 			commands: req.dashboardCommands,
 		},
 		(err, html) => {

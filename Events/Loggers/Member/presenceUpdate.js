@@ -19,9 +19,8 @@ module.exports = {
 	/**
 	 * @param {Presence} oldPresence
 	 * @param {Presence} newPresence
-	 * @param {Client} client
 	 */
-	async execute(oldPresence, newPresence, client) {
+	async execute(oldPresence, newPresence) {
 		if (!oldPresence || !newPresence) return;
 		const Data = await DB.findOne({
 			GuildID: oldPresence.guild.id,
@@ -31,12 +30,28 @@ module.exports = {
 		const logsChannel = oldPresence.guild.channels.cache.get(Data.MemberLogs);
 
 		const userUpdateEmbed = new MessageEmbed()
-			.setColor("ORANGE")
-			.setTitle(
-				`<:icons_updatestage:949374612926504960> A Member Presence Has Been Updated`
-			)
 			.setTimestamp()
 			.setFooter({ text: oldPresence.guild.name });
+
+		if (newPresence.status === "online") {
+			userUpdateEmbed
+				.setColor("GREEN")
+				.setTitle(
+					`<:icons_startstage:949374613241077792> A Member Presence Has Been Updated`
+				);
+		} else if (newPresence.status === "offline") {
+			userUpdateEmbed
+				.setColor("RED")
+				.setTitle(
+					`<:icons_endstage:949374613027160105> A Member Presence Has Been Updated`
+				);
+		} else {
+			userUpdateEmbed
+				.setColor("ORANGE")
+				.setTitle(
+					`<:icons_updatestage:949374612926504960> A Member Presence Has Been Updated`
+				);
+		}
 
 		if (oldPresence.status !== newPresence.status) {
 			// If status has changed execute code

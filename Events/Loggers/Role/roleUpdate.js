@@ -17,7 +17,6 @@ module.exports = {
 	/**
 	 * @param {Role} oldRole
 	 * @param {Role} newRole
-	 * @param {Client} client
 	 */
 	async execute(oldRole, newRole) {
 		const Data = await DB.findOne({

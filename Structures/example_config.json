@@ -2,6 +2,7 @@
 	"Token": "",
 	"Secret": "",
 	"Database": "",
+	"botsGuildID": "",
 	"ownerIDS": [],
 	"Staff": []
 }

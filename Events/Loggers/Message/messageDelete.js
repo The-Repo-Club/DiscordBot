@@ -15,9 +15,8 @@ module.exports = {
 	path: "Message/messageDelete.js",
 	/**
 	 * @param {Message} message
-	 * @param {Client} client
 	 */
-	async execute(message, client) {
+	async execute(message) {
 		if (message.author.bot) return;
 		// We're going to ignore all messages that are sent by the bot
 		const Data = await DB.findOne({

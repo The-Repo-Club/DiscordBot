@@ -1,7 +1,8 @@
 const { Router } = require("express");
 
-const Commands = Router().get("/*", function (req, res) {
+const Commands = Router().get("/*", async function (req, res) {
 	const path = req.baseUrl.split("/").pop();
+	const invite = await require("../../Systems/inviteSys")(req.client);
 	if (!req.dashboardConfig.theme[path]) {
 		const file = req.dashboardConfig.theme["404"] || "404.ejs";
 		return res.status(404).render(file, {
@@ -11,6 +12,7 @@ const Commands = Router().get("/*", function (req, res) {
 			hostname: req.protocol + "://" + req.hostname,
 			version: require("discord.js").version,
 			user: req.user,
+			invite,
 			is_logged: Boolean(req.session.user),
 			dashboardDetails: req.dashboardDetails,
 			dashboardConfig: req.dashboardConfig,
@@ -27,6 +29,7 @@ const Commands = Router().get("/*", function (req, res) {
 		hostname: req.protocol + "://" + req.hostname,
 		version: require("discord.js").version,
 		user: req.user,
+		invite,
 		is_logged: Boolean(req.session.user),
 		dashboardDetails: req.dashboardDetails,
 		dashboardConfig: req.dashboardConfig,

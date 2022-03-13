@@ -17,7 +17,7 @@ module.exports = {
 	/**
 	 * @param {Role} role
 	 */
-	async execute(role, client) {
+	async execute(role) {
 		const Data = await DB.findOne({
 			GuildID: role.guild.id,
 		});

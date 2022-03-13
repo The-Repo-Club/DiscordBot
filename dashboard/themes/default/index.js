@@ -8,5 +8,6 @@ module.exports = {
 	dashboard: join(__dirname, BASE_PATH, "dashboard.ejs"),
 	commands: join(__dirname, BASE_PATH, "commands.ejs"),
 	updates: join(__dirname, BASE_PATH, "updates.ejs"),
+	levels: join(__dirname, BASE_PATH, "levels.ejs"),
 	404: join(__dirname, BASE_PATH, "404.ejs"),
 };

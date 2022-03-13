@@ -41,35 +41,82 @@
 
 					<div class="sidebar-user">
 						<div class="d-flex justify-content-center">
-              <% if(!is_logged) { %>
-							<div class="flex-shrink-0">
-								<img
-									src="<%= bot?.user?.displayAvatarURL() %>"
-									class="avatar img-fluid rounded me-1"
-									alt="<%= bot?.user?.username %>"
-								/>
-							</div>
-							<div class="flex-grow-1 ps-2">
+              <% if(is_logged) { %>
+                <div class="flex-shrink-0">
+                  <img
+                    src="https://cdn.discordapp.com/avatars/<%= user?.id %>/<%= user?.avatar %>.png"
+                    class="avatar img-fluid rounded me-1"
+                    alt="<%= user?.username %>"
+                  />
+                </div>
+                <div class="flex-grow-1 ps-2">
 
-								<a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
-									<%= bot?.user?.username %>
-								</a>
+                  <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                    <%= user?.username %>
+                  </a>
 
-								<div class="dropdown-menu dropdown-menu-start">
-									<a class="dropdown-item" href="#"
-										><i
-											class="align-middle me-1"
-											data-feather="help-circle"
-										></i>
-										Help Center</a
-									>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Log out</a>
-								</div>
+                  <div class="dropdown-menu dropdown-menu-start">
+                    <% if(invite) { %>
+                      <a class="dropdown-item" href="https://discord.gg/<%= invite %>">
+                        <i
+                          class="align-middle me-1"
+                          data-feather="help-circle"
+                        ></i>
+                        Help Center</a
+                      >
+                      <div class="dropdown-divider"></div>
+                    <% } %>
+                    <% if(hasClientSecret) { %>
 
-								<div class="sidebar-user-subtitle">Version: v<%= version %></div>
-							</div>
-              <% }  %>
+                      <a class="dropdown-item" href="/auth/logout">
+                        <i
+                          class="align-middle me-1"
+                          data-feather="lock"
+                        ></i>
+                        Log out</a>
+                    <% } %>
+                  </div>
+
+                  <div class="sidebar-user-subtitle">Version: v<%= version %></div>
+                </div>
+              <% } else { %>
+                <div class="flex-shrink-0">
+                  <img
+                    src="<%= bot?.user?.displayAvatarURL() %>"
+                    class="avatar img-fluid rounded me-1"
+                    alt="<%= bot?.user?.username %>"
+                  />
+                </div>
+                <div class="flex-grow-1 ps-2">
+
+                  <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                    <%= bot?.user?.username %>
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-start">
+                    <% if(invite) { %>
+                      <a class="dropdown-item" href="https://discord.gg/<%= invite %>">
+                        <i
+                          class="align-middle me-1"
+                          data-feather="help-circle"
+                        ></i>
+                        Help Center</a
+                      >
+                      <div class="dropdown-divider"></div>
+                    <% } %>
+                    <% if(hasClientSecret) { %>
+                      <a class="dropdown-item" href="/auth/login">
+                        <i
+                          class="align-middle me-1"
+                          data-feather="unlock"
+                        ></i>
+                        Log in</a>
+                    <% } %>
+                  </div>
+
+                  <div class="sidebar-user-subtitle">Version: v<%= version %></div>
+                </div>
+              <% } %>
 						</div>
 					</div>
 
@@ -81,9 +128,9 @@
 								<span class="align-middle">Home</span>
 							</a>
 						</li>
-						<li class="sidebar-item" id="rel_dashboards">
+						<li class="sidebar-item" id="head_dashboards">
 							<a
-								data-bs-target="#dashboards"
+								data-bs-target="#dashboards_toggle"
 								data-bs-toggle="collapse"
 								class="sidebar-link collapsed"
 							>
@@ -91,7 +138,7 @@
 								<span class="align-middle">Dashboards</span>
 							</a>
 							<ul
-								id="dashboards"
+								id="dashboards_toggle"
 								class="sidebar-dropdown list-unstyled collapse"
 								data-bs-parent="#sidebar"
 							>
@@ -135,12 +182,60 @@
 							</ul>
 						</li>
             <li class="sidebar-header">Extras</li>
+            <% if(is_logged) { %>
+              <li class="sidebar-item" id="head_levels">
+							<a
+								data-bs-target="#levels_toggle"
+								data-bs-toggle="collapse"
+								class="sidebar-link collapsed"
+							>
+								<i class="align-middle" data-feather="layout"></i>
+								<span class="align-middle">Levels</span>
+							</a>
+							<ul
+								id="levels_toggle"
+								class="sidebar-dropdown list-unstyled collapse"
+								data-bs-parent="#sidebar"
+							>
+
+              <% user.guilds.forEach(guild => {
+                const permsOnGuild = new Perms(guild.permissions.toString());
+                if(!permsOnGuild.has(dashboardConfig.lvlpermissions)) return;
+              %>
+                <% if (bot.guilds.cache.get(guild.id)) { %>
+                  <li class="sidebar-item" id="rel_levels">
+                    <a class="sidebar-link" href="/levels/<%= guild.id %>"
+                      ><%= guild.name %></a
+                    >
+                  </li>
+                <% } %>
+               <% }); %>
+              </ul>
+            <% }  %>
+
             <li class="sidebar-item">
 							<a class="sidebar-link" href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8">
 								<i class="align-middle" data-feather="user"></i>
 								<span class="align-middle">Invite Bot</span>
 							</a>
 						</li>
+
+            <li class="sidebar-header">Authentication</li>
+            <% if(is_logged) { %>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="/auth/logout">
+                  <i class="align-middle" data-feather="lock"></i>
+                  <span class="align-middle">Log out</span>
+                </a>
+              </li>
+            <% } else {  %>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="/auth/login">
+                  <i class="align-middle" data-feather="unlock"></i>
+                  <span class="align-middle">Log in</span>
+                </a>
+              </li>
+            <% }  %>
 					</ul>
 
 					<!-- <div class="sidebar-cta">
@@ -212,7 +307,7 @@
 													<i class="text-primary" data-feather="home"></i>
 												</div>
 												<div class="col-10">
-													<div class="text-dark">Login from 192.186.1.8</div>
+													<div class="text-dark">Log in from 192.186.1.8</div>
 													<div class="text-muted small mt-1">5h ago</div>
 												</div>
 											</div>
@@ -264,18 +359,32 @@
 										><i class="align-middle me-1" data-feather="settings"></i>
 										Settings & Privacy</a
 									> -->
-									<a class="dropdown-item" href="#"
-										><i
-											class="align-middle me-1"
-											data-feather="help-circle"
-										></i>
-										Help Center</a
-									>
-									<div class="dropdown-divider"></div>
-                  <% if(is_logged) { %>
-									  <a class="dropdown-item" href="/auth/logout">Log out</a>
-                  <% } else { %>
-                    <a class="dropdown-item" href="/auth/login">Log in</a>
+                  <% if(invite) { %>
+                    <a class="dropdown-item" href="https://discord.gg/<%= invite %>">
+                      <i
+                        class="align-middle me-1"
+                        data-feather="help-circle"
+                      ></i>
+                      Help Center</a
+                    >
+                    <div class="dropdown-divider"></div>
+                  <% } %>
+                  <% if(hasClientSecret) { %>
+                    <% if(is_logged) { %>
+                      <a class="dropdown-item" href="/auth/logout">
+                        <i
+                          class="align-middle me-1"
+                          data-feather="lock"
+                        ></i>
+                        Log out</a>
+                    <% } else { %>
+                      <a class="dropdown-item" href="/auth/login">
+                        <i
+                          class="align-middle me-1"
+                          data-feather="unlock"
+                        ></i>
+                        Log in</a>
+                    <% } %>
                   <% } %>
 								</div>
 							</li>
@@ -301,12 +410,11 @@
 							</div>
 							<div class="col-6 text-end">
 								<ul class="list-inline">
-									<li class="list-inline-item">
-										<a class="text-muted" href="#">Support</a>
-									</li>
-									<li class="list-inline-item">
-										<a class="text-muted" href="#">Help Center</a>
-									</li>
+                  <% if(invite) { %>
+                    <li class="list-inline-item">
+                      <a class="text-muted" href="https://discord.gg/<%= invite %>">Help Center</a>
+                    </li>
+                  <% } %>
 									<li class="list-inline-item">
 										<a class="text-muted" href="#">Privacy</a>
 									</li>
@@ -323,28 +431,6 @@
 
 		<script src="<%= hostname %>:<%= port %>/js/app.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script>
-      (function(){
-        var currentLocation = $('body').attr('rel');
-
-        switch(currentLocation){
-            case 'home':
-              var element = document.getElementById("rel_home");
-              element.classList.add("active");
-              break;
-
-            case 'commands':
-              var element = document.getElementById("rel_commands");
-              element.classList.add("active");
-              break;
-
-            case 'dashboard':
-              var element = document.getElementById("rel_dashboard");
-              element.classList.add("active");
-              break;
-        }
-
-      })();
-    </script>
+    <script src="<%= hostname %>:<%= port %>/js/toggles.js"></script>
 	</body>
 </html>

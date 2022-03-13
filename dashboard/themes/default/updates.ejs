@@ -1,149 +1,44 @@
-<div class="page-content form-page">
-	<div class="container-sm center" style="margin-top: 25px">
-		<div class="d-grid gap-2 col-10 mx-auto">
-			<h2>Welcome to <%= dashboardDetails.name %> Dashboard!</h2>
+<!-- Page Title -->
 
-			<% if(dashboardDetails.description) { %>
-			<p><%= dashboardDetails.description %></p>
-			<% } %> <% if(hasClientSecret) { %> <% if(!is_logged) { %>
-			<a class="btn btn-secondary text-white" href="/auth/login">
-				Login to access the dashboard
-			</a>
-			<% } %> <% } %>
+<div class="container-fluid">
+  <h2 class="h5 mb-0">Latest Updates</h2>
+</div>
 
-			<hr />
+<!-- Breadcrumb -->
+<div class="container-fluid py-2">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0 py-3 px-0">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Updates</li>
+    </ol>
+  </nav>
+</div>
 
+<!-- Main Page -->
+<div class="container-fluid">
+  <div class="row gy-4">
+    <div class="col-lg-12">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<img
-								class="card-img-top"
-								src="<%= hostname %>:<%= port %>/asset/image1.png"
-								alt="Bot Invite"
-								style="width: 100%"
-							/>
-							<h4 class="card-title big-text">Invite Bot</h4>
-							<p class="card-text">
-								Invite the greatest bot in the game and level up your server!
-							</p>
-							<!-- This link invites Spectre, Change the client id to your bot's id -->
-							<a
-								href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8"
-								class="btn btn-discord btn-primary stretched-link"
-								>Invite Bot</a
-							>
-						</div>
-					</div>
-				</div>
-				<% if(dashboardDetails.serverUrl) { %>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<img
-								class="card-img-top"
-								src="<%= hostname %>:<%= port %>/asset/image2.png"
-								alt="Support Server"
-								style="width: 100%"
-							/>
-							<h4 class="card-title big-text">Support Server</h4>
-							<p class="card-text">
-								Join our support server for help setting up the bot and to
-								report bugs...
-							</p>
-							<!-- Change link to your support server link -->
-							<a
-								href="<%= dashboardDetails.serverUrl %>"
-								class="btn btn-discord btn-warning stretched-link"
-								>Join our Support Server</a
-							>
-						</div>
-					</div>
-				</div>
-				<% } %>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<img
-								class="card-img-top"
-								src="<%= hostname %>:<%= port %>/asset/image3.png"
-								alt="Commands"
-								style="width: 100%"
-							/>
-							<h4 class="card-title big-text">Bot Commands</h4>
-							<p class="card-text">
-								View a full list of Commands for Spectre bot on our command list
-								page!
-							</p>
-							<a
-								href="commands"
-								class="btn btn-discord btn-primary stretched-link"
-								>View Commands</a
-							>
-						</div>
-					</div>
-				</div>
+				<h1 class="brand-line"><b>Latest Updates:</b></h1>
 			</div>
 
-			<!-- Update these with your bot's Services -->
-			<div class="row">
-				<h1 class="brand-line"><b>We currently services...</b></h1>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<span
-								><i class="fas fa-server"></i> <%= bot?.guilds?.cache?.size %>
-								Servers</span
-							>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<span
-								><i class="fas fa-users"></i> <%= bot?.users?.cache?.size %>
-								Users</span
-							>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<span
-								><i class="fas fa-hashtag"></i> <%= bot?.channels?.cache?.size
-								%> Channels</span
-							>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Update these with your bot's News -->
-
-			<div class="row">
-				<h1 class="brand-line"><b>Featured News:</b></h1>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<h4 class="card-title big-text">Bot Updates</h4>
-							<p class="card-text">View the latest Update Logs here...</p>
-							<a
-								href="updates"
-								class="btn btn-discord btn-secondary stretched-link"
-								>Update Logs</a
-							>
-						</div>
-					</div>
-				</div>
-			</div>
+      <div class="row">
+        <% feed.items.forEach( entry => { %>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="card bg-grey" style="width: 100%">
+              <div class="card-body">
+                <h4 class="card-title big-text"><%= new Date(entry.created).toLocaleString('en-GB', {year: 'numeric', month: 'long', day: 'numeric', weekday:"short", hour: '2-digit', hourCycle: "h12", minute:'2-digit'}) %></h4>
+                <p class="card-text"><%= entry.title %></p>
+                <a
+                  href="<%= entry.link %>"
+                  class="btn btn-discord btn-secondary stretched-link"
+                  >View Commit</a
+                >
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
 		</div>
 	</div>
 </div>

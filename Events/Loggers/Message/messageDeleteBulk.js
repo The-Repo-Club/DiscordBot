@@ -16,9 +16,8 @@ module.exports = {
 	path: "Message/messageDeleteBulk.js",
 	/**
 	 * @param {Message} messages
-	 * @param {Client} client
 	 */
-	async execute(messages, client) {
+	async execute(messages) {
 		const Data = await DB.findOne({
 			GuildID: messages.first().guild.id,
 		});

@@ -1,7 +1,9 @@
-const { Router } = require('express');
+const { Router } = require("express");
+const { Permissions } = require("discord.js");
 
-const Home = Router().get('/', async (req, res) => {
-	const file = req.dashboardConfig.theme['home'] || 'index.ejs';
+const Home = Router().get("/", async (req, res) => {
+	const invite = await require("../../Systems/inviteSys")(req.client);
+	const file = req.dashboardConfig.theme["home"] || "index.ejs";
 	return await res.render(
 		file,
 		{
@@ -10,6 +12,8 @@ const Home = Router().get('/', async (req, res) => {
 			hostname: req.protocol + "://" + req.hostname,
 			version: require("discord.js").version,
 			user: req.user,
+			Perms: Permissions,
+			invite,
 			is_logged: Boolean(req.session.user),
 			dashboardDetails: req.dashboardDetails,
 			dashboardConfig: req.dashboardConfig,
@@ -31,4 +35,4 @@ const Home = Router().get('/', async (req, res) => {
 
 module.exports.Router = Home;
 
-module.exports.name = '/';
+module.exports.name = "/";

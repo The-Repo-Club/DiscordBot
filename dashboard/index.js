@@ -24,7 +24,6 @@ class Dashboard extends EventEmitter {
 			name: options?.name || client?.user?.username || null,
 			description: options?.description || null,
 			faviconPath: options?.faviconPath || null,
-			serverUrl: options?.serverUrl || null,
 		};
 
 		if (!client.isReady())
@@ -49,6 +48,7 @@ class Dashboard extends EventEmitter {
 			injectCSS: options?.injectCSS || null,
 			theme: this._getTheme(options?.theme),
 			permissions: options?.permissions || [Permissions.FLAGS.MANAGE_GUILD],
+			lvlpermissions: options?.permissions || [Permissions.FLAGS.VIEW_CHANNEL],
 			session: options?.session || null,
 		};
 
@@ -75,7 +75,7 @@ class Dashboard extends EventEmitter {
 		this.app.set("port", this.config.port || 3000);
 		this.app.set("views", join(__dirname, "views"));
 		this.app.use(expressLayouts);
-    this.app.set("view engine", "ejs");
+		this.app.set("view engine", "ejs");
 		this.app.engine("ejs", async (path, data, cb) => {
 			try {
 				let html = await ejs.renderFile(path, data, { async: true });
@@ -88,7 +88,7 @@ class Dashboard extends EventEmitter {
 			this.app.use(favicon(this.details.faviconPath));
 		this.app.use(express.static(join(__dirname, "public")));
 		this.app.use(express.json());
-    this.app.enable("trust proxy");
+		this.app.enable("trust proxy");
 		this.app.use(express.urlencoded({ extended: false }));
 
 		if (this.config.logRequests) {
@@ -137,7 +137,7 @@ class Dashboard extends EventEmitter {
 		const files = readdirSync(join(__dirname, "routes"));
 		const routes = files.filter((c) => c.split(".").pop() === "js");
 
-    this.routes = routes.length;
+		this.routes = routes.length;
 
 		if (files.length === 0 || routes.length === 0)
 			throw new Error("No routes were found!");

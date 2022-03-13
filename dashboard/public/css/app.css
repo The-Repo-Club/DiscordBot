@@ -545,6 +545,7 @@ progress {
 	--bs-gutter-y: 0;
 	display: flex;
 	flex-wrap: wrap;
+	text-align: center;
 	margin-left: calc(var(--bs-gutter-x) * -0.5);
 	margin-right: calc(var(--bs-gutter-x) * -0.5);
 	margin-top: calc(var(--bs-gutter-y) * -1);

@@ -45,7 +45,7 @@ module.exports = {
 			const ClientBox = new Box(
 				{
 					w: Math.floor(client.user.tag.length + 35),
-					h: 7,
+					h: 9,
 					stringify: false,
 					marks: {
 						nw: "╭",
@@ -71,6 +71,9 @@ ${chalk.bold.blueBright("Users Count")}:: ${chalk.redBright(
 				)}
 ${chalk.bold.blueBright("Channels Count")}:: ${chalk.redBright(
 					client.channels.cache.size
+				)}
+${chalk.bold.blueBright("Commands Count")} :: ${chalk.redBright(
+					client.dashboard._commands.length
 				)}
 ${chalk.bold.blueBright("NodeJS Version")} :: ${chalk.redBright(
 					process.version
@@ -104,7 +107,7 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 			const DashboardBox = new Box(
 				{
 					w: Math.floor(client.user.tag.length + 35),
-					h: 3,
+					h: 5,
 					stringify: false,
 					marks: {
 						nw: "╭",
@@ -118,13 +121,14 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 					},
 					hAlign: "middle",
 				},
-				`${chalk.bold.blueBright("baseUrl")} :: ${chalk.redBright(
+				`
+${chalk.bold.blueBright("baseUrl")} :: ${chalk.redBright(
 					client.dashboard.config.baseUrl
 				)}
-        ${chalk.bold.blueBright("port")} :: ${chalk.redBright(
+${chalk.bold.blueBright("port")} :: ${chalk.redBright(
 					client.dashboard.config.port
 				)}
-        ${chalk.bold.blueBright("routes")} :: ${chalk.redBright(
+${chalk.bold.blueBright("routes")} :: ${chalk.redBright(
 					client.dashboard.routes
 				)}`
 			).stringify();
@@ -168,7 +172,7 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 				const DatabaseBox = new Box(
 					{
 						w: Math.floor(client.user.tag.length + 35),
-						h: 1,
+						h: 3,
 						stringify: false,
 						marks: {
 							nw: "╭",
@@ -182,9 +186,8 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 						},
 						hAlign: "middle",
 					},
-					`${chalk.bold.yellowBright(
-						"The client is now connected to the database!"
-					)}`
+					`
+${chalk.bold.yellowBright("The client is now connected to the database!")}`
 				).stringify();
 
 				console.log(chalk.bold.greenBright(DatabaseBoxHeader));
