@@ -3,6 +3,9 @@
 	"Secret": "",
 	"Database": "",
 	"botsGuildID": "",
+	"botsDevID": "",
+	"errorWebhookID": "",
+	"errorWebhookToken": "",
 	"ownerIDS": [],
 	"Staff": []
 }
