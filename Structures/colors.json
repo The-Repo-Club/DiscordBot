@@ -1,5 +1,12 @@
 {
-    "red": "#DC143C",
-    "green": "#32CD32",
-    "purple": "#FF8C00"
+	"background": "#283036",
+	"selection": "#434c5e",
+	"foreground": "#e5e9f0",
+	"cyan": "#59fff9",
+	"green": "#59ff59",
+	"orange": "#ff9c59",
+	"pink": "#ff59f9",
+	"purple": "#9059ff",
+	"red": "#ff5959",
+	"yellow": "#ffff59"
 }

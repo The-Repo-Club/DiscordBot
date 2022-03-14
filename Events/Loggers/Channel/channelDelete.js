@@ -40,7 +40,7 @@ module.exports = {
 					`<:icons_deletechannel:952954846665928774> A Channel Has Been Deleted`
 				)
 				.setTimestamp()
-				.setFooter(channel.guild.name)
+				.setFooter({ text: channel.guild.name })
 				.setDescription(
 					`> The channel \`${channel.name}\` has been deleted by \`${log.executor.tag}\``
 				)

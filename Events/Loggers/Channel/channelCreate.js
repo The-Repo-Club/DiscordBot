@@ -15,6 +15,7 @@ module.exports = {
 	name: "channelCreate",
 	/**
 	 * @param {Channel} channel
+	 * @param {Client} client
 	 */
 	async execute(channel) {
 		const Data = await DB.findOne({
@@ -40,7 +41,7 @@ module.exports = {
 					`<:icons_createchannel:952952678172991578> A Channel Has Been Created`
 				)
 				.setTimestamp()
-				.setFooter(channel.guild.name)
+				.setFooter({ text: channel.guild.name })
 				.setDescription(
 					`> The channel ${channel} has been created by \`${log.executor.tag}\``
 				)

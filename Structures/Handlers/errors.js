@@ -1,3 +1,11 @@
+// -------------------------------------------------------------------------
+// Path          - DiscordBot/Structures/Handlers/errors.js
+// GitHub        - https://github.com/The-Repo-Club/
+// Author        - The-Repo-Club [wayne6324@gmail.com]
+// Start On      - Mon 14 March 2022, 07:58:44 pm (GMT)
+// Modified On   - Mon 14 March 2022, 07:59:17 pm (GMT)
+// -------------------------------------------------------------------------
+
 const { MessageEmbed, WebhookClient } = require("discord.js");
 
 const {

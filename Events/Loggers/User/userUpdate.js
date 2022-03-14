@@ -17,9 +17,11 @@ module.exports = {
 	 * @param {User} oldUser
 	 * @param {User} newUser
 	 */
-	async execute(oldUser, newUser) {
+	async execute(oldUser, newUser, client) {
+		const guild = client.guilds.cache.get("945963538474754058");
+
 		const Data = await DB.findOne({
-			GuildID: oldUser.guild.id,
+			GuildID: guild.id,
 		});
 		if (!Data || !Data.UserLogs) return;
 
@@ -74,7 +76,7 @@ module.exports = {
 		if (oldUser.banner !== newUser.banner) {
 			// If banner changed execute code
 			userUpdateEmbed
-				.setDescription(`The user ${newUser} changed their avatar`)
+				.setDescription(`The user ${newUser} changed their banner`)
 				.setImage(newUser.bannerURL({ dynamic: true }))
 				.addFields(
 					{
