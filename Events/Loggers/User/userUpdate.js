@@ -1,11 +1,24 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Events/Loggers/User/userUpdate.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Events/Loggers/User/userUpdate.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Mon 14 March 2022, 10:33:50 PM [GMT]
+ *
+ *Description:
+ *   Announcement Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, logsDB
+ **/
 
 const { MessageEmbed, User, UserFlags } = require("discord.js");
 const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
@@ -125,10 +138,10 @@ module.exports = {
 		if (oldUser.flags != newUser.flags) {
 			// If flags changed execute code
 			const newFlags = new UserFlags(
-				oldUserFlags.missing(newUserFlags.bitfield, false)
+				oldUser.flags.missing(newUser.flags.bitfield, false)
 			).toArray();
 			const oldFlags = new UserFlags(
-				newUserFlags.missing(oldUserFlags.bitfield, false)
+				newUser.flags.missing(oldUser.flags.bitfield, false)
 			).toArray();
 
 			if (newFlags.length < 1 && oldFlags.length < 1) return;
