@@ -9,5 +9,6 @@ module.exports = {
 	commands: join(__dirname, BASE_PATH, "commands.ejs"),
 	updates: join(__dirname, BASE_PATH, "updates.ejs"),
 	levels: join(__dirname, BASE_PATH, "levels.ejs"),
+	invite: join(__dirname, BASE_PATH, "invite.ejs"),
 	404: join(__dirname, BASE_PATH, "404.ejs"),
 };

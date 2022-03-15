@@ -17,11 +17,11 @@
  *   guildMemberUpdate Event for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, logsDB
+ *   node, npm, discord.js, channelsDB
  **/
 
 const { GuildMember } = require("discord.js");
-const DB = require("../../Structures/Schemas/roleDB");
+const DB = require("../../Structures/Schemas/channelsDB");
 
 module.exports = {
 	name: "guildMemberUpdate",
@@ -34,10 +34,10 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: oldMember.guild.id,
 		});
-		if (!Data || !Data.WelcomeID) return;
+		if (!Data || !Data.roles.welcomeID) return;
 
 		if (oldMember.pending && !newMember.pending) {
-			const role = oldMember.guild.roles.cache.get(Data.WelcomeID);
+			const role = oldMember.guild.roles.cache.get(Data.roles.welcomeID);
 			if (role) {
 				await newMember.roles.add(role);
 			}

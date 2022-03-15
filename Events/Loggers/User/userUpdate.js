@@ -17,11 +17,11 @@
  *   Announcement Command for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, logsDB
+ *   node, npm, discord.js, channelsDB
  **/
 
 const { MessageEmbed, User, UserFlags } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "userUpdate",
@@ -36,9 +36,9 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: guild.id,
 		});
-		if (!Data || !Data.UserLogs) return;
+		if (!Data || !Data.logs.userLogs) return;
 
-		const logsChannel = guild.channels.cache.get(Data.UserLogs);
+		const logsChannel = guild.channels.cache.get(Data.logs.userLogs);
 
 		const userUpdateEmbed = new MessageEmbed()
 			.setColor("ORANGE")

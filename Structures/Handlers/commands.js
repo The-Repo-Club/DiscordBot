@@ -23,7 +23,7 @@ module.exports = async (client, PG, Ascii) => {
 		if (!command.name)
 			return Table.addRow(command.path, "🟥 FAILED", "Missing a name.");
 
-    if (!command.path)
+		if (!command.path)
 			return Table.addRow(command.name, "🟥 FAILED", "Missing a path.");
 
 		if (!command.type && !command.description)
@@ -31,7 +31,12 @@ module.exports = async (client, PG, Ascii) => {
 
 		if (command.permission) {
 			if (Perms.includes(command.permission)) command.defaultPermission = false;
-			else return Table.addRow(command.path, "🟥 FAILED", "Permission is invalid.");
+			else
+				return Table.addRow(
+					command.path,
+					"🟥 FAILED",
+					"Permission is invalid."
+				);
 		}
 
 		client.commands.set(command.name, command);

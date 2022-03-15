@@ -17,14 +17,15 @@
  *   Logs Command for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, ms, logsDB
+ *   node, npm, discord.js, ms, channelsDB
  **/
 
 const { MessageEmbed, CommandInteraction } = require("discord.js");
-const DB = require("../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const ms = require("ms");
 
 async function updateField(guild, field, channel) {
+	field = `logs.${field}`;
 	await DB.findOneAndUpdate(
 		{ GuildID: guild },
 		{
@@ -56,51 +57,51 @@ module.exports = {
 					choices: [
 						{
 							name: "Channel",
-							value: "Channel",
+							value: "channel",
 						},
 						{
 							name: "Events",
-							value: "Events",
+							value: "events",
 						},
 						{
 							name: "Emoji",
-							value: "Emoji",
+							value: "emoji",
 						},
 						{
 							name: "Guild",
-							value: "Guild",
+							value: "guild",
 						},
 						{
 							name: "JoinLeave",
-							value: "JoinLeave",
+							value: "joinLeave",
 						},
 						{
 							name: "Member",
-							value: "Member",
+							value: "member",
 						},
 						{
 							name: "Message",
-							value: "Message",
+							value: "message",
 						},
 						{
 							name: "Role",
-							value: "Role",
+							value: "role",
 						},
 						{
 							name: "Sticker",
-							value: "Sticker",
+							value: "sticker",
 						},
 						{
 							name: "Thread",
-							value: "Thread",
+							value: "thread",
 						},
 						{
 							name: "User",
-							value: "User",
+							value: "user",
 						},
 						{
 							name: "Voice",
-							value: "Voice",
+							value: "voice",
 						},
 					],
 				},

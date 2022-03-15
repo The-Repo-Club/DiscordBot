@@ -11,17 +11,17 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Mon 14 March 2022, 09:53:54 PM [GMT]
+ *   Tue 15 March 2022, 09:59:38 PM [GMT]
  *
  *Description:
  *   Announcement Command for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, announcementDB, config.json, colors.json
+ *   node, npm, discord.js, channelsDB, config.json, colors.json
  **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
-const DB = require("../../Structures/Schemas/announcementDB"); //Make sure this path is correct
+const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const { botsGuildID } = require("../../Structures/config.json");
 const { green } = require("../../Structures/colors.json");
 
@@ -53,14 +53,14 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: botsGuildID,
 		});
-		if (!Data || !Data.announcementChannel)
+		if (!Data || !Data.announcementChannelID)
 			return interaction.reply({
 				content: "Sorry that is not setup :)",
 				ephemeral: true,
 			});
 
 		const logsChannel = interaction.guild.channels.cache.get(
-			Data.announcementChannel
+			Data.announcementChannelID
 		);
 
 		const title = interaction.options.getString("title");

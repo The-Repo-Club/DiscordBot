@@ -11,7 +11,7 @@
 // ❗ in big servers this one might spam the API ❗
 
 const { MessageEmbed, Client, Presence } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "presenceUpdate",
@@ -25,9 +25,11 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: oldPresence.guild.id,
 		});
-		if (!Data || !Data.MemberLogs) return;
+		if (!Data || !Data.logs.memberLogs) return;
 
-		const logsChannel = oldPresence.guild.channels.cache.get(Data.MemberLogs);
+		const logsChannel = oldPresence.guild.channels.cache.get(
+			Data.logs.memberLogs
+		);
 
 		const userUpdateEmbed = new MessageEmbed()
 			.setTimestamp()

@@ -11,17 +11,17 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 07:04:19 PM [GMT]
+ *   Tue 15 March 2022, 10:06:27 PM [GMT]
  *
  *Description:
  *   guildMemberRemove Event for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, canvas, logsDB
+ *   node, npm, discord.js, canvas, channelsDB
  **/
 
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
-const DB = require("../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const Canvas = require("../../Systems/Canvas/index");
 
 module.exports = {
@@ -34,9 +34,11 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: member.guild.id,
 		});
-		if (!Data || !Data.JoinLeaveLogs) return;
+		if (!Data || !Data.logs.joinLeaveLogs) return;
 
-		const logsChannel = member.guild.channels.cache.get(Data.JoinLeaveLogs);
+		const logsChannel = member.guild.channels.cache.get(
+			Data.logs.joinLeaveLogs
+		);
 
 		// Else it means a normal user joined
 		const image = await new Canvas.Goodbye()

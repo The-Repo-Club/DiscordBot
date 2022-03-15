@@ -11,18 +11,18 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 07:11:32 PM [GMT]
+ *   Tue 15 March 2022, 09:58:08 PM [GMT]
  *
  *Description:
  *   interactionCreate Event for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, cooldownsDB, cmdsDB
+ *   node, npm, discord.js, cooldownsDB, channelsDB
  **/
 
 const { Client, CommandInteraction, MessageEmbed } = require("discord.js");
 const cooldownsDB = require("../../Structures/Schemas/cooldownsDB");
-const cmdsDB = require("../../Structures/Schemas/cmdsDB");
+const channelsDB = require("../../Structures/Schemas/channelsDB");
 
 module.exports = {
 	name: "interactionCreate",
@@ -113,25 +113,25 @@ module.exports = {
 					}) && client.commands.delete(interaction.commandName)
 				);
 
-			const CmdChannel = await cmdsDB.findOne({
+			const Data = await channelsDB.findOne({
 				GuildID: guild.id,
 			});
 
-			if (!CmdChannel && member.permissions.has("ADMINISTRATOR"))
+			if (!Data && member.permissions.has("ADMINISTRATOR"))
 				return command.execute(interaction, client);
 
-			if (!CmdChannel)
+			if (!Data)
 				return interaction.reply({
 					content: `❌ This server has not setup the commands system.`,
 					ephemeral: true,
 				});
 
 			if (
-				interaction.channel.id != CmdChannel.ChannelID &&
+				interaction.channel.id != Data.commandsChannelID &&
 				!member.permissions.has("ADMINISTRATOR")
 			)
 				return interaction.reply({
-					content: `You cannot use ${client.user.tag} commands in this channel try <#${CmdChannel.ChannelID}>`,
+					content: `You cannot use ${client.user.tag} commands in this channel try <#${Data.commandsChannelID}>`,
 					ephemeral: true,
 				});
 			command.execute(interaction, client);

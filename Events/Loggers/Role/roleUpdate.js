@@ -9,7 +9,7 @@
 // Logs whenever permissions, name, color, icon, hoist of a role changed
 
 const { MessageEmbed, Role, Permissions, Client } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB");
+const DB = require("../../../Structures/Schemas/channelsDB");
 
 module.exports = {
 	name: "roleUpdate",
@@ -22,9 +22,9 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: oldRole.guild.id,
 		});
-		if (!Data || !Data.RoleLogs) return;
+		if (!Data || !Data.logs.roleLogs) return;
 
-		const logsChannel = oldRole.guild.channels.cache.get(Data.RoleLogs);
+		const logsChannel = oldRole.guild.channels.cache.get(Data.logs.roleLogs);
 		const logs = await oldRole.guild.fetchAuditLogs({
 			limit: 1,
 			type: "ROLE_UPDATE",

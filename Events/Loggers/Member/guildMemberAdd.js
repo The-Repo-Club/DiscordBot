@@ -4,12 +4,11 @@
 // Git           - https://github.com/The-Repo-Club
 // Author        - The-Repo-Club [wayne6324@gmail.com]
 // Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Mon 14 March 2022, 03:27:51 pm (GMT) 
+// Modified On   - Mon 14 March 2022, 03:27:51 pm (GMT)
 // -------------------------------------------------------------------------
 
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
-const Canvas = require("../../../Systems/Canvas/index");
+const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "guildMemberAdd",
@@ -21,9 +20,9 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: member.guild.id,
 		});
-		if (!Data || !Data.MemberLogs) return;
+		if (!Data || !Data.logs.memberLogs) return;
 
-		const logsChannel = member.guild.channels.cache.get(Data.MemberLogs);
+		const logsChannel = member.guild.channels.cache.get(Data.logs.memberLogs);
 		const logs = await member.guild.fetchAuditLogs({
 			limit: 1,
 		});

@@ -17,11 +17,11 @@
  *   Cmds Command for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, ms, cmdsDB
+ *   node, npm, discord.js, ms, channelsDB
  **/
 
 const { MessageEmbed, CommandInteraction } = require("discord.js");
-const DB = require("../../Structures/Schemas/cmdsDB"); //Make sure this path is correct
+const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const ms = require("ms");
 
 module.exports = {
@@ -66,7 +66,7 @@ module.exports = {
 						await DB.findOneAndUpdate(
 							{ GuildID: guild.id },
 							{
-								ChannelID: CmdChannel.id,
+								commandsChannelID: CmdChannel.id,
 							},
 							{
 								new: true,

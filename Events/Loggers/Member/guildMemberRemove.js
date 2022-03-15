@@ -10,7 +10,7 @@
 // Logs whenever a member gets kicked, pruned or just leaves normally
 
 const { MessageEmbed, GuildMember } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const Canvas = require("../../../Systems/Canvas/index");
 
 module.exports = {
@@ -23,9 +23,9 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: member.guild.id,
 		});
-		if (!Data || !Data.MemberLogs) return;
+		if (!Data || !Data.logs.memberLogs) return;
 
-		const logsChannel = member.guild.channels.cache.get(Data.MemberLogs);
+		const logsChannel = member.guild.channels.cache.get(Data.logs.memberLogs);
 		const logs = await member.guild.fetchAuditLogs({
 			limit: 1,
 		});

@@ -1,10 +1,10 @@
 const { model, Schema } = require("mongoose");
 
 module.exports = model(
-	"premiumDB",
+	"proDB",
 	new Schema({
-		isPremium: { type: Boolean, default: false },
-		premium: {
+		isPro: { type: Boolean, default: false },
+		pro: {
 			redeemedBy: { type: Array, default: null },
 			redeemedAt: { type: Number, default: null },
 			expiresAt: { type: Number, default: null },

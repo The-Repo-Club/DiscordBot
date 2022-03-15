@@ -57,6 +57,7 @@ const sendWebhook = (content, err) => {
  * @param {Client} client
  */
 process.on("uncaughtException", (exception) => {
+	console.log(exception);
 	if (!errorWebhookID || !errorWebhookToken)
 		return console.warn(
 			"Without the errorWebhook logging errors will not work..."
@@ -68,6 +69,7 @@ process.on("uncaughtException", (exception) => {
  * @param {Client} client
  */
 process.on("unhandledRejection", (rejection) => {
+	console.log(rejection);
 	if (!errorWebhookID || !errorWebhookToken)
 		return console.warn(
 			"Without the errorWebhook logging errors will not work..."

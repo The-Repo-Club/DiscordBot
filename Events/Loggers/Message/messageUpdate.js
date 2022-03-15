@@ -8,7 +8,7 @@
 // -------------------------------------------------------------------------
 
 const { MessageEmbed, Message } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "messageUpdate",
@@ -27,9 +27,11 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: newMessage.guild.id,
 		});
-		if (!Data || !Data.MessageLogs) return;
+		if (!Data || !Data.logs.messageLogs) return;
 
-		const logsChannel = newMessage.guild.channels.cache.get(Data.MessageLogs);
+		const logsChannel = newMessage.guild.channels.cache.get(
+			Data.logs.messageLogs
+		);
 
 		const Original =
 			oldMessage.content.slice(0, 1000) +

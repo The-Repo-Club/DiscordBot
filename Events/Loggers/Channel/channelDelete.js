@@ -9,7 +9,7 @@
 // Logs whenever a channel is deleted
 
 const { MessageEmbed, Channel } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB");
+const DB = require("../../../Structures/Schemas/channelsDB");
 
 module.exports = {
 	name: "channelDelete",
@@ -20,11 +20,11 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: channel.guild.id,
 		});
-		if (!Data || !Data.ChannelLogs) return;
+		if (!Data || !Data.logs.channelLogs) return;
 
 		if (channel.type == "DM" || channel.type == "GROUP_DM") return;
 
-		const logsChannel = channel.guild.channels.cache.get(Data.ChannelLogs); // Enter your log channel ID
+		const logsChannel = channel.guild.channels.cache.get(Data.logs.channelLogs); // Enter your log channel ID
 
 		const logs = await channel.guild.fetchAuditLogs({
 			limit: 1,

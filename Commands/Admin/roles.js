@@ -11,20 +11,21 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:29:14 PM [GMT]
+ *   Tue 15 March 2022, 09:35:08 PM [GMT]
  *
  *Description:
  *   Roles Command for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, ms, roleDB
+ *   node, npm, discord.js, ms, channelsDB
  **/
 
 const { MessageEmbed, CommandInteraction } = require("discord.js");
-const DB = require("../../Structures/Schemas/roleDB"); //Make sure this path is correct
+const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const ms = require("ms");
 
 async function updateField(guild, field, role) {
+	field = `roles.${field}`;
 	await DB.findOneAndUpdate(
 		{ GuildID: guild },
 		{
@@ -56,23 +57,27 @@ module.exports = {
 					choices: [
 						{
 							name: "Bots",
-							value: "Bots",
+							value: "bots",
 						},
 						{
 							name: "Partners",
-							value: "Partners",
+							value: "partners",
 						},
 						{
-							name: "Premium",
-							value: "Premium",
+							name: "Pro",
+							value: "pro",
 						},
 						{
 							name: "Supporters",
-							value: "Supporters",
+							value: "supporters",
+						},
+						{
+							name: "Helpers",
+							value: "helpers",
 						},
 						{
 							name: "Welcome",
-							value: "Welcome",
+							value: "welcome",
 						},
 					],
 				},

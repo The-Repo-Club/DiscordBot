@@ -10,7 +10,7 @@
 // Logs whenever a member's roles have changed, their nickname changed, they started boosting, or their server avatar changed
 
 const { MessageEmbed, GuildMember } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 
 module.exports = {
 	name: "guildMemberUpdate",
@@ -23,9 +23,11 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: oldMember.guild.id,
 		});
-		if (!Data || !Data.MemberLogs) return;
+		if (!Data || !Data.logs.memberLogs) return;
 
-		const logsChannel = oldMember.guild.channels.cache.get(Data.MemberLogs);
+		const logsChannel = oldMember.guild.channels.cache.get(
+			Data.logs.memberLogs
+		);
 		const logs = await oldMember.guild.fetchAuditLogs({
 			limit: 1,
 		});
