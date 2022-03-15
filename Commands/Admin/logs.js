@@ -2,7 +2,7 @@
  *Auto updated?
  *   Yes
  *File :
- *   DiscordBot/Commands/Admin/emit.js
+ *   DiscordBot/Commands/Admin/logs.js
  *Author :
  *   The-Repo-Club [wayne6324@gmail.com]
  *Github :
