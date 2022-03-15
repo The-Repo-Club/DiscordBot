@@ -1,15 +1,26 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Tickets/ticket.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Tickets/ticket.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Tue 15 March 2022, 06:04:21 PM [GMT]
+ *
+ *Description:
+ *   Ticket Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, ticketsSetupDB
+ **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
-const { ticketsCreateTicketID } = require("../../Structures/config.json");
-
 const DB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path is correct
 
 module.exports = {

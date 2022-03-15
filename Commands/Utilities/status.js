@@ -1,11 +1,24 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Utilities/status.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Utilities/status.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Tue 15 March 2022, 06:29:13 PM [GMT]
+ *
+ *Description:
+ *   Status Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, mongoose, os, ms, paginationSys
+ **/
 
 const {
 	Client,
@@ -15,7 +28,6 @@ const {
 } = require("discord.js");
 const paginationEmbed = require("../../Systems/paginationSys");
 const { connection } = require("mongoose");
-require("../../Events/Client/ready");
 var os = require("os");
 const ms = require("ms");
 

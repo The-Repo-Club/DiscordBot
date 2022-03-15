@@ -1,11 +1,24 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Events/Loggers/Member/guildMemberRemove.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Events/Loggers/Guild/guildMemberRemove.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Tue 15 March 2022, 07:04:19 PM [GMT]
+ *
+ *Description:
+ *   guildMemberRemove Event for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, canvas, logsDB
+ **/
 
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
 const DB = require("../../Structures/Schemas/logsDB"); //Make sure this path is correct
