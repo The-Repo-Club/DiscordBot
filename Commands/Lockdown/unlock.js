@@ -1,3 +1,25 @@
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Lockdown/unlock.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Tue 15 March 2022, 05:44:22 PM [GMT]
+ *
+ *Description:
+ *   Unlock Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, ms, lockdownDB
+ **/
+
 // -*-coding:utf-8 -*-
 // -------------------------------------------------------------------------
 // Path          - DiscordBot/Commands/Lockdown/unlock.js

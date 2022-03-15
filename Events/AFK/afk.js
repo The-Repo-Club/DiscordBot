@@ -1,13 +1,31 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Events/Loggers/Member/afkEvent.js
-// Git           - https://github.com/1dxy/DiscordBot
-// Author        - 1dxy [1dxyofficial@gmail.com]
-// Start On      - Monday 14 February 2022, 5:16 pm (EST)
-// Finished On   - Monday 14 February 2022, 5:36 pm (EST)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Events/AFK/afk.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Tue 15 March 2022, 06:57:59 PM [GMT]
+ *
+ *Description:
+ *   AFK Event for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, afkDB
+ **/
 
-const { MessageEmbed, GuildMember, MessageAttachment, Message } = require("discord.js");
+const {
+	MessageEmbed,
+	GuildMember,
+	MessageAttachment,
+	Message,
+} = require("discord.js");
 const Schema = require(`../../Structures/Schemas/afkDB`);
 
 module.exports = {
@@ -15,37 +33,46 @@ module.exports = {
 	path: "Member/afkEvent.js",
 	/**
 	 * @param {GuildMember} member
-     * @param {Message} message
+	 * @param {Message} message
 	 */
 	async execute(message) {
 		if (message.author.bot) return;
 
-        const checkAFK = await Schema.findOne({Guild: message.guild.id, User: message.author.id})
+		const checkAFK = await Schema.findOne({
+			Guild: message.guild.id,
+			User: message.author.id,
+		});
 
-        if (checkAFK) {
-            checkAFK.delete()
+		if (checkAFK) {
+			checkAFK.delete();
 
-            const notAFK = new MessageEmbed()
-              .setTitle(`Welcome Back ${message.author.username}!`)
-              .setDescription(`You are no longer AFK!`)
-              .setColor("BLUE")
+			const notAFK = new MessageEmbed()
+				.setTitle(`Welcome Back ${message.author.username}!`)
+				.setDescription(`You are no longer AFK!`)
+				.setColor("BLUE");
 
-            message.channel.send({ embeds: [notAFK]})
-        }
+			message.channel.send({ embeds: [notAFK] });
+		}
 
-     const mentionedUser = message.mentions.users.first();
-     if (mentionedUser) {
+		const mentionedUser = message.mentions.users.first();
+		if (mentionedUser) {
+			const data = await Schema.findOne({
+				Guild: message.guild.id,
+				User: mentionedUser.id,
+			});
 
-        const data = await Schema.findOne({Guild: message.guild.id, User: mentionedUser.id})
+			if (data) {
+				const embed = new MessageEmbed()
+					.setTitle(`🟡 ${mentionedUser.username} is currently AFK!`)
+					.setColor("YELLOW")
+					.setDescription(
+						`Reason: \`${data.Reason}\`\n AFK Since: <t:${Math.round(
+							data.Date / 1000
+						)}:R>`
+					);
 
-        if (data) {
-            const embed = new MessageEmbed()
-              .setTitle(`🟡 ${mentionedUser.username} is currently AFK!`)
-              .setColor("YELLOW")
-              .setDescription(`Reason: \`${data.Reason}\`\n AFK Since: <t:${Math.round(data.Date / 1000)}:R>`)
-
-            message.channel.send({ embeds: [embed]})
-        }
-     }
-	}
+				message.channel.send({ embeds: [embed] });
+			}
+		}
+	},
 };

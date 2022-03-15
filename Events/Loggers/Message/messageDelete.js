@@ -38,7 +38,7 @@ module.exports = {
 
 		const messageContent =
 			message.content.slice(0, 1000) +
-			(message.content.length > 1000 ? " ..." : "");
+			(message.content.length > 1000 ? " ..." : ".");
 
 		const { executor, target } = log;
 
