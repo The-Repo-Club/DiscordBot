@@ -25,8 +25,8 @@ const dashboard = new Dashboard(client, {
 	name: "Minimal-Mistakes",
 	theme: "default",
 	description: "A super cool bot with an online dashboard!",
-	baseUrl: "http://bot.minimal-mistakes.xyz",
-	port: 80,
+	baseUrl: "https://bot.minimal-mistakes.xyz",
+	port: 443,
 	secret: Secret,
 });
 // We now have a dashboard property to access everywhere!

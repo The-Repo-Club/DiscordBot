@@ -2,9 +2,12 @@ const express = require("express");
 const session = require("express-session");
 const expressLayouts = require("express-ejs-layouts");
 const favicon = require("serve-favicon");
+const https = require("https");
+const fs = require("fs");
 const { existsSync, readdirSync } = require("fs");
 const { join } = require("path");
 const ejs = require("ejs");
+const { httpsKey, httpsCert } = require("../Structures/config.json");
 const { EventEmitter } = require("events");
 const { Permissions } = require("discord.js");
 
@@ -185,7 +188,17 @@ class Dashboard extends EventEmitter {
 	}
 	_start() {
 		try {
-			this.app.listen(this.app.get("port"));
+			https
+				.createServer(
+					{
+						key: fs.readFileSync(httpsKey),
+						cert: fs.readFileSync(httpsCert),
+						requestCert: false,
+						rejectUnauthorized: false,
+					},
+					this.app
+				)
+				.listen(this.app.get("port"));
 			this.emit("ready");
 		} catch (e) {
 			throw new Error(e);
