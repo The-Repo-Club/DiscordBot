@@ -7,7 +7,11 @@ const fs = require("fs");
 const { existsSync, readdirSync } = require("fs");
 const { join } = require("path");
 const ejs = require("ejs");
-const { httpsKey, httpsCert } = require("../Structures/config.json");
+const {
+	httpsKey,
+	httpsCert,
+	runAsHTTPS,
+} = require("../Structures/config.json");
 const { EventEmitter } = require("events");
 const { Permissions } = require("discord.js");
 
@@ -75,7 +79,8 @@ class Dashboard extends EventEmitter {
 	}
 
 	_setup() {
-		this.app.set("port", this.config.port || 3000);
+		this.app.set("port", this.config.port || 80);
+		this.app.set("https", this.config.https || false);
 		this.app.set("views", join(__dirname, "views"));
 		this.app.use(expressLayouts);
 		this.app.set("view engine", "ejs");
@@ -188,17 +193,21 @@ class Dashboard extends EventEmitter {
 	}
 	_start() {
 		try {
-			https
-				.createServer(
-					{
-						key: fs.readFileSync(httpsKey),
-						cert: fs.readFileSync(httpsCert),
-						requestCert: false,
-						rejectUnauthorized: false,
-					},
-					this.app
-				)
-				.listen(this.app.get("port"));
+			if (this.app.get("https")) {
+				https
+					.createServer(
+						{
+							key: fs.readFileSync(httpsKey),
+							cert: fs.readFileSync(httpsCert),
+							requestCert: false,
+							rejectUnauthorized: false,
+						},
+						this.app
+					)
+					.listen(this.app.get("port"));
+			} else {
+				this.app.listen(this.app.get("port"));
+			}
 			this.emit("ready");
 		} catch (e) {
 			throw new Error(e);

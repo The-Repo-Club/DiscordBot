@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 07:00:10 PM [GMT]
+ *   Wed 16 March 2022, 09:24:53 PM [GMT]
  *
  *Description:
  *   Client Info Event for Minimal-Mistakes#3775

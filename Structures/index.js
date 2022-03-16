@@ -25,7 +25,8 @@ const dashboard = new Dashboard(client, {
 	name: "Minimal-Mistakes",
 	theme: "default",
 	description: "A super cool bot with an online dashboard!",
-	baseUrl: "https://bot.minimal-mistakes.xyz",
+	baseUrl: "bot.minimal-mistakes.xyz",
+	https: true,
 	port: 443,
 	secret: Secret,
 });
