@@ -48,7 +48,8 @@ class Dashboard extends EventEmitter {
 
 		this.config = {
 			baseUrl: options?.baseUrl || "http://localhost",
-			port: options?.port || 3000,
+			port: options?.port || 80,
+			https: options?.https || 443,
 			noPortIncallbackUrl: options?.noPortIncallbackUrl || false,
 			secret: options?.secret,
 			logRequests: options?.logRequests || false,
