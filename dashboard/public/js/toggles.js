@@ -4,20 +4,6 @@
 	var lastSegment = window.location.pathname.split("/").pop();
 	var currentGuild = $(`#${lastSegment}`).attr("rel");
 
-	switch (currentGuild) {
-		case lastSegment:
-			var head_levels = document.getElementById("head_levels");
-
-			var rel_levels = document.getElementById(lastSegment);
-			var levels_toggle = document.getElementById("levels_toggle");
-
-			head_levels.classList.add("active");
-
-			rel_levels.classList.add("active");
-			levels_toggle.classList.add("show");
-			break;
-	}
-
 	switch (currentLocation) {
 		case "home":
 			var rel_home = document.getElementById("rel_home");
@@ -46,6 +32,22 @@
 
 			rel_dashboard.classList.add("active");
 			dashboards_toggle.classList.add("show");
+			break;
+
+		case "levels":
+			switch (currentGuild) {
+				case lastSegment:
+					var head_levels = document.getElementById("head_levels");
+
+					var rel_levels = document.getElementById(lastSegment);
+					var levels_toggle = document.getElementById("levels_toggle");
+
+					head_levels.classList.add("active");
+
+					rel_levels.classList.add("active");
+					levels_toggle.classList.add("show");
+					break;
+			}
 			break;
 	}
 })();

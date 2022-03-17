@@ -297,6 +297,13 @@ class Dashboard extends EventEmitter {
 			get: getter,
 		});
 	}
+
+	addNewLine(name) {
+		this._settings.push({
+			name,
+			type: "new line",
+		});
+	}
 }
 
 module.exports = Dashboard;

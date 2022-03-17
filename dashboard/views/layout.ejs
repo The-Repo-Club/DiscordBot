@@ -9,7 +9,10 @@
 		/>
 		<meta name="description" content="<%= dashboardDetails.description %>" />
 		<meta name="author" content="<%= bot?.user?.username %>" />
-		<link rel="shortcut icon" href="<%= hostname %>:<%= port %>/img/icons/icon-48x48.png" />
+		<link
+			rel="shortcut icon"
+			href="<%= hostname %>:<%= port %>/img/icons/icon-48x48.png"
+		/>
 		<title><%= title %></title>
 
 		<link
@@ -17,11 +20,15 @@
 			rel="stylesheet"
 		/>
 
-		<link class="js-stylesheet" href="<%= hostname %>:<%= port %>/css/app.css" rel="stylesheet" />
+		<link
+			class="js-stylesheet"
+			href="<%= hostname %>:<%= port %>/css/app.css"
+			rel="stylesheet"
+		/>
 	</head>
 
 	<body
-    rel="<%= rel %>"
+		rel="<%= rel %>"
 		data-theme="dark"
 		data-layout="fluid"
 		data-sidebar-position="left"
@@ -41,88 +48,92 @@
 
 					<div class="sidebar-user">
 						<div class="d-flex justify-content-center">
-              <% if(is_logged) { %>
-                <div class="flex-shrink-0">
-                  <img
-                    src="https://cdn.discordapp.com/avatars/<%= user?.id %>/<%= user?.avatar %>.png"
-                    class="avatar img-fluid rounded me-1"
-                    alt="<%= user?.username %>"
-                  />
-                </div>
-                <div class="flex-grow-1 ps-2">
+							<% if(is_logged) { %>
+							<div class="flex-shrink-0">
+								<img
+									src="https://cdn.discordapp.com/avatars/<%= user?.id %>/<%= user?.avatar %>.png"
+									class="avatar img-fluid rounded me-1"
+									alt="<%= user?.username %>"
+								/>
+							</div>
+							<div class="flex-grow-1 ps-2">
+								<a
+									class="sidebar-user-title dropdown-toggle"
+									href="#"
+									data-bs-toggle="dropdown"
+								>
+									<%= user?.username %>
+								</a>
 
-                  <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                    <%= user?.username %>
-                  </a>
+								<div class="dropdown-menu dropdown-menu-start">
+									<% if(invite) { %>
+									<a
+										class="dropdown-item"
+										href="https://discord.gg/<%= invite %>"
+									>
+										<i class="align-middle me-1" data-feather="help-circle"></i>
+										Help Center</a
+									>
+									<div class="dropdown-divider"></div>
+									<% } %> <% if(hasClientSecret) { %>
 
-                  <div class="dropdown-menu dropdown-menu-start">
-                    <% if(invite) { %>
-                      <a class="dropdown-item" href="https://discord.gg/<%= invite %>">
-                        <i
-                          class="align-middle me-1"
-                          data-feather="help-circle"
-                        ></i>
-                        Help Center</a
-                      >
-                      <div class="dropdown-divider"></div>
-                    <% } %>
-                    <% if(hasClientSecret) { %>
+									<a class="dropdown-item" href="/auth/logout">
+										<i class="align-middle me-1" data-feather="lock"></i>
+										Log out</a
+									>
+									<% } %>
+								</div>
 
-                      <a class="dropdown-item" href="/auth/logout">
-                        <i
-                          class="align-middle me-1"
-                          data-feather="lock"
-                        ></i>
-                        Log out</a>
-                    <% } %>
-                  </div>
+								<div class="sidebar-user-subtitle">
+									Version: v<%= version %>
+								</div>
+							</div>
+							<% } else { %>
+							<div class="flex-shrink-0">
+								<img
+									src="<%= bot?.user?.displayAvatarURL() %>"
+									class="avatar img-fluid rounded me-1"
+									alt="<%= bot?.user?.username %>"
+								/>
+							</div>
+							<div class="flex-grow-1 ps-2">
+								<a
+									class="sidebar-user-title dropdown-toggle"
+									href="#"
+									data-bs-toggle="dropdown"
+								>
+									<%= bot?.user?.username %>
+								</a>
 
-                  <div class="sidebar-user-subtitle">Version: v<%= version %></div>
-                </div>
-              <% } else { %>
-                <div class="flex-shrink-0">
-                  <img
-                    src="<%= bot?.user?.displayAvatarURL() %>"
-                    class="avatar img-fluid rounded me-1"
-                    alt="<%= bot?.user?.username %>"
-                  />
-                </div>
-                <div class="flex-grow-1 ps-2">
+								<div class="dropdown-menu dropdown-menu-start">
+									<% if(invite) { %>
+									<a
+										class="dropdown-item"
+										href="https://discord.gg/<%= invite %>"
+									>
+										<i class="align-middle me-1" data-feather="help-circle"></i>
+										Help Center</a
+									>
+									<div class="dropdown-divider"></div>
+									<% } %> <% if(hasClientSecret) { %>
+									<a class="dropdown-item" href="/auth/login">
+										<i class="align-middle me-1" data-feather="unlock"></i>
+										Log in</a
+									>
+									<% } %>
+								</div>
 
-                  <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                    <%= bot?.user?.username %>
-                  </a>
-
-                  <div class="dropdown-menu dropdown-menu-start">
-                    <% if(invite) { %>
-                      <a class="dropdown-item" href="https://discord.gg/<%= invite %>">
-                        <i
-                          class="align-middle me-1"
-                          data-feather="help-circle"
-                        ></i>
-                        Help Center</a
-                      >
-                      <div class="dropdown-divider"></div>
-                    <% } %>
-                    <% if(hasClientSecret) { %>
-                      <a class="dropdown-item" href="/auth/login">
-                        <i
-                          class="align-middle me-1"
-                          data-feather="unlock"
-                        ></i>
-                        Log in</a>
-                    <% } %>
-                  </div>
-
-                  <div class="sidebar-user-subtitle">Version: v<%= version %></div>
-                </div>
-              <% } %>
+								<div class="sidebar-user-subtitle">
+									Version: v<%= version %>
+								</div>
+							</div>
+							<% } %>
 						</div>
 					</div>
 
 					<ul class="sidebar-nav">
 						<li class="sidebar-header">Pages</li>
-            <li class="sidebar-item" id="rel_home">
+						<li class="sidebar-item" id="rel_home">
 							<a class="sidebar-link" href="/">
 								<i class="align-middle" data-feather="home"></i>
 								<span class="align-middle">Home</span>
@@ -143,14 +154,10 @@
 								data-bs-parent="#sidebar"
 							>
 								<li class="sidebar-item" id="rel_dashboard">
-									<a class="sidebar-link" href="/dashboard"
-										>Dashboard</a
-									>
+									<a class="sidebar-link" href="/dashboard">Dashboard</a>
 								</li>
-                <li class="sidebar-item" id="rel_commands">
-									<a class="sidebar-link" href="/commands"
-										>Commands</a
-									>
+								<li class="sidebar-item" id="rel_commands">
+									<a class="sidebar-link" href="/commands">Commands</a>
 								</li>
 								<!-- <li class="sidebar-item">
 									<a class="sidebar-link" href="pages-projects.html"
@@ -181,9 +188,9 @@
 								</li> -->
 							</ul>
 						</li>
-            <li class="sidebar-header">Extras</li>
-            <% if(is_logged) { %>
-              <li class="sidebar-item" id="head_levels">
+						<li class="sidebar-header">Extras</li>
+						<% if(is_logged) { %>
+						<li class="sidebar-item" id="head_levels">
 							<a
 								data-bs-target="#levels_toggle"
 								data-bs-toggle="collapse"
@@ -197,45 +204,50 @@
 								class="sidebar-dropdown list-unstyled collapse"
 								data-bs-parent="#sidebar"
 							>
+								<% user.guilds.forEach(guild => { const permsOnGuild = new
+								Perms(guild.permissions.toString());
+								if(!permsOnGuild.has(dashboardConfig.lvlpermissions)) return; %>
+								<% if (bot.guilds.cache.get(guild.id)) { %>
+								<li
+									class="sidebar-item"
+									id="<%= guild.id %>"
+									rel="<%= guild.id %>"
+								>
+									<a class="sidebar-link" href="/levels/<%= guild.id %>"
+										><%= guild.name %></a
+									>
+								</li>
+								<% } %> <% }); %>
+							</ul>
+							<% } %>
+						</li>
 
-              <% user.guilds.forEach(guild => {
-                const permsOnGuild = new Perms(guild.permissions.toString());
-                if(!permsOnGuild.has(dashboardConfig.lvlpermissions)) return;
-              %>
-                <% if (bot.guilds.cache.get(guild.id)) { %>
-                  <li class="sidebar-item" id="<%= guild.id %>" rel="<%= guild.id %>">
-                    <a class="sidebar-link" href="/levels/<%= guild.id %>"
-                      ><%= guild.name %></a
-                    >
-                  </li>
-                <% } %>
-               <% }); %>
-              </ul>
-            <% }  %>
-
-            <li class="sidebar-item">
-							<a class="sidebar-link" href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8">
+						<li class="sidebar-item">
+							<a
+								class="sidebar-link"
+								href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8"
+							>
 								<i class="align-middle" data-feather="user"></i>
 								<span class="align-middle">Invite Bot</span>
 							</a>
 						</li>
 
-            <li class="sidebar-header">Authentication</li>
-            <% if(is_logged) { %>
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="/auth/logout">
-                  <i class="align-middle" data-feather="lock"></i>
-                  <span class="align-middle">Log out</span>
-                </a>
-              </li>
-            <% } else {  %>
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="/auth/login">
-                  <i class="align-middle" data-feather="unlock"></i>
-                  <span class="align-middle">Log in</span>
-                </a>
-              </li>
-            <% }  %>
+						<li class="sidebar-header">Authentication</li>
+						<% if(is_logged) { %>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="/auth/logout">
+								<i class="align-middle" data-feather="lock"></i>
+								<span class="align-middle">Log out</span>
+							</a>
+						</li>
+						<% } else { %>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="/auth/login">
+								<i class="align-middle" data-feather="unlock"></i>
+								<span class="align-middle">Log in</span>
+							</a>
+						</li>
+						<% } %>
 					</ul>
 
 					<!-- <div class="sidebar-cta">
@@ -359,33 +371,26 @@
 										><i class="align-middle me-1" data-feather="settings"></i>
 										Settings & Privacy</a
 									> -->
-                  <% if(invite) { %>
-                    <a class="dropdown-item" href="https://discord.gg/<%= invite %>">
-                      <i
-                        class="align-middle me-1"
-                        data-feather="help-circle"
-                      ></i>
-                      Help Center</a
-                    >
-                    <div class="dropdown-divider"></div>
-                  <% } %>
-                  <% if(hasClientSecret) { %>
-                    <% if(is_logged) { %>
-                      <a class="dropdown-item" href="/auth/logout">
-                        <i
-                          class="align-middle me-1"
-                          data-feather="lock"
-                        ></i>
-                        Log out</a>
-                    <% } else { %>
-                      <a class="dropdown-item" href="/auth/login">
-                        <i
-                          class="align-middle me-1"
-                          data-feather="unlock"
-                        ></i>
-                        Log in</a>
-                    <% } %>
-                  <% } %>
+									<% if(invite) { %>
+									<a
+										class="dropdown-item"
+										href="https://discord.gg/<%= invite %>"
+									>
+										<i class="align-middle me-1" data-feather="help-circle"></i>
+										Help Center</a
+									>
+									<div class="dropdown-divider"></div>
+									<% } %> <% if(hasClientSecret) { %> <% if(is_logged) { %>
+									<a class="dropdown-item" href="/auth/logout">
+										<i class="align-middle me-1" data-feather="lock"></i>
+										Log out</a
+									>
+									<% } else { %>
+									<a class="dropdown-item" href="/auth/login">
+										<i class="align-middle me-1" data-feather="unlock"></i>
+										Log in</a
+									>
+									<% } %> <% } %>
 								</div>
 							</li>
 						</ul>
@@ -410,11 +415,15 @@
 							</div>
 							<div class="col-6 text-end">
 								<ul class="list-inline">
-                  <% if(invite) { %>
-                    <li class="list-inline-item">
-                      <a class="text-muted" href="https://discord.gg/<%= invite %>">Help Center</a>
-                    </li>
-                  <% } %>
+									<% if(invite) { %>
+									<li class="list-inline-item">
+										<a
+											class="text-muted"
+											href="https://discord.gg/<%= invite %>"
+											>Help Center</a
+										>
+									</li>
+									<% } %>
 									<li class="list-inline-item">
 										<a class="text-muted" href="#">Privacy</a>
 									</li>
@@ -430,7 +439,7 @@
 		</div>
 
 		<script src="<%= hostname %>:<%= port %>/js/app.js"></script>
-    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script src="<%= hostname %>:<%= port %>/js/toggles.js"></script>
+		<script src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
+		<script src="<%= hostname %>:<%= port %>/js/toggles.js"></script>
 	</body>
 </html>

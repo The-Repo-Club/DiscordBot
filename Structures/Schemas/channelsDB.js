@@ -10,7 +10,6 @@ module.exports = model(
 			announcementChannelID: { type: String, default: null },
 			logs: {
 				channelLogs: { type: String, default: null },
-				eventsLogs: { type: String, default: null },
 				emojiLogs: { type: String, default: null },
 				guildLogs: { type: String, default: null },
 				joinLeaveLogs: { type: String, default: null },
