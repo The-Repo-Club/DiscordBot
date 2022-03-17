@@ -22,8 +22,7 @@ async function addTextField(discordClient, field, description, len = 5) {
 	const validate = (prefix) => prefix.length <= len;
 	const set = (discordClient, guild, value) =>
 		(discordClient.prefixes[guild.id] = value);
-	const get = (discordClient, guild) =>
-		getField(discordClient, guild, field) || "!";
+	const get = (discordClient, guild) => getField(guild, field) || null;
 
 	discordClient.dashboard.addTextInput(field, description, validate, set, get);
 }
