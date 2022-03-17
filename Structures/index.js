@@ -33,6 +33,8 @@ const dashboard = new Dashboard(client, {
 // We now have a dashboard property to access everywhere!
 client.dashboard = dashboard;
 
+require("./dashboard.js")(client);
+
 client.commands = new Collection();
 client.cooldowns = new Collection();
 client.maintenance = false;

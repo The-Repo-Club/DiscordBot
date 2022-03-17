@@ -54,9 +54,6 @@ const sendWebhook = (content, err) => {
 	});
 };
 
-/**
- * @param {Client} client
- */
 process.on("uncaughtException", (exception) => {
 	console.log(exception);
 	if (!errorWebhookID || !errorWebhookToken)
@@ -66,9 +63,6 @@ process.on("uncaughtException", (exception) => {
 	sendWebhook("uncaughtException", exception);
 });
 
-/**
- * @param {Client} client
- */
 process.on("unhandledRejection", (rejection) => {
 	console.log(rejection);
 	if (!errorWebhookID || !errorWebhookToken)
