@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 06:03:41 PM [GMT]
+ *   Thu 17 March 2022, 01:12:38 PM [GMT]
  *
  *Description:
  *   Ticket-Setup Command for Minimal-Mistakes#3775
@@ -28,6 +28,7 @@ const {
 } = require("discord.js");
 
 const DB = require("../../Structures/Schemas/ticketsSetupDB"); //Make sure this path is correct
+const { red, selection } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "ticket-setup",
@@ -158,7 +159,7 @@ module.exports = {
 					name: guild.name + " | Ticket System",
 					iconURL: guild.iconURL({ dynamic: true }),
 				})
-				.setColor("BLURPLE")
+				.setColor(selection)
 				.setDescription(Description)
 				.setFooter({ text: "Click a button to get started!" });
 
@@ -171,7 +172,7 @@ module.exports = {
 		} catch (err) {
 			console.log(err);
 			const errEmbed = new MessageEmbed()
-				.setColor("RED")
+				.setColor(red)
 				.setDescription(
 					`🟥 | An error occurred while setting up your ticket system.`
 				)

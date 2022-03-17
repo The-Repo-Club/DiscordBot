@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 09:57:37 PM [GMT]
+ *   Thu 17 March 2022, 12:56:09 PM [GMT]
  *
  *Description:
  *   AFK Event for Minimal-Mistakes#3775
@@ -22,6 +22,7 @@
 
 const { MessageEmbed, Message } = require("discord.js");
 const DB = require(`../../Structures/Schemas/afkDB`);
+const { cyan, yellow } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "messageCreate",
@@ -44,7 +45,7 @@ module.exports = {
 			const notAFK = new MessageEmbed()
 				.setTitle(`Welcome Back ${message.author.username}!`)
 				.setDescription(`You are no longer AFK!`)
-				.setColor("BLUE");
+				.setColor(cyan);
 
 			message.channel.send({ embeds: [notAFK] });
 		}
@@ -59,7 +60,7 @@ module.exports = {
 			if (Data) {
 				const embed = new MessageEmbed()
 					.setTitle(`🟡 ${mentionedUser.username} is currently AFK!`)
-					.setColor("YELLOW")
+					.setColor(yellow)
 					.setDescription(
 						`Reason: \`${Data.Reason}\`\n AFK Since: <t:${Math.round(
 							Data.Date / 1000

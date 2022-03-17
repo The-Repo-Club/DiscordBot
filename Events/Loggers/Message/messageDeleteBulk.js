@@ -10,6 +10,7 @@
 const { MessageEmbed, Message, Client } = require("discord.js");
 const discordTranscripts = require("discord-html-transcripts");
 const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "messageDeleteBulk",
@@ -49,7 +50,7 @@ module.exports = {
 			);
 
 			const messageDeletedBulkEmbed = new MessageEmbed()
-				.setColor("RED")
+				.setColor(red)
 				.setTitle(`Multiple Messages Were Deleted`)
 				.setDescription(
 					`📘 ${tooMuch} messages in <#${

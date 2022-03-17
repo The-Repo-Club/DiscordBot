@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 10:06:27 PM [GMT]
+ *   Thu 17 March 2022, 01:19:47 PM [GMT]
  *
  *Description:
  *   guildMemberAdd Event for Minimal-Mistakes#3775
@@ -22,6 +22,7 @@
 
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
 const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { green, yellow } = require("../../Structures/colors.json");
 const Canvas = require("../../Systems/Canvas/index");
 
 module.exports = {
@@ -50,7 +51,7 @@ module.exports = {
 				.setTitle(
 					"<:icons_unbanmember:949376464388784138> A Bot Joined The Server"
 				)
-				.setColor("GREEN")
+				.setColor(green)
 				.setTimestamp()
 				.setFooter({ text: member.guild.name })
 				.setDescription(
@@ -68,7 +69,7 @@ module.exports = {
 				.setAvatar(member.displayAvatarURL({ format: "png", size: 512 }))
 				.setMemberCount(member.guild.memberCount)
 				.setGuildName(member.guild.name)
-				.setColor("Background", "#283036")
+				.setColor("Background", yellow)
 				.toAttachment();
 			const attachment = new MessageAttachment(
 				image.toBuffer(),

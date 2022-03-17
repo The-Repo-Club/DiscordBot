@@ -10,6 +10,7 @@
 
 const { MessageEmbed, Role, Permissions, Client } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB");
+const { green } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "roleCreate",
@@ -34,7 +35,7 @@ module.exports = {
 			.setTitle(
 				"<:icons_createrole:866943415774478388> A Role Has Been Created"
 			)
-			.setColor("GREEN")
+			.setColor(green)
 			.setTimestamp()
 			.setFooter({ text: role.guild.name });
 

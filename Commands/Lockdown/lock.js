@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:44:27 PM [GMT]
+ *   Thu 17 March 2022, 01:10:45 PM [GMT]
  *
  *Description:
  *   Lock Command for Minimal-Mistakes#3775
@@ -21,6 +21,7 @@
  **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { red, green, orange } = require("../../Structures/colors.json");
 const DB = require("../../Structures/Schemas/lockdownDB");
 const ms = require("ms");
 
@@ -54,7 +55,7 @@ module.exports = {
 		if (!channel.permissionsFor(guild.id).has("SEND_MESSAGES"))
 			return interaction.reply({
 				embeds: [
-					Embed.setColor("RED").setDescription(
+					Embed.setColor(red).setDescription(
 						"🟥 | This channel has already been locked!"
 					),
 				],
@@ -67,7 +68,7 @@ module.exports = {
 
 		interaction.reply({
 			embeds: [
-				Embed.setColor("ORANGE").setDescription(
+				Embed.setColor(orange).setDescription(
 					`🔒 | This channel is now on lockdown for: ${Reason}`
 				),
 			],
@@ -86,7 +87,7 @@ module.exports = {
 				interaction
 					.editReply({
 						embeds: [
-							Embed.setColor("GREEN").setDescription(
+							Embed.setColor(green).setDescription(
 								"🔓 | The lockdown has been lifted!"
 							),
 						],

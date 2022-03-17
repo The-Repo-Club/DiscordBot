@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 10:06:27 PM [GMT]
+ *   Thu 17 March 2022, 01:19:35 PM [GMT]
  *
  *Description:
  *   guildMemberRemove Event for Minimal-Mistakes#3775
@@ -23,6 +23,7 @@
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
 const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const Canvas = require("../../Systems/Canvas/index");
+const { yellow } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "guildMemberRemove",
@@ -47,7 +48,7 @@ module.exports = {
 			.setAvatar(member.displayAvatarURL({ format: "png", size: 512 }))
 			.setMemberCount(member.guild.memberCount)
 			.setGuildName(member.guild.name)
-			.setColor("Background", "#283036")
+			.setColor("Background", yellow)
 			.toAttachment();
 		const attachment = new MessageAttachment(
 			image.toBuffer(),

@@ -10,6 +10,7 @@
 
 const { MessageEmbed, Role, Permissions, Client } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB");
+const { orange } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "roleUpdate",
@@ -35,7 +36,7 @@ module.exports = {
 			.setTitle(
 				"<:icons_updaterole:949338507447517266> A Role Has Been Updated"
 			)
-			.setColor("ORANGE")
+			.setColor(orange)
 			.setTimestamp()
 			.setFooter({ text: oldRole.guild.name });
 

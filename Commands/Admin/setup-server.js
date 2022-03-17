@@ -11,7 +11,7 @@
  *Created:
  *   Wed 16 March 2022, 08:49:34 PM [GMT]
  *Last edited:
- *   Wed 16 March 2022, 09:13:24 PM [GMT]
+ *   Thu 17 March 2022, 12:58:19 PM [GMT]
  *
  *Description:
  *   Setup-Server Command for Minimal-Mistakes#3775
@@ -22,7 +22,7 @@
 
 const { MessageEmbed, CommandInteraction } = require("discord.js");
 const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
-const { purple } = require("../../Structures/colors.json");
+const { purple, red } = require("../../Structures/colors.json");
 const ms = require("ms");
 
 async function updateField(guild, type, field, channel) {
@@ -344,7 +344,7 @@ module.exports = {
 				return interaction.reply({
 					embeds: [
 						new MessageEmbed()
-							.setColor("RED")
+							.setColor(red)
 							.setDescription(
 								`❌ The bot does not have access to this channel.`
 							),
@@ -354,7 +354,7 @@ module.exports = {
 				return interaction.reply({
 					embeds: [
 						new MessageEmbed()
-							.setColor("RED")
+							.setColor(red)
 							.setDescription(
 								`❌ An error occurred. \n\n \`\`\`${error}\`\`\``
 							),

@@ -10,6 +10,7 @@
 
 const { MessageEmbed, Channel } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB");
+const { red, green } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "channelPinsUpdate",
@@ -43,7 +44,7 @@ module.exports = {
 		if (log.action == "MESSAGE_PIN") {
 			// If the last entry fetched is of the type "MESSAGE_PIN" executes the code
 			channelPinsChangeEmbed
-				.setColor("GREEN")
+				.setColor(green)
 				.setDescription(
 					`> A message by \`${log.target.tag}\` has been pinned in ${channel} by \`${log.executor.tag}\``
 				);
@@ -52,7 +53,7 @@ module.exports = {
 		if (log.action == "MESSAGE_UNPIN") {
 			// If the last entry fetched is of the type "MESSAGE_UNPIN" executes the code
 			channelPinsChangeEmbed
-				.setColor("RED")
+				.setColor(red)
 				.setDescription(
 					`> A message by \`${log.target.tag}\` has been unpinned from ${channel} by \`${log.executor.tag}\``
 				);

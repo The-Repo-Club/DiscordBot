@@ -10,6 +10,7 @@
 
 const { MessageEmbed, Role, Permissions, Client } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB");
+const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "roleDelete",
@@ -34,7 +35,7 @@ module.exports = {
 			.setTitle(
 				"<:icons_deleterole:866943415895851018> A Role Has Been Deleted"
 			)
-			.setColor("RED")
+			.setColor(red)
 			.setTimestamp()
 			.setFooter({ text: role.guild.name });
 

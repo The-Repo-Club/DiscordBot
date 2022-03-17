@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:48:56 PM [GMT]
+ *   Thu 17 March 2022, 01:17:01 PM [GMT]
  *
  *Description:
  *   Suggest Command for Minimal-Mistakes#3775
@@ -23,6 +23,7 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const suggestDB = require("../../Structures/Schemas/suggestDB"); //Make sure this path is correct
 const suggestSetupDB = require("../../Structures/Schemas/suggestSetupDB"); //Make sure this path is correct
+const { red, purple } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "suggest",
@@ -81,7 +82,7 @@ module.exports = {
 			return interaction.reply({
 				embeds: [
 					new MessageEmbed()
-						.setColor("RED")
+						.setColor(red)
 						.setDescription(
 							`❌ This server has not setup the suggestion system.`
 						),
@@ -98,7 +99,7 @@ module.exports = {
 		const DM = options.getBoolean("dm");
 
 		const Embed = new MessageEmbed()
-			.setColor("#8130D7")
+			.setColor(purple)
 			.setAuthor({
 				name: `${user.tag}`,
 				iconURL: `${user.displayAvatarURL({ dynamic: true })}`,
@@ -131,7 +132,7 @@ module.exports = {
 			interaction.reply({
 				embeds: [
 					new MessageEmbed()
-						.setColor("#8130D7")
+						.setColor(purple)
 						.setDescription(
 							`✅ Your [suggestion](${M.url}) was successfully created and sent to ${suggestionsChannel}`
 						)
@@ -146,7 +147,7 @@ module.exports = {
 			return interaction.reply({
 				embeds: [
 					new MessageEmbed()
-						.setColor("RED")
+						.setColor(red)
 						.setDescription(`❌ An error occurred.`),
 				],
 			});

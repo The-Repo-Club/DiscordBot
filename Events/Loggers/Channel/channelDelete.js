@@ -10,6 +10,7 @@
 
 const { MessageEmbed, Channel } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB");
+const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "channelDelete",
@@ -35,7 +36,7 @@ module.exports = {
 		if (log) {
 			// If log exists executes code and creates embed
 			const channelDeleteEmbed = new MessageEmbed()
-				.setColor("RED")
+				.setColor(red)
 				.setTitle(
 					`<:icons_deletechannel:952954846665928774> A Channel Has Been Deleted`
 				)

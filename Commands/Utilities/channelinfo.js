@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 06:07:56 PM [GMT]
+ *   Thu 17 March 2022, 01:16:38 PM [GMT]
  *
  *Description:
  *   Channel Info Command for Minimal-Mistakes#3775
@@ -21,6 +21,7 @@
  **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { background } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "channelinfo",
@@ -47,7 +48,7 @@ module.exports = {
 				name: guild.name,
 				iconURL: guild.iconURL({ dynamic: true }),
 			})
-			.setColor("RANDOM")
+			.setColor(background)
 			.setDescription(`Info about ${channel} :`)
 			.setFields(
 				{

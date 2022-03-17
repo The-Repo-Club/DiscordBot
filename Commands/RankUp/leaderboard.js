@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:47:08 PM [GMT]
+ *   Thu 17 March 2022, 01:10:23 PM [GMT]
  *
  *Description:
  *   Leaderboard Command for Minimal-Mistakes#3775
@@ -22,6 +22,7 @@
 
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 const Levels = require("../../Systems/levelsSys");
+const { purple } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "leaderboard",
@@ -54,7 +55,7 @@ module.exports = {
 		const response = new MessageEmbed()
 			.setTitle("**LEADERBOARD**")
 			.setDescription(`${lb.join("\n\n")}`)
-			.setColor("DARK_PURPLE");
+			.setColor(purple);
 
 		interaction.reply({ embeds: [response], ephemeral: true });
 	},

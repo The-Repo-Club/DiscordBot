@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 06:30:30 PM [GMT]
+ *   Thu 17 March 2022, 01:13:27 PM [GMT]
  *
  *Description:
  *   User Info Command for Minimal-Mistakes#3775
@@ -21,6 +21,7 @@
  **/
 
 const { ContextMenuInteraction, MessageEmbed } = require("discord.js");
+const { orange } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "userinfo",
@@ -37,7 +38,7 @@ module.exports = {
 		const member = interaction.guild.members.cache.get(Target.id);
 
 		const Responce = new MessageEmbed()
-			.setColor("ORANGE")
+			.setColor(orange)
 			.setAuthor({
 				name: Target.user.tag,
 				iconURL: Target.avatarURL({ dynamic: true, size: 512 }),

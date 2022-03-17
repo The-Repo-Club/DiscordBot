@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:28:25 PM [GMT]
+ *   Thu 17 March 2022, 01:10:02 PM [GMT]
  *
  *Description:
  *   Restart Command for Minimal-Mistakes#3775
@@ -22,6 +22,7 @@
 
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 const { Token, ownerIDS } = require("../../Structures/config.json");
+const { purple } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "restart",
@@ -56,7 +57,7 @@ module.exports = {
 					owner.send({
 						embeds: [
 							new MessageEmbed()
-								.setColor("PURPLE")
+								.setColor(purple)
 								.setTitle("[Client] Restarted by")
 								.setDescription(`${member.user.username} in ${guild.name}`),
 						],

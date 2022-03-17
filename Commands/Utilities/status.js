@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 06:29:13 PM [GMT]
+ *   Thu 17 March 2022, 01:17:39 PM [GMT]
  *
  *Description:
  *   Status Command for Minimal-Mistakes#3775
@@ -30,6 +30,7 @@ const paginationEmbed = require("../../Systems/paginationSys");
 const { connection } = require("mongoose");
 var os = require("os");
 const ms = require("ms");
+const { purple } = require("../../Structures/colors.json");
 
 function getPBar(percent) {
 	let thick = Math.floor(percent / 5);
@@ -65,7 +66,7 @@ module.exports = {
 				name: interaction.user.tag,
 				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
 			})
-			.setColor("#8130D7")
+			.setColor(purple)
 			.setDescription(
 				`**Client** [discord.js](https://discord.js.org/)
         <t:${parseInt(client.readyTimestamp / 1000)}:R> `
@@ -91,7 +92,7 @@ module.exports = {
 				name: interaction.user.tag,
 				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
 			})
-			.setColor("#8130D7")
+			.setColor(purple)
 			.setDescription("**Stats**")
 			.setTimestamp()
 			.addFields(
@@ -114,7 +115,7 @@ module.exports = {
 				name: interaction.user.tag,
 				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
 			})
-			.setColor("#8130D7")
+			.setColor(purple)
 			.setDescription("**Database**")
 			.setTimestamp()
 			.addFields(
@@ -133,7 +134,7 @@ module.exports = {
 				name: interaction.user.tag,
 				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
 			})
-			.setColor("#8130D7")
+			.setColor(purple)
 			.setDescription("**Memory**")
 			.setTimestamp()
 			.addFields(

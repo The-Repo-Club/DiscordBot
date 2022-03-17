@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:47:51 PM [GMT]
+ *   Thu 17 March 2022, 01:20:00 PM [GMT]
  *
  *Description:
  *   Rank Command for Minimal-Mistakes#3775
@@ -23,6 +23,7 @@
 const { CommandInteraction, Client, MessageAttachment } = require("discord.js");
 const Levels = require("../../Systems/levelsSys");
 const Canvas = require("../../Systems/Canvas/index");
+const { yellow } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "rank",
@@ -63,7 +64,7 @@ module.exports = {
 			.setRank(users.position)
 			.setXP("Current", users.xp)
 			.setXP("Needed", neededXp)
-			.setColor("Background", "#283036")
+			.setColor("Background", yellow)
 			.toAttachment();
 		const attachment = new MessageAttachment(image.toBuffer(), "RankCard.png");
 		interaction.reply({ files: [attachment] });

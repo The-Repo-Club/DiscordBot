@@ -11,6 +11,7 @@
 
 const { MessageEmbed, GuildMember } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { red, green, orange } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "guildMemberUpdate",
@@ -52,7 +53,7 @@ module.exports = {
 					.find((x) => x.key == "$remove")
 					.new.map((e) => `<@&${e.id}>`)
 					.join(" "); // maps roles by their id to mention them
-				memberRoleUpdateEmbed.addField("Removed role(s) 📛", p).setColor("RED");
+				memberRoleUpdateEmbed.addField("Removed role(s) 📛", p).setColor(red);
 			}
 			if (oldMember.roles.cache.size < newMember.roles.cache.size) {
 				// If oldMember has more roles it means roles were removed
@@ -60,7 +61,7 @@ module.exports = {
 					.find((x) => x.key == "$add")
 					.new.map((e) => `<@&${e.id}>`)
 					.join(" "); // maps roles by their id to mention them
-				memberRoleUpdateEmbed.addField("Added role(s) ✅", p).setColor("GREEN");
+				memberRoleUpdateEmbed.addField("Added role(s) ✅", p).setColor(green);
 			}
 			logsChannel
 				.send({ embeds: [memberRoleUpdateEmbed] })
@@ -68,7 +69,7 @@ module.exports = {
 		} else if (log.action == "MEMBER_UPDATE") {
 			// If the last entry fetched is of the type "MEMBER_UPDATE" execute code
 			const memberUpdateEmbed = new MessageEmbed()
-				.setColor("ORANGE")
+				.setColor(orange)
 				.setTitle(
 					"<:icons_updatemember:949375652291809341> A Member Has Been Updated"
 				)
@@ -111,7 +112,7 @@ module.exports = {
 		} else {
 			// Else execute code
 			const memberUpdateEmbed = new MessageEmbed()
-				.setColor("ORANGE")
+				.setColor(orange)
 				.setTitle(
 					"<:icons_updatemember:949375652291809341> A Member Has Been Updated"
 				)

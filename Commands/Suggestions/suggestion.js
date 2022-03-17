@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:49:20 PM [GMT]
+ *   Thu 17 March 2022, 01:17:15 PM [GMT]
  *
  *Description:
  *   Suggestion Command for Minimal-Mistakes#3775
@@ -23,6 +23,7 @@
 const { MessageEmbed, CommandInteraction, Client } = require("discord.js");
 const suggestSetupDB = require("../../Structures/Schemas/suggestSetupDB"); //Make sure this path is correct
 const suggestDB = require("../../Structures/Schemas/suggestDB"); //Make sure this path is correct
+const { red, green, purple } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "suggestion",
@@ -108,7 +109,7 @@ module.exports = {
 			return interaction.reply({
 				embeds: [
 					new MessageEmbed()
-						.setColor("RED")
+						.setColor(red)
 						.setDescription(
 							`❌ This server has not setup the suggestion system.`
 						),
@@ -135,7 +136,7 @@ module.exports = {
 			return interaction.reply({
 				embeds: [
 					new MessageEmbed()
-						.setColor("RED")
+						.setColor(red)
 						.setDescription(
 							`❌ This suggestion was not found in the database.`
 						),
@@ -148,7 +149,7 @@ module.exports = {
 			return interaction.reply({
 				embeds: [
 					new MessageEmbed()
-						.setColor("RED")
+						.setColor(red)
 						.setDescription(`❌ This message was not found.`),
 				],
 			});
@@ -161,12 +162,12 @@ module.exports = {
 				Embed.fields[1] = { name: "Status", value: "Accepted", inline: true };
 				Embed.fields[2] = { name: "Reason", value: `${reason}`, inline: true };
 				message.edit({
-					embeds: [Embed.setColor("GREEN")],
+					embeds: [Embed.setColor(green)],
 					content: `<@${suggestion.MemberID}>`,
 				});
 
 				const acceptedMessage = new MessageEmbed()
-					.setColor("GREEN")
+					.setColor(green)
 					.setTitle("Suggestion 💡")
 					.setDescription(`Suggestion was accepted ✅`)
 					.addFields(
@@ -185,7 +186,7 @@ module.exports = {
 					return interaction.reply({
 						embeds: [
 							new MessageEmbed()
-								.setColor("RED")
+								.setColor(red)
 								.setDescription(
 									`❌ This accepted channel was not found in the database.`
 								),
@@ -201,7 +202,7 @@ module.exports = {
 						.send({
 							embeds: [
 								new MessageEmbed()
-									.setColor("GREEN")
+									.setColor(green)
 									.setTitle("Suggestion 💡")
 									.setDescription(`Your suggestion was accepted ✅`)
 									.addFields(
@@ -224,7 +225,7 @@ module.exports = {
 				return interaction.reply({
 					embeds: [
 						new MessageEmbed()
-							.setColor("GREEN")
+							.setColor(green)
 							.setDescription(`[Suggestion](${message.url}) was accepted ✅`),
 					],
 					ephemeral: true,
@@ -234,12 +235,12 @@ module.exports = {
 				Embed.fields[1] = { name: "Status", value: "Declined", inline: true };
 				Embed.fields[2] = { name: "Reason", value: `${reason}`, inline: true };
 				message.edit({
-					embeds: [Embed.setColor("RED")],
+					embeds: [Embed.setColor(red)],
 					content: `<@${suggestion.MemberID}>`,
 				});
 
 				const declinedMessage = new MessageEmbed()
-					.setColor("RED")
+					.setColor(red)
 					.setTitle("Suggestion 💡")
 					.setDescription(`Suggestion was declined. ❎`)
 					.addFields(
@@ -259,7 +260,7 @@ module.exports = {
 					return interaction.reply({
 						embeds: [
 							new MessageEmbed()
-								.setColor("RED")
+								.setColor(red)
 								.setDescription(
 									`❌ This declined channel was not found in the database.`
 								),
@@ -274,7 +275,7 @@ module.exports = {
 						.send({
 							embeds: [
 								new MessageEmbed()
-									.setColor("RED")
+									.setColor(red)
 									.setTitle("Suggestion 💡")
 									.setDescription(`Your suggestion was declined. ❎`)
 									.addFields(
@@ -297,7 +298,7 @@ module.exports = {
 				return interaction.reply({
 					embeds: [
 						new MessageEmbed()
-							.setColor("RED")
+							.setColor(red)
 							.setDescription(`[Suggestion](${message.url}) was declined ❎`),
 					],
 					ephemeral: true,
@@ -306,7 +307,7 @@ module.exports = {
 				Embed.fields[1] = { name: "Status", value: "🕐 Pending", inline: true };
 				Embed.fields[2] = { name: "Reason", value: `${reason}`, inline: true };
 				message.edit({
-					embeds: [Embed.setColor("#8130D7")],
+					embeds: [Embed.setColor(purple)],
 					content: `<@${suggestion.MemberID}>`,
 				});
 
@@ -316,7 +317,7 @@ module.exports = {
 						.send({
 							embeds: [
 								new MessageEmbed()
-									.setColor("#8130D7")
+									.setColor(purple)
 									.setTitle("Suggestion 💡")
 									.setDescription(`Your suggestion was set back to pending. 🕐`)
 									.addFields(
@@ -338,7 +339,7 @@ module.exports = {
 				return interaction.reply({
 					embeds: [
 						new MessageEmbed()
-							.setColor("#8130D7")
+							.setColor(purple)
 							.setDescription(`[Suggestion](${message.url}) is 🕐 Pending`),
 					],
 					ephemeral: true,

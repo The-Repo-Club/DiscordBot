@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Mon 14 March 2022, 10:33:50 PM [GMT]
+ *   Thu 17 March 2022, 01:14:59 PM [GMT]
  *
  *Description:
  *   Announcement Command for Minimal-Mistakes#3775
@@ -22,6 +22,7 @@
 
 const { MessageEmbed, User, UserFlags } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { orange } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "userUpdate",
@@ -41,7 +42,7 @@ module.exports = {
 		const logsChannel = guild.channels.cache.get(Data.logs.userLogs);
 
 		const userUpdateEmbed = new MessageEmbed()
-			.setColor("ORANGE")
+			.setColor(orange)
 			.setTitle(
 				`<:icons_updatemember:949375652291809341> A User Has Been Updated`
 			)

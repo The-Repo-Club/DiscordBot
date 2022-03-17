@@ -10,6 +10,7 @@
 
 const { MessageEmbed, Channel } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB");
+const { green } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "channelCreate",
@@ -36,7 +37,7 @@ module.exports = {
 		if (log) {
 			// If log exists executes code and creates embed
 			const channelCreateEmbed = new MessageEmbed()
-				.setColor("GREEN")
+				.setColor(green)
 				.setTitle(
 					`<:icons_createchannel:952952678172991578> A Channel Has Been Created`
 				)

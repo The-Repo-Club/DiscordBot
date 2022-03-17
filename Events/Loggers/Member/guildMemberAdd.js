@@ -9,6 +9,7 @@
 
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { green } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "guildMemberAdd",
@@ -34,7 +35,7 @@ module.exports = {
 				.setTitle(
 					"<:icons_unbanmember:949376464388784138> A Bot Joined The Server"
 				)
-				.setColor("GREEN")
+				.setColor(green)
 				.setTimestamp()
 				.setFooter({ text: member.guild.name })
 				.setDescription(
@@ -47,7 +48,7 @@ module.exports = {
 		} else {
 			// Else it means a normal user joined
 			const userJoinedEmbed = new MessageEmbed()
-				.setColor("GREEN")
+				.setColor(green)
 				.setTitle(
 					"<:icons_unbanmember:949376464388784138> An User Just Joined The Server"
 				)

@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:28:13 PM [GMT]
+ *   Thu 17 March 2022, 01:04:35 PM [GMT]
  *
  *Description:
  *   Maintenance Command for Minimal-Mistakes#3775
@@ -21,6 +21,7 @@
  **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { green } = require("../../Structures/colors.json");
 const ms = require("ms");
 
 module.exports = {
@@ -40,7 +41,7 @@ module.exports = {
 			client.maintenance = true;
 
 			const bot = new MessageEmbed()
-				.setColor("GREEN")
+				.setColor(green)
 				.setTitle("Maintenance mode **enabled** ✅")
 				.setDescription(`👷‍♂️ The bot has been put into maintenance mode. 👷‍♂️`)
 				.setTimestamp();
@@ -56,7 +57,7 @@ module.exports = {
 			client.maintenance = false;
 
 			const bot = new MessageEmbed()
-				.setColor("GREEN")
+				.setColor(green)
 				.setTitle("Maintenance mode **disabled** 🟥")
 				.setDescription(`👷‍♂️ The bot has been taken out of maintenance mode. 👷‍♂️`)
 				.setTimestamp();

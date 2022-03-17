@@ -9,6 +9,7 @@
 
 const { MessageEmbed, Message } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "messageDelete",
@@ -43,7 +44,7 @@ module.exports = {
 		const { executor, target } = log;
 
 		const messageDeletedEmbed = new MessageEmbed()
-			.setColor("RED")
+			.setColor(red)
 			.setTitle("A Message Has Been Deleted")
 			.setTimestamp()
 			.addField("Message", messageContent)

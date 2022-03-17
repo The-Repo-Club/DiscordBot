@@ -13,6 +13,7 @@ const ms = require("ms");
 
 const ticketsDB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path is correct
 const ticketsSetupDB = require("../../Structures/Schemas/ticketsSetupDB"); //Make sure this path is correct
+const { purple } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "interactionCreate",
@@ -47,7 +48,7 @@ module.exports = {
 				ephemeral: true,
 			});
 
-		const Embed = new MessageEmbed().setColor("#8130D7");
+		const Embed = new MessageEmbed().setColor(purple);
 
 		ticketsDB.findOne({ ChannelID: channel.id }, async (err, docs) => {
 			if (err) throw err;

@@ -11,7 +11,7 @@
 
 const { MessageEmbed, GuildMember } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
-const Canvas = require("../../../Systems/Canvas/index");
+const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "guildMemberRemove",
@@ -35,7 +35,7 @@ module.exports = {
 			.setTitle(
 				"<:icons_banmembers:949376159274127360> A Member Left the guild"
 			)
-			.setColor("RED")
+			.setColor(red)
 			.setTimestamp()
 			.setFooter({ text: member.guild.name });
 

@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 06:10:25 PM [GMT]
+ *   Thu 17 March 2022, 01:14:14 PM [GMT]
  *
  *Description:
  *   Staff Command for Minimal-Mistakes#3775
@@ -21,6 +21,7 @@
  **/
 
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
+const { orange } = require("../../Structures/colors.json");
 const { Staff } = require("../../Structures/config.json");
 
 module.exports = {
@@ -35,7 +36,7 @@ module.exports = {
 	 */
 	async execute(interaction, client) {
 		const List = new MessageEmbed()
-			.setColor("ORANGE")
+			.setColor(orange)
 			.setTitle("Staff list")
 			.setThumbnail(
 				`${interaction.guild.iconURL({ size: 512, dynamic: true })}`

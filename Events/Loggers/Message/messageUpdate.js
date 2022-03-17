@@ -9,6 +9,7 @@
 
 const { MessageEmbed, Message } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "messageUpdate",
@@ -42,7 +43,7 @@ module.exports = {
 			(newMessage.content.length > 1000 ? " ..." : "");
 
 		const Log = new MessageEmbed()
-			.setColor("RED")
+			.setColor(red)
 			.setTitle("A Message Has Been Updated")
 			.setDescription(
 				`📘 A [message](${newMessage.url}) by ${newMessage.author} was **updated** in ${newMessage.channel}.`

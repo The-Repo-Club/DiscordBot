@@ -12,6 +12,7 @@
 
 const { MessageEmbed, Client, Presence } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { red, green, orange } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "presenceUpdate",
@@ -37,19 +38,19 @@ module.exports = {
 
 		if (newPresence.status === "online") {
 			userUpdateEmbed
-				.setColor("GREEN")
+				.setColor(green)
 				.setTitle(
 					`<:icons_startstage:949374613241077792> A Member Presence Has Been Updated`
 				);
 		} else if (newPresence.status === "offline") {
 			userUpdateEmbed
-				.setColor("RED")
+				.setColor(red)
 				.setTitle(
 					`<:icons_endstage:949374613027160105> A Member Presence Has Been Updated`
 				);
 		} else {
 			userUpdateEmbed
-				.setColor("ORANGE")
+				.setColor(orange)
 				.setTitle(
 					`<:icons_updatestage:949374612926504960> A Member Presence Has Been Updated`
 				);

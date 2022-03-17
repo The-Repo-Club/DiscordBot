@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 09:58:08 PM [GMT]
+ *   Thu 17 March 2022, 01:18:35 PM [GMT]
  *
  *Description:
  *   interactionCreate Event for Minimal-Mistakes#3775
@@ -23,6 +23,7 @@
 const { Client, CommandInteraction, MessageEmbed } = require("discord.js");
 const cooldownsDB = require("../../Structures/Schemas/cooldownsDB");
 const channelsDB = require("../../Structures/Schemas/channelsDB");
+const { red, yellow } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "interactionCreate",
@@ -40,7 +41,7 @@ module.exports = {
 				.setDescription(
 					"Sorry the bot will be back shortly when everything is working correctly."
 				)
-				.setColor("RED");
+				.setColor(red);
 
 			return interaction.reply({ embeds: [Response] });
 		}
@@ -71,7 +72,7 @@ module.exports = {
 						return interaction.reply({
 							embeds: [
 								new MessageEmbed()
-									.setColor("#ff2600")
+									.setColor(yellow)
 									.setDescription(
 										`🟥 ${interaction.user} The __cooldown__ for **${
 											command.name
@@ -104,7 +105,7 @@ module.exports = {
 					interaction.reply({
 						embeds: [
 							new MessageEmbed()
-								.setColor("RED")
+								.setColor(red)
 								.setDescription(
 									"🟥 An error occurred while running this command."
 								)

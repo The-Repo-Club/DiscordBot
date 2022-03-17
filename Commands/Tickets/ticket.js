@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 06:04:21 PM [GMT]
+ *   Thu 17 March 2022, 01:06:02 PM [GMT]
  *
  *Description:
  *   Ticket Command for Minimal-Mistakes#3775
@@ -22,6 +22,7 @@
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const DB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path is correct
+const { red, green } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "ticket",
@@ -67,7 +68,7 @@ module.exports = {
 						if (!docs)
 							return interaction.reply({
 								embeds: [
-									Embed.setColor("RED").setDescription(
+									Embed.setColor(red).setDescription(
 										"🟥 | This is not a ticket channel."
 									),
 								],
@@ -76,7 +77,7 @@ module.exports = {
 						if (docs.MembersID.includes(Member.id))
 							return interaction.reply({
 								embeds: [
-									Embed.setColor("RED").setDescription(
+									Embed.setColor(red).setDescription(
 										"🟥 | This member is already part of this ticket."
 									),
 								],
@@ -91,7 +92,7 @@ module.exports = {
 
 						interaction.reply({
 							embeds: [
-								Embed.setColor("GREEN").setDescription(
+								Embed.setColor(green).setDescription(
 									`✅ | ${Member} has been added to the ticket.`
 								),
 							],
@@ -108,7 +109,7 @@ module.exports = {
 						if (!docs)
 							return interaction.reply({
 								embeds: [
-									Embed.setColor("RED").setDescription(
+									Embed.setColor(red).setDescription(
 										"🟥 | This is not a ticket channel."
 									),
 								],
@@ -117,7 +118,7 @@ module.exports = {
 						if (!docs.MembersID.includes(Member.id))
 							return interaction.reply({
 								embeds: [
-									Embed.setColor("RED").setDescription(
+									Embed.setColor(red).setDescription(
 										"🟥 | This member is not part of this ticket."
 									),
 								],
@@ -128,7 +129,7 @@ module.exports = {
 
 						interaction.reply({
 							embeds: [
-								Embed.setColor("GREEN").setDescription(
+								Embed.setColor(green).setDescription(
 									`✅ | ${Member} has been removed from the ticket.`
 								),
 							],

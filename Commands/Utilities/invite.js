@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 09:22:59 PM [GMT]
+ *   Thu 17 March 2022, 01:00:43 PM [GMT]
  *
  *Description:
  *   Invite Command for Minimal-Mistakes#3775
@@ -27,6 +27,7 @@ const {
 	MessageActionRow,
 	MessageButton,
 } = require("discord.js");
+const { red } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "invite",
@@ -45,7 +46,7 @@ module.exports = {
 			.setDescription(
 				"I'm a cool Discord Bot, ain't I? Use the buttons below to invite me to your server or join our support server!\n\nStay Safe 👋"
 			)
-			.setColor("RED")
+			.setColor(red)
 			.setThumbnail(client.user.displayAvatarURL());
 
 		let row = new MessageActionRow().addComponents(

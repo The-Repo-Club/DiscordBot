@@ -13,6 +13,7 @@ const {
 	errorWebhookToken,
 	botsDevID,
 } = require("../config.json");
+const { red } = require("../colors.json");
 
 const sendWebhook = (content, err) => {
 	const errorWebhookSend = new WebhookClient({
@@ -24,7 +25,7 @@ const sendWebhook = (content, err) => {
 	const errString = err?.stack || err;
 
 	const embed = new MessageEmbed()
-		.setColor("RED")
+		.setColor(red)
 		.setAuthor({ name: err?.name || "Error" })
 		.setTitle(`🟥 **There was a ${content}** 🟥`)
 		.setDescription(

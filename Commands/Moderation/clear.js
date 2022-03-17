@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:45:02 PM [GMT]
+ *   Thu 17 March 2022, 12:59:27 PM [GMT]
  *
  *Description:
  *   Clear Command for Minimal-Mistakes#3775
@@ -21,6 +21,7 @@
  **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { red } = require("../../Structures/colors.json");
 const ms = require("ms");
 
 module.exports = {
@@ -56,7 +57,7 @@ module.exports = {
 
 		const Messages = await channel.messages.fetch();
 
-		const Response = new MessageEmbed().setColor("RED");
+		const Response = new MessageEmbed().setColor(red);
 
 		if (Amount > 100 || Amount <= 0) {
 			Response.setDescription(`Amount cannot exceed 100.`);
