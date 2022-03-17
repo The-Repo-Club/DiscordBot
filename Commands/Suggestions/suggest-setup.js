@@ -1,14 +1,28 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Suggestions/suggest-setup.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Suggestions/suggest-setup.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Thu 17 March 2022, 01:15:35 PM [GMT]
+ *
+ *Description:
+ *   Suggest-Setup Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, suggestSetupDB
+ **/
 
 const { MessageEmbed, CommandInteraction, Client } = require("discord.js");
 const DB = require("../../Structures/Schemas/suggestSetupDB"); //Make sure this path is correct
+const { red, green, cyan } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "suggest-setup",
@@ -108,7 +122,7 @@ module.exports = {
 						.send({
 							embeds: [
 								new MessageEmbed()
-									.setColor("AQUA")
+									.setColor(cyan)
 									.setDescription(
 										`✅ This channel has been set as a ${type} channel.`
 									),
@@ -128,7 +142,7 @@ module.exports = {
 							interaction.reply({
 								embeds: [
 									new MessageEmbed()
-										.setColor("DARK_RED")
+										.setColor(red)
 										.setDescription(
 											`✅ ${channel} has successfully been set as the ${type} channel for ${interaction.guild.name}.`
 										),
@@ -141,7 +155,7 @@ module.exports = {
 						return interaction.reply({
 							embeds: [
 								new MessageEmbed()
-									.setColor("RED")
+									.setColor(red)
 									.setDescription(
 										`❌ The bot does not have access to this channel.`
 									),
@@ -152,7 +166,7 @@ module.exports = {
 						return interaction.reply({
 							embeds: [
 								new MessageEmbed()
-									.setColor("RED")
+									.setColor(red)
 									.setDescription(
 										`❌ An error occurred. \n\n \`\`\`${error}\`\`\``
 									)
@@ -172,7 +186,7 @@ module.exports = {
 					return interaction.reply({
 						embeds: [
 							new MessageEmbed()
-								.setColor("RED")
+								.setColor(red)
 								.setDescription(
 									`❌ This server has not setup the suggestion system.`
 								),
@@ -180,7 +194,7 @@ module.exports = {
 						ephemeral: true,
 					});
 
-				const messages = new MessageEmbed().setColor("GREEN");
+				const messages = new MessageEmbed().setColor(green);
 				if (suggestion.AcceptID) {
 					messages.addFields({
 						name: "The Accepted channel is currently set to",

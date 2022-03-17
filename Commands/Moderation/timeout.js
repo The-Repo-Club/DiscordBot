@@ -1,13 +1,27 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Moderation/timeout.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Moderation/timeout.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Thu 17 March 2022, 01:05:21 PM [GMT]
+ *
+ *Description:
+ *   Timeout Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, ms
+ **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { red, green } = require("../../Structures/colors.json");
 const ms = require("ms");
 
 module.exports = {
@@ -81,7 +95,7 @@ module.exports = {
 							embeds: [
 								new MessageEmbed()
 									.setTitle("❌ Error ❌")
-									.setColor("RED")
+									.setColor(red)
 									.setDescription(
 										`Hey... ${interaction.user.username} Why Are You Trying To Mute Yourself....?`
 									)
@@ -94,7 +108,7 @@ module.exports = {
 							embeds: [
 								new MessageEmbed()
 									.setTitle("❌ Error ❌")
-									.setColor("RED")
+									.setColor(red)
 									.setDescription(`${target.user.username} Is An Admin....?`)
 									.setTimestamp(),
 							],
@@ -105,7 +119,7 @@ module.exports = {
 							embeds: [
 								new MessageEmbed()
 									.setTitle("❌ Error ❌")
-									.setColor("RED")
+									.setColor(red)
 									.setDescription("Please Specify A Valid Time!")
 									.setTimestamp(),
 							],
@@ -116,7 +130,7 @@ module.exports = {
 							embeds: [
 								new MessageEmbed()
 									.setTitle("❌ Error ❌")
-									.setColor("RED")
+									.setColor(red)
 									.setDescription(
 										"Please Specify A Time Between 1 Second, And 28 Days!"
 									)
@@ -129,7 +143,7 @@ module.exports = {
 							embeds: [
 								new MessageEmbed()
 									.setTitle("❌ Error ❌")
-									.setColor("RED")
+									.setColor(red)
 									.setDescription("Reason Can't Be More Than 512 Characters")
 									.setTimestamp(),
 							],
@@ -139,7 +153,7 @@ module.exports = {
 					return interaction.reply({
 						embeds: [
 							new MessageEmbed()
-								.setColor("GREEN")
+								.setColor(green)
 								.setTitle(`Successfully Muted!`)
 								.addFields(
 									{
@@ -166,7 +180,7 @@ module.exports = {
 								embeds: [
 									new MessageEmbed()
 										.setTitle("❌ Error ❌")
-										.setColor("RED")
+										.setColor(red)
 										.setDescription(`${target.user.username} Is An Admin....?`)
 										.setTimestamp(),
 								],
@@ -177,7 +191,7 @@ module.exports = {
 								embeds: [
 									new MessageEmbed()
 										.setTitle("❌ Error ❌")
-										.setColor("RED")
+										.setColor(red)
 										.setDescription(`${target.user.username} Isn't Muted?`)
 										.setTimestamp(),
 								],
@@ -187,7 +201,7 @@ module.exports = {
 						return interaction.reply({
 							embeds: [
 								new MessageEmbed()
-									.setColor("GREEN")
+									.setColor(green)
 									.setTitle("Successfully Unmuted!")
 									.addFields(
 										{
@@ -207,7 +221,7 @@ module.exports = {
 			}
 		} catch (e) {
 			const errorEmbed = new MessageEmbed()
-				.setColor("RED")
+				.setColor(red)
 				.setDescription(`🛑 Error: ${e}`);
 			return interaction.reply({
 				embeds: [errorEmbed],

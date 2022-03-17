@@ -1,13 +1,27 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Lockdown/lock.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Lockdown/lock.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Thu 17 March 2022, 01:10:45 PM [GMT]
+ *
+ *Description:
+ *   Lock Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, ms, lockdownDB
+ **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { red, green, orange } = require("../../Structures/colors.json");
 const DB = require("../../Structures/Schemas/lockdownDB");
 const ms = require("ms");
 
@@ -41,7 +55,7 @@ module.exports = {
 		if (!channel.permissionsFor(guild.id).has("SEND_MESSAGES"))
 			return interaction.reply({
 				embeds: [
-					Embed.setColor("RED").setDescription(
+					Embed.setColor(red).setDescription(
 						"🟥 | This channel has already been locked!"
 					),
 				],
@@ -54,7 +68,7 @@ module.exports = {
 
 		interaction.reply({
 			embeds: [
-				Embed.setColor("ORANGE").setDescription(
+				Embed.setColor(orange).setDescription(
 					`🔒 | This channel is now on lockdown for: ${Reason}`
 				),
 			],
@@ -73,7 +87,7 @@ module.exports = {
 				interaction
 					.editReply({
 						embeds: [
-							Embed.setColor("GREEN").setDescription(
+							Embed.setColor(green).setDescription(
 								"🔓 | The lockdown has been lifted!"
 							),
 						],

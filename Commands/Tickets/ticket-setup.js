@@ -1,11 +1,24 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Tickets/ticket-setup.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Tickets/ticket-setup.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Thu 17 March 2022, 01:12:38 PM [GMT]
+ *
+ *Description:
+ *   Ticket-Setup Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, ticketsSetupDB
+ **/
 
 const {
 	CommandInteraction,
@@ -15,6 +28,7 @@ const {
 } = require("discord.js");
 
 const DB = require("../../Structures/Schemas/ticketsSetupDB"); //Make sure this path is correct
+const { red, selection } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "ticket-setup",
@@ -145,7 +159,7 @@ module.exports = {
 					name: guild.name + " | Ticket System",
 					iconURL: guild.iconURL({ dynamic: true }),
 				})
-				.setColor("BLURPLE")
+				.setColor(selection)
 				.setDescription(Description)
 				.setFooter({ text: "Click a button to get started!" });
 
@@ -158,7 +172,7 @@ module.exports = {
 		} catch (err) {
 			console.log(err);
 			const errEmbed = new MessageEmbed()
-				.setColor("RED")
+				.setColor(red)
 				.setDescription(
 					`🟥 | An error occurred while setting up your ticket system.`
 				)

@@ -1,14 +1,27 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Admin/announce.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Mon 14 March 2022, 08:09:26 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Admin/announce.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Tue 15 March 2022, 09:59:38 PM [GMT]
+ *
+ *Description:
+ *   Announcement Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, channelsDB, config.json, colors.json
+ **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
-const DB = require("../../Structures/Schemas/announcementDB"); //Make sure this path is correct
+const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const { botsGuildID } = require("../../Structures/config.json");
 const { green } = require("../../Structures/colors.json");
 
@@ -40,14 +53,14 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: botsGuildID,
 		});
-		if (!Data || !Data.announcementChannel)
+		if (!Data || !Data.announcementChannelID)
 			return interaction.reply({
 				content: "Sorry that is not setup :)",
 				ephemeral: true,
 			});
 
 		const logsChannel = interaction.guild.channels.cache.get(
-			Data.announcementChannel
+			Data.announcementChannelID
 		);
 
 		const title = interaction.options.getString("title");

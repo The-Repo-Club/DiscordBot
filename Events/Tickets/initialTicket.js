@@ -17,6 +17,7 @@ const ms = require("ms");
 
 const ticketsDB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path is correct
 const ticketsSetupDB = require("../../Structures/Schemas/ticketsSetupDB"); //Make sure this path is correct
+const { background } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "interactionCreate",
@@ -71,7 +72,7 @@ module.exports = {
 						name: `${guild.name} | Ticket ${ID}`,
 						iconURL: guild.iconURL({ dynamic: true }),
 					})
-					.setColor("GREY")
+					.setColor(background)
 					.setDescription(
 						"Please wait patiently for a response from a member of Staff, in the mean while, please describe your issue in as much detail as possible."
 					)

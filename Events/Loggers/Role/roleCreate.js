@@ -9,7 +9,8 @@
 // Logs whenever a role is created
 
 const { MessageEmbed, Role, Permissions, Client } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB");
+const DB = require("../../../Structures/Schemas/channelsDB");
+const { green } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "roleCreate",
@@ -21,9 +22,9 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: role.guild.id,
 		});
-		if (!Data || !Data.RoleLogs) return;
+		if (!Data || !Data.logs.roleLogs) return;
 
-		const logsChannel = role.guild.channels.cache.get(Data.RoleLogs);
+		const logsChannel = role.guild.channels.cache.get(Data.logs.roleLogs);
 		const logs = await role.guild.fetchAuditLogs({
 			limit: 1,
 			type: "ROLE_CREATE",
@@ -34,7 +35,7 @@ module.exports = {
 			.setTitle(
 				"<:icons_createrole:866943415774478388> A Role Has Been Created"
 			)
-			.setColor("GREEN")
+			.setColor(green)
 			.setTimestamp()
 			.setFooter({ text: role.guild.name });
 

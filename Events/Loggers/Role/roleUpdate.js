@@ -9,7 +9,8 @@
 // Logs whenever permissions, name, color, icon, hoist of a role changed
 
 const { MessageEmbed, Role, Permissions, Client } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB");
+const DB = require("../../../Structures/Schemas/channelsDB");
+const { orange } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "roleUpdate",
@@ -22,9 +23,9 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: oldRole.guild.id,
 		});
-		if (!Data || !Data.RoleLogs) return;
+		if (!Data || !Data.logs.roleLogs) return;
 
-		const logsChannel = oldRole.guild.channels.cache.get(Data.RoleLogs);
+		const logsChannel = oldRole.guild.channels.cache.get(Data.logs.roleLogs);
 		const logs = await oldRole.guild.fetchAuditLogs({
 			limit: 1,
 			type: "ROLE_UPDATE",
@@ -35,7 +36,7 @@ module.exports = {
 			.setTitle(
 				"<:icons_updaterole:949338507447517266> A Role Has Been Updated"
 			)
-			.setColor("ORANGE")
+			.setColor(orange)
 			.setTimestamp()
 			.setFooter({ text: oldRole.guild.name });
 

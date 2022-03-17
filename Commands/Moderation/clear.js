@@ -1,13 +1,27 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Moderation/clear.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Moderation/clear.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Thu 17 March 2022, 12:59:27 PM [GMT]
+ *
+ *Description:
+ *   Clear Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, ms
+ **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { red } = require("../../Structures/colors.json");
 const ms = require("ms");
 
 module.exports = {
@@ -43,7 +57,7 @@ module.exports = {
 
 		const Messages = await channel.messages.fetch();
 
-		const Response = new MessageEmbed().setColor("RED");
+		const Response = new MessageEmbed().setColor(red);
 
 		if (Amount > 100 || Amount <= 0) {
 			Response.setDescription(`Amount cannot exceed 100.`);

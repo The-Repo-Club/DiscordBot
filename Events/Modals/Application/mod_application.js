@@ -8,6 +8,7 @@
 // -------------------------------------------------------------------------
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { green } = require("../../../Structures/colors.json");
 
 /**
  * @param {CommandInteraction} interaction
@@ -25,7 +26,7 @@ module.exports = {
 			const contribute = interaction.getTextInputValue("contribute");
 
 			const embed = new MessageEmbed()
-				.setColor("GREEN")
+				.setColor(green)
 				.setTitle("Moderator Application Submission")
 				.setDescription(`Sent by <@${interaction.member.id}>`)
 				.addField("Age", `${age}`, false)

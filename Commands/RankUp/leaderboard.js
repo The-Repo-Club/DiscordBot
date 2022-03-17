@@ -1,14 +1,28 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/RankUp/leaderboard.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/RankUp/leaderboard.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Thu 17 March 2022, 01:10:23 PM [GMT]
+ *
+ *Description:
+ *   Leaderboard Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, levelsSys
+ **/
 
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 const Levels = require("../../Systems/levelsSys");
+const { purple } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "leaderboard",
@@ -41,7 +55,7 @@ module.exports = {
 		const response = new MessageEmbed()
 			.setTitle("**LEADERBOARD**")
 			.setDescription(`${lb.join("\n\n")}`)
-			.setColor("DARK_PURPLE");
+			.setColor(purple);
 
 		interaction.reply({ embeds: [response], ephemeral: true });
 	},

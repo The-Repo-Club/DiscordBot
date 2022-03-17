@@ -1,13 +1,27 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Utilities/staffinfo.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Utilities/staff.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Thu 17 March 2022, 01:14:14 PM [GMT]
+ *
+ *Description:
+ *   Staff Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js
+ **/
 
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
+const { orange } = require("../../Structures/colors.json");
 const { Staff } = require("../../Structures/config.json");
 
 module.exports = {
@@ -22,7 +36,7 @@ module.exports = {
 	 */
 	async execute(interaction, client) {
 		const List = new MessageEmbed()
-			.setColor("ORANGE")
+			.setColor(orange)
 			.setTitle("Staff list")
 			.setThumbnail(
 				`${interaction.guild.iconURL({ size: 512, dynamic: true })}`

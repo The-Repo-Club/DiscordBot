@@ -9,7 +9,8 @@
 
 const { MessageEmbed, Message, Client } = require("discord.js");
 const discordTranscripts = require("discord-html-transcripts");
-const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "messageDeleteBulk",
@@ -21,11 +22,11 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: messages.first().guild.id,
 		});
-		if (!Data || !Data.MessageLogs) return;
+		if (!Data || !Data.logs.messageLogs) return;
 
 		const logsChannel = messages
 			.first()
-			.guild.channels.cache.get(Data.MessageLogs);
+			.guild.channels.cache.get(Data.logs.messageLogs);
 		const logs = await messages.first().guild.fetchAuditLogs({
 			limit: 1,
 		});
@@ -49,7 +50,7 @@ module.exports = {
 			);
 
 			const messageDeletedBulkEmbed = new MessageEmbed()
-				.setColor("RED")
+				.setColor(red)
 				.setTitle(`Multiple Messages Were Deleted`)
 				.setDescription(
 					`📘 ${tooMuch} messages in <#${

@@ -8,7 +8,8 @@
 // -------------------------------------------------------------------------
 
 const { MessageEmbed, Message } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "messageDelete",
@@ -22,9 +23,9 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: message.guild.id,
 		});
-		if (!Data || !Data.MessageLogs) return;
+		if (!Data || !Data.logs.messageLogs) return;
 
-		const logsChannel = message.guild.channels.cache.get(Data.MessageLogs);
+		const logsChannel = message.guild.channels.cache.get(Data.logs.messageLogs);
 		const logs = await message.guild.fetchAuditLogs({
 			limit: 1,
 			type: "MESSAGE_DELETE",
@@ -38,12 +39,12 @@ module.exports = {
 
 		const messageContent =
 			message.content.slice(0, 1000) +
-			(message.content.length > 1000 ? " ..." : "");
+			(message.content.length > 1000 ? " ..." : ".");
 
 		const { executor, target } = log;
 
 		const messageDeletedEmbed = new MessageEmbed()
-			.setColor("RED")
+			.setColor(red)
 			.setTitle("A Message Has Been Deleted")
 			.setTimestamp()
 			.addField("Message", messageContent)

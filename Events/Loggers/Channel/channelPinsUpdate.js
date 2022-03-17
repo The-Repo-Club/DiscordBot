@@ -9,7 +9,8 @@
 // Logs whenever a channel is deleted
 
 const { MessageEmbed, Channel } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB");
+const DB = require("../../../Structures/Schemas/channelsDB");
+const { red, green } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "channelPinsUpdate",
@@ -20,11 +21,11 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: channel.guild.id,
 		});
-		if (!Data || !Data.ChannelLogs) return;
+		if (!Data || !Data.logs.channelLogs) return;
 
 		if (channel.type == "DM" || channel.type == "GROUP_DM") return;
 
-		const logsChannel = channel.guild.channels.cache.get(Data.ChannelLogs); // Enter your log channel ID
+		const logsChannel = channel.guild.channels.cache.get(Data.logs.channelLogs); // Enter your log channel ID
 
 		const logs = await channel.guild.fetchAuditLogs({
 			limit: 1,
@@ -43,7 +44,7 @@ module.exports = {
 		if (log.action == "MESSAGE_PIN") {
 			// If the last entry fetched is of the type "MESSAGE_PIN" executes the code
 			channelPinsChangeEmbed
-				.setColor("GREEN")
+				.setColor(green)
 				.setDescription(
 					`> A message by \`${log.target.tag}\` has been pinned in ${channel} by \`${log.executor.tag}\``
 				);
@@ -52,7 +53,7 @@ module.exports = {
 		if (log.action == "MESSAGE_UNPIN") {
 			// If the last entry fetched is of the type "MESSAGE_UNPIN" executes the code
 			channelPinsChangeEmbed
-				.setColor("RED")
+				.setColor(red)
 				.setDescription(
 					`> A message by \`${log.target.tag}\` has been unpinned from ${channel} by \`${log.executor.tag}\``
 				);

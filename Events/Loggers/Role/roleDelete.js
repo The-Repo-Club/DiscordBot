@@ -9,7 +9,8 @@
 // Logs whenever a role is deleted
 
 const { MessageEmbed, Role, Permissions, Client } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB");
+const DB = require("../../../Structures/Schemas/channelsDB");
+const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "roleDelete",
@@ -21,9 +22,9 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: role.guild.id,
 		});
-		if (!Data || !Data.RoleLogs) return;
+		if (!Data || !Data.logs.roleLogs) return;
 
-		const logsChannel = role.guild.channels.cache.get(Data.RoleLogs);
+		const logsChannel = role.guild.channels.cache.get(Data.logs.roleLogs);
 		const logs = await role.guild.fetchAuditLogs({
 			limit: 1,
 			type: "ROLE_DELETE",
@@ -34,7 +35,7 @@ module.exports = {
 			.setTitle(
 				"<:icons_deleterole:866943415895851018> A Role Has Been Deleted"
 			)
-			.setColor("RED")
+			.setColor(red)
 			.setTimestamp()
 			.setFooter({ text: role.guild.name });
 

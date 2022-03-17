@@ -1,15 +1,29 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Events/Loggers/Member/guildMemberRemove.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Events/Loggers/Guild/guildMemberRemove.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Thu 17 March 2022, 01:19:35 PM [GMT]
+ *
+ *Description:
+ *   guildMemberRemove Event for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, canvas, channelsDB
+ **/
 
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
-const DB = require("../../Structures/Schemas/logsDB"); //Make sure this path is correct
+const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const Canvas = require("../../Systems/Canvas/index");
+const { yellow } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "guildMemberRemove",
@@ -21,9 +35,11 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: member.guild.id,
 		});
-		if (!Data || !Data.JoinLeaveLogs) return;
+		if (!Data || !Data.logs.joinLeaveLogs) return;
 
-		const logsChannel = member.guild.channels.cache.get(Data.JoinLeaveLogs);
+		const logsChannel = member.guild.channels.cache.get(
+			Data.logs.joinLeaveLogs
+		);
 
 		// Else it means a normal user joined
 		const image = await new Canvas.Goodbye()
@@ -32,7 +48,7 @@ module.exports = {
 			.setAvatar(member.displayAvatarURL({ format: "png", size: 512 }))
 			.setMemberCount(member.guild.memberCount)
 			.setGuildName(member.guild.name)
-			.setColor("Background", "#283036")
+			.setColor("Background", yellow)
 			.toAttachment();
 		const attachment = new MessageAttachment(
 			image.toBuffer(),

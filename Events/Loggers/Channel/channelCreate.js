@@ -9,7 +9,8 @@
 // Logs whenever a channel is created
 
 const { MessageEmbed, Channel } = require("discord.js");
-const DB = require("../../../Structures/Schemas/logsDB");
+const DB = require("../../../Structures/Schemas/channelsDB");
+const { green } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "channelCreate",
@@ -21,11 +22,11 @@ module.exports = {
 		const Data = await DB.findOne({
 			GuildID: channel.guild.id,
 		});
-		if (!Data || !Data.ChannelLogs) return;
+		if (!Data || !Data.logs.channelLogs) return;
 
 		if (channel.type == "DM" || channel.type == "GROUP_DM") return;
 
-		const logsChannel = channel.guild.channels.cache.get(Data.ChannelLogs); // Enter your log channel ID
+		const logsChannel = channel.guild.channels.cache.get(Data.logs.channelLogs); // Enter your log channel ID
 
 		const logs = await channel.guild.fetchAuditLogs({
 			limit: 1,
@@ -36,7 +37,7 @@ module.exports = {
 		if (log) {
 			// If log exists executes code and creates embed
 			const channelCreateEmbed = new MessageEmbed()
-				.setColor("GREEN")
+				.setColor(green)
 				.setTitle(
 					`<:icons_createchannel:952952678172991578> A Channel Has Been Created`
 				)

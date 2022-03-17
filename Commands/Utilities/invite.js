@@ -1,11 +1,24 @@
-// -*-coding:utf-8 -*-
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Commands/Utilities/invite.js
-// Git           - https://github.com/The-Repo-Club
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Wed 23 February 2022, 12:04:54 pm (GMT)
-// Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Commands/Utilities/invite.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Thu 17 March 2022, 01:00:43 PM [GMT]
+ *
+ *Description:
+ *   Invite Command for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js
+ **/
 
 const {
 	CommandInteraction,
@@ -14,6 +27,7 @@ const {
 	MessageActionRow,
 	MessageButton,
 } = require("discord.js");
+const { red } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "invite",
@@ -26,24 +40,25 @@ module.exports = {
 	 * @param {Client} client
 	 */
 	async execute(interaction, client) {
+		const inviteID = await require("../../Systems/inviteSys")(client);
 		const Invite = new MessageEmbed()
 			.setTitle("Invite Me!")
 			.setDescription(
 				"I'm a cool Discord Bot, ain't I? Use the buttons below to invite me to your server or join our support server!\n\nStay Safe 👋"
 			)
-			.setColor("RED")
+			.setColor(red)
 			.setThumbnail(client.user.displayAvatarURL());
 
 		let row = new MessageActionRow().addComponents(
 			new MessageButton()
 				.setURL(
-					"https://discord.com/api/oauth2/authorize?client_id=937294229263224862&permissions=8&scope=bot%20applications.commands"
+					`https://discord.com/api/oauth2/authorize?client_id=${client?.user?.id}&permissions=8&scope=bot%20applications.commands`
 				)
 				.setLabel("Invite Me")
 				.setStyle("LINK"),
 
 			new MessageButton()
-				.setURL("https://discord.gg/knight")
+				.setURL(`https://discord.gg//invite/${inviteID}`)
 				.setLabel("Support Server")
 				.setStyle("LINK")
 		);
