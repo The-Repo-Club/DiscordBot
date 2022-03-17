@@ -1,44 +1,43 @@
-<!-- Page Title -->
-
-<div class="container-fluid">
-  <h2 class="h5 mb-0">Latest Updates</h2>
-</div>
-
-<!-- Breadcrumb -->
-<div class="container-fluid py-2">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb mb-0 py-3 px-0">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Updates</li>
-    </ol>
-  </nav>
-</div>
-
-<!-- Main Page -->
-<div class="container-fluid">
-  <div class="row gy-4">
-    <div class="col-lg-12">
-			<div class="row">
-				<h1 class="brand-line"><b>Latest Updates:</b></h1>
-			</div>
-
-      <div class="row">
-        <% feed.items.forEach( entry => { %>
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div class="card bg-grey" style="width: 100%">
-              <div class="card-body">
-                <h4 class="card-title big-text"><%= new Date(entry.created).toLocaleString('en-GB', {year: 'numeric', month: 'long', day: 'numeric', weekday:"short", hour: '2-digit', hourCycle: "h12", minute:'2-digit'}) %></h4>
-                <p class="card-text"><%= entry.title %></p>
-                <a
-                  href="<%= entry.link %>"
-                  class="btn btn-discord btn-secondary stretched-link"
-                  >View Commit</a
-                >
-              </div>
-            </div>
-          </div>
-        <% }) %>
-      </div>
-		</div>
+<div class="bg-dash-dark-2 py-4">
+	<div class="container-fluid">
+		<h2 class="h5 mb-0">Latest Updates</h2>
 	</div>
 </div>
+<section>
+	<!-- Page Title -->
+
+	<!-- Breadcrumb -->
+	<div class="container-fluid py-2">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-0 py-3 px-0">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Updates</li>
+			</ol>
+		</nav>
+	</div>
+
+	<!-- Main Page -->
+	<div class="container-fluid">
+		<div class="row gy-4">
+			<div class="col-lg-12">
+				<div class="row">
+					<h1 class="brand-line"><b>Latest Updates:</b></h1>
+				</div>
+
+				<div class="row">
+					<% feed.items.forEach( entry => { %>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<h4 class="card-title big-text"><%= new Date(entry.created).toLocaleString('en-GB', {year: 'numeric', month: 'long', day: 'numeric', weekday:"short", hour: '2-digit', hourCycle: "h12", minute:'2-digit'}) %></h4>
+								<p class="card-text"><%= entry.title %></p>
+								<a href="<%= entry.link %>" class="btn btn-discord btn-secondary stretched-link">View Commit</a>
+							</div>
+						</div>
+					</div>
+					<% }) %>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

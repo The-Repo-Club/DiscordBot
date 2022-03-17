@@ -1,445 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no"
-		/>
-		<meta name="description" content="<%= dashboardDetails.description %>" />
-		<meta name="author" content="<%= bot?.user?.username %>" />
-		<link
-			rel="shortcut icon"
-			href="<%= hostname %>:<%= port %>/img/icons/icon-48x48.png"
-		/>
 		<title><%= title %></title>
-
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
-			rel="stylesheet"
-		/>
-
-		<link
-			class="js-stylesheet"
-			href="<%= hostname %>:<%= port %>/css/app.css"
-			rel="stylesheet"
-		/>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="all,follow" />
+		<!-- Choices.js-->
+		<link rel="stylesheet" href="<%= hostname %>:<%= port %>/vendor/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" />
+		<!-- Google fonts - Muli-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700" />
+		<!-- theme stylesheet-->
+		<link rel="stylesheet" href="<%= hostname %>:<%= port %>/css/style.default.css" id="theme-stylesheet" />
+		<!-- Custom stylesheet - for your changes-->
+		<link rel="stylesheet" href="<%= hostname %>:<%= port %>/css/custom.css" />
 	</head>
 
-	<body
-		rel="<%= rel %>"
-		data-theme="dark"
-		data-layout="fluid"
-		data-sidebar-position="left"
-		data-sidebar-layout="default"
-	>
-		<div class="wrapper">
-			<nav id="sidebar" class="sidebar js-sidebar">
-				<div class="sidebar-content js-simplebar">
-					<a class="sidebar-brand" href="/">
-						<span class="sidebar-brand-text align-middle">
-							<%= bot?.user?.username %>
-							<sup
-								><small class="badge bg-primary text-uppercase">Pro</small></sup
-							>
-						</span>
-					</a>
-
-					<div class="sidebar-user">
-						<div class="d-flex justify-content-center">
-							<% if(is_logged) { %>
-							<div class="flex-shrink-0">
-								<img
-									src="https://cdn.discordapp.com/avatars/<%= user?.id %>/<%= user?.avatar %>.png"
-									class="avatar img-fluid rounded me-1"
-									alt="<%= user?.username %>"
-								/>
-							</div>
-							<div class="flex-grow-1 ps-2">
-								<a
-									class="sidebar-user-title dropdown-toggle"
-									href="#"
-									data-bs-toggle="dropdown"
-								>
-									<%= user?.username %>
-								</a>
-
-								<div class="dropdown-menu dropdown-menu-start">
-									<% if(invite) { %>
-									<a
-										class="dropdown-item"
-										href="https://discord.gg/<%= invite %>"
-									>
-										<i class="align-middle me-1" data-feather="help-circle"></i>
-										Help Center</a
-									>
-									<div class="dropdown-divider"></div>
-									<% } %> <% if(hasClientSecret) { %>
-
-									<a class="dropdown-item" href="/auth/logout">
-										<i class="align-middle me-1" data-feather="lock"></i>
-										Log out</a
-									>
-									<% } %>
-								</div>
-
-								<div class="sidebar-user-subtitle">
-									Version: v<%= version %>
-								</div>
-							</div>
-							<% } else { %>
-							<div class="flex-shrink-0">
-								<img
-									src="<%= bot?.user?.displayAvatarURL() %>"
-									class="avatar img-fluid rounded me-1"
-									alt="<%= bot?.user?.username %>"
-								/>
-							</div>
-							<div class="flex-grow-1 ps-2">
-								<a
-									class="sidebar-user-title dropdown-toggle"
-									href="#"
-									data-bs-toggle="dropdown"
-								>
-									<%= bot?.user?.username %>
-								</a>
-
-								<div class="dropdown-menu dropdown-menu-start">
-									<% if(invite) { %>
-									<a
-										class="dropdown-item"
-										href="https://discord.gg/<%= invite %>"
-									>
-										<i class="align-middle me-1" data-feather="help-circle"></i>
-										Help Center</a
-									>
-									<div class="dropdown-divider"></div>
-									<% } %> <% if(hasClientSecret) { %>
-									<a class="dropdown-item" href="/auth/login">
-										<i class="align-middle me-1" data-feather="unlock"></i>
-										Log in</a
-									>
-									<% } %>
-								</div>
-
-								<div class="sidebar-user-subtitle">
-									Version: v<%= version %>
-								</div>
-							</div>
-							<% } %>
-						</div>
+	<body rel="<%= rel %>">
+		<header class="header">
+			<nav class="navbar navbar-expand-lg py-3 bg-dash-dark-2 border-bottom border-dash-dark-1 z-index-10">
+				<div class="container-fluid d-flex align-items-center justify-content-between py-1">
+					<div class="navbar-header d-flex align-items-center">
+						<a class="navbar-brand text-uppercase text-reset" href="/">
+							<div class="brand-text brand-big"><strong class="text-primary">Minimal</strong><strong>Mistakes</strong></div>
+							<div class="brand-text brand-sm"><strong class="text-primary">M</strong><strong>M</strong></div>
+						</a>
+						<button class="sidebar-toggle">
+							<svg class="svg-icon svg-icon-sm svg-icon-heavy transform-none">
+								<use xlink:href="#arrow-left-1"></use>
+							</svg>
+						</button>
 					</div>
-
-					<ul class="sidebar-nav">
-						<li class="sidebar-header">Pages</li>
-						<li class="sidebar-item" id="rel_home">
-							<a class="sidebar-link" href="/">
-								<i class="align-middle" data-feather="home"></i>
-								<span class="align-middle">Home</span>
+					<ul class="list-inline mb-0">
+						<% if(dashboardDetails.serverUrl) { %>
+						<li class="list-inline-item support px-lg-2">
+							<a class="nav-link text-sm text-reset px-1 px-lg-0" id="server" href="<%= dashboardDetails.serverUrl %>">
+								<span class="d-none d-sm-inline-block ms-2">Support Server</span>
+								<svg class="svg-icon svg-icon-xs svg-icon-heavy">
+									<use xlink:href="#shield-security-1"></use>
+								</svg>
 							</a>
 						</li>
-						<li class="sidebar-item" id="head_dashboards">
-							<a
-								data-bs-target="#dashboards_toggle"
-								data-bs-toggle="collapse"
-								class="sidebar-link collapsed"
-							>
-								<i class="align-middle" data-feather="layout"></i>
-								<span class="align-middle">Dashboards</span>
-							</a>
-							<ul
-								id="dashboards_toggle"
-								class="sidebar-dropdown list-unstyled collapse"
-								data-bs-parent="#sidebar"
-							>
-								<li class="sidebar-item" id="rel_dashboard">
-									<a class="sidebar-link" href="/dashboard">Dashboard</a>
-								</li>
-								<li class="sidebar-item" id="rel_commands">
-									<a class="sidebar-link" href="/commands">Commands</a>
-								</li>
-								<!-- <li class="sidebar-item">
-									<a class="sidebar-link" href="pages-projects.html"
-										>Projects
-										<span class="sidebar-badge badge bg-primary">Pro</span></a
-									>
-								</li>
-								<li class="sidebar-item">
-									<a class="sidebar-link" href="pages-clients.html"
-										>Clients
-										<span class="sidebar-badge badge bg-primary">Pro</span></a
-									>
-								</li>
-								<li class="sidebar-item">
-									<a class="sidebar-link" href="pages-pricing.html"
-										>Pricing
-										<span class="sidebar-badge badge bg-primary">Pro</span></a
-									>
-								</li>
-								<li class="sidebar-item">
-									<a class="sidebar-link" href="pages-chat.html"
-										>Chat
-										<span class="sidebar-badge badge bg-primary">Pro</span></a
-									>
-								</li>
-								<li class="sidebar-item">
-									<a class="sidebar-link" href="pages-blank.html">Blank Page</a>
-								</li> -->
-							</ul>
-						</li>
-						<li class="sidebar-header">Extras</li>
-						<% if(is_logged) { %>
-						<li class="sidebar-item" id="head_levels">
-							<a
-								data-bs-target="#levels_toggle"
-								data-bs-toggle="collapse"
-								class="sidebar-link collapsed"
-							>
-								<i class="align-middle" data-feather="layout"></i>
-								<span class="align-middle">Levels</span>
-							</a>
-							<ul
-								id="levels_toggle"
-								class="sidebar-dropdown list-unstyled collapse"
-								data-bs-parent="#sidebar"
-							>
-								<% user.guilds.forEach(guild => { const permsOnGuild = new
-								Perms(guild.permissions.toString());
-								if(!permsOnGuild.has(dashboardConfig.lvlpermissions)) return; %>
-								<% if (bot.guilds.cache.get(guild.id)) { %>
-								<li
-									class="sidebar-item"
-									id="<%= guild.id %>"
-									rel="<%= guild.id %>"
-								>
-									<a class="sidebar-link" href="/levels/<%= guild.id %>"
-										><%= guild.name %></a
-									>
-								</li>
-								<% } %> <% }); %>
-							</ul>
-							<% } %>
-						</li>
-
-						<li class="sidebar-item">
-							<a
-								class="sidebar-link"
-								href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8"
-							>
-								<i class="align-middle" data-feather="user"></i>
-								<span class="align-middle">Invite Bot</span>
-							</a>
-						</li>
-
-						<li class="sidebar-header">Authentication</li>
-						<% if(is_logged) { %>
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="/auth/logout">
-								<i class="align-middle" data-feather="lock"></i>
-								<span class="align-middle">Log out</span>
+						<% } %> <% if(hasClientSecret) { %> <% if(is_logged) { %>
+						<li class="list-inline-item login px-lg-2">
+							<a class="nav-link text-sm text-reset px-1 px-lg-0" id="logout" href="/auth/logout">
+								<span class="d-none d-sm-inline-block">Logout </span>
+								<svg class="svg-icon svg-icon-xs svg-icon-heavy">
+									<use xlink:href="#disable-1"></use>
+								</svg>
 							</a>
 						</li>
 						<% } else { %>
-						<li class="sidebar-item">
-							<a class="sidebar-link" href="/auth/login">
-								<i class="align-middle" data-feather="unlock"></i>
-								<span class="align-middle">Log in</span>
+						<li class="list-inline-item login px-lg-2">
+							<a class="nav-link text-sm text-reset px-1 px-lg-0" id="login" href="/auth/login">
+								<span class="d-none d-sm-inline-block">Login </span>
+								<svg class="svg-icon svg-icon-xs svg-icon-heavy">
+									<use xlink:href="#disable-1"></use>
+								</svg>
 							</a>
 						</li>
-						<% } %>
+						<% } %> <% } %>
 					</ul>
-
-					<!-- <div class="sidebar-cta">
-						<div class="sidebar-cta-content">
-							<strong class="d-inline-block mb-2">Weekly Sales Report</strong>
-							<div class="mb-3 text-sm">
-								Your weekly sales report is ready for download!
-							</div>
-
-							<div class="d-grid">
-								<a
-									href="#"
-									class="btn btn-outline-primary"
-									target="_blank"
-									>Download</a
-								>
-							</div>
-						</div>
-					</div> -->
 				</div>
 			</nav>
+		</header>
+		<div class="d-flex align-items-stretch">
+			<!-- Sidebar Navigation-->
+			<nav id="sidebar">
+				<!-- Sidebar Header-->
+				<% if(is_logged) { %>
+				<div class="sidebar-header d-flex align-items-center p-4">
+					<img class="avatar shadow-0 img-fluid rounded-circle" src="https://cdn.discordapp.com/avatars/<%= user?.id %>/<%= user?.avatar %>.png" alt="..." />
+					<div class="ms-3 title">
+						<h1 class="h5 mb-1"><%= user?.username %></h1>
+						<p class="text-sm text-gray-700 mb-0 lh-1">Version: v<%= version %></p>
+					</div>
+				</div>
+				<% } else { %>
+				<div class="sidebar-header d-flex align-items-center p-4">
+					<img class="avatar shadow-0 img-fluid rounded-circle" src="<%= bot?.user?.displayAvatarURL() %>" alt="..." />
+					<div class="ms-3 title">
+						<h1 class="h5 mb-1"><%= bot?.user?.username %></h1>
+						<p class="text-sm text-gray-700 mb-0 lh-1">Version: v<%= version %></p>
+					</div>
+				</div>
+				<% } %>
+				<span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
 
-			<div class="main">
-				<nav class="navbar navbar-expand navbar-light navbar-bg">
-					<a class="sidebar-toggle js-sidebar-toggle">
-						<i class="hamburger align-self-center"></i>
-					</a>
-
-					<div class="navbar-collapse collapse">
-						<ul class="navbar-nav navbar-align">
-							<!-- <li class="nav-item dropdown">
-								<a
-									class="nav-icon dropdown-toggle"
-									href="#"
-									id="alertsDropdown"
-									data-bs-toggle="dropdown"
-								>
-									<div class="position-relative">
-										<i class="align-middle" data-feather="bell"></i>
-										<span class="indicator">3</span>
-									</div>
-								</a>
-								<div
-									class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
-									aria-labelledby="alertsDropdown"
-								>
-									<div class="dropdown-menu-header">3 New Notifications</div>
-									<div class="list-group">
-										<a href="#" class="list-group-item">
-											<div class="row g-0 align-items-center">
-												<div class="col-2">
-													<i
-														class="text-danger"
-														data-feather="alert-circle"
-													></i>
-												</div>
-												<div class="col-10">
-													<div class="text-dark">Update completed</div>
-													<div class="text-muted small mt-1">
-														Restart server 12 to complete the update.
-													</div>
-													<div class="text-muted small mt-1">30m ago</div>
-												</div>
-											</div>
-										</a>
-										<a href="#" class="list-group-item">
-											<div class="row g-0 align-items-center">
-												<div class="col-2">
-													<i class="text-primary" data-feather="home"></i>
-												</div>
-												<div class="col-10">
-													<div class="text-dark">Log in from 192.186.1.8</div>
-													<div class="text-muted small mt-1">5h ago</div>
-												</div>
-											</div>
-										</a>
-										<a href="#" class="list-group-item">
-											<div class="row g-0 align-items-center">
-												<div class="col-2">
-													<i class="text-success" data-feather="user-plus"></i>
-												</div>
-												<div class="col-10">
-													<div class="text-dark">New connection</div>
-													<div class="text-muted small mt-1">
-														Christina accepted your request.
-													</div>
-													<div class="text-muted small mt-1">14h ago</div>
-												</div>
-											</div>
-										</a>
-									</div>
-									<div class="dropdown-menu-footer">
-										<a href="#" class="text-muted">Show all notifications</a>
-									</div>
-								</div>
-							</li> -->
-
-							<li class="nav-item dropdown">
-								<a
-									class="nav-icon pe-md-0 dropdown-toggle"
-									href="#"
-									data-bs-toggle="dropdown"
-								>
-									<img
-										src="<%= bot?.user?.displayAvatarURL() %>"
-										class="avatar img-fluid rounded"
-										alt="<%= bot?.user?.username %>"
-									/>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end">
-									<!-- <a class="dropdown-item" href="pages-profile"
-										><i class="align-middle me-1" data-feather="user"></i>
-										Profile</a
-									> -->
-									<!-- <a class="dropdown-item" href="#"
-										><i class="align-middle me-1" data-feather="pie-chart"></i>
-										Analytics</a
-									> -->
-									<!-- <div class="dropdown-divider"></div> -->
-									<!-- <a class="dropdown-item" href="pages-settings"
-										><i class="align-middle me-1" data-feather="settings"></i>
-										Settings & Privacy</a
-									> -->
-									<% if(invite) { %>
-									<a
-										class="dropdown-item"
-										href="https://discord.gg/<%= invite %>"
-									>
-										<i class="align-middle me-1" data-feather="help-circle"></i>
-										Help Center</a
-									>
-									<div class="dropdown-divider"></div>
-									<% } %> <% if(hasClientSecret) { %> <% if(is_logged) { %>
-									<a class="dropdown-item" href="/auth/logout">
-										<i class="align-middle me-1" data-feather="lock"></i>
-										Log out</a
-									>
-									<% } else { %>
-									<a class="dropdown-item" href="/auth/login">
-										<i class="align-middle me-1" data-feather="unlock"></i>
-										Log in</a
-									>
-									<% } %> <% } %>
-								</div>
-							</li>
+				<ul class="list-unstyled">
+					<li class="sidebar-item" id="rel_home">
+						<a class="sidebar-link" href="/">
+							<svg class="svg-icon svg-icon-sm svg-icon-heavy">
+								<use xlink:href="#real-estate-1"></use></svg
+							><span>Home </span></a
+						>
+					</li>
+					<li class="sidebar-item" id="item_dashboards">
+						<a class="sidebar-link" id="head_dashboards" data-bs-target="#dashboards_toggle" data-bs-toggle="collapse">
+							<svg class="svg-icon svg-icon-sm svg-icon-heavy">
+								<use xlink:href="#portfolio-grid-1"></use></svg
+							><span>Dashboard </span></a
+						>
+						<ul class="collapse list-unstyled" id="dashboards_toggle">
+							<% if(is_logged) { %>
+							<li><a class="sidebar-link" id="rel_dashboard" href="/dashboard">Dashboard</a></li>
+							<% } %> <% if(commands.length> 0) { %>
+							<li><a class="sidebar-link" id="rel_commands" href="/commands">Commands</a></li>
+							<% } %>
 						</ul>
-					</div>
-				</nav>
+					</li>
+				</ul>
+				<span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Extra</span>
+				<ul class="list-unstyled">
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8">
+							<svg class="svg-icon svg-icon-sm svg-icon-heavy">
+								<use xlink:href="#paper-stack-1"></use></svg
+							><span>Invite Bot </span></a
+						>
+					</li>
+				</ul>
 
-				<main class="content"><%- body %></main>
-
-				<footer class="footer">
-					<div class="container-fluid">
-						<div class="row text-muted">
-							<div class="col-6 text-start">
-								<p class="mb-0">
-									2022 &copy; <%= bot?.user?.username %>. Design by
-									<a
-										href="https://therepo.club.com"
-										target="_blank"
-										class="text-muted"
-										><strong>The-Repo-Club</strong></a
-									>
-								</p>
-							</div>
-							<div class="col-6 text-end">
-								<ul class="list-inline">
-									<% if(invite) { %>
-									<li class="list-inline-item">
-										<a
-											class="text-muted"
-											href="https://discord.gg/<%= invite %>"
-											>Help Center</a
-										>
-									</li>
-									<% } %>
-									<li class="list-inline-item">
-										<a class="text-muted" href="#">Privacy</a>
-									</li>
-									<li class="list-inline-item">
-										<a class="text-muted" href="#">Terms</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</footer>
-			</div>
+				<span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Authentication</span>
+				<ul class="list-unstyled">
+					<% if(is_logged) { %>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="/auth/logout">
+							<svg class="svg-icon svg-icon-sm svg-icon-heavy">
+								<use xlink:href="#disable-1"></use></svg
+							><span>Logout </span></a
+						>
+					</li>
+					<% } else { %>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="/auth/login">
+							<svg class="svg-icon svg-icon-sm svg-icon-heavy">
+								<use xlink:href="#disable-1"></use></svg
+							><span>Login </span></a
+						>
+					</li>
+					<% } %>
+				</ul>
+			</nav>
+			<div class="page-content"><%- body %></div>
+			<!-- Page Footer-->
+			<footer class="position-absolute bottom-0 bg-dash-dark-2 text-white text-center py-3 w-100 text-xs" id="footer">
+				<div class="container-fluid text-center">
+					<p class="mb-0 text-dash-gray">
+						2022 &copy; <%= bot?.user?.username %>. Design by
+						<a href="https://therepo.club.com">The-Repo-Club</a>.
+					</p>
+				</div>
+			</footer>
 		</div>
 
-		<script src="<%= hostname %>:<%= port %>/js/app.js"></script>
+		<!-- JavaScript files-->
+		<script src="<%= hostname %>:<%= port %>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="<%= hostname %>:<%= port %>/vendor/just-validate/js/just-validate.min.js"></script>
+		<script src="<%= hostname %>:<%= port %>/vendor/chart.js/Chart.min.js"></script>
+		<script src="<%= hostname %>:<%= port %>/vendor/choices.js/public/assets/scripts/choices.min.js"></script>
+		<!-- Main File-->
+		<script src="<%= hostname %>:<%= port %>/js/front.js"></script>
 		<script src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
 		<script src="<%= hostname %>:<%= port %>/js/toggles.js"></script>
+
+		<script>
+			function injectSvgSprite(path) {
+				var ajax = new XMLHttpRequest();
+				ajax.open("GET", path, true);
+				ajax.send();
+				ajax.onload = function (e) {
+					var div = document.createElement("div");
+					div.className = "d-none";
+					div.innerHTML = ajax.responseText;
+					document.body.insertBefore(div, document.body.childNodes[0]);
+				};
+			}
+			injectSvgSprite("https://bootstraptemple.com/files/icons/orion-svg-sprite.svg");
+		</script>
+		<!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
 	</body>
 </html>

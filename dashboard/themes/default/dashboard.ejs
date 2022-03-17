@@ -1,38 +1,36 @@
-<!-- Page Title -->
-
-<div class="container-fluid">
-  <h2 class="h5 mb-0">Dashboard</h2>
+<div class="bg-dash-dark-2 py-4">
+	<div class="container-fluid">
+		<h2 class="h5 mb-0">Dashboard</h2>
+	</div>
 </div>
+<section>
+	<!-- Page Title -->
 
-<!-- Breadcrumb -->
-<div class="container-fluid py-2">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb mb-0 py-3 px-0">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-    </ol>
-  </nav>
-</div>
+	<!-- Breadcrumb -->
+	<div class="container-fluid py-2">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-0 py-3 px-0">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+			</ol>
+		</nav>
+	</div>
 
-<!-- Main Page -->
+	<!-- Main Page -->
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-  <% guilds.forEach(guild => {
-      const permsOnGuild = new Perms(guild.permissions.toString());
-      if(!permsOnGuild.has(dashboardConfig.permissions)) return;
-  %>
-    <div class="card" style="width: 18rem; margin: 2rem;">
-    <%- guild.icon ? `<img src="https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}" class="card-img-top" style="max-width: 18rem;">` : '<img src="https://cdn.discordapp.com/embed/avatars/0.png" class="card-img-top" style="max-width: 18rem;">' %>
-      <div class="card-body">
-        <h5 class="card-title"><%= guild.name %></h5>
-        <% if (bot.guilds.cache.get(guild.id)) { %>
-          <a href="/manage/<%- guild.id %>" class="btn btn-success text-white">Edit Settings</a>
-        <% } else { %>
-          <a href="<%= `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>" class="btn btn-primary text-white">Invite Bot</a>
-        <% } %>
-      </div>
-    </div>
-  <%
-      });
-  %>
-</div>
+	<div style="display: flex; flex-wrap: wrap; justify-content: center">
+		<% guilds.forEach(guild => { const permsOnGuild = new Perms(guild.permissions.toString()); if(!permsOnGuild.has(dashboardConfig.permissions)) return; %>
+		<div class="card" style="width: 18rem; margin: 2rem">
+			<%- guild.icon ? `<img src="https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}" class="card-img-top" style="max-width: 18rem" />` : '<img src="https://cdn.discordapp.com/embed/avatars/0.png" class="card-img-top" style="max-width: 18rem" />' %>
+			<div class="card-body">
+				<h5 class="card-title"><%= guild.name %></h5>
+				<% if (bot.guilds.cache.get(guild.id)) { %>
+				<a href="/manage/<%- guild.id %>" class="btn btn-success text-white">Edit Settings</a>
+				<% } else { %>
+				<a href="<%= `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>" class="btn btn-primary text-white">Invite Bot</a>
+				<% } %>
+			</div>
+		</div>
+		<% }); %>
+	</div>
+</section>

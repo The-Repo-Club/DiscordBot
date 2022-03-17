@@ -7,11 +7,7 @@ const fs = require("fs");
 const { existsSync, readdirSync } = require("fs");
 const { join } = require("path");
 const ejs = require("ejs");
-const {
-	httpsKey,
-	httpsCert,
-	runAsHTTPS,
-} = require("../Structures/config.json");
+const { httpsKey, httpsCert, runAsHTTPS } = require("../Structures/config.json");
 const { EventEmitter } = require("events");
 const { Permissions } = require("discord.js");
 
@@ -19,8 +15,7 @@ class Dashboard extends EventEmitter {
 	constructor(client, options) {
 		super();
 
-		if (+process.versions.node.split(".")[0] < 16)
-			throw new Error("dashboard only supports node-v16+");
+		if (+process.versions.node.split(".")[0] < 16) throw new Error("dashboard only supports node-v16+");
 
 		if (!client) throw new Error("Client is a required parameter.");
 		this.client = client;
@@ -33,15 +28,7 @@ class Dashboard extends EventEmitter {
 			faviconPath: options?.faviconPath || null,
 		};
 
-		if (!client.isReady())
-			client.on(
-				"ready",
-				() =>
-					(this.details.name =
-						this.details.name === null
-							? this.client.user.username
-							: this.details.name)
-			);
+		if (!client.isReady()) client.on("ready", () => (this.details.name = this.details.name === null ? this.client.user.username : this.details.name));
 
 		this._commands = [];
 		this._settings = [];
@@ -60,10 +47,7 @@ class Dashboard extends EventEmitter {
 			session: options?.session || null,
 		};
 
-		if (!this.config.secret)
-			console.warn(
-				"Without the client.secret parameter, some features of dashboard will be disabled, like Discord authentication or guild settings..."
-			);
+		if (!this.config.secret) console.warn("Without the client.secret parameter, some features of dashboard will be disabled, like Discord authentication or guild settings...");
 
 		this._setup();
 		this._checkRoutes();
@@ -74,8 +58,7 @@ class Dashboard extends EventEmitter {
 	_getTheme(theme) {
 		if (!theme) require(join(__dirname, "themes", "light"));
 		if (typeof theme === "object") return theme;
-		if (!existsSync(join(__dirname, "themes", theme)))
-			throw new Error(`Theme ${theme} not found!`);
+		if (!existsSync(join(__dirname, "themes", theme))) throw new Error(`Theme ${theme} not found!`);
 		return require(join(__dirname, "themes", theme));
 	}
 
@@ -93,8 +76,7 @@ class Dashboard extends EventEmitter {
 				cb(e, "");
 			}
 		});
-		if (this.details.faviconPath)
-			this.app.use(favicon(this.details.faviconPath));
+		if (this.details.faviconPath) this.app.use(favicon(this.details.faviconPath));
 		this.app.use(express.static(join(__dirname, "public")));
 		this.app.use(express.json());
 		this.app.enable("trust proxy");
@@ -110,9 +92,7 @@ class Dashboard extends EventEmitter {
 		} else {
 			this.app.use(
 				session({
-					secret: `dashboard-${Date.now()}-${
-						this.client.id
-					}-${Math.random().toString(36)}`,
+					secret: `dashboard-${Date.now()}-${this.client.id}-${Math.random().toString(36)}`,
 					resave: false,
 					saveUninitialized: false,
 				})
@@ -120,15 +100,9 @@ class Dashboard extends EventEmitter {
 		}
 
 		this.app.use((req, res, next) => {
-			res.setHeader(
-				"Access-Control-Allow-Headers",
-				"X-Requested-With,content-type"
-			);
+			res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type");
 			res.setHeader("Access-Control-Allow-Origin", "*");
-			res.setHeader(
-				"Access-Control-Allow-Methods",
-				"GET, POST, OPTIONS, PUT, PATCH, DELETE"
-			);
+			res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
 			res.setHeader("Access-Control-Allow-Credentials", true);
 
 			req.user = req.session.user;
@@ -148,15 +122,9 @@ class Dashboard extends EventEmitter {
 
 		this.routes = routes.length;
 
-		if (files.length === 0 || routes.length === 0)
-			throw new Error("No routes were found!");
+		if (files.length === 0 || routes.length === 0) throw new Error("No routes were found!");
 		for (let i = 0; i < routes.length; i++) {
-			if (
-				(!this.config.secret &&
-					["auth.js", "manage.js", "dashboard.js"].includes(routes[i])) ||
-				routes[i] === "custom.js"
-			)
-				continue;
+			if ((!this.config.secret && ["auth.js", "manage.js", "dashboard.js"].includes(routes[i])) || routes[i] === "custom.js") continue;
 			const route = require(`./routes/${routes[i]}`);
 			this.app.use(route.name, route.Router);
 		}
@@ -166,13 +134,8 @@ class Dashboard extends EventEmitter {
 	}
 	_checkRoutes() {
 		// Manual checking because the structure for 404 is weird
-		if (!this.config.theme[404])
-			console.warn(
-				`No key found in the theme object for "404", falling back to the default one`
-			);
-		for (let routeFile of readdirSync(join(__dirname, "routes")).filter((e) =>
-			e.endsWith(".js")
-		)) {
+		if (!this.config.theme[404]) console.warn(`No key found in the theme object for "404", falling back to the default one`);
+		for (let routeFile of readdirSync(join(__dirname, "routes")).filter((e) => e.endsWith(".js"))) {
 			if (["auth.js", "custom.js"].includes(routeFile)) continue;
 			const route = require(`./routes/${routeFile}`);
 			let routeName;
@@ -186,10 +149,7 @@ class Dashboard extends EventEmitter {
 				default:
 					routeName = route.name.split("/")[1];
 			}
-			if (!this.config.theme[routeName])
-				console.warn(
-					`No key found in the theme object for "${route.name}", falling back to the default one`
-				);
+			if (!this.config.theme[routeName]) console.warn(`No key found in the theme object for "${route.name}", falling back to the default one`);
 		}
 	}
 	_start() {
@@ -298,10 +258,17 @@ class Dashboard extends EventEmitter {
 		});
 	}
 
-	addNewLine(name) {
+	addNewLine(name, panel) {
 		this._settings.push({
 			name,
+			panel,
 			type: "new line",
+		});
+	}
+
+	addEndLine() {
+		this._settings.push({
+			type: "end line",
 		});
 	}
 }

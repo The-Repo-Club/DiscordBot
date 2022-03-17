@@ -1,66 +1,55 @@
-<!-- Page Title -->
-
-<div class="container-fluid">
-  <h2 class="h5 mb-0">Commands</h2>
+<div class="bg-dash-dark-2 py-4">
+	<div class="container-fluid">
+		<h2 class="h5 mb-0">Commands</h2>
+	</div>
 </div>
+<section>
+	<!-- Breadcrumb -->
+	<div class="container-fluid py-2">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-0 py-3 px-0">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Commands</li>
+			</ol>
+		</nav>
+	</div>
 
-<!-- Breadcrumb -->
-<div class="container-fluid py-2">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb mb-0 py-3 px-0">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Commands</li>
-    </ol>
-  </nav>
-</div>
+	<!-- Main Page -->
+	<div class="container-fluid">
+		<div class="row gy-4">
+			<div class="col-lg-12">
+				<div class="card-header">
+					<h2><%= dashboardDetails.name %>'s commands</h2>
+					<hr />
 
-<!-- Main Page -->
-<div class="container-fluid">
-  <div class="row gy-4">
-    <div class="col-lg-12">
-      <div class="card-header">
-        <h2>
-          <%= dashboardDetails.name %>'s commands
-        </h2>
-        <hr>
-
-        <div class="card-body pt-0">
-          <div class="table-responsive">
-            <table class="table mb-0 table-striped table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Usage</th>
-                  <th scope="col">Permission</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% commands.forEach((command, rank)=> { %>
-                  <tr>
-                    <th scope="row">
-                      <%= rank + 1 %>
-                    </th>
-                    <td>
-                      <%= command.name %>
-                    </td>
-                    <td>
-                      <%= command.description %>
-                    </td>
-                    <td>
-                      <%= command.usage %>
-                    </td>
-                    <td>
-                      <%- command.permission ? command.permission : "NO PERMISSIONS NEEDED" %>
-                    </td>
-                  </tr>
-                  <% }) %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+					<div class="card-body pt-0">
+						<div class="table-responsive">
+							<table class="table mb-0 table-striped table-sm">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Name</th>
+										<th scope="col">Description</th>
+										<th scope="col">Usage</th>
+										<th scope="col">Permission</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% commands.forEach((command, rank)=> { %>
+									<tr>
+										<th scope="row"><%= rank + 1 %></th>
+										<td><%= command.name %></td>
+										<td><%= command.description %></td>
+										<td><%= command.usage %></td>
+										<td><%- command.permission ? command.permission : "NO PERMISSIONS NEEDED" %></td>
+									</tr>
+									<% }) %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

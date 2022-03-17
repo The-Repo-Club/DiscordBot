@@ -2,10 +2,12 @@
 	"Token": "",
 	"Secret": "",
 	"Database": "",
+	"httpsKey": "",
+	"httpsCert": "",
 	"botsGuildID": "",
 	"botsDevID": "",
+	"ownerIDS": [""],
 	"errorWebhookID": "",
 	"errorWebhookToken": "",
-	"ownerIDS": [],
 	"Staff": []
 }

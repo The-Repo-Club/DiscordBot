@@ -69,7 +69,7 @@ async function addTextField(discordClient, field, description, len = 5) {
  * @param {Client} client
  */
 module.exports = async (client) => {
-	client.dashboard.addNewLine("Channel Settings");
+	client.dashboard.addNewLine("Channel Settings", "channel");
 
 	addTextField(
 		client,
@@ -89,8 +89,8 @@ module.exports = async (client) => {
 		"The channel in which new users will be invited to.",
 		18
 	);
-
-	client.dashboard.addNewLine("Logs Settings");
+	client.dashboard.addEndLine();
+	client.dashboard.addNewLine("Logs Settings", "logs");
 
 	addTextField(
 		client,
@@ -173,4 +173,6 @@ module.exports = async (client) => {
 		"The channel in which logs for other events will be posted.",
 		18
 	);
+
+	client.dashboard.addEndLine();
 };

@@ -1,229 +1,161 @@
-<div class="page-content form-page">
-	<div class="container-sm center" style="margin-top: 25px">
-		<div class="d-grid gap-2 col-10 mx-auto">
-			<h2>Welcome to <%= dashboardDetails.name %> Dashboard!</h2>
-			<% if(dashboardDetails.description) { %>
-			<p><%= dashboardDetails.description %></p>
-			<% } %>
-
-			<hr />
-
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<img
-								class="card-img-top"
-								src="<%= hostname %>:<%= port %>/asset/image1.png"
-								alt="Bot Invite"
-								style="width: 100%"
-							/>
-							<h4 class="card-title big-text">Invite Bot</h4>
-							<p class="card-text">
-								Invite the greatest bot in the game and level up your server!
-							</p>
-							<!-- This link invites Spectre, Change the client id to your bot's id -->
-							<a
-								href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8"
-								class="btn btn-discord btn-primary stretched-link"
-								>Invite Bot</a
-							>
-						</div>
-					</div>
-				</div>
-				<% if(invite) { %>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<img
-								class="card-img-top"
-								src="<%= hostname %>:<%= port %>/asset/image2.png"
-								alt="Support Server"
-								style="width: 100%"
-							/>
-							<h4 class="card-title big-text">Support Server</h4>
-							<p class="card-text">
-								Join our support server for help setting up the bot and to
-								report bugs...
-							</p>
-							<!-- Change link to your support server link -->
-							<a
-								href="https://discord.gg/<%= invite %>"
-								class="btn btn-discord btn-warning stretched-link"
-								>Join our Support Server</a
-							>
-						</div>
-					</div>
-				</div>
-				<% } %>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<img
-								class="card-img-top"
-								src="<%= hostname %>:<%= port %>/asset/image3.png"
-								alt="Commands"
-								style="width: 100%"
-							/>
-							<h4 class="card-title big-text">Bot Commands</h4>
-							<p class="card-text">
-								View a full list of Commands for Spectre bot on our command list
-								page!
-							</p>
-							<a
-								href="commands"
-								class="btn btn-discord btn-primary stretched-link"
-								>View Commands</a
-							>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<h1 class="brand-line">
-					<b>What does <%= dashboardDetails.name %> Pro get me?</b>
-				</h1>
-				<h4>Take your server to a next level</h4>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<p
-								style="color: yellow; font-size: 10px"
-								class="icon icon-default"
-							>
-								<i class="fas fa-star fa-fw fa-5x"></i>
-							</p>
-							<hr />
-							<p>1 Pro Server</p>
-							<h3 id="1">£5.99/month</h3>
-							<button
-								onclick=""
-								class="btn btn-discord btn-primary stretched-link"
-							>
-								Purchase
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<p
-								style="color: yellow; font-size: 10px"
-								class="icon icon-default"
-							>
-								<i class="fas fa-star fa-fw fa-5x"></i>
-								<i class="fas fa-star fa-fw fa-5x"></i>
-							</p>
-							<hr />
-							<p>2 Pro Server</p>
-							<h3 id="2">£7.99/month</h3>
-							<button
-								onclick=""
-								class="btn btn-discord btn-primary stretched-link"
-							>
-								Purchase
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<p
-								style="color: yellow; font-size: 10px"
-								class="icon icon-default"
-							>
-								<i class="fas fa-star fa-fw fa-5x"></i>
-								<i class="fas fa-star fa-fw fa-5x"></i>
-								<i class="fas fa-star fa-fw fa-5x"></i>
-								<i class="fas fa-star fa-fw fa-5x"></i>
-							</p>
-							<hr />
-							<p>4 Pro Server</p>
-							<h3 id="3">£11.99/month</h3>
-							<button
-								onclick=""
-								class="btn btn-discord btn-primary stretched-link"
-							>
-								Purchase
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<h1 class="brand-line"><b>We currently services...</b></h1>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<span
-								><i class="fas fa-server"></i>
-								<%= bot?.guilds?.cache?.size %> Servers
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<span
-								><i class="fas fa-users"></i>
-								<%= bot?.users?.cache?.size %> Users
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<span
-								><i class="fas fa-hashtag"></i>
-								<%= bot?.channels?.cache?.size %> Channels
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Update these with your bot's News -->
-
-			<div class="row">
-				<h1 class="brand-line"><b>Featured News:</b></h1>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-					<div class="card bg-grey" style="width: 100%">
-						<div class="card-body">
-							<h4 class="card-title big-text">Bot Updates</h4>
-							<p class="card-text">View the latest Update Logs here...</p>
-							<a
-								href="updates"
-								class="btn btn-discord btn-secondary stretched-link"
-								>Update Logs</a
-							>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<% if(hasClientSecret) { %> <% if(!is_logged) { %>
-			<hr />
-			<a class="btn btn-secondary text-white" href="/auth/login">
-				Login to access the dashboard
-			</a>
-			<% } %> <% } %>
-		</div>
+<div class="bg-dash-dark-2 py-4">
+	<div class="container-fluid">
+		<h2 class="h5 mb-0">Home</h2>
 	</div>
 </div>
+<section>
+	<div class="page-content form-page">
+		<div class="container-sm center" style="margin-top: 25px">
+			<div class="d-grid gap-2 col-10 mx-auto">
+				<h2>Welcome to <%= dashboardDetails.name %> Dashboard!</h2>
+				<% if(dashboardDetails.description) { %>
+				<p><%= dashboardDetails.description %></p>
+				<% } %>
+
+				<hr />
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<img class="card-img-top" src="<%= hostname %>:<%= port %>/asset/image1.png" alt="Bot Invite" style="width: 100%" />
+								<h4 class="card-title big-text">Invite Bot</h4>
+								<p class="card-text">Invite the greatest bot in the game and level up your server!</p>
+								<!-- This link invites Spectre, Change the client id to your bot's id -->
+								<a href="https://discord.com/oauth2/authorize?client_id=<%= bot?.user?.id %>&scope=bot%20applications.commands&permissions=8" class="btn btn-discord btn-primary stretched-link">Invite Bot</a>
+							</div>
+						</div>
+					</div>
+					<% if(invite) { %>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<img class="card-img-top" src="<%= hostname %>:<%= port %>/asset/image2.png" alt="Support Server" style="width: 100%" />
+								<h4 class="card-title big-text">Support Server</h4>
+								<p class="card-text">Join our support server for help setting up the bot and to report bugs...</p>
+								<!-- Change link to your support server link -->
+								<a href="https://discord.gg/<%= invite %>" class="btn btn-discord btn-warning stretched-link">Join our Support Server</a>
+							</div>
+						</div>
+					</div>
+					<% } %>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<img class="card-img-top" src="<%= hostname %>:<%= port %>/asset/image3.png" alt="Commands" style="width: 100%" />
+								<h4 class="card-title big-text">Bot Commands</h4>
+								<p class="card-text">View a full list of Commands for Spectre bot on our command list page!</p>
+								<a href="commands" class="btn btn-discord btn-primary stretched-link">View Commands</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<h1 class="brand-line">
+						<b>What does <%= dashboardDetails.name %> Pro get me?</b>
+					</h1>
+					<h4>Take your server to a next level</h4>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<p style="color: yellow; font-size: 30px">⭐</p>
+								<hr />
+								<p>1 Pro Server</p>
+								<h3 id="1">£5.99/month</h3>
+								<button onclick="" class="btn btn-discord btn-primary stretched-link">Purchase</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<p style="color: yellow; font-size: 30px">⭐⭐</p>
+								<hr />
+								<p>2 Pro Server</p>
+								<h3 id="2">£7.99/month</h3>
+								<button onclick="" class="btn btn-discord btn-primary stretched-link">Purchase</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<p style="color: yellow; font-size: 30px">⭐⭐⭐⭐</p>
+								<hr />
+								<p>4 Pro Server</p>
+								<h3 id="3">£11.99/month</h3>
+								<button onclick="" class="btn btn-discord btn-primary stretched-link">Purchase</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<h1 class="brand-line"><b>We currently services...</b></h1>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<span
+									><i class="fas fa-server"></i>
+									<%= bot?.guilds?.cache?.size %> Servers
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<span
+									><i class="fas fa-users"></i>
+									<%= bot?.users?.cache?.size %> Users
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<span
+									><i class="fas fa-hashtag"></i>
+									<%= bot?.channels?.cache?.size %> Channels
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Update these with your bot's News -->
+
+				<div class="row">
+					<h1 class="brand-line"><b>Featured News:</b></h1>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<h4 class="card-title big-text">Bot Updates</h4>
+								<p class="card-text">View the latest Update Logs here...</p>
+								<a href="updates" class="btn btn-discord btn-secondary stretched-link">Update Logs</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<% if(hasClientSecret) { %> <% if(!is_logged) { %>
+				<hr />
+				<a class="btn btn-secondary text-white" href="/auth/login"> Login to access the dashboard </a>
+				<% } %> <% } %>
+			</div>
+		</div>
+	</div>
+</section>

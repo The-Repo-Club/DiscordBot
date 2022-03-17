@@ -1,62 +1,57 @@
-<!-- Page Title -->
-
-<div class="container-fluid">
-  <h2 class="h5 mb-0">Levels Leaderboard</h2>
-</div>
-
-<!-- Breadcrumb -->
-<div class="container-fluid py-2">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb mb-0 py-3 px-0">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Levels</li>
-    </ol>
-  </nav>
-</div>
-
-<!-- Main Page -->
-<div class="container-fluid">
-  <div class="row gy-4">
-    <div class="col-lg-12">
-			<div class="row">
-				<h1 class="brand-line"><b><%= guild.name %> Levels Leaderboard:</b></h1>
-			</div>
-      <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="card bg-grey" style="width: 100%">
-              <div class="card-body">
-                <table class="table mb-0 table-striped table-sm">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Level</th>
-                      <th scope="col">Exp</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% levels.forEach((users, rank)=> { %>
-                      <tr>
-                        <th scope="row">
-                          <%= rank + 1 %>
-                        </th>
-                        <td>
-                          <%= bot.users.cache.get(users.userID).tag %>
-                        </td>
-                        <td>
-                          <%= users.level %>
-                        </td>
-                        <td>
-                          <%= users.xp %>
-                        </td>
-                      </tr>
-                      <% }) %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-      </div>
-		</div>
+<div class="bg-dash-dark-2 py-4">
+	<div class="container-fluid">
+		<h2 class="h5 mb-0">Levels Leaderboard</h2>
 	</div>
 </div>
+<section>
+	<!-- Page Title -->
+
+	<!-- Breadcrumb -->
+	<div class="container-fluid py-2">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-0 py-3 px-0">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Levels</li>
+			</ol>
+		</nav>
+	</div>
+
+	<!-- Main Page -->
+	<div class="container-fluid">
+		<div class="row gy-4">
+			<div class="col-lg-12">
+				<div class="row">
+					<h1 class="brand-line"><b><%= guild.name %> Levels Leaderboard:</b></h1>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<div class="card bg-grey" style="width: 100%">
+							<div class="card-body">
+								<table class="table mb-0 table-striped table-sm">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Name</th>
+											<th scope="col">Level</th>
+											<th scope="col">Exp</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% levels.forEach((users, rank)=> { %>
+										<tr>
+											<th scope="row"><%= rank + 1 %></th>
+											<td><%= bot.users.cache.get(users.userID).tag %></td>
+											<td><%= users.level %></td>
+											<td><%= users.xp %></td>
+										</tr>
+										<% }) %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

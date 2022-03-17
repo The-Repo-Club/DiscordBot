@@ -12,24 +12,30 @@
 
 		case "commands":
 			var head_dashboards = document.getElementById("head_dashboards");
+			var item_dashboards = document.getElementById("item_dashboards");
 
 			var rel_commands = document.getElementById("rel_commands");
 			var dashboards_toggle = document.getElementById("dashboards_toggle");
 
 			head_dashboards.classList.add("active");
+			$(".active").attr("aria-expanded", "true");
 
+			item_dashboards.classList.add("active");
 			rel_commands.classList.add("active");
 			dashboards_toggle.classList.add("show");
 			break;
 
 		case "dashboard":
 			var head_dashboards = document.getElementById("head_dashboards");
+			var item_dashboards = document.getElementById("item_dashboards");
 
 			var rel_dashboard = document.getElementById("rel_dashboard");
 			var dashboards_toggle = document.getElementById("dashboards_toggle");
 
 			head_dashboards.classList.add("active");
+			$(".active").attr("aria-expanded", "true");
 
+			item_dashboards.classList.add("active");
 			rel_dashboard.classList.add("active");
 			dashboards_toggle.classList.add("show");
 			break;
