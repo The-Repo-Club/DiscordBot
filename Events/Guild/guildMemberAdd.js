@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Thu 17 March 2022, 01:19:47 PM [GMT]
+ *   Fri 18 March 2022, 11:41:49 PM [GMT]
  *
  *Description:
  *   guildMemberAdd Event for Minimal-Mistakes#3775
@@ -22,7 +22,7 @@
 
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
 const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
-const { green, yellow } = require("../../Structures/colors.json");
+const { green, background } = require("../../Structures/colors.json");
 const Canvas = require("../../Systems/Canvas/index");
 
 module.exports = {
@@ -37,9 +37,7 @@ module.exports = {
 		});
 		if (!Data || !Data.logs.joinLeaveLogs) return;
 
-		const logsChannel = member.guild.channels.cache.get(
-			Data.logs.joinLeaveLogs
-		);
+		const logsChannel = member.guild.channels.cache.get(Data.logs.joinLeaveLogs);
 		const logs = await member.guild.fetchAuditLogs({
 			limit: 1,
 		});
@@ -47,20 +45,9 @@ module.exports = {
 
 		if (log.action == "BOT_ADD") {
 			// If the last entry fetched is of the type "BOT_ADD" it means a bot has joined
-			const botJoinedEmbed = new MessageEmbed()
-				.setTitle(
-					"<:icons_unbanmember:949376464388784138> A Bot Joined The Server"
-				)
-				.setColor(green)
-				.setTimestamp()
-				.setFooter({ text: member.guild.name })
-				.setDescription(
-					`> The bot ${member} has been added by \`${log.executor.tag}\` to this server`
-				);
+			const botJoinedEmbed = new MessageEmbed().setTitle("<:icons_unbanmember:949376464388784138> A Bot Joined The Server").setColor(green).setTimestamp().setFooter({ text: member.guild.name }).setDescription(`> The bot ${member} has been added by \`${log.executor.tag}\` to this server`);
 
-			logsChannel
-				.send({ embeds: [botJoinedEmbed] })
-				.catch((err) => console.log(err));
+			logsChannel.send({ embeds: [botJoinedEmbed] }).catch((err) => console.log(err));
 		} else {
 			// Else it means a normal user joined
 			const image = await new Canvas.Welcome()
@@ -69,15 +56,10 @@ module.exports = {
 				.setAvatar(member.displayAvatarURL({ format: "png", size: 512 }))
 				.setMemberCount(member.guild.memberCount)
 				.setGuildName(member.guild.name)
-				.setColor("Background", yellow)
+				.setColor("Background", background)
 				.toAttachment();
-			const attachment = new MessageAttachment(
-				image.toBuffer(),
-				"MemberWelcomeCard.png"
-			);
-			logsChannel
-				.send({ files: [attachment] })
-				.catch((err) => console.log(err));
+			const attachment = new MessageAttachment(image.toBuffer(), "MemberWelcomeCard.png");
+			logsChannel.send({ files: [attachment] }).catch((err) => console.log(err));
 		}
 	},
 };

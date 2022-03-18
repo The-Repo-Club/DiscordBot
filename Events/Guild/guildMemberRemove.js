@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Thu 17 March 2022, 01:19:35 PM [GMT]
+ *   Fri 18 March 2022, 11:42:01 PM [GMT]
  *
  *Description:
  *   guildMemberRemove Event for Minimal-Mistakes#3775
@@ -23,7 +23,7 @@
 const { MessageEmbed, GuildMember, MessageAttachment } = require("discord.js");
 const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const Canvas = require("../../Systems/Canvas/index");
-const { yellow } = require("../../Structures/colors.json");
+const { background } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "guildMemberRemove",
@@ -37,9 +37,7 @@ module.exports = {
 		});
 		if (!Data || !Data.logs.joinLeaveLogs) return;
 
-		const logsChannel = member.guild.channels.cache.get(
-			Data.logs.joinLeaveLogs
-		);
+		const logsChannel = member.guild.channels.cache.get(Data.logs.joinLeaveLogs);
 
 		// Else it means a normal user joined
 		const image = await new Canvas.Goodbye()
@@ -48,12 +46,9 @@ module.exports = {
 			.setAvatar(member.displayAvatarURL({ format: "png", size: 512 }))
 			.setMemberCount(member.guild.memberCount)
 			.setGuildName(member.guild.name)
-			.setColor("Background", yellow)
+			.setColor("Background", background)
 			.toAttachment();
-		const attachment = new MessageAttachment(
-			image.toBuffer(),
-			"MemberWelcomeCard.png"
-		);
+		const attachment = new MessageAttachment(image.toBuffer(), "MemberWelcomeCard.png");
 		logsChannel.send({ files: [attachment] }).catch((err) => console.log(err));
 	},
 };
