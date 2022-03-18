@@ -11,7 +11,7 @@
  *Created:
  *   Thu 17 March 2022, 10:25:00 PM [GMT]
  *Last edited:
- *   Thu 17 March 2022, 10:28:38 PM [GMT]
+ *   Fri 18 March 2022, 11:43:46 PM [GMT]
  *
  *Description:
  *   Warning Command for Minimal-Mistakes#3775
@@ -26,6 +26,7 @@ const { red } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "warnings",
+	path: "Moderation/warnings.js",
 	description: "Shows user warnings",
 	permission: "KICK_MEMBERS",
 	options: [
