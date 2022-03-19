@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Wed 16 March 2022, 09:24:53 PM [GMT]
+ *   Sat 19 March 2022, 02:23:32 AM [GMT]
  *
  *Description:
  *   Client Info Event for Minimal-Mistakes#3775
@@ -41,14 +41,14 @@ module.exports = {
 					h: 1,
 					stringify: false,
 					marks: {
-						nw: "╭",
-						n: "─",
-						ne: "╮",
-						e: "│",
-						se: "╯",
-						s: "─",
-						sw: "╰",
-						w: "│",
+						nw: "╔",
+						n: "═",
+						ne: "╗",
+						e: "║",
+						se: "╝",
+						s: "═",
+						sw: "╚",
+						w: "║",
 					},
 					hAlign: "middle",
 				},
@@ -61,39 +61,25 @@ module.exports = {
 					h: 9,
 					stringify: false,
 					marks: {
-						nw: "╭",
-						n: "─",
-						ne: "╮",
-						e: "│",
-						se: "╯",
-						s: "─",
-						sw: "╰",
-						w: "│",
+						nw: "╔",
+						n: "═",
+						ne: "╗",
+						e: "║",
+						se: "╝",
+						s: "═",
+						sw: "╚",
+						w: "║",
 					},
 					hAlign: "middle",
 				},
 				`
-${chalk.bold.blueBright("Client Details")} :: ${chalk.redBright(
-					client.user.tag
-				)}
-${chalk.bold.blueBright("Guilds Count")} :: ${chalk.redBright(
-					client.guilds.cache.size
-				)}
-${chalk.bold.blueBright("Users Count")}:: ${chalk.redBright(
-					client.users.cache.size
-				)}
-${chalk.bold.blueBright("Channels Count")}:: ${chalk.redBright(
-					client.channels.cache.size
-				)}
-${chalk.bold.blueBright("Commands Count")} :: ${chalk.redBright(
-					client.dashboard._commands.length
-				)}
-${chalk.bold.blueBright("NodeJS Version")} :: ${chalk.redBright(
-					process.version
-				)}
-${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
-					require("discord.js").version
-				)}
+${chalk.bold.blueBright("Client Details")} :: ${chalk.redBright(client.user.tag)}
+${chalk.bold.blueBright("Guilds Count")} :: ${chalk.redBright(client.guilds.cache.size.toLocaleString())}
+${chalk.bold.blueBright("Users Count")}:: ${chalk.redBright(client.users.cache.size.toLocaleString())}
+${chalk.bold.blueBright("Channels Count")}:: ${chalk.redBright(client.channels.cache.filter((c) => c.type === "GUILD_TEXT" || c.type === "GUILD_VOICE").size.toLocaleString())}
+${chalk.bold.blueBright("Commands Count")} :: ${chalk.redBright(client.dashboard._commands.length.toLocaleString())}
+${chalk.bold.blueBright("NodeJS Version")} :: ${chalk.redBright(process.version)}
+${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(require("discord.js").version)}
 `
 			).stringify();
 
@@ -103,14 +89,14 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 					h: 1,
 					stringify: false,
 					marks: {
-						nw: "╭",
-						n: "─",
-						ne: "╮",
-						e: "│",
-						se: "╯",
-						s: "─",
-						sw: "╰",
-						w: "│",
+						nw: "╔",
+						n: "═",
+						ne: "╗",
+						e: "║",
+						se: "╝",
+						s: "═",
+						sw: "╚",
+						w: "║",
 					},
 					hAlign: "middle",
 				},
@@ -123,27 +109,21 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(
 					h: 5,
 					stringify: false,
 					marks: {
-						nw: "╭",
-						n: "─",
-						ne: "╮",
-						e: "│",
-						se: "╯",
-						s: "─",
-						sw: "╰",
-						w: "│",
+						nw: "╔",
+						n: "═",
+						ne: "╗",
+						e: "║",
+						se: "╝",
+						s: "═",
+						sw: "╚",
+						w: "║",
 					},
 					hAlign: "middle",
 				},
 				`
-${chalk.bold.blueBright("baseUrl")} :: ${chalk.redBright(
-					client.dashboard.config.baseUrl
-				)}
-${chalk.bold.blueBright("port")} :: ${chalk.redBright(
-					client.dashboard.config.port
-				)}
-${chalk.bold.blueBright("routes")} :: ${chalk.redBright(
-					client.dashboard.routes
-				)}`
+${chalk.bold.blueBright("baseUrl")} :: ${chalk.redBright(client.dashboard.config.baseUrl)}
+${chalk.bold.blueBright("port")} :: ${chalk.redBright(client.dashboard.config.port)}
+${chalk.bold.blueBright("routes")} :: ${chalk.redBright(client.dashboard.routes)}`
 			).stringify();
 
 			console.log(chalk.bold.greenBright(ClientBoxHeader));
@@ -168,14 +148,14 @@ ${chalk.bold.blueBright("routes")} :: ${chalk.redBright(
 						h: 1,
 						stringify: false,
 						marks: {
-							nw: "╭",
-							n: "─",
-							ne: "╮",
-							e: "│",
-							se: "╯",
-							s: "─",
-							sw: "╰",
-							w: "│",
+							nw: "╔",
+							n: "═",
+							ne: "╗",
+							e: "║",
+							se: "╝",
+							s: "═",
+							sw: "╚",
+							w: "║",
 						},
 						hAlign: "middle",
 					},
@@ -188,14 +168,14 @@ ${chalk.bold.blueBright("routes")} :: ${chalk.redBright(
 						h: 3,
 						stringify: false,
 						marks: {
-							nw: "╭",
-							n: "─",
-							ne: "╮",
-							e: "│",
-							se: "╯",
-							s: "─",
-							sw: "╰",
-							w: "│",
+							nw: "╔",
+							n: "═",
+							ne: "╗",
+							e: "║",
+							se: "╝",
+							s: "═",
+							sw: "╚",
+							w: "║",
 						},
 						hAlign: "middle",
 					},

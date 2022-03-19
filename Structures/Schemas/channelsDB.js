@@ -30,6 +30,13 @@ module.exports = model(
 				helpersID: { type: String, default: null },
 				welcomeID: { type: String, default: null },
 			},
+			status: {
+				membersID: { type: String, default: null },
+				botsID: { type: String, default: null },
+				rolesID: { type: String, default: null },
+				channelsID: { type: String, default: null },
+				premiumsID: { type: String, default: null },
+			},
 		},
 		{
 			versionKey: false, // You should be aware of the outcome after set to false

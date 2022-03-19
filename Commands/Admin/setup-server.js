@@ -11,7 +11,7 @@
  *Created:
  *   Wed 16 March 2022, 08:49:34 PM [GMT]
  *Last edited:
- *   Thu 17 March 2022, 12:58:19 PM [GMT]
+ *   Sat 19 March 2022, 01:48:23 AM [GMT]
  *
  *Description:
  *   Setup-Server Command for Minimal-Mistakes#3775
@@ -161,6 +161,48 @@ module.exports = {
 			],
 		},
 		{
+			name: "status",
+			description: "Setup the server status channels.",
+			type: "SUB_COMMAND",
+			options: [
+				{
+					name: "type",
+					description: "Select the type of status you would like to setup.",
+					required: true,
+					type: "STRING",
+					choices: [
+						{
+							name: "Members",
+							value: "members",
+						},
+						{
+							name: "Bots",
+							value: "bots",
+						},
+						{
+							name: "Roles",
+							value: "roles",
+						},
+						{
+							name: "Channels",
+							value: "channels",
+						},
+						{
+							name: "Premiums",
+							value: "premiums",
+						},
+					],
+				},
+				{
+					name: "channel",
+					description: "Select the role to give to that type.",
+					required: true,
+					type: "CHANNEL",
+					channelTypes: ["GUILD_STAGE_VOICE"],
+				},
+			],
+		},
+		{
 			name: "commands",
 			description: "Setup the server commands channel.",
 			type: "SUB_COMMAND",
@@ -219,11 +261,7 @@ module.exports = {
 							}
 						).catch((err) => console.log(err));
 
-						const channelSetup = new MessageEmbed()
-							.setDescription(
-								"✅ | Successfully setup the server announcements channel."
-							)
-							.setColor(purple);
+						const channelSetup = new MessageEmbed().setDescription("✅ | Successfully setup the server announcements channel.").setColor(purple);
 
 						await guild.channels.cache
 							.get(announcementsChannel.id)
@@ -235,7 +273,7 @@ module.exports = {
 							});
 
 						await interaction.reply({
-							content: "Done",
+							content: "Successfully setup the Announcements Channel.",
 							ephemeral: true,
 						});
 					}
@@ -245,9 +283,7 @@ module.exports = {
 						const LType = options.getString("type");
 						const LChannel = options.getChannel("channel");
 
-						const channelSetup = new MessageEmbed()
-							.setDescription(`✅ | Successfully setup the ${LType} logs.`)
-							.setColor(purple);
+						const channelSetup = new MessageEmbed().setDescription(`✅ | Successfully setup the ${LType} logs.`).setColor(purple);
 
 						updateField(guild.id, "logs", LType + "Logs", LChannel);
 
@@ -261,7 +297,7 @@ module.exports = {
 							});
 
 						await interaction.reply({
-							content: `Successfully setup the ${LType} logs.`,
+							content: `Successfully setup the ${LChannel} logs.`,
 							ephemeral: true,
 						});
 					}
@@ -281,11 +317,7 @@ module.exports = {
 							}
 						).catch((err) => console.log(err));
 
-						const channelSetup = new MessageEmbed()
-							.setDescription(
-								"✅ | Successfully setup the server commands channel."
-							)
-							.setColor(purple);
+						const channelSetup = new MessageEmbed().setDescription("✅ | Successfully setup the server commands channel.").setColor(purple);
 
 						await guild.channels.cache
 							.get(commandChannel.id)
@@ -297,7 +329,7 @@ module.exports = {
 							});
 
 						await interaction.reply({
-							content: "Done",
+							content: "Successfully setup the Commands Channel.",
 							ephemeral: true,
 						});
 					}
@@ -307,9 +339,7 @@ module.exports = {
 						const RType = options.getString("type");
 						const RRole = options.getRole("role");
 
-						const channelSetup = new MessageEmbed()
-							.setDescription(`✅ | Successfully setup the ${RType} role.`)
-							.setColor(purple);
+						const channelSetup = new MessageEmbed().setDescription(`✅ | Successfully setup the ${RType} role.`).setColor(purple);
 
 						updateField(guild.id, RType + "ID", RRole);
 
@@ -319,22 +349,31 @@ module.exports = {
 						});
 					}
 					break;
+				case "status":
+					{
+						const LType = options.getString("type");
+						const LChannel = options.getChannel("channel");
+
+						updateField(guild.id, "status", LType + "ID", LChannel);
+
+						await interaction.reply({
+							content: `Successfully setup the ${LChannel} status channel.`,
+							ephemeral: true,
+						});
+					}
+					break;
 				case "reset":
 					{
-						const LogsReset = new MessageEmbed()
-							.setDescription("✅ | Successfully reset the logging channels.")
-							.setColor(purple);
+						const LogsReset = new MessageEmbed().setDescription("✅ | Successfully reset the logging channels.").setColor(purple);
 						DB.deleteMany({ GuildID: guild.id }, async (err, data) => {
 							if (err) throw err;
 							if (!data)
 								return interaction.reply({
 									content: "There is no data to delete",
 								});
-							return interaction
-								.reply({ embeds: [LogsReset], fetchReply: true })
-								.then((msg) => {
-									setTimeout(() => msg.delete(), ms("5s"));
-								});
+							return interaction.reply({ embeds: [LogsReset], fetchReply: true }).then((msg) => {
+								setTimeout(() => msg.delete(), ms("5s"));
+							});
 						});
 					}
 					return;
@@ -342,23 +381,11 @@ module.exports = {
 		} catch (error) {
 			if (error.message === "Missing Access") {
 				return interaction.reply({
-					embeds: [
-						new MessageEmbed()
-							.setColor(red)
-							.setDescription(
-								`❌ The bot does not have access to this channel.`
-							),
-					],
+					embeds: [new MessageEmbed().setColor(red).setDescription(`❌ The bot does not have access to this channel.`)],
 				});
 			} else {
 				return interaction.reply({
-					embeds: [
-						new MessageEmbed()
-							.setColor(red)
-							.setDescription(
-								`❌ An error occurred. \n\n \`\`\`${error}\`\`\``
-							),
-					],
+					embeds: [new MessageEmbed().setColor(red).setDescription(`❌ An error occurred. \n\n \`\`\`${error}\`\`\``)],
 				});
 			}
 		}
