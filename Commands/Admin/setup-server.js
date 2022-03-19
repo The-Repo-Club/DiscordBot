@@ -231,6 +231,20 @@ module.exports = {
 			],
 		},
 		{
+			name: "invite",
+			description: "Setup the server invite channel.",
+			type: "SUB_COMMAND",
+			options: [
+				{
+					name: "channel",
+					description: "Select the channel to get invites from.",
+					required: true,
+					type: "CHANNEL",
+					channelTypes: ["GUILD_TEXT"],
+				},
+			],
+		},
+		{
 			name: "reset",
 			description: "Reset all of the channels.",
 			type: "SUB_COMMAND",
@@ -253,7 +267,7 @@ module.exports = {
 						await DB.findOneAndUpdate(
 							{ GuildID: guild.id },
 							{
-								announcementsChannelID: announcementsChannel.id,
+								announcementChannelID: announcementsChannel.id,
 							},
 							{
 								new: true,
@@ -274,6 +288,38 @@ module.exports = {
 
 						await interaction.reply({
 							content: "Successfully setup the Announcements Channel.",
+							ephemeral: true,
+						});
+					}
+					break;
+				case "invite":
+					{
+						const inviteChannel = options.getChannel("invite");
+
+						await DB.findOneAndUpdate(
+							{ GuildID: guild.id },
+							{
+								inviteChannelID: inviteChannel.id,
+							},
+							{
+								new: true,
+								upsert: true,
+							}
+						).catch((err) => console.log(err));
+
+						const channelSetup = new MessageEmbed().setDescription("✅ | Successfully setup the server invite channel.").setColor(purple);
+
+						await guild.channels.cache
+							.get(inviteChannel.id)
+							.send({ embeds: [channelSetup] })
+							.then((m) => {
+								setTimeout(() => {
+									m.delete().catch(() => {});
+								}, ms("5s"));
+							});
+
+						await interaction.reply({
+							content: "Successfully setup the Invites Channel.",
 							ephemeral: true,
 						});
 					}
