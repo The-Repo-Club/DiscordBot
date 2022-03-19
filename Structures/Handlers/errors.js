@@ -8,11 +8,7 @@
 
 const { MessageEmbed, WebhookClient } = require("discord.js");
 
-const {
-	errorWebhookID,
-	errorWebhookToken,
-	botsDevID,
-} = require("../config.json");
+const { errorWebhookID, errorWebhookToken, botsDevID } = require("../config.json");
 const { red } = require("../colors.json");
 
 const sendWebhook = (content, err) => {
@@ -28,13 +24,7 @@ const sendWebhook = (content, err) => {
 		.setColor(red)
 		.setAuthor({ name: err?.name || "Error" })
 		.setTitle(`🟥 **There was a ${content}** 🟥`)
-		.setDescription(
-			"```js\n" +
-				(errString.length > 4096
-					? `${errString.substr(0, 4000)}...`
-					: errString) +
-				"\n```"
-		);
+		.setDescription("```js\n" + (errString.length > 4096 ? `${errString.substr(0, 4000)}...` : errString) + "\n```");
 
 	if (err?.description) embed.addField("Error Description", err?.description);
 	if (content) embed.addField("Error Type", content);
@@ -49,25 +39,18 @@ const sendWebhook = (content, err) => {
 		});
 	errorWebhookSend.send({
 		content: "There seems to have been an error.",
-		username: "Console Logs",
 		embeds: [embed],
 	});
 };
 
 process.on("uncaughtException", (exception) => {
 	console.log(exception);
-	if (!errorWebhookID || !errorWebhookToken)
-		return console.warn(
-			"Without the errorWebhook logging errors will not work..."
-		);
+	if (!errorWebhookID || !errorWebhookToken) return console.warn("Without the errorWebhook logging errors will not work...");
 	sendWebhook("uncaughtException", exception);
 });
 
 process.on("unhandledRejection", (rejection) => {
 	console.log(rejection);
-	if (!errorWebhookID || !errorWebhookToken)
-		return console.warn(
-			"Without the errorWebhook logging errors will not work..."
-		);
+	if (!errorWebhookID || !errorWebhookToken) return console.warn("Without the errorWebhook logging errors will not work...");
 	sendWebhook("unhandledRejection", rejection);
 });

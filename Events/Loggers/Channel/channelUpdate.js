@@ -40,7 +40,7 @@ module.exports = {
 
 		if (oldChannel.type == "DM" || oldChannel.type == "GROUP_DM") return;
 
-		const logsChannel = oldChannel.guild.channels.cache.get(Data.channelLogs);
+		const logsChannel = oldChannel.guild.channels.cache.get(Data.logs.channelLogs);
 
 		const logs = await oldChannel.guild.fetchAuditLogs({
 			limit: 1,

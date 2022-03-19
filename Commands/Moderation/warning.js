@@ -146,7 +146,15 @@ module.exports = {
 				data.save();
 			});
 
-			interaction.reply({ embeds: [new MessageEmbed().setTitle("Warning added").setColor(red).setDescription(`Warning Added: ${Target.user.tag} \n**Reason**: ${Reason}\n**Evidence**: ${Evidence}`).setFooter(`ID: ${Target.id}`)] });
+			interaction.reply({
+				embeds: [
+					new MessageEmbed()
+						.setTitle("Warning added")
+						.setColor(red)
+						.setDescription(`Warning Added: ${Target.user.tag} \n**Reason**: ${Reason}\n**Evidence**: ${Evidence}`)
+						.setFooter({ text: `ID: ${Target.id}` }),
+				],
+			});
 		} else if (Sub === "check") {
 			db.findOne({ GuildID: guildId, UserID: Target.id, UserTag: Target.user.tag }, async (err, data) => {
 				if (err) throw err;
