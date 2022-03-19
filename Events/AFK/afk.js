@@ -26,7 +26,7 @@ const { cyan, yellow } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "messageCreate",
-	path: "Member/afkEvent.js",
+	path: "AFK/afkEvent.js",
 	/**
 	 * @param {GuildMember} member
 	 * @param {Message} message
@@ -42,10 +42,7 @@ module.exports = {
 		if (checkAFK) {
 			checkAFK.delete();
 
-			const notAFK = new MessageEmbed()
-				.setTitle(`Welcome Back ${message.author.username}!`)
-				.setDescription(`You are no longer AFK!`)
-				.setColor(cyan);
+			const notAFK = new MessageEmbed().setTitle(`Welcome Back ${message.author.username}!`).setDescription(`You are no longer AFK!`).setColor(cyan);
 
 			message.channel.send({ embeds: [notAFK] });
 		}
@@ -61,11 +58,7 @@ module.exports = {
 				const embed = new MessageEmbed()
 					.setTitle(`🟡 ${mentionedUser.username} is currently AFK!`)
 					.setColor(yellow)
-					.setDescription(
-						`Reason: \`${Data.Reason}\`\n AFK Since: <t:${Math.round(
-							Data.Date / 1000
-						)}:R>`
-					);
+					.setDescription(`Reason: \`${Data.Reason}\`\n AFK Since: <t:${Math.round(Data.Date / 1000)}:R>`);
 
 				message.channel.send({ embeds: [embed] });
 			}

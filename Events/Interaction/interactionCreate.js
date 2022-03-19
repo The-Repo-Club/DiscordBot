@@ -34,6 +34,12 @@ module.exports = {
 	 */
 	async execute(interaction, client) {
 		const { guildId, guild, user, member } = interaction;
+		if (!interaction.channel)
+			return (
+				interaction.reply({
+					embeds: [new MessageEmbed().setColor(red).setDescription("🟥 Sorry slash commands dont work in DM.").setTimestamp()],
+				}) && client.commands.delete(interaction.commandName)
+			);
 
 		if (client.maintenance && interaction.user.id != "861270236475817994") {
 			const Response = new MessageEmbed().setTitle("👷‍♂️ MAINTENANCE 👷‍♂️").setDescription("Sorry the bot will be back shortly when everything is working correctly.").setColor(red);

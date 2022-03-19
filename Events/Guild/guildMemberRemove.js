@@ -27,7 +27,7 @@ const { background } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "guildMemberRemove",
-	path: "Member/guildMemberRemove.js",
+	path: "Guild/guildMemberRemove.js",
 	/**
 	 * @param {GuildMember} member
 	 */

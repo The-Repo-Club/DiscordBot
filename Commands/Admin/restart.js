@@ -44,9 +44,7 @@ module.exports = {
 			.reply({ content: "Restarting...", ephemeral: true })
 			.then(() => {
 				client.destroy();
-				console.log(
-					`[Client] Restarting by ${member.user.username} in ${guild.name}`
-				);
+				console.log(`[Client] Restarting by ${member.user.username} in ${guild.name}`);
 			})
 			.then(() => {
 				client.login(Token);
@@ -55,12 +53,7 @@ module.exports = {
 					var owner = client.users.cache.get(ownerIDS[i]);
 
 					owner.send({
-						embeds: [
-							new MessageEmbed()
-								.setColor(purple)
-								.setTitle("[Client] Restarted by")
-								.setDescription(`${member.user.username} in ${guild.name}`),
-						],
+						embeds: [new MessageEmbed().setColor(purple).setTitle("[Client] Restarted by").setDescription(`${member.user.username} in ${guild.name}`)],
 					});
 				}
 			});

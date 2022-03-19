@@ -27,7 +27,7 @@ const Canvas = require("../../Systems/Canvas/index");
 
 module.exports = {
 	name: "guildMemberAdd",
-	path: "Member/guildMemberAdd.js",
+	path: "Guild/guildMemberAdd.js",
 	/**
 	 * @param {GuildMember} member
 	 */

@@ -44,13 +44,11 @@ const sendWebhook = (content, err) => {
 };
 
 process.on("uncaughtException", (exception) => {
-	console.log(exception);
 	if (!errorWebhookID || !errorWebhookToken) return console.warn("Without the errorWebhook logging errors will not work...");
 	sendWebhook("uncaughtException", exception);
 });
 
 process.on("unhandledRejection", (rejection) => {
-	console.log(rejection);
 	if (!errorWebhookID || !errorWebhookToken) return console.warn("Without the errorWebhook logging errors will not work...");
 	sendWebhook("unhandledRejection", rejection);
 });

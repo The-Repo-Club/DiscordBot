@@ -25,7 +25,7 @@ const DB = require("../../Structures/Schemas/channelsDB");
 
 module.exports = {
 	name: "guildMemberUpdate",
-	path: "Member/guildMemberUpdate.js",
+	path: "Guild/guildMemberUpdate.js",
 	/**
 	 * @param {GuildMember} oldMember
 	 * @param {GuildMember} newMember

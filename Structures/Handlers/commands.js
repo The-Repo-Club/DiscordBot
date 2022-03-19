@@ -20,23 +20,15 @@ module.exports = async (client, PG, Ascii) => {
 	(await PG(`${process.cwd()}/Commands/*/*.js`)).map(async (file) => {
 		const command = require(file);
 
-		if (!command.name)
-			return Table.addRow(command.path, "🟥 FAILED", "Missing a name.");
+		if (!command.name) return Table.addRow(command.path, "🟥 FAILED", "Missing a name.");
 
-		if (!command.path)
-			return Table.addRow(command.name, "🟥 FAILED", "Missing a path.");
+		if (!command.path) return Table.addRow(command.name, "🟥 FAILED", "Missing a path.");
 
-		if (!command.type && !command.description)
-			return Table.addRow(command.path, "🟥 FAILED", "Missing a description.");
+		if (!command.type && !command.description) return Table.addRow(command.path, "🟥 FAILED", "Missing a description.");
 
 		if (command.permission) {
 			if (Perms.includes(command.permission)) command.defaultPermission = false;
-			else
-				return Table.addRow(
-					command.path,
-					"🟥 FAILED",
-					"Permission is invalid."
-				);
+			else return Table.addRow(command.path, "🟥 FAILED", "Permission is invalid.");
 		}
 
 		client.commands.set(command.name, command);
@@ -49,28 +41,18 @@ module.exports = async (client, PG, Ascii) => {
 
 	// DASHBOARD CHECK //
 	client.commands.forEach((command) => {
-		if (!command.type && command.description)
-			client.dashboard.registerCommand(
-				command.name,
-				command.description,
-				"/" + command.name,
-				command.permission
-			);
+		if (!command.type && command.description) client.dashboard.registerCommand(command.name, command.description, "/" + command.name, command.permission);
 	});
 
 	// PERMISSIONS CHECK //
 	client.on("ready", async () => {
 		client.guilds.cache.forEach((MainGuild) => {
-			MainGuild.commands.set(CommandsArray).then(async (command) => {
+			client.application.commands.set(CommandsArray).then(async (command) => {
 				const Roles = (commandName) => {
-					const cmdPerms = CommandsArray.find(
-						(c) => c.name === commandName
-					).permission;
+					const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
 					if (!cmdPerms) return null;
 
-					return MainGuild.roles.cache
-						.filter((r) => r.permissions.has(cmdPerms) && !r.managed)
-						.first(10);
+					return MainGuild.roles.cache.filter((r) => r.permissions.has(cmdPerms) && !r.managed).first(10);
 				};
 
 				const fullPermissions = command.reduce((accumulator, r) => {
