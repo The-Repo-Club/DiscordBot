@@ -28,8 +28,7 @@ const { green } = require("../../Structures/colors.json");
 module.exports = {
 	name: "announce",
 	path: "Admin/announce.js",
-	description:
-		"Announces whatever you want to announce in the announcement channel.",
+	description: "Announces whatever you want to announce in the announcement channel.",
 	permission: "ADMINISTRATOR",
 	options: [
 		{
@@ -59,18 +58,12 @@ module.exports = {
 				ephemeral: true,
 			});
 
-		const logsChannel = interaction.guild.channels.cache.get(
-			Data.announcementChannelID
-		);
+		const logsChannel = interaction.guild.channels.cache.get(Data.announcementChannelID);
 
 		const title = interaction.options.getString("title");
 		const info = interaction.options.getString("information");
 
-		const announcement = new MessageEmbed()
-			.setTitle(`${title}`)
-			.setColor(green)
-			.setDescription(`${info}`)
-			.setTimestamp();
+		const announcement = new MessageEmbed().setTitle(`${title}`).setColor(green).setDescription(`${info}`).setTimestamp();
 
 		logsChannel.send({ embeds: [announcement] });
 		interaction.reply({
