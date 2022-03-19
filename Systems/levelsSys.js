@@ -1,3 +1,25 @@
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Systems/levelsSys.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Sat 19 March 2022, 04:18:23 AM [GMT]
+ *Last edited:
+ *   Sat 19 March 2022, 04:24:17 AM [GMT]
+ *
+ *Description:
+ *   levelsSys System for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, mongoose, levelsDB
+ **/
+
 const mongoose = require("mongoose");
 const levels = require("../Structures/Schemas/levelsDB");
 var mongoUrl;
@@ -34,9 +56,7 @@ class DiscordXp {
 			guildID: guildId,
 		});
 
-		await newUser
-			.save()
-			.catch((e) => console.log(`Failed to create user: ${e}`));
+		await newUser.save().catch((e) => console.log(`Failed to create user: ${e}`));
 
 		return newUser;
 	}
@@ -53,9 +73,7 @@ class DiscordXp {
 		const user = await levels.findOne({ userID: userId, guildID: guildId });
 		if (!user) return false;
 
-		await levels
-			.findOneAndDelete({ userID: userId, guildID: guildId })
-			.catch((e) => console.log(`Failed to delete user: ${e}`));
+		await levels.findOneAndDelete({ userID: userId, guildID: guildId }).catch((e) => console.log(`Failed to delete user: ${e}`));
 
 		return user;
 	}
@@ -69,8 +87,7 @@ class DiscordXp {
 	static async appendXp(userId, guildId, xp) {
 		if (!userId) throw new TypeError("An user id was not provided.");
 		if (!guildId) throw new TypeError("A guild id was not provided.");
-		if (xp == 0 || !xp || isNaN(parseInt(xp)))
-			throw new TypeError("An amount of xp was not provided/was invalid.");
+		if (xp == 0 || !xp || isNaN(parseInt(xp))) throw new TypeError("An amount of xp was not provided/was invalid.");
 
 		const user = await levels.findOne({ userID: userId, guildID: guildId });
 
@@ -82,9 +99,7 @@ class DiscordXp {
 				level: Math.floor(0.1 * Math.sqrt(xp)),
 			});
 
-			await newUser
-				.save()
-				.catch((e) => console.log(`Failed to save new user.`));
+			await newUser.save().catch((e) => console.log(`Failed to save new user.`));
 
 			return Math.floor(0.1 * Math.sqrt(xp)) > 0;
 		}
@@ -130,8 +145,7 @@ class DiscordXp {
 	static async setXp(userId, guildId, xp) {
 		if (!userId) throw new TypeError("An user id was not provided.");
 		if (!guildId) throw new TypeError("A guild id was not provided.");
-		if (xp == 0 || !xp || isNaN(parseInt(xp)))
-			throw new TypeError("An amount of xp was not provided/was invalid.");
+		if (xp == 0 || !xp || isNaN(parseInt(xp))) throw new TypeError("An amount of xp was not provided/was invalid.");
 
 		const user = await levels.findOne({ userID: userId, guildID: guildId });
 		if (!user) return false;
@@ -210,8 +224,7 @@ class DiscordXp {
 	static async subtractXp(userId, guildId, xp) {
 		if (!userId) throw new TypeError("An user id was not provided.");
 		if (!guildId) throw new TypeError("A guild id was not provided.");
-		if (xp == 0 || !xp || isNaN(parseInt(xp)))
-			throw new TypeError("An amount of xp was not provided/was invalid.");
+		if (xp == 0 || !xp || isNaN(parseInt(xp))) throw new TypeError("An amount of xp was not provided/was invalid.");
 
 		const user = await levels.findOne({ userID: userId, guildID: guildId });
 		if (!user) return false;
@@ -289,10 +302,7 @@ class DiscordXp {
 					userID: key.userID,
 					xp: key.xp,
 					level: key.level,
-					position:
-						leaderboard.findIndex(
-							(i) => i.guildID === key.guildID && i.userID === key.userID
-						) + 1,
+					position: leaderboard.findIndex((i) => i.guildID === key.guildID && i.userID === key.userID) + 1,
 					username: user.username,
 					discriminator: user.discriminator,
 				});
@@ -304,16 +314,9 @@ class DiscordXp {
 					userID: key.userID,
 					xp: key.xp,
 					level: key.level,
-					position:
-						leaderboard.findIndex(
-							(i) => i.guildID === key.guildID && i.userID === key.userID
-						) + 1,
-					username: client.users.cache.get(key.userID)
-						? client.users.cache.get(key.userID).username
-						: "Unknown",
-					discriminator: client.users.cache.get(key.userID)
-						? client.users.cache.get(key.userID).discriminator
-						: "0000",
+					position: leaderboard.findIndex((i) => i.guildID === key.guildID && i.userID === key.userID) + 1,
+					username: client.users.cache.get(key.userID) ? client.users.cache.get(key.userID).username : "Unknown",
+					discriminator: client.users.cache.get(key.userID) ? client.users.cache.get(key.userID).discriminator : "0000",
 				})
 			);
 		}
@@ -325,11 +328,9 @@ class DiscordXp {
 	 * @param {number} [targetLevel] - Xp required to reach that level.
 	 */
 	static xpFor(targetLevel) {
-		if (isNaN(targetLevel) || isNaN(parseInt(targetLevel, 10)))
-			throw new TypeError("Target level should be a valid number.");
+		if (isNaN(targetLevel) || isNaN(parseInt(targetLevel, 10))) throw new TypeError("Target level should be a valid number.");
 		if (isNaN(targetLevel)) targetLevel = parseInt(targetLevel, 10);
-		if (targetLevel < 0)
-			throw new RangeError("Target level should be a positive number.");
+		if (targetLevel < 0) throw new RangeError("Target level should be a positive number.");
 		return targetLevel * targetLevel * 100;
 	}
 
@@ -343,9 +344,7 @@ class DiscordXp {
 		const guild = await levels.findOne({ guildID: guildId });
 		if (!guild) return false;
 
-		await levels
-			.deleteMany({ guildID: guildId })
-			.catch((e) => console.log(`Failed to delete guild: ${e}`));
+		await levels.deleteMany({ guildID: guildId }).catch((e) => console.log(`Failed to delete guild: ${e}`));
 
 		return guild;
 	}

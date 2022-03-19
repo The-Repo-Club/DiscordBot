@@ -18,11 +18,10 @@ module.exports = async (client, PG, Ascii) => {
 	(await PG(`${process.cwd()}/Events/*/*.js`)).map(async (file) => {
 		const event = require(file);
 
+		if (!event.path) return Table.addRow(event.name, "🟥 FAILED", "Missing a path.");
+
 		if (!Events.includes(event.name) || !event.name) {
-			await Table.addRow(
-				`${event.name || "MISSING"}`,
-				`🟥 Event name is either invalid or missing: ${event.path}`
-			);
+			await Table.addRow(`${event.name || "MISSING"}`, `🟥 Event name is either invalid or missing: ${event.path}`);
 			return;
 		}
 

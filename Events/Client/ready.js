@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Fri 18 March 2022, 11:56:23 PM [GMT]
+ *   Sat 19 March 2022, 04:09:23 AM [GMT]
  *
  *Description:
  *   Ready Event for Minimal-Mistakes#3775
@@ -33,9 +33,5 @@ module.exports = {
 		require("./clientInfo");
 
 		client.user.setActivity("Development of v1.0.0", { type: "WATCHING" });
-
-		require("../../Systems/renameChannelsSys")(client);
-		require("../../Systems/cooldownSys")(client);
-		require("../../Systems/lockdownSys")(client);
 	},
 };

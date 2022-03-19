@@ -35,14 +35,17 @@ client.dashboard = dashboard;
 
 require("./dashboard.js")(client);
 
+client.buttons = new Collection();
 client.commands = new Collection();
 client.cooldowns = new Collection();
 client.maintenance = false;
 
-["commands", "events", "loggers", "modals"].forEach((handler) => {
-	require(`./Handlers/${handler}`)(client, PG, Ascii).catch((err) =>
-		console.log(err)
-	);
+["renameChannelsSys", "cooldownSys", "lockdownSys"].forEach((system) => {
+	require(`../Systems/${system}`)(client);
+});
+
+["buttons", "commands", "events", "loggers", "modals"].forEach((handler) => {
+	require(`./Handlers/${handler}`)(client, PG, Ascii).catch((err) => console.log(err));
 });
 
 client.login(Token).catch((err) => console.log(err));

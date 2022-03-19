@@ -2,7 +2,7 @@
  *Auto updated?
  *   Yes
  *File :
- *   DiscordBot/Events/Loggers/Guild/interactionCreate.js
+ *   DiscordBot/Events/Interaction/interactionCreate.js
  *Author :
  *   The-Repo-Club [wayne6324@gmail.com]
  *Github :
@@ -36,12 +36,7 @@ module.exports = {
 		const { guildId, guild, user, member } = interaction;
 
 		if (client.maintenance && interaction.user.id != "861270236475817994") {
-			const Response = new MessageEmbed()
-				.setTitle("👷‍♂️ MAINTENANCE 👷‍♂️")
-				.setDescription(
-					"Sorry the bot will be back shortly when everything is working correctly."
-				)
-				.setColor(red);
+			const Response = new MessageEmbed().setTitle("👷‍♂️ MAINTENANCE 👷‍♂️").setDescription("Sorry the bot will be back shortly when everything is working correctly.").setColor(red);
 
 			return interaction.reply({ embeds: [Response] });
 		}
@@ -52,9 +47,7 @@ module.exports = {
 				const CommandName = command.name.replace(" ", "").toLowerCase();
 
 				if (command.cooldown) {
-					const cooldown =
-						client.cooldowns.get(`${guildId}||${CommandName}||${user.id}`) -
-						Date.now();
+					const cooldown = client.cooldowns.get(`${guildId}||${CommandName}||${user.id}`) - Date.now();
 					const time = Math.floor(cooldown / 1000) + "";
 
 					const Data = await cooldownsDB.findOne({
@@ -70,25 +63,12 @@ module.exports = {
 
 					if (client.cooldowns.has(`${guildId}||${CommandName}||${user.id}`))
 						return interaction.reply({
-							embeds: [
-								new MessageEmbed()
-									.setColor(yellow)
-									.setDescription(
-										`🟥 ${interaction.user} The __cooldown__ for **${
-											command.name
-										}** is still active.\nYou have to wait for another \` ${
-											time.split(".")[0]
-										} \` *second(s)*.`
-									),
-							],
+							embeds: [new MessageEmbed().setColor(yellow).setDescription(`🟥 ${interaction.user} The __cooldown__ for **${command.name}** is still active.\nYou have to wait for another \` ${time.split(".")[0]} \` *second(s)*.`)],
 							ephemeral: true,
 						});
 
 					// if (user.id != guild.ownerId) {
-					client.cooldowns.set(
-						`${guildId}||${CommandName}||${user.id}`,
-						Date.now() + command.cooldown
-					);
+					client.cooldowns.set(`${guildId}||${CommandName}||${user.id}`, Date.now() + command.cooldown);
 					// }
 
 					setTimeout(async () => {
@@ -103,14 +83,7 @@ module.exports = {
 			if (!command)
 				return (
 					interaction.reply({
-						embeds: [
-							new MessageEmbed()
-								.setColor(red)
-								.setDescription(
-									"🟥 An error occurred while running this command."
-								)
-								.setTimestamp(),
-						],
+						embeds: [new MessageEmbed().setColor(red).setDescription("🟥 An error occurred while running this command.").setTimestamp()],
 					}) && client.commands.delete(interaction.commandName)
 				);
 
@@ -118,8 +91,7 @@ module.exports = {
 				GuildID: guild.id,
 			});
 
-			if (!Data && member.permissions.has("ADMINISTRATOR"))
-				return command.execute(interaction, client);
+			if (!Data && member.permissions.has("ADMINISTRATOR")) return command.execute(interaction, client);
 
 			if (!Data)
 				return interaction.reply({
@@ -127,10 +99,7 @@ module.exports = {
 					ephemeral: true,
 				});
 
-			if (
-				interaction.channel.id != Data.commandsChannelID &&
-				!member.permissions.has("ADMINISTRATOR")
-			)
+			if (interaction.channel.id != Data.commandsChannelID && !member.permissions.has("ADMINISTRATOR"))
 				return interaction.reply({
 					content: `You cannot use ${client.user.tag} commands in this channel try <#${Data.commandsChannelID}>`,
 					ephemeral: true,

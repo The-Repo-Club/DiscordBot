@@ -1,3 +1,25 @@
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Systems/paginationSys.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Sat 19 March 2022, 04:18:23 AM [GMT]
+ *Last edited:
+ *   Sat 19 March 2022, 04:24:17 AM [GMT]
+ *
+ *Description:
+ *   paginationSys System for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js,
+ **/
+
 const { MessageActionRow, MessageEmbed, MessageButton } = require("discord.js");
 
 /**
@@ -8,16 +30,10 @@ const { MessageActionRow, MessageEmbed, MessageButton } = require("discord.js");
  * @param {number} timeout
  * @returns
  */
-const paginationEmbed = async (
-	interaction,
-	pages,
-	buttonList,
-	timeout = 120000
-) => {
+const paginationEmbed = async (interaction, pages, buttonList, timeout = 120000) => {
 	if (!pages) throw new Error("Pages are not given.");
 	if (!buttonList) throw new Error("Buttons are not given.");
-	if (buttonList[0].style === "LINK" || buttonList[1].style === "LINK")
-		throw new Error("Link buttons are not supported with pagination");
+	if (buttonList[0].style === "LINK" || buttonList[1].style === "LINK") throw new Error("Link buttons are not supported with pagination");
 	if (buttonList.length !== 3) throw new Error("Need three buttons.");
 
 	let page = 0;
@@ -30,17 +46,12 @@ const paginationEmbed = async (
 	}
 
 	const curPage = await interaction.editReply({
-		embeds: [
-			pages[page].setFooter({ text: `Page ${page + 1} / ${pages.length}` }),
-		],
+		embeds: [pages[page].setFooter({ text: `Page ${page + 1} / ${pages.length}` })],
 		components: [row],
 		fetchReply: true,
 	});
 
-	const filter = (i) =>
-		i.customId === buttonList[0].customId ||
-		i.customId === buttonList[1].customId ||
-		i.customId === buttonList[2].customId;
+	const filter = (i) => i.customId === buttonList[0].customId || i.customId === buttonList[1].customId || i.customId === buttonList[2].customId;
 
 	const collector = await curPage.createMessageComponentCollector({
 		filter,
@@ -63,9 +74,7 @@ const paginationEmbed = async (
 		}
 		await i.deferUpdate();
 		await i.editReply({
-			embeds: [
-				pages[page].setFooter({ text: `Page ${page + 1} / ${pages.length}` }),
-			],
+			embeds: [pages[page].setFooter({ text: `Page ${page + 1} / ${pages.length}` })],
 			components: [row],
 		});
 		collector.resetTimer();
@@ -73,14 +82,9 @@ const paginationEmbed = async (
 
 	collector.on("end", (_, reason) => {
 		if (reason !== "messageDelete") {
-			const disabledRow = new MessageActionRow().addComponents(
-				buttonList[0].setDisabled(true),
-				buttonList[1].setDisabled(true)
-			);
+			const disabledRow = new MessageActionRow().addComponents(buttonList[0].setDisabled(true), buttonList[1].setDisabled(true));
 			curPage.edit({
-				embeds: [
-					pages[page].setFooter({ text: `Page ${page + 1} / ${pages.length}` }),
-				],
+				embeds: [pages[page].setFooter({ text: `Page ${page + 1} / ${pages.length}` })],
 				components: [disabledRow],
 			});
 		}

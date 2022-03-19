@@ -1,10 +1,24 @@
-// -------------------------------------------------------------------------
-// Path          - DiscordBot/Events/Loggers/Channel/channelDelete.js
-// GitHub        - https://github.com/The-Repo-Club/
-// Author        - The-Repo-Club [wayne6324@gmail.com]
-// Start On      - Mon 14 March 2022, 03:26:26 pm (GMT)
-// Modified On   - Mon 14 March 2022, 03:27:47 pm (GMT)
-// -------------------------------------------------------------------------
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Events/Loggers/Channel/channelDelete.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Mon 14 March 2022, 11:17:33 AM [GMT]
+ *Last edited:
+ *   Sat 19 March 2022, 11:31:44 AM [GMT]
+ *
+ *Description:
+ *   channelDelete Event for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, channelsDB, colors.json
+ **/
 
 // Logs whenever a channel is deleted
 
@@ -14,6 +28,7 @@ const { red } = require("../../../Structures/colors.json");
 
 module.exports = {
 	name: "channelDelete",
+	path: "Channel/channelDelete.js",
 	/**
 	 * @param {Channel} channel
 	 */
@@ -37,30 +52,18 @@ module.exports = {
 			// If log exists executes code and creates embed
 			const channelDeleteEmbed = new MessageEmbed()
 				.setColor(red)
-				.setTitle(
-					`<:icons_deletechannel:952954846665928774> A Channel Has Been Deleted`
-				)
+				.setTitle(`<:icons_deletechannel:952954846665928774> A Channel Has Been Deleted`)
 				.setTimestamp()
 				.setFooter({ text: channel.guild.name })
-				.setDescription(
-					`> The channel \`${channel.name}\` has been deleted by \`${log.executor.tag}\``
-				)
-				.addField(
-					"Type",
-					`\`${channel.type.slice(6).toLowerCase().replaceAll("_", " ")}\``
-				);
+				.setDescription(`> The channel \`${channel.name}\` has been deleted by \`${log.executor.tag}\``)
+				.addField("Type", `\`${channel.type.slice(6).toLowerCase().replaceAll("_", " ")}\``);
 
 			if (channel.type !== "GUILD_CATEGORY") {
 				// If type is different than category adds the parent
-				channelDeleteEmbed.addField(
-					"Parent category",
-					channel.parentId ? `\`${channel.parent.name}\`` : "No parent channel"
-				);
+				channelDeleteEmbed.addField("Parent category", channel.parentId ? `\`${channel.parent.name}\`` : "No parent channel");
 			}
 
-			logsChannel
-				.send({ embeds: [channelDeleteEmbed] })
-				.catch((err) => console.log(err));
+			logsChannel.send({ embeds: [channelDeleteEmbed] }).catch((err) => console.log(err));
 		}
 	},
 };
