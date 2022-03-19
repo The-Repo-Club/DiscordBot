@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Thu 17 March 2022, 01:20:00 PM [GMT]
+ *   Sat 19 March 2022, 02:37:59 AM [GMT]
  *
  *Description:
  *   Rank Command for Minimal-Mistakes#3775
@@ -23,7 +23,7 @@
 const { CommandInteraction, Client, MessageAttachment } = require("discord.js");
 const Levels = require("../../Systems/levelsSys");
 const Canvas = require("../../Systems/Canvas/index");
-const { yellow } = require("../../Structures/colors.json");
+const { background } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "rank",
@@ -43,12 +43,10 @@ module.exports = {
 	 * @param {Client} client
 	 */
 	async execute(interaction, client) {
-		const Target =
-			interaction.options.getMember("target") || interaction.member;
+		const Target = interaction.options.getMember("target") || interaction.member;
 		const users = await Levels.fetch(Target.id, interaction.guildId, true);
 
-		if (!users)
-			return interaction.reply({ content: "The mentioned user has no XP." });
+		if (!users) return interaction.reply({ content: "The mentioned user has no XP." });
 
 		const neededXp = Levels.xpFor(parseInt(users.level) + 1);
 
@@ -64,7 +62,7 @@ module.exports = {
 			.setRank(users.position)
 			.setXP("Current", users.xp)
 			.setXP("Needed", neededXp)
-			.setColor("Background", yellow)
+			.setColor("Background", background)
 			.toAttachment();
 		const attachment = new MessageAttachment(image.toBuffer(), "RankCard.png");
 		interaction.reply({ files: [attachment] });
