@@ -17,12 +17,11 @@
  *   Announcement Command for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, channelsDB, config.json, colors.json
+ *   node, npm, discord.js, channelsDB, colors.json
  **/
 
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const DB = require("../../Structures/Schemas/channelsDB"); //Make sure this path is correct
-const { botsGuildID } = require("../../Structures/config.json");
 const { green } = require("../../Structures/colors.json");
 
 module.exports = {
@@ -50,7 +49,7 @@ module.exports = {
 	 */
 	async execute(interaction) {
 		const Data = await DB.findOne({
-			GuildID: botsGuildID,
+			GuildID: interaction.guild.id,
 		});
 		if (!Data || !Data.announcementChannelID)
 			return interaction.reply({
