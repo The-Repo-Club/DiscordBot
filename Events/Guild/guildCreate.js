@@ -1,5 +1,27 @@
+/*-*-coding:utf-8 -*-
+ *Auto updated?
+ *   Yes
+ *File :
+ *   DiscordBot/Events/Loggers/Guild/guildCreate.js
+ *Author :
+ *   The-Repo-Club [wayne6324@gmail.com]
+ *Github :
+ *   https://github.com/The-Repo-Club/
+ *
+ *Created:
+ *   Wed 23 February 2022, 12:04:54 PM [GMT]
+ *Last edited:
+ *   Sun 20 March 2022, 10:52:52 AM [GMT]
+ *
+ *Description:
+ *   guildCreate Event for Minimal-Mistakes#3775
+ *
+ *Dependencies:
+ *   node, npm, discord.js, util, glob, colors.json, config.json
+ **/
+
 const { Client, MessageEmbed } = require("discord.js");
-const { green, background } = require("../../Structures/colors.json");
+const { green } = require("../../Structures/colors.json");
 const { botsDevID } = require("../../Structures/config.json");
 const { promisify } = require("util");
 const { glob } = require("glob");

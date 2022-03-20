@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 07:04:36 PM [GMT]
+ *   Sun 20 March 2022, 04:23:40 PM [GMT]
  *
  *Description:
  *   guildMemberUpdate Event for Minimal-Mistakes#3775

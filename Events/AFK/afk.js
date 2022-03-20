@@ -11,18 +11,19 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Thu 17 March 2022, 12:56:09 PM [GMT]
+ *   Sun 20 March 2022, 11:02:17 AM [GMT]
  *
  *Description:
  *   AFK Event for Minimal-Mistakes#3775
  *
  *Dependencies:
- *   node, npm, discord.js, afkDB
+ *   node, npm, discord.js, ms, afkDB, colors.json
  **/
 
 const { MessageEmbed, Message } = require("discord.js");
 const DB = require(`../../Structures/Schemas/afkDB`);
 const { cyan, yellow } = require("../../Structures/colors.json");
+const ms = require("ms");
 
 module.exports = {
 	name: "messageCreate",
@@ -44,7 +45,9 @@ module.exports = {
 
 			const notAFK = new MessageEmbed().setTitle(`Welcome Back ${message.author.username}!`).setDescription(`You are no longer AFK!`).setColor(cyan);
 
-			message.channel.send({ embeds: [notAFK] });
+			return await message.channel.send({ embeds: [notAFK] }).then((msg) => {
+				setTimeout(() => msg.delete(), ms("5s"));
+			});
 		}
 
 		const mentionedUser = message.mentions.users.first();
@@ -60,7 +63,11 @@ module.exports = {
 					.setColor(yellow)
 					.setDescription(`Reason: \`${Data.Reason}\`\n AFK Since: <t:${Math.round(Data.Date / 1000)}:R>`);
 
-				message.channel.send({ embeds: [embed] });
+				message.delete();
+
+				return await message.channel.send({ embeds: [embed] }).then((msg) => {
+					setTimeout(() => msg.delete(), ms("5s"));
+				});
 			}
 		}
 	},
