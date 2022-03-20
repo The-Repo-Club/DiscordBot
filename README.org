@@ -1,0 +1,14 @@
+#+TITLE: DiscordBot
+#+DESCRIPTION: A nice and easy to setup discord bot made with discord.js
+#+AUTHOR: The-Repo-Club [wayne6324@gmail.com]
+
+* TABLE OF CONTENTS :toc:
+- [[#how-to-install-discordbot][How to Install DiscordBot]]
+
+* How to Install DiscordBot
+** Installation instructions
+To install DiscordBot, you need to clone this repository.
+#+begin_example
+git clone https://github.com/The-Repo-Club/DiscordBot
+cd DiscordBot/
+#+end_example
