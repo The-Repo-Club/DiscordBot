@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Sun 20 March 2022, 07:45:24 PM [GMT]
+ *   Sun 20 March 2022, 08:04:10 PM [GMT]
  *
  *Description:
  *   Goodbye Event for Minimal-Mistakes#3775
@@ -130,12 +130,12 @@ module.exports = {
 
 		Goodbye.setDescription("Sad to see them leaving the server!").setImage("attachment://goodbye.png");
 
-		if (member.guild.systemChannel) return member.guild.systemChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
-
 		if (!Data || !Data.logs.joinLeaveLogs) return;
 
 		const logsChannel = member.guild.channels.cache.get(Data.logs.joinLeaveLogs);
 
-		return logsChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
+		if (!member.guild.systemChannel) return logsChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
+
+		return member.guild.systemChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
 	},
 };

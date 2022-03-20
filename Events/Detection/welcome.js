@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Sun 20 March 2022, 07:42:50 PM [GMT]
+ *   Sun 20 March 2022, 08:05:10 PM [GMT]
  *
  *Description:
  *   Welcome Event for Minimal-Mistakes#3775
@@ -61,13 +61,13 @@ module.exports = {
 			// If the last entry fetched is of the type "BOT_ADD" it means a bot has joined
 			const botJoinedEmbed = new MessageEmbed().setTitle("<:icons_unbanmember:949376464388784138> A Bot Joined The Server").setColor(green).setTimestamp().setFooter({ text: member.guild.name }).setDescription(`> The bot ${member} has been added by \`${log.executor.tag}\` to this server`);
 
-			if (member.guild.systemChannel) return member.guild.systemChannel.send({ embeds: [botJoinedEmbed] }).catch((err) => console.log(err));
-
 			if (!Data || !Data.logs.joinLeaveLogs) return;
 
 			const logsChannel = member.guild.channels.cache.get(Data.logs.joinLeaveLogs);
 
-			return logsChannel.send({ embeds: [botJoinedEmbed] }).catch((err) => console.log(err));
+			if (!member.guild.systemChannel) return logsChannel.send({ embeds: [botJoinedEmbed] }).catch((err) => console.log(err));
+
+			return member.guild.systemChannel.send({ embeds: [botJoinedEmbed] }).catch((err) => console.log(err));
 		} else {
 			const Welcome = new MessageEmbed().setColor(green).setAuthor({ name: "NEW USER JOINED", iconURL: member.guild.iconURL({ dynamic: true }) });
 
@@ -147,13 +147,13 @@ module.exports = {
 
 			Welcome.setDescription("Thank you for joining the server!").setImage("attachment://welcome.png");
 
-			if (member.guild.systemChannel) return member.guild.systemChannel.send({ embeds: [Welcome], files: [attach] }).catch((err) => console.log(err));
-
 			if (!Data || !Data.logs.joinLeaveLogs) return;
 
 			const logsChannel = member.guild.channels.cache.get(Data.logs.joinLeaveLogs);
 
-			return logsChannel.send({ embeds: [Welcome], files: [attach] }).catch((err) => console.log(err));
+			if (!member.guild.systemChannel) return logsChannel.send({ embeds: [Welcome], files: [attach] }).catch((err) => console.log(err));
+
+			return member.guild.systemChannel.send({ embeds: [Welcome], files: [attach] }).catch((err) => console.log(err));
 		}
 	},
 };

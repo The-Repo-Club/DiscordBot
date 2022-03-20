@@ -24,16 +24,13 @@ module.exports = {
 		const min = 15;
 		const max = 30;
 		const xp = Math.floor(Math.random() * (max - min + 1) + min);
-		const hasLeveledUp = await Levels.appendXp(
-			message.author.id,
-			message.guildId,
-			xp
-		);
+		const hasLeveledUp = await Levels.appendXp(message.author.id, message.guildId, xp);
 		if (hasLeveledUp) {
 			const user = await Levels.fetch(message.author.id, message.guildId);
-			message.channel.send(
-				`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`
-			);
+
+			if (!message.guild.systemChannel) return message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);
+
+			return message.guild.systemChannel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);
 		}
 	},
 };
