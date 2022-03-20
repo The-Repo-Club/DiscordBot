@@ -3,12 +3,42 @@
 #+AUTHOR: The-Repo-Club [wayne6324@gmail.com]
 
 * TABLE OF CONTENTS :toc:
+- [[#how-to-download-discordbot][How to Download DiscordBot]]
 - [[#how-to-install-discordbot][How to Install DiscordBot]]
+- [[#how-to-run-discordbot][How to Run DiscordBot]]
 
-* How to Install DiscordBot
-** Installation instructions
-To install DiscordBot, you need to clone this repository.
+* How to Download DiscordBot
+** Download instructions
+To download DiscordBot, you need to clone this repository.
 #+begin_example
 git clone https://github.com/The-Repo-Club/DiscordBot
 cd DiscordBot/
+#+end_example
+
+* How to Install DiscordBot
+** Install instructions
+To install the bot use the following commands. (be sure to have nodejs npm installed)
+*** NPM
+#+begin_example
+npm install
+#+end_example
+
+* How to Run DiscordBot
+** Run instructions
+To run the but you can use a few different system.
+if you plan to use port 80 you will need sudo when on linux.
+
+*** nodemon
+#+begin_example
+nodemon .
+#+end_example
+
+*** node
+#+begin_example
+node .
+#+end_example
+
+*** npm
+#+begin_example
+npm run start
 #+end_example
