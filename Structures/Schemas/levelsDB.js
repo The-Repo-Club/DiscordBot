@@ -7,6 +7,7 @@ module.exports = model(
 			userID: { type: String },
 			guildID: { type: String },
 			xp: { type: Number, default: 0 },
+			rep: { type: Number, default: 0 },
 			level: { type: Number, default: 0 },
 			badges: {
 				bubble: { type: String, default: null },
