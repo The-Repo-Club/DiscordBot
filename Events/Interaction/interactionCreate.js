@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Thu 17 March 2022, 01:18:35 PM [GMT]
+ *   Sun 20 March 2022, 08:31:04 PM [GMT]
  *
  *Description:
  *   interactionCreate Event for Minimal-Mistakes#3775
@@ -24,6 +24,7 @@ const { Client, CommandInteraction, MessageEmbed } = require("discord.js");
 const cooldownsDB = require("../../Structures/Schemas/cooldownsDB");
 const channelsDB = require("../../Structures/Schemas/channelsDB");
 const { red, yellow } = require("../../Structures/colors.json");
+const { botsDevID } = require("../../Structures/config.json");
 
 module.exports = {
 	name: "interactionCreate",
@@ -41,7 +42,7 @@ module.exports = {
 				}) && client.commands.delete(interaction.commandName)
 			);
 
-		if (client.maintenance && interaction.user.id != "861270236475817994") {
+		if (client.maintenance && interaction.user.id != botsDevID) {
 			const Response = new MessageEmbed().setTitle("👷‍♂️ MAINTENANCE 👷‍♂️").setDescription("Sorry the bot will be back shortly when everything is working correctly.").setColor(red);
 
 			return interaction.reply({ embeds: [Response] });
@@ -99,7 +100,7 @@ module.exports = {
 
 			if (!Data && member.permissions.has("ADMINISTRATOR")) return command.execute(interaction, client);
 
-			if (!Data)
+			if (!Data && !Data.commandsChannelID)
 				return interaction.reply({
 					content: `❌ This server has not setup the commands system.`,
 					ephemeral: true,

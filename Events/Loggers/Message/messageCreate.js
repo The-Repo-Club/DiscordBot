@@ -21,6 +21,14 @@ module.exports = {
 	async execute(message) {
 		if (message.author.bot || !message.guildId) return;
 
+		const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
+
+		const Data = await DB.findOne({
+			GuildID: message.guild.id,
+		});
+
+		if (Data && Data.commandsChannelID == message.channel.id) return message.delete();
+
 		const min = 15;
 		const max = 30;
 		const xp = Math.floor(Math.random() * (max - min + 1) + min);

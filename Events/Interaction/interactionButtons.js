@@ -11,7 +11,7 @@
  *Created:
  *   Sat 19 March 2022, 11:49:48 AM [GMT]
  *Last edited:
- *   Sat 19 March 2022, 11:49:48 AM [GMT]
+ *   Sun 20 March 2022, 08:47:54 PM [GMT]
  *
  *Description:
  *   interactionButtons Event for Minimal-Mistakes#3775
@@ -36,7 +36,7 @@ module.exports = {
 
 		if (Button.permission && !interaction.member.permissions.has(Button.permission)) return interaction.reply({ content: "🟥 You are missing permissions to use that button.", ephemeral: true });
 
-		if (Button.ownerOnly && !interaction.member.id !== interaction.guild.ownerId) return interaction.reply({ content: "🟥 Sorry only the owner of the guild can use that button.", ephemeral: true });
+		if (Button.ownerOnly && interaction.member.id !== interaction.guild.ownerId) return interaction.reply({ content: "🟥 Sorry only the owner of the guild can use that button.", ephemeral: true });
 
 		Button.execute(interaction, client);
 	},
