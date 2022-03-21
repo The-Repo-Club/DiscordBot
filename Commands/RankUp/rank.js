@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Sun 20 March 2022, 07:34:54 PM [GMT]
+ *   Mon 21 March 2022, 03:00:05 PM [GMT]
  *
  *Description:
  *   Rank Command for Minimal-Mistakes#3775
@@ -142,22 +142,24 @@ module.exports = {
 		}
 
 		// Badges
-		ctx.fillStyle = selection;
-		ctx.globalAlpha = opacity;
-		ctx.fillRect(240 + 50 + 50, 295, 700, 70);
-		ctx.fillStyle = foreground;
-		const badgeNames = badgesNames;
-		for (let index = 0; index < badgeNames.length; index++) {
-			const badge = `${users.badges[badgeNames[index]]}`;
-			if (badge === "null") {
-				ctx.globalAlpha = opacity;
-				ctx.textAlign = "center";
-				ctx.font = "200px Bold";
-				ctx.fillText(".", 75 * index + 390, 340);
-			} else {
-				ctx.globalAlpha = 1;
-				const badgeImg = await Canvas.loadImage(badgesColors.includes(badge.toLowerCase()) ? `${__dirname}/../../Structures/Assets/Badges/${badgeNames[index]}_${badge.toLowerCase()}.png` : badge);
-				ctx.drawImage(badgeImg, 75 * index + 365, 305, 50, 50);
+		if (badgesNames && badgesColors) {
+			ctx.fillStyle = selection;
+			ctx.globalAlpha = opacity;
+			ctx.fillRect(240 + 50 + 50, 295, 700, 70);
+			ctx.fillStyle = foreground;
+			const badgeNames = badgesNames;
+			for (let index = 0; index < badgeNames.length; index++) {
+				const badge = `${users.badges[badgeNames[index]]}`;
+				if (badge === "null") {
+					ctx.globalAlpha = opacity;
+					ctx.textAlign = "center";
+					ctx.font = "200px Bold";
+					ctx.fillText(".", 75 * index + 390, 340);
+				} else {
+					ctx.globalAlpha = 1;
+					const badgeImg = await Canvas.loadImage(badgesColors.includes(badge.toLowerCase()) ? `${__dirname}/../../Structures/Assets/Badges/${badgeNames[index]}_${badge.toLowerCase()}.png` : badge);
+					ctx.drawImage(badgeImg, 75 * index + 365, 305, 50, 50);
+				}
 			}
 		}
 
