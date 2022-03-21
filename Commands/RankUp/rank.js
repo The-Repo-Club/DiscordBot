@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Mon 21 March 2022, 06:14:52 PM [GMT]
+ *   Mon 21 March 2022, 10:58:43 PM [GMT]
  *
  *Description:
  *   Rank Command for Minimal-Mistakes#3775
@@ -59,7 +59,7 @@ module.exports = {
 	 * @param {CommandInteraction} interaction
 	 * @param {Client} client
 	 */
-	async execute(interaction, client) {
+	async execute(interaction) {
 		const Target = interaction.options.getMember("target") || interaction.member;
 		const users = await Levels.fetch(Target.id, interaction.guildId, true);
 
@@ -165,9 +165,11 @@ module.exports = {
 			}
 		}
 
-		const roleIcon = await Canvas.loadImage(Target.roles.highest.iconURL({ format: "png", dynamic: true }));
+		if (Target.roles.highest.iconURL({ format: "png", dynamic: true })) {
+			const roleIcon = await Canvas.loadImage(Target.roles.highest.iconURL({ format: "png", dynamic: true }));
 
-		if (roleIcon) {
+			console.log(interaction);
+
 			// Role Name
 			ctx.textAlign = "left";
 			ctx.fillStyle = interaction.member.displayHexColor;
