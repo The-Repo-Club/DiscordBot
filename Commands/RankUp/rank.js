@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Mon 21 March 2022, 03:00:05 PM [GMT]
+ *   Mon 21 March 2022, 06:14:52 PM [GMT]
  *
  *Description:
  *   Rank Command for Minimal-Mistakes#3775
@@ -98,8 +98,10 @@ module.exports = {
 		const avatar = await Canvas.loadImage(Target.displayAvatarURL({ format: "png", dynamic: true }));
 		ctx.drawImage(avatar, 50 + 30, 30, 180, 180);
 
-		// Level
+		// const banner = await Canvas.loadImage("./Structures/Assets/Images/img.png");
+		// ctx.drawImage(banner, 50 + 0, 0, 240, 240);
 
+		// Level
 		ctx.fillStyle = orange;
 		ctx.globalAlpha = opacity;
 		ctx.fillRect(50 + 30, 30 + 180 + 30, 180, 50);
@@ -163,11 +165,22 @@ module.exports = {
 			}
 		}
 
-		// Role Name
-		ctx.textAlign = "left";
-		ctx.fillStyle = interaction.member.displayHexColor;
-		ctx.font = "35px Bold";
-		ctx.fillText(Target.roles.highest.name, 50 + 240 + 45 + 5, 80 + 45 + 15);
+		const roleIcon = await Canvas.loadImage(Target.roles.highest.iconURL({ format: "png", dynamic: true }));
+
+		if (roleIcon) {
+			// Role Name
+			ctx.textAlign = "left";
+			ctx.fillStyle = interaction.member.displayHexColor;
+			ctx.font = "35px Bold";
+			ctx.fillText(Target.roles.highest.name, 50 + 240 + 45 + 45, 80 + 45 + 15);
+			ctx.drawImage(roleIcon, 340, 110, 35, 35);
+		} else {
+			// Role Name
+			ctx.textAlign = "left";
+			ctx.fillStyle = interaction.member.displayHexColor;
+			ctx.font = "35px Bold";
+			ctx.fillText(Target.roles.highest.name, 50 + 240 + 45 + 5, 80 + 45 + 15);
+		}
 
 		// XP Bar
 		ctx.globalAlpha = 1;
