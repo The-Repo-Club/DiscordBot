@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 06:04:54 PM [GMT]
+ *   Mon 21 March 2022, 07:30:35 PM [GMT]
  *
  *Description:
  *   AFK Command for Minimal-Mistakes#3775
@@ -20,12 +20,7 @@
  *   node, npm, discord.js, afkDB
  **/
 
-const {
-	CommandInteraction,
-	Client,
-	MessageEmbed,
-	Message,
-} = require("discord.js");
+const { CommandInteraction, Client, MessageEmbed, Message } = require("discord.js");
 const afkSchema = require("../../Structures/Schemas/afkDB");
 
 module.exports = {
@@ -69,7 +64,7 @@ module.exports = {
 					Date: Date.now(),
 				}).save();
 				interaction.reply({
-					content: `You are now AFK for the reasoning of \`${reason}\``,
+					content: `You are now AFK for: __**${reason}**__`,
 					ephemeral: true,
 				});
 			}

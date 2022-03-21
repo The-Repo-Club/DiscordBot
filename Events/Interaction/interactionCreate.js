@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Sun 20 March 2022, 08:31:04 PM [GMT]
+ *   Mon 21 March 2022, 07:38:38 PM [GMT]
  *
  *Description:
  *   interactionCreate Event for Minimal-Mistakes#3775
