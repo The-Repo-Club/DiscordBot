@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Mon 21 March 2022, 08:46:12 PM [GMT]
+ *   Mon 21 March 2022, 09:26:56 PM [GMT]
  *
  *Description:
  *   Server Info Command for Minimal-Mistakes#3775
@@ -81,6 +81,7 @@ module.exports = {
 			.addField(
 				"__General__",
 				`**❯ Name:** \`${guild.name}\`
+      **❯ Description:** \`${guild.description}\`
 		  **❯ ID:** \`${guild.id}\`
 		  **❯ Owner:** \`${owner.tag}\` \`(${guild.ownerId})\`
 		  **❯ Boost Tier:** \`${guild.premiumTier ? `Tier ${guild.premiumTier}` : "None"}\`
