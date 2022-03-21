@@ -1,4 +1,5 @@
 {
+	"xpMultiplier": 2,
 	"badgesNames": ["bubble", "speaker", "stream", "picture", "like", "star", "boost", "money", "bot"],
 	"badgesColors": ["bronze", "silver", "gold", "diamond"]
 }

@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Mon 14 March 2022, 10:09:54 PM [GMT]
+ *   Sun 20 March 2022, 09:57:41 PM [GMT]
  *
  *Description:
  *   Emit Command for Minimal-Mistakes#3775

@@ -33,6 +33,7 @@ module.exports = {
 		const max = 30;
 		const xp = Math.floor(Math.random() * (max - min + 1) + min);
 		const hasLeveledUp = await Levels.appendXp(message.author.id, message.guildId, xp);
+		console.log(hasLeveledUp);
 		if (hasLeveledUp) {
 			const user = await Levels.fetch(message.author.id, message.guildId);
 

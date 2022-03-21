@@ -11,7 +11,7 @@
  *Created:
  *   Sat 19 March 2022, 04:18:23 AM [GMT]
  *Last edited:
- *   Sat 19 March 2022, 04:24:17 AM [GMT]
+ *   Mon 21 March 2022, 02:50:16 PM [GMT]
  *
  *Description:
  *   levelsSys System for Minimal-Mistakes#3775
@@ -22,8 +22,7 @@
 
 const mongoose = require("mongoose");
 const levels = require("../Structures/Schemas/levelsDB");
-var mongoUrl;
-
+const { xpMultiplier } = require("../Structures/ranks.json");
 class DiscordXp {
 	/**
 	 * @param {string} [dbUrl] - A valid mongo database URI.
@@ -31,7 +30,7 @@ class DiscordXp {
 
 	static async setURL(dbUrl) {
 		if (!dbUrl) throw new TypeError("A database url was not provided.");
-		mongoUrl = dbUrl;
+		var mongoUrl = dbUrl;
 		return mongoose.connect(dbUrl, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
@@ -208,10 +207,6 @@ class DiscordXp {
 			user.position = leaderboard.findIndex((i) => i.userID === userId) + 1;
 		}
 
-		/* To be used with canvacord or displaying xp in a pretier fashion, with each level the cleanXp stats from 0 and goes until cleanNextLevelXp when user levels up and gets back to 0 then the cleanNextLevelXp is re-calculated */
-		user.cleanXp = user.xp - this.xpFor(user.level);
-		user.cleanNextLevelXp = this.xpFor(user.level + 1) - this.xpFor(user.level);
-
 		return user;
 	}
 
@@ -331,7 +326,10 @@ class DiscordXp {
 		if (isNaN(targetLevel) || isNaN(parseInt(targetLevel, 10))) throw new TypeError("Target level should be a valid number.");
 		if (isNaN(targetLevel)) targetLevel = parseInt(targetLevel, 10);
 		if (targetLevel < 0) throw new RangeError("Target level should be a positive number.");
-		return targetLevel * targetLevel * 100;
+		if (xpMultiplier == 0 || !xpMultiplier || isNaN(parseInt(xpMultiplier))) throw new TypeError("An amount for the xp multiplier was not provided/was invalid.");
+
+		const multi = xpMultiplier || 10;
+		return targetLevel * targetLevel * 100 * multi;
 	}
 
 	/**
