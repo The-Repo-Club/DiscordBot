@@ -11,7 +11,7 @@
  *Created:
  *   Sat 19 March 2022, 04:18:23 AM [GMT]
  *Last edited:
- *   Tue 22 March 2022, 04:59:23 PM [GMT]
+ *   Tue 22 March 2022, 05:00:51 PM [GMT]
  *
  *Description:
  *   levelsSys System for Minimal-Mistakes#3775
@@ -22,7 +22,6 @@
 
 const mongoose = require("mongoose");
 const levels = require("../Structures/Schemas/levelsDB");
-const { xpMultiplier } = require("../Structures/ranks.json");
 class DiscordXp {
 	/**
 	 * @param {string} [dbUrl] - A valid mongo database URI.
