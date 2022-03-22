@@ -11,7 +11,7 @@
  *Created:
  *   Sat 19 March 2022, 04:18:23 AM [GMT]
  *Last edited:
- *   Mon 21 March 2022, 02:55:20 PM [GMT]
+ *   Tue 22 March 2022, 12:28:15 AM [GMT]
  *
  *Description:
  *   levelsSys System for Minimal-Mistakes#3775
@@ -122,12 +122,15 @@ class DiscordXp {
 		if (!userId) throw new TypeError("An user id was not provided.");
 		if (!guildId) throw new TypeError("A guild id was not provided.");
 		if (!levelss) throw new TypeError("An amount of levels was not provided.");
+		if (xpMultiplier == 0 || !xpMultiplier || isNaN(parseInt(xpMultiplier))) throw new TypeError("An amount for the xp multiplier was not provided/was invalid.");
+
+		const multi = xpMultiplier || 10;
 
 		const user = await levels.findOne({ userID: userId, guildID: guildId });
 		if (!user) return false;
 
 		user.level += parseInt(levelss, 10);
-		user.xp = user.level * user.level * 100;
+		user.xp = user.level * user.level * 100 * multi;
 		user.lastUpdated = new Date();
 
 		user.save().catch((e) => console.log(`Failed to append level: ${e}`));
@@ -168,12 +171,15 @@ class DiscordXp {
 		if (!userId) throw new TypeError("An user id was not provided.");
 		if (!guildId) throw new TypeError("A guild id was not provided.");
 		if (!level) throw new TypeError("A level was not provided.");
+		if (xpMultiplier == 0 || !xpMultiplier || isNaN(parseInt(xpMultiplier))) throw new TypeError("An amount for the xp multiplier was not provided/was invalid.");
+
+		const multi = xpMultiplier || 10;
 
 		const user = await levels.findOne({ userID: userId, guildID: guildId });
 		if (!user) return false;
 
 		user.level = level;
-		user.xp = level * level * 100;
+		user.xp = level * level * 100 * multi;
 		user.lastUpdated = new Date();
 
 		user.save().catch((e) => console.log(`Failed to set level: ${e}`));
@@ -243,12 +249,15 @@ class DiscordXp {
 		if (!userId) throw new TypeError("An user id was not provided.");
 		if (!guildId) throw new TypeError("A guild id was not provided.");
 		if (!levelss) throw new TypeError("An amount of levels was not provided.");
+		if (xpMultiplier == 0 || !xpMultiplier || isNaN(parseInt(xpMultiplier))) throw new TypeError("An amount for the xp multiplier was not provided/was invalid.");
+
+		const multi = xpMultiplier || 10;
 
 		const user = await levels.findOne({ userID: userId, guildID: guildId });
 		if (!user) return false;
 
 		user.level -= levelss;
-		user.xp = user.level * user.level * 100;
+		user.xp = user.level * user.level * 100 * multi;
 		user.lastUpdated = new Date();
 
 		user.save().catch((e) => console.log(`Failed to subtract levels: ${e}`));
