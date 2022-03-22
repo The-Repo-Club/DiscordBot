@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Sun 20 March 2022, 08:19:00 PM [GMT]
+ *   Tue 22 March 2022, 12:40:17 AM [GMT]
  *
  *Description:
  *   Welcome Event for Minimal-Mistakes#3775
@@ -147,7 +147,7 @@ module.exports = {
 
 			Welcome.setDescription("Thank you for joining the server!").setImage("attachment://welcome.png");
 
-			if (!Data || !Data.logs.joinLeaveLogs) return;
+			if (!Data || !Data.logs.joinLeaveLogs) if (member.guild.systemChannel) return member.guild.systemChannel.send({ embeds: [Welcome], files: [attach] }).catch((err) => console.log(err));
 
 			const logsChannel = member.guild.channels.cache.get(Data.logs.joinLeaveLogs);
 
