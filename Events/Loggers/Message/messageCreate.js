@@ -33,8 +33,8 @@ module.exports = {
 		const user = await Levels.fetch(message.author.id, message.guildId);
 
 		if (Date.now() - user.lastUpdated > ms("5 minutes")) {
-			const min = 15;
-			const max = 30;
+			const min = 25;
+			const max = 300;
 			const xp = Math.floor(Math.random() * (max - min + 1) + min);
 			const hasLeveledUp = await Levels.appendXp(message.author.id, message.guildId, xp);
 			if (hasLeveledUp) {
