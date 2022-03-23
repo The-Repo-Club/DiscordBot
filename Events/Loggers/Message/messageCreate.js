@@ -10,6 +10,7 @@
 const { Message } = require("discord.js");
 const Levels = require("../../../Systems/levelsSys");
 const { Database } = require("../../../Structures/config.json");
+const ms = require("ms");
 Levels.setURL(Database);
 
 module.exports = {
@@ -29,16 +30,18 @@ module.exports = {
 
 		if (Data && Data.commandsChannelID == message.channel.id) return message.delete();
 
-		const min = 15;
-		const max = 30;
-		const xp = Math.floor(Math.random() * (max - min + 1) + min);
-		const hasLeveledUp = await Levels.appendXp(message.author.id, message.guildId, xp);
-		if (hasLeveledUp) {
-			const user = await Levels.fetch(message.author.id, message.guildId);
+		const user = await Levels.fetch(message.author.id, message.guildId);
 
-			if (!message.guild.systemChannel) return message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);
+		if (Date.now() - user.lastUpdated > ms("5 minutes")) {
+			const min = 15;
+			const max = 30;
+			const xp = Math.floor(Math.random() * (max - min + 1) + min);
+			const hasLeveledUp = await Levels.appendXp(message.author.id, message.guildId, xp);
+			if (hasLeveledUp) {
+				if (!message.guild.systemChannel) return message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);
 
-			return message.guild.systemChannel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);
+				return message.guild.systemChannel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);
+			}
 		}
 	},
 };

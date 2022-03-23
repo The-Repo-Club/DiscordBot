@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 06:06:10 PM [GMT]
+ *   Tue 22 March 2022, 09:20:42 PM [GMT]
  *
  *Description:
  *   Apply Command for Minimal-Mistakes#3775
@@ -60,46 +60,11 @@ module.exports = {
 					.setCustomId("mod_application")
 					.setTitle(`Moderator Application`)
 					.addComponents(
-						new TextInputComponent()
-							.setCustomId("age")
-							.setLabel("What is your age?")
-							.setStyle("SHORT")
-							.setMinLength(2)
-							.setMaxLength(2)
-							.setPlaceholder("Must be 13 or above")
-							.setRequired(true),
-						new TextInputComponent()
-							.setCustomId("answer")
-							.setLabel("Why do you want to be a Moderator?")
-							.setStyle("LONG")
-							.setMinLength(15)
-							.setMaxLength(200)
-							.setPlaceholder("Answer in 15 - 200 chars.")
-							.setRequired(true),
-						new TextInputComponent()
-							.setCustomId("hours")
-							.setLabel("How many hours you can moderate?")
-							.setStyle("SHORT")
-							.setMinLength(2)
-							.setMaxLength(22)
-							.setPlaceholder("How many hours you can moderate?")
-							.setRequired(true),
-						new TextInputComponent()
-							.setCustomId("experience")
-							.setLabel("Do you have any past experience?")
-							.setStyle("LONG")
-							.setMinLength(15)
-							.setMaxLength(200)
-							.setPlaceholder("Answer in 15 - 200 chars.")
-							.setRequired(true),
-						new TextInputComponent()
-							.setCustomId("contribute")
-							.setLabel("What can you contribute to the staff team?")
-							.setStyle("LONG")
-							.setMinLength(15)
-							.setMaxLength(200)
-							.setPlaceholder("Answer in 15 - 200 chars.")
-							.setRequired(true)
+						new TextInputComponent().setCustomId("age").setLabel("What is your age?").setStyle("SHORT").setMinLength(2).setMaxLength(2).setPlaceholder("Must be 13 or above").setRequired(true),
+						new TextInputComponent().setCustomId("answer").setLabel("Why do you want to be a Moderator?").setStyle("LONG").setMinLength(15).setMaxLength(200).setPlaceholder("Answer in 15 - 200 chars.").setRequired(true),
+						new TextInputComponent().setCustomId("hours").setLabel("How many hours you can moderate?").setStyle("SHORT").setMinLength(2).setMaxLength(22).setPlaceholder("How many hours you can moderate?").setRequired(true),
+						new TextInputComponent().setCustomId("experience").setLabel("Do you have any past experience?").setStyle("LONG").setMinLength(15).setMaxLength(200).setPlaceholder("Answer in 15 - 200 chars.").setRequired(true),
+						new TextInputComponent().setCustomId("contribute").setLabel("What can you contribute to the staff team?").setStyle("LONG").setMinLength(15).setMaxLength(200).setPlaceholder("Answer in 15 - 200 chars.").setRequired(true)
 					);
 		}
 

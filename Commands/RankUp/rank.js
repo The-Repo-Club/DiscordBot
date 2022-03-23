@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Mon 21 March 2022, 10:58:43 PM [GMT]
+ *   Tue 22 March 2022, 09:02:09 PM [GMT]
  *
  *Description:
  *   Rank Command for Minimal-Mistakes#3775
@@ -67,7 +67,7 @@ module.exports = {
 
 		const Rank = new MessageEmbed().setColor(green).setAuthor({ name: "RANKUP SYSTEM", iconURL: interaction.guild.iconURL({ dynamic: true }) });
 
-		const neededXp = Levels.xpFor(parseInt(users.level) + 1);
+		const neededXp = Levels.xpFor(parseInt(users.level + 1));
 
 		const canvas = Canvas.createCanvas(1080, 400);
 		const ctx = canvas.getContext("2d");
@@ -167,8 +167,6 @@ module.exports = {
 
 		if (Target.roles.highest.iconURL({ format: "png", dynamic: true })) {
 			const roleIcon = await Canvas.loadImage(Target.roles.highest.iconURL({ format: "png", dynamic: true }));
-
-			console.log(interaction);
 
 			// Role Name
 			ctx.textAlign = "left";
