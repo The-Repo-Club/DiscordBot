@@ -22,13 +22,35 @@ module.exports = {
 	async execute(message) {
 		if (message.author.bot || !message.guildId) return;
 
+		const { member } = message;
+
 		const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 
 		const Data = await DB.findOne({
 			GuildID: message.guild.id,
 		});
 
-		if (Data && Data.commandsChannelID == message.channel.id) return message.delete();
+		if (Data && Data.commandsChannelID === message.channel.id && message.author.id !== message.guild.ownerId) {
+			message.channel
+				.send({
+					content: `${message.author} this channel is for commands only.`,
+				})
+				.then((msg) => {
+					setTimeout(() => msg.delete(), ms("5s"));
+				});
+			return message.delete();
+		}
+
+		if (message.content.includes(message.guild.ownerId))
+			message.channel
+				.send({
+					content: `${message.author} don't tag the guild owner.`,
+				})
+				.then(async (msg) => {
+					message.delete();
+					setTimeout(() => msg.delete(), ms("5s"));
+					await member.timeout(ms("1 hour"), "don't tag the guild owner");
+				});
 
 		const user = await Levels.fetch(message.author.id, message.guildId);
 

@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Mon 21 March 2022, 07:14:34 PM [GMT]
+ *   Wed 23 March 2022, 07:25:57 PM [GMT]
  *
  *Description:
  *   guildCreate Event for Minimal-Mistakes#3775
