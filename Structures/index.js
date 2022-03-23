@@ -7,7 +7,7 @@
 // Modified On   - Sat 12 March 2022, 11:52:32 am (GMT)
 // -------------------------------------------------------------------------
 
-const { Client, Collection, MessageEmbed } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 const client = new Client({ intents: 32767 });
 const discordjsModal = require("discord-modals"); // Define this package
 discordjsModal(client); // It is necessary to have your client to be able to know when a modal is executed

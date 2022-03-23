@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Thu 17 March 2022, 01:10:02 PM [GMT]
+ *   Wed 23 March 2022, 12:22:54 AM [GMT]
  *
  *Description:
  *   Restart Command for Minimal-Mistakes#3775
@@ -20,15 +20,19 @@
  *   node, npm, discord.js, config.json
  **/
 
-const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
+const { CommandInteraction, Client, MessageEmbed, Collection } = require("discord.js");
 const { Token, ownerIDS } = require("../../Structures/config.json");
+const { promisify } = require("util");
+const { glob } = require("glob");
+const PG = promisify(glob);
+const Ascii = require("ascii-table");
+require("../../Structures/Handlers/errors");
 const { purple } = require("../../Structures/colors.json");
 
 module.exports = {
 	name: "restart",
 	path: "Admin/restart.js",
 	description: "Restart Bot",
-	permission: "ADMINISTRATOR",
 	/**
 	 * @param {CommandInteraction} interaction
 	 * @param {Client} client
@@ -47,6 +51,20 @@ module.exports = {
 				console.log(`[Client] Restarting by ${member.user.username} in ${guild.name}`);
 			})
 			.then(() => {
+				client.buttons = new Collection();
+				client.commands = new Collection();
+				client.cooldowns = new Collection();
+				client.maintenance = false;
+
+				["renameChannelsSys", "cooldownSys", "lockdownSys"].forEach((system) => {
+					require(`../../Systems/${system}`)(client);
+				});
+
+				["buttons", "commands", "events", "loggers", "modals"].forEach((handler) => {
+					require(`../../Structures/Handlers/${handler}`)(client, PG, Ascii).catch((err) => console.log(err));
+				});
+
+				client.login(Token).catch((err) => console.log(err));
 				client.login(Token);
 				console.log("[Client] Ready");
 				for (var i = 0; i < ownerIDS.length; i++) {
