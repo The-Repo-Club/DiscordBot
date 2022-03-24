@@ -18,6 +18,8 @@ module.exports = {
 	 * @param {GuildMember} member
 	 */
 	async execute(member) {
+		if (member.user.bot) return;
+
 		const Data = await DB.findOne({
 			GuildID: member.guild.id,
 		});
@@ -31,34 +33,14 @@ module.exports = {
 
 		if (log.action == "BOT_ADD") {
 			// If the last entry fetched is of the type "BOT_ADD" it means a bot has joined
-			const botJoinedEmbed = new MessageEmbed()
-				.setTitle(
-					"<:icons_unbanmember:949376464388784138> A Bot Joined The Server"
-				)
-				.setColor(green)
-				.setTimestamp()
-				.setFooter({ text: member.guild.name })
-				.setDescription(
-					`> The bot ${member} has been added by \`${log.executor.tag}\` to this server`
-				);
+			const botJoinedEmbed = new MessageEmbed().setTitle("<:icons_unbanmember:949376464388784138> A Bot Joined The Server").setColor(green).setTimestamp().setFooter({ text: member.guild.name }).setDescription(`> The bot ${member} has been added by \`${log.executor.tag}\` to this server`);
 
-			logsChannel
-				.send({ embeds: [botJoinedEmbed] })
-				.catch((err) => console.log(err));
+			logsChannel.send({ embeds: [botJoinedEmbed] }).catch((err) => console.log(err));
 		} else {
 			// Else it means a normal user joined
-			const userJoinedEmbed = new MessageEmbed()
-				.setColor(green)
-				.setTitle(
-					"<:icons_unbanmember:949376464388784138> An User Just Joined The Server"
-				)
-				.setTimestamp()
-				.setFooter({ text: member.guild.name })
-				.setDescription(`> The user ${member} just joined the guild`);
+			const userJoinedEmbed = new MessageEmbed().setColor(green).setTitle("<:icons_unbanmember:949376464388784138> An User Just Joined The Server").setTimestamp().setFooter({ text: member.guild.name }).setDescription(`> The user ${member} just joined the guild`);
 
-			logsChannel
-				.send({ embeds: [userJoinedEmbed] })
-				.catch((err) => console.log(err));
+			logsChannel.send({ embeds: [userJoinedEmbed] }).catch((err) => console.log(err));
 		}
 	},
 };

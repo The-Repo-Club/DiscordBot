@@ -20,6 +20,8 @@ module.exports = {
 	 * @param {GuildMember} member
 	 */
 	async execute(member) {
+		if (member.user.bot) return;
+
 		const Data = await DB.findOne({
 			GuildID: member.guild.id,
 		});

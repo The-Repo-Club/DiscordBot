@@ -22,57 +22,39 @@ module.exports = {
 	 * @param {Presence} newPresence
 	 */
 	async execute(oldPresence, newPresence) {
+		if (oldPresence.user.bot || newPresence.user.bot) return;
+
 		if (!oldPresence || !newPresence) return;
 		const Data = await DB.findOne({
 			GuildID: oldPresence.guild.id,
 		});
 		if (!Data || !Data.logs.memberLogs) return;
 
-		const logsChannel = oldPresence.guild.channels.cache.get(
-			Data.logs.memberLogs
-		);
+		const logsChannel = oldPresence.guild.channels.cache.get(Data.logs.memberLogs);
 
-		const userUpdateEmbed = new MessageEmbed()
-			.setTimestamp()
-			.setFooter({ text: oldPresence.guild.name });
+		const userUpdateEmbed = new MessageEmbed().setTimestamp().setFooter({ text: oldPresence.guild.name });
 
 		if (newPresence.status === "online") {
-			userUpdateEmbed
-				.setColor(green)
-				.setTitle(
-					`<:icons_startstage:949374613241077792> A Member Presence Has Been Updated`
-				);
+			userUpdateEmbed.setColor(green).setTitle(`<:icons_startstage:949374613241077792> A Member Presence Has Been Updated`);
 		} else if (newPresence.status === "offline") {
-			userUpdateEmbed
-				.setColor(red)
-				.setTitle(
-					`<:icons_endstage:949374613027160105> A Member Presence Has Been Updated`
-				);
+			userUpdateEmbed.setColor(red).setTitle(`<:icons_endstage:949374613027160105> A Member Presence Has Been Updated`);
 		} else {
-			userUpdateEmbed
-				.setColor(orange)
-				.setTitle(
-					`<:icons_updatestage:949374612926504960> A Member Presence Has Been Updated`
-				);
+			userUpdateEmbed.setColor(orange).setTitle(`<:icons_updatestage:949374612926504960> A Member Presence Has Been Updated`);
 		}
 
 		if (oldPresence.status !== newPresence.status) {
 			// If status has changed execute code
-			userUpdateEmbed
-				.setDescription(`> The status of ${oldPresence.member} has ben updated`)
-				.addFields(
-					{
-						name: "Old status",
-						value: `\`${oldPresence.status}\``,
-					},
-					{
-						name: "New status",
-						value: `\`${newPresence.status}\``,
-					}
-				);
-			logsChannel
-				.send({ embeds: [userUpdateEmbed] })
-				.catch((err) => console.log(err));
+			userUpdateEmbed.setDescription(`> The status of ${oldPresence.member} has ben updated`).addFields(
+				{
+					name: "Old status",
+					value: `\`${oldPresence.status}\``,
+				},
+				{
+					name: "New status",
+					value: `\`${newPresence.status}\``,
+				}
+			);
+			logsChannel.send({ embeds: [userUpdateEmbed] }).catch((err) => console.log(err));
 		}
 	},
 };
