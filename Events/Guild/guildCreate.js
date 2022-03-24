@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Thu 24 March 2022, 11:22:02 PM [GMT]
+ *   Thu 24 March 2022, 11:24:19 PM [GMT]
  *
  *Description:
  *   guildCreate Event for Minimal-Mistakes#3775
@@ -75,7 +75,7 @@ module.exports = {
 			.setAuthor({ name: `${client.user.tag}`, iconURL: client.user.displayAvatarURL() })
 			.setColor(green)
 			.addField("**Guild Info**", ` \`${guild.name} (${guild.id})\``, false)
-			.addField("**Owner Info**", `<@${owner.id}> ${owner.tag}`, false)
+			.addField("**Owner Info**", `${owner} ${owner.tag}`, false)
 			.addField("**Server Member Count**", ` \`${guild.memberCount}\``, false)
 			.addField("**Total Servers**", ` \`${client.guilds.cache.size}\``, false)
 			.addField("**Total Member count**", ` \`${client.users.cache.size}\``, false)

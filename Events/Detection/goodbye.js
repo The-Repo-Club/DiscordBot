@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 22 March 2022, 12:40:37 AM [GMT]
+ *   Thu 24 March 2022, 11:33:29 PM [GMT]
  *
  *Description:
  *   Goodbye Event for Minimal-Mistakes#3775
@@ -130,12 +130,16 @@ module.exports = {
 
 		Goodbye.setDescription("Sad to see them leaving the server!").setImage("attachment://goodbye.png");
 
-		if (!Data || !Data.logs.joinLeaveLogs) if (member.guild.systemChannel) return member.guild.systemChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
+		if (!Data) {
+			if (member.guild.systemChannel) return member.guild.systemChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
+		} else {
+			if (Data.logs.joinLeaveLogs) {
+				const logsChannel = member.guild.channels.cache.get(Data.logs.joinLeaveLogs);
 
-		const logsChannel = member.guild.channels.cache.get(Data.logs.joinLeaveLogs);
-
-		if (!member.guild.systemChannel) return logsChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
-
-		return member.guild.systemChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
+				return logsChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
+			} else {
+				if (member.guild.systemChannel) return member.guild.systemChannel.send({ embeds: [Goodbye], files: [attach] }).catch((err) => console.log(err));
+			}
+		}
 	},
 };
