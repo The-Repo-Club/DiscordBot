@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Thu 17 March 2022, 01:14:59 PM [GMT]
+ *   Thu 24 March 2022, 06:33:02 PM [GMT]
  *
  *Description:
  *   Announcement Command for Minimal-Mistakes#3775
@@ -41,50 +41,36 @@ module.exports = {
 
 		const logsChannel = guild.channels.cache.get(Data.logs.userLogs);
 
-		const userUpdateEmbed = new MessageEmbed()
-			.setColor(orange)
-			.setTitle(
-				`<:icons_updatemember:949375652291809341> A User Has Been Updated`
-			)
-			.setTimestamp()
-			.setFooter({ text: guild.name });
+		const userUpdateEmbed = new MessageEmbed().setColor(orange).setTitle(`<:icons_updatemember:949375652291809341> A User Has Been Updated`).setTimestamp().setFooter({ text: guild.name });
 
 		if (oldUser.username !== newUser.username) {
 			// If username changed execute code
-			userUpdateEmbed
-				.setDescription(`The user ${newUser} changed their username`)
-				.addFields(
-					{
-						name: "Old username",
-						value: `\`${oldUser.username}\``,
-					},
-					{
-						name: "New username",
-						value: `\`${newUser.username}\``,
-					}
-				);
-			logsChannel
-				.send({ embeds: [userUpdateEmbed] })
-				.catch((err) => console.log(err));
+			userUpdateEmbed.setDescription(`The user ${newUser} changed their username`).addFields(
+				{
+					name: "Old username",
+					value: `\`${oldUser.username}\``,
+				},
+				{
+					name: "New username",
+					value: `\`${newUser.username}\``,
+				}
+			);
+			logsChannel.send({ embeds: [userUpdateEmbed] }).catch((err) => console.log(err));
 		}
 
 		if (oldUser.discriminator !== newUser.discriminator) {
 			// If discriminator changed execute code
-			userUpdateEmbed
-				.setDescription(`The user ${newUser} changed their discriminator`)
-				.addFields(
-					{
-						name: "Old discriminator",
-						value: `\`${oldUser.discriminator}\``,
-					},
-					{
-						name: "New discriminator",
-						value: `\`${newUser.discriminator}\``,
-					}
-				);
-			logsChannel
-				.send({ embeds: [userUpdateEmbed] })
-				.catch((err) => console.log(err));
+			userUpdateEmbed.setDescription(`The user ${newUser} changed their discriminator`).addFields(
+				{
+					name: "Old discriminator",
+					value: `\`${oldUser.discriminator}\``,
+				},
+				{
+					name: "New discriminator",
+					value: `\`${newUser.discriminator}\``,
+				}
+			);
+			logsChannel.send({ embeds: [userUpdateEmbed] }).catch((err) => console.log(err));
 		}
 
 		if (oldUser.banner !== newUser.banner) {
@@ -95,20 +81,14 @@ module.exports = {
 				.addFields(
 					{
 						name: "Old banner",
-						value: oldUser.banner
-							? `${oldUser.bannerURL({ dynamic: true })}`
-							: "No banner before",
+						value: oldUser.banner ? `${oldUser.bannerURL({ dynamic: true })}` : "No banner before",
 					},
 					{
 						name: "New banner",
-						value: newUser.banner
-							? `${newUser.bannerURL({ dynamic: true })}`
-							: "No new banner",
+						value: newUser.banner ? `${newUser.bannerURL({ dynamic: true })}` : "No new banner",
 					}
 				);
-			logsChannel
-				.send({ embeds: [userUpdateEmbed] })
-				.catch((err) => console.log(err));
+			logsChannel.send({ embeds: [userUpdateEmbed] }).catch((err) => console.log(err));
 		}
 
 		if (oldUser.avatar !== newUser.avatar) {
@@ -119,37 +99,27 @@ module.exports = {
 				.addFields(
 					{
 						name: "Old avatar",
-						value: oldUser.avatar
-							? `${oldUser.avatarURL({ dynamic: true })}`
-							: "No avatar before",
+						value: oldUser.avatar ? `${oldUser.avatarURL({ dynamic: true })}` : "No avatar before",
 					},
 					{
 						name: "New avatar",
-						value: newUser.avatar
-							? `${newUser.avatarURL({ dynamic: true })}`
-							: "No new avatar",
+						value: newUser.avatar ? `${newUser.avatarURL({ dynamic: true })}` : "No new avatar",
 					}
 				);
-			logsChannel
-				.send({ embeds: [userUpdateEmbed] })
-				.catch((err) => console.log(err));
+			logsChannel.send({ embeds: [userUpdateEmbed] }).catch((err) => console.log(err));
 		}
 
 		if (!oldUser.flags || !newUser.flags) return;
 		if (oldUser.flags != newUser.flags) {
 			// If flags changed execute code
-			const newFlags = new UserFlags(
-				oldUser.flags.missing(newUser.flags.bitfield, false)
-			).toArray();
-			const oldFlags = new UserFlags(
-				newUser.flags.missing(oldUser.flags.bitfield, false)
-			).toArray();
+			const newFlags = new UserFlags(oldUser.flags.missing(newUser.flags.bitfield, false)).toArray();
+			const oldFlags = new UserFlags(newUser.flags.missing(oldUser.flags.bitfield, false)).toArray();
 
 			if (newFlags.length < 1 && oldFlags.length < 1) return;
 			userUpdateEmbed.setDescription(`The user ${newUser} changed their flags`);
 
 			if (newFlags.length > 0) {
-				const addedPerms = d
+				const addedPerms = newFlags
 					.slice(" ")
 					.map((e) => `\`${e}\``)
 					.join(" ")
@@ -157,13 +127,11 @@ module.exports = {
 					.replaceAll("_", " ");
 				userUpdateEmbed.addField("**Added Flags**", addedPerms);
 
-				logsChannel
-					.send({ embeds: [userUpdateEmbed] })
-					.catch((err) => console.log(err));
+				logsChannel.send({ embeds: [userUpdateEmbed] }).catch((err) => console.log(err));
 			}
 
 			if (oldFlags.length > 0) {
-				const removedPerms = s
+				const removedPerms = oldFlags
 					.slice(" ")
 					.map((e) => `\`${e}\``)
 					.join(" ")
@@ -171,9 +139,7 @@ module.exports = {
 					.replaceAll("_", " ");
 				userUpdateEmbed.addField("**Removed Flags**", removedPerms);
 
-				logsChannel
-					.send({ embeds: [userUpdateEmbed] })
-					.catch((err) => console.log(err));
+				logsChannel.send({ embeds: [userUpdateEmbed] }).catch((err) => console.log(err));
 			}
 		}
 	},

@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Wed 23 March 2022, 07:25:43 PM [GMT]
+ *   Thu 24 March 2022, 06:15:50 PM [GMT]
  *
  *Description:
  *   interactionCreate Event for Minimal-Mistakes#3775
@@ -100,7 +100,7 @@ module.exports = {
 
 			if (!Data && member.permissions.has("ADMINISTRATOR")) return command.execute(interaction, client);
 
-			if (!Data && !Data.commandsChannelID)
+			if (!Data || !Data.commandsChannelID)
 				return interaction.reply({
 					content: `❌ This server has not setup the commands system.`,
 					ephemeral: true,

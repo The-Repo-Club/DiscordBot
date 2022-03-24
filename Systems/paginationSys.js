@@ -11,7 +11,7 @@
  *Created:
  *   Sat 19 March 2022, 04:18:23 AM [GMT]
  *Last edited:
- *   Sat 19 March 2022, 04:24:17 AM [GMT]
+ *   Thu 24 March 2022, 05:18:06 PM [GMT]
  *
  *Description:
  *   paginationSys System for Minimal-Mistakes#3775
@@ -59,6 +59,10 @@ const paginationEmbed = async (interaction, pages, buttonList, timeout = 120000)
 	});
 
 	collector.on("collect", async (i) => {
+		if (i.user.id !== interaction.user.id) {
+			return i.reply({ content: "Sorry this interaction does not belong to you.", ephemeral: true });
+		}
+
 		switch (i.customId) {
 			case buttonList[0].customId:
 				page = page > 0 ? --page : pages.length - 1;
@@ -72,6 +76,7 @@ const paginationEmbed = async (interaction, pages, buttonList, timeout = 120000)
 			default:
 				break;
 		}
+
 		await i.deferUpdate();
 		await i.editReply({
 			embeds: [pages[page].setFooter({ text: `Page ${page + 1} / ${pages.length}` })],
