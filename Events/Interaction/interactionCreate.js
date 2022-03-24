@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Thu 24 March 2022, 06:15:50 PM [GMT]
+ *   Thu 24 March 2022, 10:10:34 PM [GMT]
  *
  *Description:
  *   interactionCreate Event for Minimal-Mistakes#3775
@@ -35,6 +35,12 @@ module.exports = {
 	 */
 	async execute(interaction, client) {
 		const { guildId, guild, user, member } = interaction;
+		if (!interaction.guild)
+			return (
+				interaction.reply({
+					embeds: [new MessageEmbed().setColor(red).setDescription("🟥 Sorry slash commands only works in guilds.").setTimestamp()],
+				}) && client.commands.delete(interaction.commandName)
+			);
 		if (!interaction.channel)
 			return (
 				interaction.reply({

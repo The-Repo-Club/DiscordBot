@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Tue 15 March 2022, 05:28:19 PM [GMT]
+ *   Thu 24 March 2022, 10:00:47 PM [GMT]
  *
  *Description:
  *   Ping Command for Minimal-Mistakes#3775
@@ -36,6 +36,6 @@ module.exports = {
 	 * @param {CommandInteraction} interaction
 	 */
 	execute(interaction) {
-		interaction.reply({ content: "PONG" });
+		interaction.reply({ content: "Lets play PONG" });
 	},
 };

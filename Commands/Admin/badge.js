@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 March 2022, 04:34:08 PM [GMT]
  *Last edited:
- *   Wed 23 March 2022, 05:38:40 PM [GMT]
+ *   Thu 24 March 2022, 11:16:30 PM [GMT]
  *
  *Description:
  *   Badge Command for Minimal-Mistakes#3775
@@ -20,10 +20,8 @@
  *   node, npm, discord.js
  **/
 
-const { MessageEmbed, CommandInteraction } = require("discord.js");
+const { CommandInteraction } = require("discord.js");
 const DB = require("../../Structures/Schemas/levelsDB"); //Make sure this path is correct
-const { purple, red } = require("../../Structures/colors.json");
-const ms = require("ms");
 
 async function updateField(guild, type, user, badge, level) {
 	field = `${type}.${badge}`;

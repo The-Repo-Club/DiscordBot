@@ -11,12 +11,16 @@ const { Client, Collection } = require("discord.js");
 const client = new Client({ intents: 32767 });
 const discordjsModal = require("discord-modals"); // Define this package
 discordjsModal(client); // It is necessary to have your client to be able to know when a modal is executed
-const { Token, Secret } = require("./config.json");
+const { Token, Secret, Database } = require("./config.json");
 const { promisify } = require("util");
 const { glob } = require("glob");
 const PG = promisify(glob);
 const Ascii = require("ascii-table");
 require("./Handlers/errors");
+
+// Requires ecoSys class from eco system
+const ecoSys = require("../Systems/ecoSys");
+ecoSys.connect(Database);
 
 // Requires Dashboard class from dashboard
 const Dashboard = require("../dashboard");
