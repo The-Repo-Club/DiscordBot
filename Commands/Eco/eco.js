@@ -11,7 +11,7 @@
  *Created:
  *   Thu 24 March 2022, 08:20:06 PM [GMT]
  *Last edited:
- *   Sat 26 March 2022, 09:59:55 AM [GMT]
+ *   Sat 26 March 2022, 10:20:21 PM [GMT]
  *
  *Description:
  *   eco Command for Minimal-Mistakes#3775
@@ -35,14 +35,62 @@ module.exports = {
 			type: "SUB_COMMAND",
 		},
 		{
+			name: "daily",
+			description: "Receive a daily bonus.",
+			type: "SUB_COMMAND",
+		},
+		{
 			name: "balance",
 			description: "Check the balance of a user in the eco system",
 			type: "SUB_COMMAND",
 			options: [
 				{
 					name: "user",
-					description: "The user you wish check the balance of.",
+					description: "The user you would like to check the balance of.",
 					type: "USER",
+				},
+			],
+		},
+		{
+			name: "deposit",
+			description: "Deposit currency into the eco bank.",
+			type: "SUB_COMMAND",
+			options: [
+				{
+					name: "amount",
+					description: "The amount of currency to deposit.",
+					type: "NUMBER",
+				},
+			],
+		},
+		{
+			name: "withdraw",
+			description: "Withdraw currency into the eco bank.",
+			type: "SUB_COMMAND",
+			options: [
+				{
+					name: "amount",
+					description: "The amount of currency to withdraw.",
+					type: "NUMBER",
+				},
+			],
+		},
+		{
+			name: "pay",
+			description: "Pay a selected use an amount.",
+			type: "SUB_COMMAND",
+			options: [
+				{
+					name: "user",
+					description: "The user you would like to pay.",
+					required: true,
+					type: "USER",
+				},
+				{
+					name: "amount",
+					description: "The amount of currency you wish to pay.",
+					required: true,
+					type: "NUMBER",
 				},
 			],
 		},
@@ -52,56 +100,93 @@ module.exports = {
 	 * @param {CommandInteraction} interaction
 	 */
 	async execute(interaction) {
+		const currencyIcon = await ecoSys.icon();
+
 		const options = interaction.options;
 		const { member, guild } = interaction;
 
 		const user = options.getUser("user") || interaction.user;
+		const amount = options.getNumber("amount");
 
 		switch (options.getSubcommand()) {
 			case "balance":
-				ecoSys
-					.getBalance(user.id, guild.id)
-					.then((data) => {
-						const { userID, currency } = data;
+				const balance = await ecoSys.getBalance(user.id, guild.id);
 
-						const mem = guild.members.cache.get(userID);
+				if (balance.error) {
+					return interaction.reply({ content: `${member.user} - ${balance.error.message}`, ephemeral: true });
+				} else {
+					const mem = guild.members.cache.get(balance.user);
 
-						const announcement = new MessageEmbed()
-							.setTitle(`${mem.user.tag}`)
-							.setColor(green)
-							.setFields(
-								{
-									name: "Bank",
-									value: `\`${currency.bank}\``,
-									inline: true,
-								},
-								{
-									name: "Wallet",
-									value: `\`${currency.wallet}\``,
-									inline: true,
-								}
-							)
-							.setTimestamp();
-						return interaction.reply({ embeds: [announcement] });
-					})
-					.catch((err) => {
-						if (interaction.user.id === user.id) {
-							return interaction.reply({ content: `${member.user} sorry you must first join the eco system with /eco join before you can run any of the other eco system commands.`, ephemeral: true });
-						} else {
-							return interaction.reply({ content: `${member.user} sorry ${user.username} does not seem to be in the eco system.`, ephemeral: true });
-						}
-					});
-				break;
+					const announcement = new MessageEmbed()
+						.setTitle(`${mem.user.tag}`)
+						.setColor(green)
+						.setFields(
+							{
+								name: `Wallet`,
+								value: `${currencyIcon} \`${balance.currency.wallet}\``,
+								inline: true,
+							},
+							{
+								name: `Bank`,
+								value: `${currencyIcon} \`${balance.currency.bank}\``,
+								inline: true,
+							}
+						)
+						.setTimestamp();
+					return interaction.reply({ embeds: [announcement] });
+				}
+			case "deposit":
+				const deposit = await ecoSys.deposit(user.id, guild.id, amount);
+				if (deposit.error) {
+					switch (deposit.error.message) {
+						case "Not enough":
+							return interaction.reply({ content: `${member.user} you do not have that much please only try to deposit what you have in your wallet.`, ephemeral: true });
+						case "Invalid amount":
+							return interaction.reply({ content: `${member.user} must pay a positive amount.`, ephemeral: true });
+						default:
+							return interaction.reply({ content: `${member.user} you do not have an account in the eco system.`, ephemeral: true });
+					}
+				} else {
+					return interaction.reply({ content: ` ${member.user} has deposited ${amount} into there the eco bank.` });
+				}
+			case "withdraw":
+				ecoSys.withdraw(user.id, guild.id, amount);
+
+				const withdraw = await ecoSys.withdraw(user.id, guild.id, amount);
+				if (withdraw.error) {
+					switch (withdraw.error.message) {
+						case "Not enough":
+							return interaction.reply({ content: `${member.user} you do not have that much please only try to withdraw what you have in your bank.`, ephemeral: true });
+						case "Invalid amount":
+							return interaction.reply({ content: `${member.user} must pay a positive amount.`, ephemeral: true });
+						default:
+							return interaction.reply({ content: `${member.user} you do not have an account in the eco system.`, ephemeral: true });
+					}
+				} else {
+					return interaction.reply({ content: ` ${member.user} has withdraw ${amount} from there the eco bank.` });
+				}
+			case "pay":
+				const pay = ecoSys.pay(interaction.user.id, user.id, guild.id, amount);
+				if (pay.error) {
+					switch (pay.error.message) {
+						case "Not enough":
+							return interaction.reply({ content: `${member.user} you do not have that much please only try to deposit what you have in your wallet.`, ephemeral: true });
+						case "Invalid amount":
+							return interaction.reply({ content: `${member.user} must pay a positive amount.`, ephemeral: true });
+						default:
+							return interaction.reply({ content: `${member.user} you do not have an account in the eco system.`, ephemeral: true });
+					}
+				} else {
+					return interaction.reply({ content: ` ${member.user} has paid ${user} in the amount of ${amount}.` });
+				}
 			case "join":
-				ecoSys
-					.joinEcoSystem(member.id, guild.id)
-					.then((msg) => {
-						return interaction.reply({ content: ` ${member.user} has joined the eco system.` });
-					})
-					.catch((err) => {
-						return interaction.reply({ content: `${member.user} you have already joined the eco system.`, ephemeral: true });
-					});
-				break;
+				const join = await ecoSys.joinEcoSystem(member.id, guild.id);
+
+				if (join.error) {
+					return interaction.reply({ content: `${member.user} - ${join.error.message}`, ephemeral: true });
+				} else {
+					return interaction.reply({ content: `<@${join.user}> has joined the eco system.` });
+				}
 		}
 	},
 };

@@ -11,7 +11,7 @@
  *Created:
  *   Thu 24 March 2022, 08:20:06 PM [GMT]
  *Last edited:
- *   Sat 26 March 2022, 09:58:15 AM [GMT]
+ *   Sat 26 March 2022, 10:09:11 PM [GMT]
  *
  *Description:
  *   eco Command for Minimal-Mistakes#3775
@@ -79,36 +79,36 @@ module.exports = {
 			options: [
 				{
 					name: "add",
-					description: "The amount of currency you wish add.",
+					description: "Add currency to a selected user.",
 					type: "SUB_COMMAND",
 					options: [
 						{
 							name: "amount",
-							description: "The amount of currency you wish add.",
+							description: "The amount of currency you would like to add.",
 							required: true,
 							type: "NUMBER",
 						},
 						{
 							name: "user",
-							description: "The user you wish to add currency to.",
+							description: "The user you would like to add currency to.",
 							type: "USER",
 						},
 					],
 				},
 				{
 					name: "remove",
-					description: "The amount of currency you wish remove.",
+					description: "Remove currency from a selected user.",
 					type: "SUB_COMMAND",
 					options: [
 						{
 							name: "amount",
-							description: "The amount of currency you wish add.",
+							description: "The amount of currency you would like to remove.",
 							required: true,
 							type: "NUMBER",
 						},
 						{
 							name: "user",
-							description: "The user you wish to remove currency from.",
+							description: "The user you would like to remove currency from.",
 							type: "USER",
 						},
 					],
@@ -131,49 +131,65 @@ module.exports = {
 			case "add":
 				switch (options.getSubcommandGroup()) {
 					case "wallet":
-						ecoSys
-							.addWallet(user.id, guild.id, amount)
-							.then((msg) => {
-								return interaction.reply({ content: `${member.user} Added ${amount} to ${user.username}'s wallet` });
-							})
-							.catch((err) => {
-								return interaction.reply({ content: `${member.user} sorry ${user.username} does not seem to be in the eco system..`, ephemeral: true });
-							});
-						break;
+						const wallet = await ecoSys.addWallet(user.id, guild.id, amount);
+						if (wallet.error) {
+							switch (wallet.error.message) {
+								case "Invalid amount":
+									return interaction.reply({ content: `${member.user} sorry that is not a valid amount.`, ephemeral: true });
+								case "Invalid userID":
+									return interaction.reply({ content: `${member.user} sorry that is not a valid user.`, ephemeral: true });
+								default:
+									return interaction.reply({ content: `${member.user} sorry ${user.username} does not seem to be in the eco system..`, ephemeral: true });
+							}
+						} else {
+							return interaction.reply({ content: `${member.user} added ${amount} to <@${wallet.user}>'s wallet` });
+						}
 					case "bank":
-						ecoSys
-							.addBank(user.id, guild.id, amount)
-							.then((msg) => {
-								return interaction.reply({ content: `${member.user} Added ${amount} to ${user.username}'s bank` });
-							})
-							.catch((err) => {
-								return interaction.reply({ content: `${member.user} sorry ${user.username} does not seem to be in the eco system..`, ephemeral: true });
-							});
-						break;
+						const bank = await ecoSys.addBank(user.id, guild.id, amount);
+						if (bank.error) {
+							switch (bank.error.message) {
+								case "Invalid amount":
+									return interaction.reply({ content: `${member.user} sorry that is not a valid amount.`, ephemeral: true });
+								case "Invalid userID":
+									return interaction.reply({ content: `${member.user} sorry that is not a valid user.`, ephemeral: true });
+								default:
+									return interaction.reply({ content: `${member.user} sorry ${user.username} does not seem to be in the eco system..`, ephemeral: true });
+							}
+						} else {
+							return interaction.reply({ content: `${member.user} added ${amount} to <@${bank.user}>'s bank` });
+						}
 				}
 				break;
 			case "remove":
 				switch (options.getSubcommandGroup()) {
 					case "wallet":
-						ecoSys
-							.removeWallet(user.id, guild.id, amount)
-							.then((msg) => {
-								return interaction.reply({ content: `${member.user} Removed ${amount} to ${user.username}'s wallet` });
-							})
-							.catch((err) => {
-								return interaction.reply({ content: `${member.user} sorry ${user.username} does not seem to be in the eco system..`, ephemeral: true });
-							});
-						break;
+						const wallet = await ecoSys.removeWallet(user.id, guild.id, amount);
+						if (wallet.error) {
+							switch (wallet.error.message) {
+								case "Invalid amount":
+									return interaction.reply({ content: `${member.user} sorry that is not a valid amount.`, ephemeral: true });
+								case "Invalid userID":
+									return interaction.reply({ content: `${member.user} sorry that is not a valid user.`, ephemeral: true });
+								default:
+									return interaction.reply({ content: `${member.user} sorry ${user.username} does not seem to be in the eco system..`, ephemeral: true });
+							}
+						} else {
+							return interaction.reply({ content: `${member.user} removed ${amount} from <@${wallet.user}>'s wallet` });
+						}
 					case "bank":
-						ecoSys
-							.removeBank(user.id, guild.id, amount)
-							.then((msg) => {
-								return interaction.reply({ content: `${member.user} Removed ${amount} to ${user.username}'s bank` });
-							})
-							.catch((err) => {
-								return interaction.reply({ content: `${member.user} sorry ${user.username} does not seem to be in the eco system..`, ephemeral: true });
-							});
-						break;
+						const bank = await ecoSys.removeBank(user.id, guild.id, amount);
+						if (bank.error) {
+							switch (bank.error.message) {
+								case "Invalid amount":
+									return interaction.reply({ content: `${member.user} sorry that is not a valid amount.`, ephemeral: true });
+								case "Invalid userID":
+									return interaction.reply({ content: `${member.user} sorry that is not a valid user.`, ephemeral: true });
+								default:
+									return interaction.reply({ content: `${member.user} sorry ${user.username} does not seem to be in the eco system..`, ephemeral: true });
+							}
+						} else {
+							return interaction.reply({ content: `${member.user} removed ${amount} from <@${bank.user}>'s bank` });
+						}
 				}
 				break;
 		}
