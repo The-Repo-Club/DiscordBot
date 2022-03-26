@@ -11,7 +11,7 @@
  *Created:
  *   Thu 24 March 2022, 08:20:06 PM [GMT]
  *Last edited:
- *   Sat 26 March 2022, 09:46:00 AM [GMT]
+ *   Sat 26 March 2022, 09:58:15 AM [GMT]
  *
  *Description:
  *   eco Command for Minimal-Mistakes#3775
@@ -20,11 +20,11 @@
  *   node, npm, discord.js, ecoSys
  **/
 
-const { CommandInteraction, MessageEmbed } = require("discord.js");
+const { CommandInteraction } = require("discord.js");
 const ecoSys = require("../../Systems/ecoSys");
 
 module.exports = {
-	name: "eco",
+	name: "eco-admin",
 	path: "Admin/eco.js",
 	description: "Eco",
 	permission: "ADMINISTRATOR",
