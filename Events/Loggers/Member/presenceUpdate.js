@@ -10,7 +10,7 @@
 // Logs whenever a user status changes
 // ❗ in big servers this one might spam the API ❗
 
-const { MessageEmbed, Client, Presence } = require("discord.js");
+const { MessageEmbed, Presence } = require("discord.js");
 const DB = require("../../../Structures/Schemas/channelsDB"); //Make sure this path is correct
 const { red, green, orange } = require("../../../Structures/colors.json");
 
@@ -22,9 +22,8 @@ module.exports = {
 	 * @param {Presence} newPresence
 	 */
 	async execute(oldPresence, newPresence) {
-		if (oldPresence.user.bot || newPresence.user.bot) return;
-
 		if (!oldPresence || !newPresence) return;
+		if (oldPresence.member.user.id || newPresence.member.user.bot) return;
 		const Data = await DB.findOne({
 			GuildID: oldPresence.guild.id,
 		});
