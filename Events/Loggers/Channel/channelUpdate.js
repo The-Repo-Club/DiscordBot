@@ -11,7 +11,7 @@
  *Created:
  *   Sat 19 March 2022, 11:17:19 AM [GMT]
  *Last edited:
- *   Sat 19 March 2022, 11:32:19 AM [GMT]
+ *   Sat 26 March 2022, 09:02:33 PM [GMT]
  *
  *Description:
  *   channelCreate Event for Minimal-Mistakes#3775
@@ -54,7 +54,7 @@ module.exports = {
 
 			if (log.extra.user) {
 				// If target is a member executes code below
-				channelPermissionCreate.setDescription(`> Permissions have been added in the channel ${oldChannel} by \`${log.executor.tag}\``)().addField("Member", `\`${log.extra.user.tag}\``);
+				channelPermissionCreate.setDescription(`> Permissions have been added in the channel ${oldChannel} by \`${log.executor.tag}\``).addField("Member", `\`${log.extra.user.tag}\``);
 			} else {
 				// Else it means the target is a role
 				channelPermissionCreate.setDescription(`> Permissions have been added in the channel ${oldChannel} by \`${log.executor.tag}\``).addField("Role", `\`${log.extra.name}\``);

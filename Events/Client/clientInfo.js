@@ -11,7 +11,7 @@
  *Created:
  *   Wed 23 February 2022, 12:04:54 PM [GMT]
  *Last edited:
- *   Sat 19 March 2022, 02:23:32 AM [GMT]
+ *   Sat 26 March 2022, 07:39:41 PM [GMT]
  *
  *Description:
  *   Client Info Event for Minimal-Mistakes#3775
@@ -37,7 +37,7 @@ module.exports = {
 		function clientInfo(client) {
 			const ClientBoxHeader = new Box(
 				{
-					w: Math.floor(client.user.tag.length + 35),
+					w: Math.floor(66),
 					h: 1,
 					stringify: false,
 					marks: {
@@ -57,7 +57,7 @@ module.exports = {
 
 			const ClientBox = new Box(
 				{
-					w: Math.floor(client.user.tag.length + 35),
+					w: Math.floor(66),
 					h: 9,
 					stringify: false,
 					marks: {
@@ -85,7 +85,7 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(require("dis
 
 			const DashboardBoxHeader = new Box(
 				{
-					w: Math.floor(client.user.tag.length + 35),
+					w: Math.floor(66),
 					h: 1,
 					stringify: false,
 					marks: {
@@ -105,7 +105,7 @@ ${chalk.bold.blueBright("Discord.js Version")} :: ${chalk.redBright(require("dis
 
 			const DashboardBox = new Box(
 				{
-					w: Math.floor(client.user.tag.length + 35),
+					w: Math.floor(66),
 					h: 5,
 					stringify: false,
 					marks: {
@@ -144,7 +144,7 @@ ${chalk.bold.blueBright("routes")} :: ${chalk.redBright(client.dashboard.routes)
 			.then(() => {
 				const DatabaseBoxHeader = new Box(
 					{
-						w: Math.floor(client.user.tag.length + 35),
+						w: Math.floor(66),
 						h: 1,
 						stringify: false,
 						marks: {
@@ -164,7 +164,7 @@ ${chalk.bold.blueBright("routes")} :: ${chalk.redBright(client.dashboard.routes)
 
 				const DatabaseBox = new Box(
 					{
-						w: Math.floor(client.user.tag.length + 35),
+						w: Math.floor(66),
 						h: 3,
 						stringify: false,
 						marks: {

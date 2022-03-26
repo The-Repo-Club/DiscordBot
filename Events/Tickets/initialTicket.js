@@ -7,12 +7,7 @@
 // Modified On   - Wed 23 February 2022, 12:06:14 pm (GMT)
 // -------------------------------------------------------------------------
 
-const {
-	ButtonInteraction,
-	MessageEmbed,
-	MessageActionRow,
-	MessageButton,
-} = require("discord.js");
+const { ButtonInteraction, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const ms = require("ms");
 
 const ticketsDB = require("../../Structures/Schemas/ticketsDB"); //Make sure this path is correct
@@ -36,14 +31,17 @@ module.exports = {
 
 		if (!Data.Buttons.includes(customId)) return;
 
-		const ID =
-			member.user.username + "_" + Math.floor(Math.random() * 90000) + 10000;
+		const ID = member.user.username + "_" + Math.floor(Math.random() * 90000) + 10000;
 
 		await guild.channels
 			.create(`${customId + "_" + ID}`, {
 				type: "GUILD_TEXT",
 				parent: Data.Category,
 				permissionOverwrites: [
+					{
+						id: Data.Handlers,
+						allow: ["SEND_MESSAGES", "VIEW_CHANNEL", "READ_MESSAGE_HISTORY"],
+					},
 					{
 						id: member.id,
 						allow: ["SEND_MESSAGES", "VIEW_CHANNEL", "READ_MESSAGE_HISTORY"],
@@ -73,36 +71,18 @@ module.exports = {
 						iconURL: guild.iconURL({ dynamic: true }),
 					})
 					.setColor(background)
-					.setDescription(
-						"Please wait patiently for a response from a member of Staff, in the mean while, please describe your issue in as much detail as possible."
-					)
+					.setDescription("Please wait patiently for a response from a member of Staff, in the mean while, please describe your issue in as much detail as possible.")
 					.setFooter({ text: "The buttons below are for staff only." });
 
 				const Buttons = new MessageActionRow();
 				Buttons.addComponents(
-					new MessageButton()
-						.setCustomId("close_report")
-						.setLabel("Save & Close")
-						.setStyle("PRIMARY")
-						.setEmoji("💾"),
+					new MessageButton().setCustomId("close_report").setLabel("Save & Close").setStyle("PRIMARY").setEmoji("💾"),
 
-					new MessageButton()
-						.setCustomId("lock_report")
-						.setLabel("Lock")
-						.setStyle("DANGER")
-						.setEmoji("🔒"),
+					new MessageButton().setCustomId("lock_report").setLabel("Lock").setStyle("DANGER").setEmoji("🔒"),
 
-					new MessageButton()
-						.setCustomId("unlock_report")
-						.setLabel("Unlock")
-						.setStyle("SUCCESS")
-						.setEmoji("🔓"),
+					new MessageButton().setCustomId("unlock_report").setLabel("Unlock").setStyle("SUCCESS").setEmoji("🔓"),
 
-					new MessageButton()
-						.setCustomId("claim_report")
-						.setLabel("Claim")
-						.setStyle("SECONDARY")
-						.setEmoji("🛄")
+					new MessageButton().setCustomId("claim_report").setLabel("Claim").setStyle("SECONDARY").setEmoji("🛄")
 				);
 				channel.send({
 					embeds: [Embed],
