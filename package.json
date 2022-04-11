@@ -31,7 +31,7 @@
 		"express-slow-down": "^1.4.0",
 		"fs": "^0.0.1-security",
 		"glob": "^7.2.0",
-		"moment": "^2.29.1",
+		"moment": "^2.29.2",
 		"mongoose": "^6.2.3",
 		"morgan": "^1.10.0",
 		"ms": "^2.1.3",
